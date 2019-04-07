@@ -15,7 +15,6 @@ public class CompareZZ implements Comparator {
 		String bS = b.toString();
 		if ("".equals(bS) || bS.length()<10) n2 = 0;
 		else n2 = Integer.valueOf(bS.substring(6));
-		//System.out.println(n1+" "+n2);
 		return n1 - n2;
 	}
 

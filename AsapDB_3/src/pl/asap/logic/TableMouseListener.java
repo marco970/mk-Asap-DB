@@ -21,7 +21,7 @@ public class TableMouseListener extends MouseAdapter  {
    public void mousePressed(MouseEvent event) {
        Point point = event.getPoint();
        int currentRow = table.rowAtPoint(point);
-       //System.out.println("current row: "+currentRow);
+
        if (currentRow<0 || currentRow > model.getRowCount()) currentRow = model.getRowCount()-1;
        table.setRowSelectionInterval(currentRow, currentRow);
        
@@ -36,7 +36,6 @@ public class TableMouseListener extends MouseAdapter  {
        
        if (status.equals("aktywne"))	{
     	   pmb.setPopupStr(popupStr2);
-    	   //System.out.println("TML mousePressed - pmb change");
        }
        else if (status.equals("zawieszone")) {
     	   pmb.setPopupStr(popupStr3);

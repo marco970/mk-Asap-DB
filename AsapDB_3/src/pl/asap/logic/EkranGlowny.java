@@ -30,9 +30,7 @@ public class EkranGlowny implements ActionListener {
 	private MainTableModel data;
 	private JTable lista;
 	JMenu raport=null;  
-	//private ErrMessage errMessage;
 
-	//do menu - string pierwszy nazwa menu, kolejne - nazwy MenuItemów
 	String[] start = {"Start", "Nowe postępowanie", "Raport miesięczny", "Exit"};
 	String[] sort = {"Sort","Nieaktywne", "Aktywne","Zawieszone", "Zakończone", "Wszystkie"};
 	String[] toDo = {"ToDo", "Lista", "Notatki"};
@@ -92,11 +90,8 @@ public class EkranGlowny implements ActionListener {
 		for(int m = 0; m<=i-1; m++)	{
 			for (int n =0; n<=j-1; n++)	{
 				if (n==0)	{	
-				//System.out.print("ids-"+ids[m]+"("+m+"|"+n+")  ");
 				}
-				//System.out.print(data.getMatrix()[m][n]+"-("+m+"|"+n+") ");
 			}
-			//System.out.println();
 		}	
 		eg = new JFrame("ASap - Lista Postępowań");
 		
@@ -105,9 +100,7 @@ public class EkranGlowny implements ActionListener {
 		eg.setSize(width, height);
 		
 		lista = new JTable(data);
-		
-		//sortowanie i filtrowanie
-		//lista.setAutoCreateRowSorter(true);			//sortowanie najprościej
+
 		sorter = new TableRowSorter<MainTableModel>(data);
 		
 		
@@ -144,7 +137,7 @@ public class EkranGlowny implements ActionListener {
 		//doMassAddMenu(menuBar, toDo);
 		//doMassAddMenu(menuBar, notatki);
 
-		eg.setJMenuBar(menuBar); // f - oznacza obiekt typu JFrame
+		eg.setJMenuBar(menuBar);
 		
 		PopupMenuBean pmb = new PopupMenuBean(popupStr);
 		
@@ -155,7 +148,7 @@ public class EkranGlowny implements ActionListener {
 		
 		lista.addMouseListener(tbml);
 
-		lista.setComponentPopupMenu(pc); //tu wrzucamy dynamiczny obiekt
+		lista.setComponentPopupMenu(pc);
 
 		eg.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		eg.addWindowListener(new WindowAdapter() {
@@ -171,15 +164,7 @@ public class EkranGlowny implements ActionListener {
 	    });
 		eg.setVisible(true);
 	}
-	public void setPopupContent(String[] s)	{		//do wywalenia
-		popupStr = s;
-	}
-	public void doMassAddMenu(JPopupMenu popup, String...args)	{ //metoda z Popup do wywalenia z tej klasy
-		for (int i =0; i<=args.length-1; i++)	{
-			JMenuItem menuItem = mi(args[i]);
-			popup.add(menuItem);
-		}
-	}
+
 	
 	public void doMassAddMenu(JMenuBar mb, String...args)	{
 		JMenu menu = new JMenu(args[0]);
@@ -225,7 +210,6 @@ public class EkranGlowny implements ActionListener {
 		String u = e.getActionCommand();
 
 		if (u.equals(start[3]))	{
-			//System.out.println(dbConnect.getProcess().toString()+"yyyy");
 			dbConnect.getProcess().destroy();
 			System.exit(0);
 		}
@@ -290,48 +274,5 @@ public class EkranGlowny implements ActionListener {
 				lista.setRowSorter(sorter);
 
 		}
-		/*
-		if (u.equals("modyfikacja"))	{	//popup do wywalenia - będzie w PopupContent
-			int selectedRow = lista.getSelectedRow();
-			int realSelectedRow = lista.convertRowIndexToModel(selectedRow);
-
-			new OpForm2("Edycja postępowania", realSelectedRow, data);
-			
-			//System.out.println(" to ma być " + popupStr[0] + lista.getSelectedRow() );
-		}
-		//okFo.addChangeListener(this); //czy to w ogóle jest potrzebne?
-		if (u.equals("zakończ postępowanie"))	{
-			//spr czy jest WP?
-			int selectedRow = lista.getSelectedRow();
-			int realSelectedRow = lista.convertRowIndexToModel(selectedRow);
-			if (data.getValueAt(realSelectedRow, 2)==null || "".equals(data.getValueAt(realSelectedRow, 2)))	{
-				JOptionPane.showMessageDialog(eg, "Nie można zakończyć tego postępowania");
-			}
-			else {
-				//System.out.println("kończę");
-				data.cellUpdate("done", realSelectedRow, 4);
-				try {
-					new Zapis(data);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-				
-			//System.out.println(" to ma być " + popupStr[1] + lista.getSelectedRow() );
-		}
-		if (u.equals("zmień daty"))	{
-			System.out.println("daty");
-			new DataChangeForm(data, lista.getSelectedRow());
-		}
-		if (u.equals("zawieś postepowanie"))	{
-			int selectedRow = lista.getSelectedRow();
-			int realSelectedRow = lista.convertRowIndexToModel(selectedRow);
-		}
-		if (u.equals("odwieś postępowanie"))	{
-			//System.out.println(" to ma być " + popupStr[1] + lista.getSelectedRow() );
-		}
-		*/
-		
 	}
 }

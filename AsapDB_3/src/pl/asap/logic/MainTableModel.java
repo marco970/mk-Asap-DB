@@ -5,8 +5,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
-
 import javax.swing.table.AbstractTableModel;
 
 import pl.asap.DB.DBConnect;
@@ -23,9 +21,10 @@ public class MainTableModel extends AbstractTableModel {
 			"dsZZ", "dsPZ", "dsWP", "dsDK" };
 	private String current = "Current4.txt";	
 	private Object[][] dane = null;
+	@SuppressWarnings("unused")
 	private Object[][] adane = null;
 	private Object[] ids;
-	private Lista lista; //to jest klasa bean, jakbym zapomniał
+	private Lista lista;
 	
 	public MainTableModel() 	{
 		
@@ -44,10 +43,6 @@ public class MainTableModel extends AbstractTableModel {
 		this.ids = readDB.getIDs();
 		System.out.print("ids "+ ids.length + " _ "+ dane.length);
 		
-		//System.out.println("wiersze n: "+dane.length);
-		//System.out.println("kolumny m: "+dane[0].length);
-		//System.out.println("kolumny m': "+nazwyKolumn.length);
-		
 		int i = dane.length;
 		int j = nazwyKolumn.length;
 		
@@ -57,15 +52,10 @@ public class MainTableModel extends AbstractTableModel {
 					
 			for (int n =0; n<=j-1; n++)	{
 				if (n==0)	{							
-					//System.out.print("ids-"+ids[m]+"("+m+"|"+n+")  ");
 				}
-					//System.out.print(dane[m][n]+"-("+m+"|"+n+") ");
 			}
-			//System.out.println();
 		}	
 		
-	
-				
 	}
 	//----------metody--
 
@@ -105,7 +95,6 @@ public class MainTableModel extends AbstractTableModel {
 	}
 	public boolean doesElExists(int i, int j)	{
 		boolean a = true;
-		//(getValueAt(i,j)).toString().matches("[ ]{2,}")
 		if (i <= getRowCount())	{
 			if ((getValueAt(i,j)==null)||"".equals(getValueAt(i,j))||" ".equals(getValueAt(i,j))) a = false;
 			else a = true;
@@ -139,7 +128,7 @@ public class MainTableModel extends AbstractTableModel {
 		if (row<=getRowCount() && col<=getColumnCount()) return dane[row][col];
 		else return "";
 	}
-	//----------------------------------------------------------
+	//----------------------------------------------------------potrzebne do migracji danych
 	public Object[][] readFile(String filePath) throws IOException {
 		  FileReader fileReader = new FileReader(filePath);
 		  BufferedReader bufferedReader = new BufferedReader(fileReader);

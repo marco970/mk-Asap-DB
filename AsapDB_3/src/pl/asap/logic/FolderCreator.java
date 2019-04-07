@@ -40,8 +40,6 @@ public class FolderCreator {
 
 	public void moveFolder(String folderName, boolean tam)	{
 		
-		//System.out.println(defaultPath);
-		
 		File destinationFolder;
 	    File sourceFolder;
 		if (tam) {
@@ -52,23 +50,18 @@ public class FolderCreator {
 			sourceFolder = new File(defaultPath+zamknięte+folderName);
 			destinationFolder = new File(defaultPath+aktywne+folderName);
 		}
-		//System.out.println(sourceFolder);
-		//System.out.println(destinationFolder);
 
 	    if (!destinationFolder.exists())	{
 	    	destinationFolder.mkdirs();
 	    }
-	    // Check weather source exists and it is folder.
 	    if (sourceFolder.exists() && sourceFolder.isDirectory())	{
 	        // Get list of the files and iterate over them
 	        File[] listOfFiles = sourceFolder.listFiles();
 
 	        if (listOfFiles != null)	{
 	            for (File child : listOfFiles )	{
-	                // Move files to destination folder
 	                child.renameTo(new File(destinationFolder + "\\" + child.getName()));
 	            }
-	            // Add if you want to delete the source folder 
 	            sourceFolder.delete();
 	        }
 	    }

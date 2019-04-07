@@ -1,6 +1,5 @@
 package pl.asap.logic;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -10,14 +9,10 @@ public class SingleFieldValidator {
 	private String errMessage = "";
 	private String fieldName = "";
 	private MainTableModel model;
-	private String vendor="";
-	private String[] colData;
 	private int colPosition;
 	private Object[][] o;
 	private String spolka="";
 	private int rowNr;
-	private OpForm2 opF;
-	
 	public SingleFieldValidator(){}
 	
 	public SingleFieldValidator(String fieldName, String fieldValue, MainTableModel model, int rowNo)	{//ten konstruktor do newForm
@@ -31,23 +26,17 @@ public class SingleFieldValidator {
 		
 		for (Object[] el: o)	{
 			if (el[i]==null) el[i] = "";//tu na pewno zastępuje nula pustym stringiem, co jest potrzebne
-			//colData[i]=(String) el[i];
-			//System.out.println(el[i]);
+
 		}
 		ValidatioModel valModel = new ValidatioModel();
 		String[] b = valModel.getValArray(fieldName);
 		for(String el: b)	{
-			//System.out.println(el+" - "+fieldValue);
 			runMethod(el, fieldValue);
 		}
-		///System.out.println(valDone+ " *** "+errMessage);
-		//doesExist(fieldValue);  //-----------UWAGA, nie wiem, do czego to było...
-		//spolka
-		//System.out.println("**_ "+spolka+"row "+ rowNr+ "aaa "+model.getValueAt(rowNr, 0).toString());
-		
+
 		
 	}//koniec konstruktora 1
-	public SingleFieldValidator(String fieldName, String fieldValue, MainTableModel model, int rowNo, OpForm2 opF) {// nie wiem, do czego ten opF? Moze zeby rozróznic konstr
+	public SingleFieldValidator(String fieldName, String fieldValue, MainTableModel model, int rowNo, OpForm2 opF) {
 		this.fieldName = fieldName;
 		this.model = model;
 		this.rowNr = rowNo;
@@ -69,7 +58,6 @@ public class SingleFieldValidator {
 			if (fieldValue.length()>6)	spolka=fieldValue.substring(3, 6);
 		}
 		else spolka=model.getValueAt(rowNr,9).toString();
-		this.opF = opF;
 	}
 	
 	public boolean getValidationResult()	{
@@ -82,7 +70,6 @@ public class SingleFieldValidator {
 	public void runMethod(String methName, String fieldValue)	{
 		Method[] methArray = this.getClass().getDeclaredMethods();
 		for (Method methEl: methArray)	{
-			//System.out.println("*"+methEl.getName()+" - "+methName);
 			if (methEl.getName().equals(methName))	{
 				//tu odpalam po prostu metodę
 				try {
@@ -95,7 +82,7 @@ public class SingleFieldValidator {
 	}
 	//metody walidacyjne
 	public void isPredecessor(String field)	{
-		//System.out.println("poprzedniki"+model.getColumnName(2)+" - "+model.getColumnName(3)+" - "+ field +" -- " +fieldName);
+
 		String[] errMessage = {
 				"najpierw uzupełnij lub zapisz numer PZ",
 				"najpierw uzupełnij lub zapisz numer WP"
@@ -104,10 +91,7 @@ public class SingleFieldValidator {
 			for (int i=2; i<=3; i++)	{
 				
 				if(model.getColumnName(i).equals(fieldName))	{
-					//System.out.println("spr el i-1: "+model.getValueAt(rowNr, i-1));
-					//System.out.println("spr el i-1: "+model.doesElExists(rowNr, i-1));
 					if(model.doesElExists(rowNr, i-1))	valOrg(true,"");
-					//else if (!opF.getPrecedValue(i-1).equals("")) valOrg(true,"");
 					else valOrg(false,errMessage[i-2]);
 				}
 			}
@@ -170,13 +154,11 @@ public class SingleFieldValidator {
 					else valOrg(false,"nieprawidłowy format numeru_3");
 					
 					if (fieldName.equals("WP"))	{
-						//System.out.println(sndPart +" fN-> "+fieldName );
 						if (sndPart.equals(spolka))	{
 							valOrg(true,"");
 						}
 						else {
 							valOrg(false,"nieprawidłowy format numeru_4");
-							//System.out.println("I am here "+ fieldName);
 						}
 						System.out.println("fieldName: "+fieldName+" fstPart: "+fstPart+" sndPart: "+sndPart+" spolka "+spolka);
 					}
@@ -189,7 +171,6 @@ public class SingleFieldValidator {
 							valOrg(false,"nieprawidłowy format numeru_4");
 							System.out.println("I am here "+ fieldName);
 						}
-						//System.out.println("fieldName: "+fieldName+" fstPart: "+fstPart+" sndPart: "+sndPart+" spolka "+spolka);
 					}
 				}
 			}

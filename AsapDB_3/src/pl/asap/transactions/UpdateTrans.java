@@ -47,7 +47,6 @@ public class UpdateTrans extends TransBlank {
     	Object[] a = ((Lista) bean).getArray();
     	for (int i = 0; i<=a.length-1; i++)	{
     		if (savedRow[i]==null) savedRow[i] = "a";
-    		//System.out.println(i+" * "+a[i]+" * "+savedRow[i]);
     		updateLogic(a[i], savedRow[i], id);
     		
     	}

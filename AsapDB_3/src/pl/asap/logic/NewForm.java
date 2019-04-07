@@ -28,8 +28,8 @@ public class NewForm implements  ActionListener, FocusListener {
 	
 	private MainTableModel model;
 	private JFrame newFrame;
-	private JPanel contentPane;		//bo potrzebujemy tego w metodach
-	private JPanel panel;			//jw
+	private JPanel contentPane;		
+	private JPanel panel;			
 	private JTextField poleZZ;
 	private JLabel poleZZlab;
 	private JLabel errZZLab;
@@ -40,7 +40,7 @@ public class NewForm implements  ActionListener, FocusListener {
 	private JTextField nazwaPole ;
 	private JComboBox trybPole;
 
-	private ArrayList<Component> listaComp = new ArrayList<Component>(); //lista komponentów do visible
+	private ArrayList<Component> listaComp = new ArrayList<Component>(); 
 	private int rowNr;
 	
 	//przyciski
@@ -95,7 +95,6 @@ public class NewForm implements  ActionListener, FocusListener {
 		//panel.add(poleZZlab, "cell 1 1");
 		panel.add(errZZLab, "cell 2 1");
 		
-		//tworzenie HashMapy - o ile będzie potrzebna
 		//tworzenie pozostałych elementów
 		
 		//dodać status 
@@ -194,6 +193,7 @@ public class NewForm implements  ActionListener, FocusListener {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object command= e.getActionCommand();
@@ -230,7 +230,7 @@ public class NewForm implements  ActionListener, FocusListener {
 			SimpleDateFormat datePart = new SimpleDateFormat("yyyyMM");
 			String c = datePart.format(currentDate)+"_";
 			String d = "_"+savedRow[9];
-			//System.out.println("---> "+a+b+c+d);
+
 			//new FolderCreator().createFolder(a+b+c+d); ---odblokować jak gotowe
 			
 			newFrame.dispose();

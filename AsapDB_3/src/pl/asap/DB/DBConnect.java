@@ -21,37 +21,21 @@ public class DBConnect {
 	private static Statement stmt;
 	static JFrame frame;
 	static JLabel lab;
-                //private static String driverName = "com.mysql.jdbc.Driver";
 	String defaultPath;
 	Process proc;
 
 public DBConnect()        {
 	
 	defaultPath = new JFileChooser().getFileSystemView().getDefaultDirectory().toString();
-	//System.out.println(defaultPath);
 	
 	if (processCheck("mysqld_usbwv8.exe")==false) {
 		try {
 			proc = Runtime.getRuntime().exec(defaultPath + "\\000_rough\\mysql\\bin\\mysqld_usbwv8.exe");
-			//Process process = new ProcessBuilder("U:\\git\\AukcjaDo\\1\\AukcjaDo1\\000_rough\\usbwebserver.exe").start();
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		} 
 	}
 	
-	
-	//mysqld_usbwv8.exe
-	
-	/*
-	frame = new JFrame("siema");
-	frame.setSize(790, 100);
-	JPanel pane = new JPanel();                          
-	lab = new JLabel("hello");
-	pane.add(lab);
-	frame.add(pane);
-	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	frame.setVisible(false);
-        */
 	
 	for (int i = 0; i < 4; i++) {
 		try {
@@ -88,14 +72,12 @@ public DBConnect()        {
 	}
 	public boolean processCheck(String processName)	{
 		String findProcess = processName;
-		//String findProcess = "mysqld_usbwv8.exe";
 		String filenameFilter = "/nh /fi \"Imagename eq "+findProcess+"\"";
 		String tasksCmd = System.getenv("windir") +"/system32/tasklist.exe "+filenameFilter;
 
 		Process p = null;
 		try {
 			p = Runtime.getRuntime().exec(tasksCmd);
-			//System.out.println(p.toString()+"xxxx");
 		} catch (IOException e2) {
 			e2.printStackTrace();
 		}
@@ -106,7 +88,6 @@ public DBConnect()        {
 		try {
 			while ((line = input.readLine()) != null) 
 			    procs.add(line);
-				//System.out.println(procs.toString()+"****");
 		} catch (IOException e2) {
 			e2.printStackTrace();
 		}

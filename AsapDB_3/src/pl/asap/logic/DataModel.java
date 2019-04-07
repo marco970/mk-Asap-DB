@@ -2,7 +2,6 @@ package pl.asap.logic;
 
 import javax.swing.table.AbstractTableModel;
 
-import pl.asap.entity.Lista;
 import pl.asap.transactions.ReadTrans;
 
 public class DataModel extends AbstractTableModel {

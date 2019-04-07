@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -34,15 +33,11 @@ public class OpForm2 implements ActionListener, FocusListener {
 	
 	private int rowNr;
 	
-	//private String[] validateArr;
 	private Component[] tfAll;
 	
-	//private ErrMessage errMessage;
-	
 	private JFrame opForm;
-	private ArrayList<Component> listaComp = new ArrayList<Component>();		//out - jednak nie potrzeba, stara konstrukcja działa ok
-	
-	///
+	private ArrayList<Component> listaComp = new ArrayList<Component>();	
+
 	JComboBox<String> statusPole;
 	JComboBox<String> trybPole;
 	
@@ -59,20 +54,13 @@ public class OpForm2 implements ActionListener, FocusListener {
 	private JButton btnNext;
 
 	public OpForm2(String nazwa, int rowNo, MainTableModel mod)  {
-		
-		
-		/*errMessage = new ErrMessage(mod); //out
-		String[] errMessageStr = errMessage.getErrMessage();	//out
-		errMessage.addPropertyChangeListener(errMS); //potrzebne?//out
-		*/
 				
 		this.model = mod;
 		this.rowNr = rowNo;
 		this.colCount=model.getColumnCount();
-		//this.validateArr = new String[model.getColumnCount()-model.getNumberDs()]; //out
 		
 		//ramka
-		//-----------to do wyjebki 
+
 		opForm = new JFrame();
 		opForm.setTitle(nazwa);
 		opForm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -82,9 +70,8 @@ public class OpForm2 implements ActionListener, FocusListener {
 		JPanel contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		opForm.setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[grow]", "[grow][][]"));//różnica
-		//-------------dotąd
-		panel = new JPanel();	//tu metoda klasy dziedziczonej
+		contentPane.setLayout(new MigLayout("", "[grow]", "[grow][][]"));
+		panel = new JPanel();
 		contentPane.add(panel, "cell 0 0,grow");
 
 		//definicje od rysunku-----------------------
@@ -102,8 +89,6 @@ public class OpForm2 implements ActionListener, FocusListener {
 			targetField[i] = "cell 1 "+ i;
 			//targetErrMessage[i] = "cell 2 "+ i; //out
 		}
-		//JLabel[] errMessage = errMS.getErrMessageLab();	//out
-		
 		
 		//rysujemy-----------------------------------
 		panel.setLayout(new MigLayout("", "[][][]", "[][][]"));
@@ -168,8 +153,7 @@ public class OpForm2 implements ActionListener, FocusListener {
 				listaComp.add(a5);
 			}
 			else if (i>0 && i<=3)	{
-				//System.out.println("hej "+ "i-1 = "+(i-1)+" poprzednik "+model.doesElExists(rowNr, i-1)+" wartość "+model.getValueAt(rowNr, i-1));
-				//System.out.println("aab "+(model.getValueAt(rowNr, i-1)).toString().matches("[ ]{2,}"));
+
 				if (model.doesElExists(rowNr, i))	{
 					
 					JLabel a5 = new JLabel((String) model.getValueAt(rowNr, i));
@@ -200,7 +184,7 @@ public class OpForm2 implements ActionListener, FocusListener {
 						( (Component) a[i]).addFocusListener(this);
 					}
 				}
-				//System.out.println("asd "+i +"  -> "+b[i].toString());
+
 			}
 			else if (i==5)	{
 				JTextArea a5 = new JTextArea(5, 15);
@@ -349,9 +333,9 @@ public class OpForm2 implements ActionListener, FocusListener {
 
 			model.recordUpdate(savedRow, rowNr);
 
-			opForm.dispose(); //to jakimś cudem działa dobrze
+			opForm.dispose();
 		}
-		//System.out.println(e.getActionCommand());
+
 	}//koniec metody actionPerformed
 	public void findMoveFolder(String numerZZ, String myPath, boolean tam)	{
 		if (myPath.length()>0)	{
@@ -388,36 +372,23 @@ public class OpForm2 implements ActionListener, FocusListener {
 	}
 
 	@Override
-	public void focusLost(FocusEvent e) {	/*
-											/-------> kod tej metody do poprawy. Zmiana konstruktorów SingleFieldValidator + setter na 2 pierwsze parametry
-											 * a moze wystarczy jedynie setter a konstruktor zostawić....
-											*/
-
+	public void focusLost(FocusEvent e) {	
 		SingleFieldValidator valCheck = new SingleFieldValidator();
 
 		if (((JTextComponent) e.getSource()).getName().equals("PZ")) {
 			SingleFieldValidator zzVal = new SingleFieldValidator("PZ", ((JTextComponent) e.getSource()).getText(), model, rowNr, this);
-			//System.out.println(zzVal.getErrMessage()+" 1");
 			errPZLab.setText(zzVal.getErrMessage());
-			//errPZLab.setEnabled(true);
-			//System.out.println(errPZLab.getText()+" 2");
 			valCheck = zzVal;
 		}
 		else if (((JTextComponent) e.getSource()).getName().equals("WP")) {
 			SingleFieldValidator zzVal = new SingleFieldValidator("WP", ((JTextComponent) e.getSource()).getText(), model, rowNr, this);
-			//System.out.println(zzVal.getErrMessage()+" 1");
 			errWPLab.setText(zzVal.getErrMessage());
-			//errWPLab.setEnabled(true);
-			//System.out.println(errWPLab.getText()+" 2");
 			valCheck = zzVal;
 		}
 		else if (((JTextComponent) e.getSource()).getName().equals("DK")) 
 		{
 			SingleFieldValidator zzVal = new SingleFieldValidator("DK", ((JTextComponent) e.getSource()).getText(), model, rowNr, this);
-			//System.out.println(zzVal.getErrMessage()+" 1");
 			errDKLab.setText(zzVal.getErrMessage());
-			//errDKLab.setEnabled(true);
-			//System.out.println(errDKLab.getText()+" 2");
 			valCheck = zzVal;
 		}
 		if(!valCheck.getValidationResult())	{
@@ -425,12 +396,7 @@ public class OpForm2 implements ActionListener, FocusListener {
 			btnNext.setEnabled(true);
 		}
 		else {
-			/*
-			 * tu trzebaby sprawdzić, czy zmieniły się dane we wszysktich okienkach - na razie mi się nie chce
-			if (!((JTextComponent) e.getSource()).getText().equals(""))	{
-				btnSave.setEnabled(true);
-			}
-			*/
+
 			btnSave.setEnabled(true);
 			btnNext.setEnabled(false);
 		}

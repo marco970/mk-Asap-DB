@@ -1,11 +1,7 @@
 package pl.asap.logic;
 
 import java.lang.reflect.Field;
-/*
- * To jest klasa, która ma służyć do przechowywania informacji, jakie walidacje
- * należy robić per dane pole.
- * W przypadku zmiany wektora danych, trzeba zmodyfikować zmienne w tej klasie
- */
+
 
 public class ValidatioModel {
 	 String[] ZZ = {"checkFormat","toShort", "notNull"};

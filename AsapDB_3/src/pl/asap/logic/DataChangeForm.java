@@ -6,8 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.io.IOException;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -36,11 +34,6 @@ public class DataChangeForm extends JFrame implements ActionListener, FocusListe
 	private int rowNr;
 	
 	private boolean isErr;
-	
-	//private Compare comp = new Compare();
-
-
-
 	/**
 	 * Create the frame.
 	 */
@@ -84,11 +77,7 @@ public class DataChangeForm extends JFrame implements ActionListener, FocusListe
 		panel.add(lblNewLabel, "cell 0 0 3 1");
 
 		for (int i = 0; i<=labNames.length-1; i++)	{
-			//JLabel aa = new JLabel(labNames[i]);
-			//.out.println(labNames.length);
 			labs[i] = new JLabel(labNames[i]);
-			
-			//labs[i].setFont(new Font("Tahoma", Font.PLAIN, 12));
 			panel.add(labs[i], "cell 0 "+(i+2));
 			
 			tfs[i] = new JTextField(10);
@@ -109,13 +98,7 @@ public class DataChangeForm extends JFrame implements ActionListener, FocusListe
 	//-------------moje metody
 	@Override
 	public void focusGained(FocusEvent arg0) {
-		// TODO Auto-generated method stub
-		
 	}
-	/**
-	 * ^\s*(3[01]|[12][0-9]|0?[1-9])\.(1[012]|0?[1-9])\.((?:19|20)\d{2})\s*$ --- to nie robi np 30.02
-	 * ^((0[1-9]|[12]\\d)\\.(0[1-9]|1[012])|30\\.(0[13-9]|1[012])|31\\.(0[13578]|1[02]))\\.(19|20)\\d\\d$
-	 */
 	@Override
 	public void focusLost(FocusEvent efl) {
 		
@@ -159,7 +142,6 @@ public class DataChangeForm extends JFrame implements ActionListener, FocusListe
 			for (int i = 0; i<=labNames.length-1; i++)	{
 				model.cellUpdate(tfs[i].getText(), rowNr, 10+i);
 			}
-			//try {new Zapis(model);} catch (IOException e1) {e1.printStackTrace();}
 			btnSave.setVisible(false);
 			btnCancel.setText("Zakończ");
 		}
@@ -188,27 +170,6 @@ public class DataChangeForm extends JFrame implements ActionListener, FocusListe
 		}
 		return n1 - n2;
 	}
-	
-	//-------------
-	/**
-	 * Launch the application.
-	 */
-	
-	public static void main(String[] args) {	//do wywalenia na koniec
-		
-		DataChangeForm frame = new DataChangeForm(new MainTableModel(), 3);
-		/*
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					DataChangeForm frame = new DataChangeForm(new MainTableModel(), 3);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});*/
-	}
-	/**/
+
 
 }
