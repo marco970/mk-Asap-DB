@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -29,17 +31,18 @@ public class EkranGlowny implements ActionListener {
 	private JMenuBar menuBar;
 	private MainTableModel data;
 	private JTable lista;
-	JMenu raport=null;  
+	private JMenu raport=null;
+	private ImageIcon img = new ImageIcon("\\gui-elements\\sleepy-worker-at-work.png");
 
-	String[] start = {"Start", "Nowe postÄ™powanie", "Raport miesiÄ™czny", "Exit"};
-	String[] sort = {"Sort","Nieaktywne", "Aktywne","Zawieszone", "ZakoÅ„czone", "Wszystkie"};
-	String[] toDo = {"ToDo", "Lista", "Notatki"};
-	String[] notatki = {"Notatki","Nowa notatka","Edytuj"};
-	String[] popupStr = {"modyfikacja", "zmieÅ„ daty", "zakoÅ„cz postÄ™powanie", "zawieÅ› postepowanie"};
+	private String[] start = {"Start", "Nowe postêpowanie", "Raport miesiêczny", "Exit"};
+	private String[] sort = {"Sort","Nieaktywne", "Aktywne","Zawieszone", "Zakoñczone", "Wszystkie"};
+	private String[] toDo = {"ToDo", "Lista", "Notatki"};
+	private String[] notatki = {"Notatki","Nowa notatka","Edytuj"};
+	private String[] popupStr = {"modyfikacja", "zmieñ daty", "zakoÅ„cz postêpowanie", "zawieœ postepowanie"};
 	
-	static String[] nazwaMies = { "styczeÅ„", "luty", "marzec", "kwiecieÅ„",
-            "maj", "czerwiec", "lipiec", "sierpieÅ„",
-            "wrzesieÅ„", "paÅºdziernik", "listopad", "grudzieÅ„"
+	private static String[] nazwaMies = { "styczeñ", "luty", "marzec", "kwiecieñ",
+            "maj", "czerwiec", "lipiec", "sierpieñ",
+            "wrzesieñ", "paŸdziernik", "listopad", "grudzieñ"
           };
 	
 	//sortowanie filtrowanie
@@ -60,6 +63,7 @@ public class EkranGlowny implements ActionListener {
 	public EkranGlowny(AbstractTableModel dataModel)	{ //do wywalenia
 		
 		this.dataModel = dataModel;
+		this.img = new ImageIcon("\\gui-elements\\sleepy-worker-at-work.png");
 
 		SwingUtilities.invokeLater(new Runnable() {
 		      @Override
@@ -93,11 +97,12 @@ public class EkranGlowny implements ActionListener {
 				}
 			}
 		}	
-		eg = new JFrame("ASap - Lista PostÄ™powaÅ„");
+		eg = new JFrame("ASap - Lista Postêpowañ");
 		
 		width = data.getColumnCount()*100;
 		height=	data.getRowCount()*12+200;	
 		eg.setSize(width, height);
+		eg.setIconImage(img.getImage());
 		
 		lista = new JTable(data);
 
