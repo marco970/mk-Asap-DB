@@ -32,17 +32,17 @@ public class EkranGlowny implements ActionListener {
 	private MainTableModel data;
 	private JTable lista;
 	private JMenu raport=null;
-	private ImageIcon img = new ImageIcon("\\gui-elements\\sleepy-worker-at-work.png");
+	private ImageIcon img = new ImageIcon("gui-elements/face1.png");
 
-	private String[] start = {"Start", "Nowe postêpowanie", "Raport miesiêczny", "Exit"};
-	private String[] sort = {"Sort","Nieaktywne", "Aktywne","Zawieszone", "Zakoñczone", "Wszystkie"};
+	private String[] start = {"Start", "Nowe postÄ™powanie", "Raport miesiÄ™czny", "Exit"};
+	private String[] sort = {"Sort","Nieaktywne", "Aktywne","Zawieszone", "ZakoÅ„czone", "Wszystkie"};
 	private String[] toDo = {"ToDo", "Lista", "Notatki"};
 	private String[] notatki = {"Notatki","Nowa notatka","Edytuj"};
-	private String[] popupStr = {"modyfikacja", "zmieñ daty", "zakoÅ„cz postêpowanie", "zawieœ postepowanie"};
+	private String[] popupStr = {"modyfikacja", "zmieÅ„ daty", "zakoÅ„cz postÄ™powanie", "zawieÅ› postepowanie"};
 	
-	private static String[] nazwaMies = { "styczeñ", "luty", "marzec", "kwiecieñ",
-            "maj", "czerwiec", "lipiec", "sierpieñ",
-            "wrzesieñ", "paŸdziernik", "listopad", "grudzieñ"
+	private static String[] nazwaMies = { "styczeÅ„", "luty", "marzec", "kwiecieÅ„",
+            "maj", "czerwiec", "lipiec", "sierpieÅ„",
+            "wrzesieÅ„", "paÅºdziernik", "listopad", "grudzieÅ„"
           };
 	
 	//sortowanie filtrowanie
@@ -63,7 +63,7 @@ public class EkranGlowny implements ActionListener {
 	public EkranGlowny(AbstractTableModel dataModel)	{ //do wywalenia
 		
 		this.dataModel = dataModel;
-		this.img = new ImageIcon("\\gui-elements\\sleepy-worker-at-work.png");
+		//img = new ImageIcon("/gui-elements/sleepy-worker-at-work.png");
 
 		SwingUtilities.invokeLater(new Runnable() {
 		      @Override
@@ -77,6 +77,7 @@ public class EkranGlowny implements ActionListener {
 		this.dbConnect = dbConnect;
 		MainTableModel dane = new MainTableModel();
 		data = dane;
+		//img = new ImageIcon("gui-elements/sleepy-worker-at-work.png");
 
 		SwingUtilities.invokeLater(new Runnable() {
 		      @Override
@@ -97,7 +98,7 @@ public class EkranGlowny implements ActionListener {
 				}
 			}
 		}	
-		eg = new JFrame("ASap - Lista Postêpowañ");
+		eg = new JFrame("ASap - Lista PostÄ™powaÅ„");
 		
 		width = data.getColumnCount()*100;
 		height=	data.getRowCount()*12+200;	
