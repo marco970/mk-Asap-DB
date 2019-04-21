@@ -1,4 +1,4 @@
-package theToDo;
+package pl.asap.theToDo;
 
 import java.awt.GridLayout;
 
