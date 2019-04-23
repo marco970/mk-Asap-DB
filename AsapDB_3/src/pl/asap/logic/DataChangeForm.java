@@ -18,7 +18,7 @@ import javax.swing.SwingConstants;
 public class DataChangeForm extends JFrame implements ActionListener, FocusListener  {
 
 	private JPanel contentPane;
-	JPanel panel;
+	private JPanel panel;
 	private JButton btnSave = new JButton("Zapisz");
 	private JButton btnCancel = new JButton("Anuluj");
 	private JLabel lblNewLabel;

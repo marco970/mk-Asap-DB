@@ -1,6 +1,5 @@
 package pl.asap.DB;
 
-import java.awt.EventQueue;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,12 +12,8 @@ import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 public class DBConnect {   
-	private static Connection myConn;
-	private static Statement stmt;
 	static JFrame frame;
 	static JLabel lab;
 	String defaultPath;
@@ -50,7 +45,7 @@ public DBConnect()        {
 			String password = "usbw";
 
 			try {
-				myConn = DriverManager.getConnection(jdbcUrl, user, password);
+				DriverManager.getConnection(jdbcUrl, user, password);
 				System.out.println("połączono");
 				break;
 			} catch (SQLException exc) {

@@ -41,12 +41,12 @@ public class MainTableModel extends AbstractTableModel {
 		//this.dane=adane;
 		this.dane=readDB.getMatrix();
 		this.ids = readDB.getIDs();
-		System.out.print("ids "+ ids.length + " _ "+ dane.length);
+		//System.out.print("ids "+ ids.length + " _ "+ dane.length);
 		
 		int i = dane.length;
 		int j = nazwyKolumn.length;
 		
-		System.out.print("ids "+ ids.length + " _ "+ j);
+		//System.out.print("ids "+ ids.length + " _ "+ j);
 
 		for(int m = 0; m<=i-1; m++)	{
 					
