@@ -1,4 +1,4 @@
-package pl.test;
+package pl.asap.start;
 
 import pl.asap.DB.DBConnect;
 import pl.asap.logic.EkranGlowny;
