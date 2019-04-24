@@ -2,31 +2,25 @@ package pl.test;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.GridLayout;
-import java.awt.ScrollPane;
-
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.border.EmptyBorder;
-
-import javafx.scene.control.Separator;
 import net.miginfocom.swing.MigLayout;
 
+@SuppressWarnings("serial")
 public class NotesScreen extends JFrame {
 	
 	
 	public NotesScreen()	{
 		
 		super("Notatki");
-		SingleNote sn1 = new SingleNote("text1");
-		SingleNote sn2 = new SingleNote("text2");
-		int m = 10;
-		int n = m*120;
+		SingleNote sn1 = new SingleNote("2019.02.30", "2019.04.11", "3");
+		SingleNote sn2 = new SingleNote("2019.03.22", "2019.04.15", "5");
+		//int m = 10;
+		//int n = m*120;
 		
-		Container cp =  this.getContentPane();
+		//Container cp =  this.getContentPane();
 		JPanel jpa = new JPanel();
 		
 		jpa.setLayout(new MigLayout("", "[grow]", "[grow][]"));
@@ -50,5 +44,6 @@ public class NotesScreen extends JFrame {
 		
 
 	}
+
 
 }

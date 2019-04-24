@@ -7,15 +7,16 @@ import javax.swing.*;
 import javax.swing.border.Border;
 
 
-public class SingleNote extends Container implements ActionListener	{
+public class SingleNote extends Container implements ActionListener, FocusListener	{
 	private JCheckBox chBox;
+	private JTextArea ta;
 	
-	public SingleNote(String message)	{
+	public SingleNote(String dateStart, String lastChangeDate, String noteId)	{
 		super();
 		
 		this.setLayout(new GridLayout(1,3));
-		JLabel messLab = new JLabel(message);
-		JLabel messLab2 = new JLabel(message+" helloł");
+		JLabel messLab = new JLabel(dateStart);
+		JLabel messLab2 = new JLabel(lastChangeDate);
 		chBox = new JCheckBox("Zamknij");
 		formatuj(messLab);
 		formatuj(messLab2);
@@ -29,11 +30,16 @@ public class SingleNote extends Container implements ActionListener	{
 		leftPanel.add(messLab2);
 		leftPanel.add(chBox);
 		
+		//chBox.setName(message);
 		chBox.addActionListener(this);
-		chBox.setActionCommand(message);
+		
+		//chBox.setActionCommand(message);
 		
 		
-		JTextArea ta = new JTextArea(5,30);
+		ta = new JTextArea(5,30);
+		ta.addFocusListener(this);
+		ta.setName(noteId);
+		
 		JScrollPane sp = new JScrollPane(ta);
 		Border border ;
 
@@ -48,19 +54,44 @@ public class SingleNote extends Container implements ActionListener	{
 		this.add(panel);
 		
 	}
-	public void formatuj (JComponent c)	{
+	private void formatuj (JComponent c)	{
 		c.setFont(new Font("sansserif", Font.PLAIN, 12));
+	}
+	private void deactivate(JTextArea ta2)	{
+		//ta.setContentType("text/html");
+		ta2.setEditable(false);
+		ta2.setBackground(null);
+		ta2.setBorder(null);
+	}
+	private void activate(JTextArea ta2)	{
+		ta2.setEditable(true);
+		ta2.setBackground(Color.white);
+		Border blackline = BorderFactory.createLineBorder(Color.black);
+		ta2.setBorder(blackline);
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String a = "";
 		if(chBox.isSelected()) {
 			a = " zaznaczone";
+			
+			deactivate(ta);
 		}
 		else {
 			a = " niezaznaczone"; 
+			activate(ta);
 		}
 		System.out.println(e.getActionCommand()+a);
+		
+	}
+	@Override
+	public void focusGained(FocusEvent arg0) {
+		
+		
+	}
+	@Override
+	public void focusLost(FocusEvent ev) {
+		System.out.println(ta.getName() +" focusLostAction " + ta.getText());
 		
 	}
 
