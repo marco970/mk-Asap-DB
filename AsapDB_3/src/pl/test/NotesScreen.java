@@ -17,6 +17,7 @@ public class NotesScreen extends JFrame {
 		super("Notatki");
 		SingleNote sn1 = new SingleNote("2019.02.30", "2019.04.11", "3");
 		SingleNote sn2 = new SingleNote("2019.03.22", "2019.04.15", "5");
+		SingleNote sn3 = new SingleNote("2019.03.11", "2019.04.21", "9");
 		//int m = 10;
 		//int n = m*120;
 		
@@ -29,6 +30,7 @@ public class NotesScreen extends JFrame {
 		jpa.add(new JLabel("numer ZZ, Numer PZ"),"cell 0 0" );
 		jpa.add(sn1, "cell 0 1");
 		jpa.add(sn2, "cell 0 2");
+		jpa.add(sn3, "cell 0 3");
 		jscrollpane.getViewport().add(jpa, null);
 		add(jscrollpane, BorderLayout.CENTER);
 		

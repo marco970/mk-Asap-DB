@@ -5,11 +5,13 @@ import java.awt.event.*;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.border.EtchedBorder;
 
 
 public class SingleNote extends Container implements ActionListener, FocusListener	{
 	private JCheckBox chBox;
 	private JTextArea ta;
+	JButton button;
 	
 	public SingleNote(String dateStart, String lastChangeDate, String noteId)	{
 		super();
@@ -17,18 +19,24 @@ public class SingleNote extends Container implements ActionListener, FocusListen
 		this.setLayout(new GridLayout(1,3));
 		JLabel messLab = new JLabel(dateStart);
 		JLabel messLab2 = new JLabel(lastChangeDate);
+		button = new JButton();
+		button.addActionListener(this);
+		button.setActionCommand("button");
+		button.setName("button"+noteId);
 		chBox = new JCheckBox("Zamknij");
+		chBox.setName(noteId);
 		formatuj(messLab);
 		formatuj(messLab2);
 		formatuj(chBox);
 		
-		messLab.setFont(new Font("sansserif", Font.PLAIN, 12));
-		messLab2.setFont(new Font("sansserif", Font.PLAIN, 12));
+		//messLab.setFont(new Font("sansserif", Font.PLAIN, 12));
+		//messLab2.setFont(new Font("sansserif", Font.PLAIN, 12));
 		JPanel leftPanel = new JPanel();
-		leftPanel.setLayout(new GridLayout(4, 1));
+		leftPanel.setLayout(new GridLayout(5, 1));
 		leftPanel.add(messLab);
 		leftPanel.add(messLab2);
 		leftPanel.add(chBox);
+		leftPanel.add(button);
 		
 		//chBox.setName(message);
 		chBox.addActionListener(this);
@@ -36,7 +44,7 @@ public class SingleNote extends Container implements ActionListener, FocusListen
 		//chBox.setActionCommand(message);
 		
 		
-		ta = new JTextArea(5,30);
+		ta = new JTextArea(5,40);
 		ta.addFocusListener(this);
 		ta.setName(noteId);
 		
@@ -61,16 +69,18 @@ public class SingleNote extends Container implements ActionListener, FocusListen
 		//ta.setContentType("text/html");
 		ta2.setEditable(false);
 		ta2.setBackground(null);
-		ta2.setBorder(null);
+		ta2.removeFocusListener(this);
+
 	}
 	private void activate(JTextArea ta2)	{
 		ta2.setEditable(true);
 		ta2.setBackground(Color.white);
-		Border blackline = BorderFactory.createLineBorder(Color.black);
-		ta2.setBorder(blackline);
+		ta2.addFocusListener(this);
+
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if (e.getActionCommand()=="button")	System.out.println("klikam button"+button.getName());
 		String a = "";
 		if(chBox.isSelected()) {
 			a = " zaznaczone";
@@ -81,7 +91,7 @@ public class SingleNote extends Container implements ActionListener, FocusListen
 			a = " niezaznaczone"; 
 			activate(ta);
 		}
-		System.out.println(e.getActionCommand()+a);
+		System.out.println(chBox.getName()+" "+a);
 		
 	}
 	@Override
