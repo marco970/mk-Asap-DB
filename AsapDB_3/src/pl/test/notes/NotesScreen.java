@@ -1,7 +1,6 @@
 package pl.test.notes;
 
 import java.awt.BorderLayout;
-import java.awt.Container;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;

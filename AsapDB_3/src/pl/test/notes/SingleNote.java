@@ -40,7 +40,7 @@ public class SingleNote extends Container implements ActionListener, FocusListen
 		//chBox.setActionCommand(message);
 		
 		
-		ta = new NoteArea(5, text);
+		ta = new TextArea(5, 40);
 		ta.addFocusListener(this);
 		ta.setName(noteId);
 		
