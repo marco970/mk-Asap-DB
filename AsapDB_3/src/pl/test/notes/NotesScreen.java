@@ -1,4 +1,4 @@
-package pl.test;
+package pl.test.notes;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -15,13 +15,11 @@ public class NotesScreen extends JFrame {
 	public NotesScreen()	{
 		
 		super("Notatki");
-		SingleNote sn1 = new SingleNote("2019.02.30", "2019.04.11", "3");
-		SingleNote sn2 = new SingleNote("2019.03.22", "2019.04.15", "5");
-		SingleNote sn3 = new SingleNote("2019.03.11", "2019.04.21", "9");
-		//int m = 10;
-		//int n = m*120;
 		
-		//Container cp =  this.getContentPane();
+		SingleNote sn1 = new SingleNote("2019.02.30", "2019.04.11", "3", "");
+		SingleNote sn2 = new SingleNote("2019.03.22", "2019.04.15", "5", "coś");
+		SingleNote sn3 = new SingleNote("2019.03.11", "2019.04.21", "9", "nic na razie");
+
 		JPanel jpa = new JPanel();
 		
 		jpa.setLayout(new MigLayout("", "[grow]", "[grow][]"));

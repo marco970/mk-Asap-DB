@@ -1,4 +1,4 @@
-package pl.test;
+package pl.test.notes;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -10,19 +10,16 @@ import javax.swing.border.EtchedBorder;
 
 public class SingleNote extends Container implements ActionListener, FocusListener	{
 	private JCheckBox chBox;
-	private JTextArea ta;
-	JButton button;
+	private TextArea ta;
 	
-	public SingleNote(String dateStart, String lastChangeDate, String noteId)	{
+	public SingleNote(String dateStart, String lastChangeDate, String noteId, String text)	{
 		super();
-		
+			
 		this.setLayout(new GridLayout(1,3));
+		
 		JLabel messLab = new JLabel(dateStart);
 		JLabel messLab2 = new JLabel(lastChangeDate);
-		button = new JButton();
-		button.addActionListener(this);
-		button.setActionCommand("button");
-		button.setName("button"+noteId);
+
 		chBox = new JCheckBox("Zamknij");
 		chBox.setName(noteId);
 		formatuj(messLab);
@@ -36,7 +33,6 @@ public class SingleNote extends Container implements ActionListener, FocusListen
 		leftPanel.add(messLab);
 		leftPanel.add(messLab2);
 		leftPanel.add(chBox);
-		leftPanel.add(button);
 		
 		//chBox.setName(message);
 		chBox.addActionListener(this);
@@ -44,7 +40,7 @@ public class SingleNote extends Container implements ActionListener, FocusListen
 		//chBox.setActionCommand(message);
 		
 		
-		ta = new JTextArea(5,40);
+		ta = new NoteArea(5, text);
 		ta.addFocusListener(this);
 		ta.setName(noteId);
 		
@@ -65,14 +61,14 @@ public class SingleNote extends Container implements ActionListener, FocusListen
 	private void formatuj (JComponent c)	{
 		c.setFont(new Font("sansserif", Font.PLAIN, 12));
 	}
-	private void deactivate(JTextArea ta2)	{
+	private void deactivate(TextArea ta2)	{
 		//ta.setContentType("text/html");
 		ta2.setEditable(false);
 		ta2.setBackground(null);
 		ta2.removeFocusListener(this);
 
 	}
-	private void activate(JTextArea ta2)	{
+	private void activate(TextArea ta2)	{
 		ta2.setEditable(true);
 		ta2.setBackground(Color.white);
 		ta2.addFocusListener(this);
@@ -80,7 +76,7 @@ public class SingleNote extends Container implements ActionListener, FocusListen
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getActionCommand()=="button")	System.out.println("klikam button"+button.getName());
+
 		String a = "";
 		if(chBox.isSelected()) {
 			a = " zaznaczone";
