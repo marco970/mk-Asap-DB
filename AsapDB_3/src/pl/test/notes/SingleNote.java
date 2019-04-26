@@ -43,6 +43,7 @@ public class SingleNote extends Container implements ActionListener, FocusListen
 		ta = new TextArea(5, 40);
 		ta.addFocusListener(this);
 		ta.setName(noteId);
+		ta.setText(text);
 		
 		JScrollPane sp = new JScrollPane(ta);
 		Border border ;
