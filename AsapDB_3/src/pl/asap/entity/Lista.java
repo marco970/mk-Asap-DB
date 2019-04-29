@@ -2,6 +2,7 @@ package pl.asap.entity;
 
 import javax.persistence.*;
 import java.lang.reflect.*;
+import java.util.List;
 
 
 
@@ -57,7 +58,8 @@ public class Lista {
 	@Column(name="data_DK")
 	private String dsDK;
 	
-
+	@OneToMany(mappedBy = "idPostepowanie")
+	private List<Notes> notes;
 
 	public Integer getIdPostepowanie() {
 		return idPostepowanie;

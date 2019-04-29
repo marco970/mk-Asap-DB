@@ -1,10 +1,13 @@
 package pl.asap.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,7 +23,10 @@ public class Notes {
 	@Column(name="note")
 	private String note;
 	
-	@Column(name="id_postepowanie")
+	 
+	//@Column(name="id_postepowanie")
+	@ManyToOne(cascade= {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	@JoinColumn(name="id_postepowanie")
 	private Integer idPostepowanie;
 	
 	@Column(name="date_open")
