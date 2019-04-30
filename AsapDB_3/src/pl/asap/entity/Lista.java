@@ -58,7 +58,7 @@ public class Lista {
 	@Column(name="data_DK")
 	private String dsDK;
 	
-	@OneToMany(mappedBy = "idPostepowanie")
+	@OneToMany(mappedBy = "idPostepowanie", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	private List<Notes> notes;
 
 	public Integer getIdPostepowanie() {
@@ -150,6 +150,15 @@ public class Lista {
 	}
 	public void setdsDK(String dsDK) {
 		this.dsDK = dsDK;
+	}
+	
+	
+	
+	public List<Notes> getNotes() {
+		return notes;
+	}
+	public void setNotes(List<Notes> notes) {
+		this.notes = notes;
 	}
 	public Object[] getArray()	{
 		//zwraca nazwy pól beana
