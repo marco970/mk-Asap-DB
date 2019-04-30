@@ -2,6 +2,7 @@ package pl.asap.entity;
 
 import javax.persistence.*;
 import java.lang.reflect.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -70,7 +71,7 @@ public class Lista {
 	public String getZZ() {
 		return ZZ;
 	}
-	public void setZZ(String zZ) {
+	public void setZZ(String zZ) { 
 		ZZ = zZ;
 	}
 	public String getPZ() {
@@ -159,6 +160,13 @@ public class Lista {
 	}
 	public void setNotes(List<Notes> notes) {
 		this.notes = notes;
+	}
+	public void addNote(Notes note)	{
+		if (notes==null)	{
+			 notes=new ArrayList<>();
+		}
+		notes.add(note);
+		note.setIdPostepowanie(this.getIdPostepowanie());
 	}
 	public Object[] getArray()	{
 		//zwraca nazwy pól beana
