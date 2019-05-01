@@ -44,17 +44,19 @@ public class SingleNote extends Container implements ActionListener, FocusListen
 		ta.addFocusListener(this);
 		ta.setName(noteId);
 		ta.setText(text);
+		ta.setBackground(Color.WHITE);
+		ta.setCaretPosition(ta.getText().length());
 		
-		JScrollPane sp = new JScrollPane(ta);
-		Border border ;
+		//JScrollPane sp = new JScrollPane(ta);
+		//Border border ;
 
-		border = BorderFactory.createLineBorder(Color.black);
+		//border = BorderFactory.createLineBorder(Color.black);
 		
 		JPanel panel = new JPanel();
 		
 		panel.add(leftPanel);
 		
-		panel.add(sp);
+		panel.add(ta);
 		
 		this.add(panel);
 		
@@ -71,8 +73,9 @@ public class SingleNote extends Container implements ActionListener, FocusListen
 	}
 	private void activate(TextArea ta2)	{
 		ta2.setEditable(true);
-		ta2.setBackground(Color.white);
+		ta2.setBackground(Color.WHITE);
 		ta2.addFocusListener(this);
+		ta2.setCaretPosition(ta2.getText().length());
 
 	}
 	@Override
