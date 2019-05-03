@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -23,11 +24,9 @@ public class Notes {
 	@Column(name="note")
 	private String note;
 	
-	 
-	//@Column(name="id_postepowanie")
 	@ManyToOne(cascade= {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name="id_postepowanie")
-	private Integer idPostepowanie;
+	private Lista lista;
 	
 	@Column(name="date_open")
 	private String dateOpen;
@@ -42,9 +41,8 @@ public class Notes {
 		
 	}
 
-	public Notes(String note, Integer idPostepowanie, String dateOpen, String dateModified, Integer isOpen) {
+	public Notes(String note, String dateOpen, String dateModified, Integer isOpen) {
 		this.note = note;
-		this.idPostepowanie = idPostepowanie;
 		this.dateOpen = dateOpen;
 		this.dateModified = dateModified;
 		this.isOpen = isOpen;
@@ -66,13 +64,13 @@ public class Notes {
 		this.note = note;
 	}
 
-	public Integer getIdPostepowanie() {
-		return idPostepowanie;
-	}
-
-	public void setIdPostepowanie(Integer idPostepowanie) {
-		this.idPostepowanie = idPostepowanie;
-	}
+//	public Integer getIdPostepowanie() {
+//		return idPostepowanie;
+//	}
+//
+//	public void setIdPostepowanie(Integer idPostepowanie) {
+//		this.idPostepowanie = idPostepowanie;
+//	}
 
 	public String getDateOpen() {
 		return dateOpen;
@@ -97,10 +95,19 @@ public class Notes {
 	public void setIsOpen(Integer isOpen) {
 		this.isOpen = isOpen;
 	}
+	
+
+	public Lista getLista() {
+		return lista;
+	}
+
+	public void setLista(Lista lista) {
+		this.lista = lista;
+	}
 
 	@Override
 	public String toString() {
-		return "Notes [noteId=" + noteId + ", note=" + note + ", idPostepowanie=" + idPostepowanie + ", dateOpen="
+		return "Notes [noteId=" + noteId + ", note=" + note + ", dateOpen="
 				+ dateOpen + ", dateModified=" + dateModified + ", isOpen=" + isOpen + "]";
 	}
 	

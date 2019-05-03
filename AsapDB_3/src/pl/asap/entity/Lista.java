@@ -8,7 +8,7 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "Lista")
+@Table(name = "lista")
 public class Lista {
 	
 	@Id
@@ -59,7 +59,7 @@ public class Lista {
 	@Column(name="data_DK")
 	private String dsDK;
 	
-	@OneToMany(mappedBy = "idPostepowanie", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	@OneToMany(mappedBy = "lista", cascade = CascadeType.ALL)
 	private List<Notes> notes;
 
 	public Integer getIdPostepowanie() {
@@ -152,9 +152,6 @@ public class Lista {
 	public void setdsDK(String dsDK) {
 		this.dsDK = dsDK;
 	}
-	
-	
-	
 	public List<Notes> getNotes() {
 		return notes;
 	}
@@ -166,10 +163,10 @@ public class Lista {
 			 notes=new ArrayList<>();
 		}
 		notes.add(note);
-		note.setIdPostepowanie(this.getIdPostepowanie());
+		note.setLista(this);
 	}
 	public Object[] getArray()	{
-		//zwraca nazwy pól beana
+		//zwraca nazwy pól klasy entity
 		Class c = getClass();
 		Field[] fields = c.getDeclaredFields();
 		int length = fields.length;
@@ -214,6 +211,14 @@ public Object[] getRow()	{
 		return fields.length;
 		
 	}
+	@Override
+	public String toString() {
+		return "Lista [idPostepowanie=" + idPostepowanie + ", ZZ=" + ZZ + ", PZ=" + PZ + ", WP=" + WP + ", DK=" + DK
+				+ ", Status=" + Status + ", Przedmiot_zakupu=" + Przedmiot_zakupu + ", Dostawca=" + Dostawca
+				+ ", Nazwa=" + Nazwa + ", Tryb_postepowania=" + Tryb_postepowania + ", Spolka=" + Spolka + ", dsZZ="
+				+ dsZZ + ", dsPZ=" + dsPZ + ", dsWP=" + dsWP + ", dsDK=" + dsDK + "]";
+	}
+	
 	
 
 }
