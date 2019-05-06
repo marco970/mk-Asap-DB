@@ -9,9 +9,22 @@ import org.hibernate.cfg.Configuration;
 import pl.asap.entity.Lista;
 import pl.asap.entity.Notes;
 
-public class AddNote {
+public class ReadNotes {
 	
+	private static int idPostepowanie;
+	
+	
+
+	public ReadNotes(int idPostepowanie) {
+		this.idPostepowanie = idPostepowanie;
+	}
+
+
+
 	public static void main(String[] args) {
+		
+		new ReadNotes(11);
+		
 		// stworzenie obiektu Configuration
 		Configuration conf = new Configuration();
 		// wczytanie pliku konfiguracyjnego
@@ -26,7 +39,7 @@ public class AddNote {
 		Session session = factory.getCurrentSession();
 
 		
-		String getPostepowanie = "select c from Lista c where c.idPostepowanie=12";
+		String getPostepowanie = "select c from Lista c where c.idPostepowanie="+idPostepowanie;
 
 		session.beginTransaction();
 		
@@ -36,24 +49,9 @@ public class AddNote {
 		
 		System.out.println(lista.toString());
 		
-		Notes note1 = new Notes("Jestem Krasnoludkiem!", "2019.03.21", "2019.04.07", 0);
-		Notes note2 = new Notes("Jestem Patafianem z Puszczy", "2019.02.11", "2019.04.07", 0);
-		Notes note3 = new Notes("Jestem łysym Dziadem z gór", "2019.03.11", "2019.04.27", 0);
-		Notes note4 = new Notes("Jestem szalonym stolarzem z Garwolina", "2019.03.18", "2019.04.17", 1);
-		
-		//Notes(String note, Integer idPostepowanie, String dateOpen, String dateModified, Integer isOpen)
-//		
-//		Property property2 = new Property("Gdynia", 30);
-//		
-//		lista.addNote(note1);
-		lista.addNote(note2);
-//		lista.addNote(note3);
-//		lista.addNote(note4);
-//		
-//		session.persist(note1);
-		session.persist(note2);
-//		session.persist(note3);
-//		session.persist(note4);
+		for(Notes note: lista.getNotes() )	{
+			System.out.println(note.toString());
+		}
 		
 		session.getTransaction().commit();
 
