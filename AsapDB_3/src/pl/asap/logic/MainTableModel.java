@@ -211,6 +211,7 @@ public class MainTableModel extends AbstractTableModel {
 		UpdateTrans ut = new UpdateTrans(lista);
 		String field = getColumnName(kolNr);
 		int id = getId(rowNr);
+		System.out.println("cellUpdate id= "+id);
 		ut.upadateCell(field, value, id);
 		
 	}

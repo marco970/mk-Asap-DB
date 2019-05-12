@@ -17,13 +17,13 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 	private JTable lista;
 	private MainTableModel data;
 	private JFrame frame;
-	public PopupContent(JTable list, MainTableModel dane, JFrame fram)	{
+	public PopupContent(JTable list, MainTableModel dane, JFrame fram, String[] popupStr)	{
 		super();
 		lista=list;
 		data = dane;
 		frame = fram;
 
-		String[] popupStr = {"modyfikacja", "zmień daty", "zakończ postępowanie", "zawieś postepowanie"};
+		//String[] popupStr = {"modyfikacja", "zmień daty", "zakończ postępowanie", "zawieś postepowanie"};
 		doMassAddMenu(this, popupStr);		
 	}
 	

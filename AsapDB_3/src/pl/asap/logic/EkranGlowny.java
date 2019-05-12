@@ -38,7 +38,7 @@ public class EkranGlowny implements ActionListener {
 	private String[] sort = {"Sort","Nieaktywne", "Aktywne","Zawieszone", "Zakończone", "Wszystkie"};
 	private String[] toDo = {"ToDo", "Lista", "Notatki"};
 	private String[] notatki = {"Notatki","Nowa notatka","Edytuj"};
-	private String[] popupStr = {"modyfikacja", "zmień daty", "zakończ postępowanie", "zawieś postepowanie"};
+	private String[] popupStr = {"modyfikacja", "zmień daty", "zakończ postępowanie", "zawieś postepowanie", "otwórz folder","notatki"};
 	
 	private static String[] nazwaMies = { "styczeń", "luty", "marzec", "kwiecień",
             "maj", "czerwiec", "lipiec", "sierpień",
@@ -148,7 +148,7 @@ public class EkranGlowny implements ActionListener {
 		PopupMenuBean pmb = new PopupMenuBean(popupStr);
 		
 		TableMouseListener tbml = new TableMouseListener(lista, data, pmb);
-		PopupContent pc = new PopupContent(lista, data, eg);
+		PopupContent pc = new PopupContent(lista, data, eg, popupStr);
 		
 		pmb.addPropertyChangeListener(pc);
 		

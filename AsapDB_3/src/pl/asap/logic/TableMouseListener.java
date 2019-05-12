@@ -28,9 +28,9 @@ public class TableMouseListener extends MouseAdapter  {
        int selectedRow = table.getSelectedRow();
        int realSelectedRow = table.convertRowIndexToModel(selectedRow);
 		
-       String[] popupStr1 = {"modyfikacja", "zmień daty"};
-       String[] popupStr2 = {"modyfikacja", "zmień daty", "zakończ postępowanie", "zawieś postepowanie"};
-       String[] popupStr3 = {"modyfikacja", "zmień daty", "odwieś postępowanie"};
+       String[] popupStr1 = {"modyfikacja", "zmień daty","otwórz folder","notatki"};
+       String[] popupStr2 = {"modyfikacja", "zmień daty", "zakończ postępowanie", "zawieś postepowanie", "otwórz folder","notatki"};
+       String[] popupStr3 = {"modyfikacja", "zmień daty", "odwieś postępowanie", "otwórz folder","notatki"};
        
        Object status = model.getValueAt(realSelectedRow, 4);
        

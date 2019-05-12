@@ -6,6 +6,7 @@ import org.hibernate.cfg.Configuration;
 
 import pl.asap.entity.Config;
 import pl.asap.entity.Lista;
+import pl.asap.entity.Notes;
 
 public abstract class TransBlank {
 	
@@ -27,6 +28,7 @@ public abstract class TransBlank {
 		Class<? extends Object> beanClass = bean.getClass();
 		
 		conf.addAnnotatedClass(beanClass);
+		conf.addAnnotatedClass(Notes.class);	//to do poprawy, koniecznie, trzeba to jakoś w dać w klasie Config i stamtąd automatycznie pobierać
 		factory = conf.buildSessionFactory();
 		session = factory.getCurrentSession();
 

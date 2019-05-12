@@ -21,9 +21,17 @@ public class UpdateTrans extends TransBlank {
         super(bean);      
     }
     public void updateLogic(Object field, Object newValue, int id)	{
-    	String str = bean.toString();
+    	String str = bean.toString(); //trzeba wykombinować przekazanie nazwy tabeli
+    	
         int i = str.indexOf("@");
+        System.out.println("str= "+str+" i= "+i);
     	String update = "update "+str.substring(0, i)+" set "+ field+"=:"+field+ " where id_postepowanie=:id";
+    	
+//		String update = "update Employee e set e.salary=:salary where e.idEmployee=:idEmployee";
+//		Query query = session.createQuery(update);
+//		query.setParameter("salary", salary);
+//		query.setParameter("idEmployee", idEmployee);
+//		query.executeUpdate();
     	
         
         query = session.createQuery(update);
