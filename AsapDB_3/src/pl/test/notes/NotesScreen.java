@@ -21,15 +21,12 @@ public class NotesScreen extends JFrame {
 		int idPostepowanie = dane.getId(rowNr);
 		ReadNotes rn = new ReadNotes(idPostepowanie);
 		ArrayList<Notes> notes = rn.getNotes();
-		for (Notes el: notes)	{
-			System.out.println(el.getNote()+" "+el.getNoteId());
-			
-		}
+
 		
 		
-		SingleNote sn1 = new SingleNote("2019.02.30", "2019.04.11", "3", "");
-		SingleNote sn2 = new SingleNote("2019.03.22", "2019.04.15", "5", "coś");
-		SingleNote sn3 = new SingleNote("2019.03.11", "2019.04.21", "9", "nic na razie");
+//		SingleNote sn1 = new SingleNote("2019.02.30", "2019.04.11", "3", "");
+//		SingleNote sn2 = new SingleNote("2019.03.22", "2019.04.15", "5", "coś");
+//		SingleNote sn3 = new SingleNote("2019.03.11", "2019.04.21", "9", "nic na razie");
 
 		JPanel jpa = new JPanel();
 		
@@ -39,9 +36,19 @@ public class NotesScreen extends JFrame {
 		
 		String ZZPZ = dane.getValueAt(rowNr, 0)+", "+dane.getValueAt(rowNr, 1);
 		jpa.add(new JLabel(ZZPZ),"cell 0 0" );
-		jpa.add(sn1, "cell 0 1");
-		jpa.add(sn2, "cell 0 2");
-		jpa.add(sn3, "cell 0 3");
+		int j = 1;
+		for (Notes el: notes)	{
+			System.out.println(el.getNote()+" "+el.getNoteId());
+			SingleNote sno = new SingleNote(el.getDateOpen(), el.getDateModified(), el.getNoteId().toString(), el.getNote()); 
+			jpa.add(sno, "cell 0 "+j );
+			j++;
+		}
+		
+		
+		
+//		jpa.add(sn1, "cell 0 1");
+//		jpa.add(sn2, "cell 0 2");
+//		jpa.add(sn3, "cell 0 3");
 		jscrollpane.getViewport().add(jpa, null);
 		add(jscrollpane, BorderLayout.CENTER);
 		
