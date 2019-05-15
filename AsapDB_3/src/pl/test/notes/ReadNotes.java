@@ -44,7 +44,10 @@ public class ReadNotes {
 		for(Notes note: lista.getNotes() )	{
 			
 			notes.add(note);
-			System.out.println(note.toString());
+//			System.out.println(note.toString());
+//			System.out.print(note.getNote()+" -date open: ");
+//			System.out.print(note.getDateOpen()+" -date last modified: ");
+//			System.out.print(note.getDateModified()+"\n");
 		}
 		
 		session.getTransaction().commit();
@@ -58,7 +61,7 @@ public class ReadNotes {
 
 	public static void main(String[] args) {
 		
-		new ReadNotes(12);
+		new ReadNotes(10);
 		
 
 

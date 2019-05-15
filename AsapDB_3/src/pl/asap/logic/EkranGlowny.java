@@ -216,7 +216,11 @@ public class EkranGlowny implements ActionListener {
 		String u = e.getActionCommand();
 
 		if (u.equals(start[3]))	{
-			dbConnect.getProcess().destroy();
+			try {
+				dbConnect.getProcess().destroy();
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
 			System.exit(0);
 		}
 

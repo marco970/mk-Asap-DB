@@ -11,6 +11,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 
+import pl.test.notes.NotesScreen;
+
 @SuppressWarnings("serial")
 public class PopupContent extends JPopupMenu implements PropertyChangeListener, ActionListener {
 
@@ -113,6 +115,15 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 				new Zapis(data);
 				
 			}
+		}
+		if (u.equals("notatki"))	{
+			//private String[] popupStr = {"modyfikacja", "zmień daty", "zakończ postępowanie", "zawieś postepowanie", "otwórz folder","notatki"};
+			int realSelectedRow = lista.convertRowIndexToModel(lista.getSelectedRow());
+			final int idPostepowanie = data.getId(realSelectedRow);
+			System.out.println("row= "+realSelectedRow+" id= "+idPostepowanie);
+			new NotesScreen(realSelectedRow, data);
+
+			
 		}
 	}
 
