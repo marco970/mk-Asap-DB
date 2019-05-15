@@ -66,8 +66,8 @@ public class MainTableModel extends AbstractTableModel {
 			id = (Integer) cids[rowNr-1];
 		}else
 			id = 0;
-		System.out.println("row "+ rowNr + " id "+ id);
-		System.out.println("ids length " + (Integer) cids.length);
+//		System.out.println("row "+ rowNr + " id "+ id);
+//		System.out.println("ids length " + (Integer) cids.length);
 		return id;
 	}
 	

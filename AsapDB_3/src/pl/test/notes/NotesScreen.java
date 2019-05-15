@@ -23,6 +23,7 @@ public class NotesScreen extends JFrame {
 		ArrayList<Notes> notes = rn.getNotes();
 		for (Notes el: notes)	{
 			System.out.println(el.getNote()+" "+el.getNoteId());
+			
 		}
 		
 		
