@@ -22,8 +22,7 @@ public class UpdateTrans extends TransBlank {
     }
     public void updateLogic(Object field, Object newValue, int id)	{
     	String str = bean.getClass().getSimpleName(); //trzeba wykombinować przekazanie nazwy tabeli
-    	
-        //int i = str.indexOf("@");
+
         System.out.println("str= "+str);
     	String update = "update "+str+" set "+ field+"=:"+field+ " where id_postepowanie=:id";
     	
