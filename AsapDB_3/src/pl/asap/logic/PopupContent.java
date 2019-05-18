@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 
+import pl.asap.models.MainTableModel;
 import pl.test.notes.NotesScreen;
 
 @SuppressWarnings("serial")

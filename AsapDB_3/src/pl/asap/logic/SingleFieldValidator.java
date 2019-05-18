@@ -3,6 +3,8 @@ package pl.asap.logic;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import pl.asap.models.MainTableModel;
+
 public class SingleFieldValidator {
 	
 	private boolean valDone = true;

@@ -5,6 +5,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JTable;
 
+import pl.asap.models.MainTableModel;
+
 public class TableMouseListener extends MouseAdapter  {
     
    private JTable table;

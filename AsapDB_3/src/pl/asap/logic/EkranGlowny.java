@@ -21,6 +21,7 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableRowSorter;
 
 import pl.asap.DB.DBConnect;
+import pl.asap.models.MainTableModel;
 
 	
 public class EkranGlowny implements ActionListener {

@@ -23,6 +23,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
+import pl.asap.models.MainTableModel;
 
 public class NewForm implements  ActionListener, FocusListener {
 	

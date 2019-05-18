@@ -1,4 +1,4 @@
-package pl.asap.logic;
+package pl.asap.models;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

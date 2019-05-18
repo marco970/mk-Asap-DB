@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import net.miginfocom.swing.MigLayout;
 import pl.asap.entity.Notes;
-import pl.asap.logic.MainTableModel;
+import pl.asap.models.MainTableModel;
 
 @SuppressWarnings("serial")
 public class NotesScreen extends JFrame {
@@ -19,14 +19,8 @@ public class NotesScreen extends JFrame {
 		
 		super("Notatki");
 		int idPostepowanie = dane.getId(rowNr);
-		ReadNotes rn = new ReadNotes(idPostepowanie);
-		ArrayList<Notes> notes = rn.getNotes();
-
-		
-		
-//		SingleNote sn1 = new SingleNote("2019.02.30", "2019.04.11", "3", "");
-//		SingleNote sn2 = new SingleNote("2019.03.22", "2019.04.15", "5", "coś");
-//		SingleNote sn3 = new SingleNote("2019.03.11", "2019.04.21", "9", "nic na razie");
+		ReadNotes rn = new ReadNotes(idPostepowanie); //to do modelu
+		ArrayList<Notes> notes = rn.getNotes(); //to tez?
 
 		JPanel jpa = new JPanel();
 		
@@ -43,12 +37,7 @@ public class NotesScreen extends JFrame {
 			jpa.add(sno, "cell 0 "+j );
 			j++;
 		}
-		
-		
-		
-//		jpa.add(sn1, "cell 0 1");
-//		jpa.add(sn2, "cell 0 2");
-//		jpa.add(sn3, "cell 0 3");
+
 		jscrollpane.getViewport().add(jpa, null);
 		add(jscrollpane, BorderLayout.CENTER);
 		

@@ -4,10 +4,11 @@ import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.EtchedBorder;
+
+import pl.asap.transactions.UpdateTrans;
 
 
+@SuppressWarnings("serial")
 public class SingleNote extends Container implements ActionListener, FocusListener	{
 	private JCheckBox chBox;
 	private TextArea ta;
@@ -102,6 +103,7 @@ public class SingleNote extends Container implements ActionListener, FocusListen
 	@Override
 	public void focusLost(FocusEvent ev) {
 		System.out.println(ta.getName() +" focusLostAction " + ta.getText());
+//		UpdateTrans updateNote = new UpdateTrans(bean);
 		
 	}
 

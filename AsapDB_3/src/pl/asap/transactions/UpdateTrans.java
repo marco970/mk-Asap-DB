@@ -25,13 +25,7 @@ public class UpdateTrans extends TransBlank {
 
         System.out.println("str= "+str);
     	String update = "update "+str+" set "+ field+"=:"+field+ " where id_postepowanie=:id";
-    	
-//		String update = "update Employee e set e.salary=:salary where e.idEmployee=:idEmployee";
-//		Query query = session.createQuery(update);
-//		query.setParameter("salary", salary);
-//		query.setParameter("idEmployee", idEmployee);
-//		query.executeUpdate();
-    	
+
         
         query = session.createQuery(update);
         query.setParameter("id", id);

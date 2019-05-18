@@ -20,6 +20,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.text.JTextComponent;
 
 import net.miginfocom.swing.MigLayout;
+import pl.asap.models.MainTableModel;
+
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
