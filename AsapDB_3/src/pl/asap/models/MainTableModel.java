@@ -62,10 +62,12 @@ public class MainTableModel extends AbstractTableModel {
 	public Integer getId(int rowNr)	{
 		int id;
 		Object[] cids = new ReadTrans(lista).getIDs();
-		if (rowNr>0)	{
-			id = (Integer) cids[rowNr-1];
-		}else
-			id = 0;
+		id = (Integer) cids[rowNr];
+		
+//		if (rowNr>0)	{
+//			id = (Integer) cids[rowNr-1];
+//		}else
+//			id = 0;
 //		System.out.println("row "+ rowNr + " id "+ id);
 //		System.out.println("ids length " + (Integer) cids.length);
 		return id;
