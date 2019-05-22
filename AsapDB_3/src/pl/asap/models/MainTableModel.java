@@ -62,12 +62,13 @@ public class MainTableModel extends AbstractTableModel {
 	public Integer getId(int rowNr)	{
 		int id;
 		Object[] cids = new ReadTrans(lista).getIDs();
-		if (rowNr>0)	{
-			id = (Integer) cids[rowNr-1];
-		}else
-			id = 0;
-//		System.out.println("row "+ rowNr + " id "+ id);
-//		System.out.println("ids length " + (Integer) cids.length);
+		id = (Integer) cids[rowNr];
+//		if (rowNr>0)	{
+//			id = (Integer) cids[rowNr];
+//		}else
+//			id = (Integer) cids[rowNr];
+		System.out.println("MTM-getId----- row "+ rowNr + " id "+ id);
+		System.out.println("MTM-getId----- ids length " + (Integer) cids.length);
 		return id;
 	}
 	
@@ -185,7 +186,7 @@ public class MainTableModel extends AbstractTableModel {
 		for (int i = 0; i<=getRowCount()-1; i++)	{
 			rowList.add(dane[i]);
 		}
-		System.out.println("recordUpdated rowNr: "+rowNr + " ilość wierszy :"+getRowCount());
+		System.out.println("MainTabModel ----- recordUpdate rowNr: "+rowNr + " ----id: "+getId(rowNr));
 		rowList.set(rowNr, savedRow);
 		Object[][] daneUpd = new Object[rowList.size()][nazwyKolumn.length];
 		int j = 0;

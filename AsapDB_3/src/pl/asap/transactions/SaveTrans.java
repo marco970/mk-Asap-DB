@@ -34,11 +34,15 @@ public class SaveTrans extends TransBlank {
 	}
 	public void saveRow(Object[] values)	{
 		
-		int i=0;
-		for (Object el: array)	{
-			fieldLogic((String) el, values[i].toString());
-			i++;
+//		int i=0;
+//		for (Object el: array)	{
+//			fieldLogic((String) el, values[i].toString());
+//			i++;
+//		}
+		for(int i=0; i<=array.length-2; i++)	{
+			fieldLogic((String) array[i], values[i].toString());
 		}
+		
 		session.beginTransaction();
 		session.save(bean);
 		session.getTransaction().commit();

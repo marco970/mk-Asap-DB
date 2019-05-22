@@ -23,12 +23,20 @@ public class UpdateTrans extends TransBlank {
     public void updateLogic(Object field, Object newValue, int id)	{
     	String str = bean.getClass().getSimpleName(); //trzeba wykombinować przekazanie nazwy tabeli
 
-        System.out.println("str= "+str);
-    	String update = "update "+str+" set "+ field+"=:"+field+ " where id_postepowanie=:id";
-
+        //System.out.println("str= "+str  + " field= "+field+ "newValue= "+newValue);
         
+
+        String clause = " where id_postepowanie=:id";       
+//        String update = "update "+str+" set "+ field+"=:"+field+ " where "+clauseLeft+"=:"+clauseRight;
+        String update = "update "+str+" set "+ field+"=:"+field+ " where id_postepowanie=:id";
+//        String update2 = "update table =: table set "+ field+ "=:"+field+ " where id_postepowanie=:id";
+//        String update = "update "+str+" set "+ field+"=:"+field+ " where id_postepowanie=:id";
+        System.out.println(update+" ---------- val= "+newValue);
+      
         query = session.createQuery(update);
+//        query.setParameter("table", str);
         query.setParameter("id", id);
+//        query.setParameter("field", (String) field);
         query.setParameter((String) field, newValue.toString());
         query.executeUpdate();
     }
@@ -43,11 +51,13 @@ public class UpdateTrans extends TransBlank {
     
     public void updateRow(Object[] savedRow, int id)	{
     	
+    	System.out.println("UpdateTrans----updateRow---id---- "+id);
     	session.beginTransaction();
     	
     	Object[] a = ((Lista) bean).getArray();
-    	for (int i = 0; i<=a.length-1; i++)	{
-    		if (savedRow[i]==null) savedRow[i] = "a";
+
+    	for (int i = 0; i<=a.length-2; i++)	{
+    		if (savedRow[i]==null) savedRow[i] = "";
     		updateLogic(a[i], savedRow[i], id);
     		
     	}
