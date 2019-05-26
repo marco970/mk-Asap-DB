@@ -26,7 +26,7 @@ public class AddNote {
 		Session session = factory.getCurrentSession();
 
 		
-		String getPostepowanie = "select c from Lista c where c.idPostepowanie=12";
+		String getPostepowanie = "select c from Lista c where c.idPostepowanie=26";
 
 		session.beginTransaction();
 		
@@ -45,10 +45,10 @@ public class AddNote {
 //		
 //		Property property2 = new Property("Gdynia", 30);
 //		
-//		lista.addNote(note1);
+		lista.addNote(note1);
 		lista.addNote(note2);
-//		lista.addNote(note3);
-//		lista.addNote(note4);
+		lista.addNote(note3);
+		lista.addNote(note4);
 //		
 //		session.persist(note1);
 		session.persist(note2);

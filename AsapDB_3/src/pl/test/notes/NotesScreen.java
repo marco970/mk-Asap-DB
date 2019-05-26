@@ -1,42 +1,39 @@
 package pl.test.notes;
 
 import java.awt.BorderLayout;
-import java.util.ArrayList;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import net.miginfocom.swing.MigLayout;
-import pl.asap.entity.Notes;
-import pl.asap.models.MainTableModel;
 
 @SuppressWarnings("serial")
-public class NotesScreen extends JFrame {
+public class NotesScreen extends JFrame implements ActionListener {
 	
 	
-	public NotesScreen(int rowNr, MainTableModel dane)	{
+	public NotesScreen(String ZZPZ, NotesView notesView)	{ //NotesView w konstr
 		
-		super("Notatki");
-		int idPostepowanie = dane.getId(rowNr);
-		ReadNotes rn = new ReadNotes(idPostepowanie); //to do modelu
-		ArrayList<Notes> notes = rn.getNotes(); //to tez?
+		super("Notatki - "+ ZZPZ);
+//		int idPostepowanie = dane.getId(rowNr);
+//		ReadNotes rn = new ReadNotes(idPostepowanie); //to do modelu
+//		ArrayList<Notes> notes = rn.getNotes(); //to tez?
 
 		JPanel jpa = new JPanel();
 		
 		jpa.setLayout(new MigLayout("", "[grow]", "[grow][]"));
 		JScrollPane jscrollpane = new JScrollPane();
 		
+//		String ZZPZ = dane.getValueAt(rowNr, 0)+", "+dane.getValueAt(rowNr, 1);
+//		jpa.add(new JLabel(ZZPZ),"cell 0 0" );
 		
-		String ZZPZ = dane.getValueAt(rowNr, 0)+", "+dane.getValueAt(rowNr, 1);
-		jpa.add(new JLabel(ZZPZ),"cell 0 0" );
-		int j = 1;
-		for (Notes el: notes)	{
-			System.out.println(el.getNote()+" "+el.getNoteId());
-			SingleNote sno = new SingleNote(el.getDateOpen(), el.getDateModified(), el.getNoteId().toString(), el.getNote()); 
-			jpa.add(sno, "cell 0 "+j );
-			j++;
-		}
+		JButton newButton = new JButton("Dodaj notatkę"); //to musi być menu
+		newButton.addActionListener(this);
+		jpa.add(newButton, "cell 0 1");
+		
+		jpa.add(notesView, "cell 0 2");
+
 
 		jscrollpane.getViewport().add(jpa, null);
 		add(jscrollpane, BorderLayout.CENTER);
@@ -47,13 +44,17 @@ public class NotesScreen extends JFrame {
 		setVisible(true);
 		
 	}
-	
 
-	public static void main(String[] args) {
-		new NotesScreen(3, new MainTableModel());
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		//tu robimy nową notatkę
+		/*
+		 * 
+		 */
 		
-
 	}
+
 
 
 }

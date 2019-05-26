@@ -34,12 +34,8 @@ public class SingleNote extends Container implements ActionListener, FocusListen
 		leftPanel.add(messLab);
 		leftPanel.add(messLab2);
 		leftPanel.add(chBox);
-		
-		//chBox.setName(message);
+
 		chBox.addActionListener(this);
-		
-		//chBox.setActionCommand(message);
-		
 		
 		ta = new TextArea(5, 40);
 		ta.addFocusListener(this);
@@ -47,11 +43,6 @@ public class SingleNote extends Container implements ActionListener, FocusListen
 		ta.setText(text);
 		ta.setBackground(Color.WHITE);
 		ta.setCaretPosition(ta.getText().length());
-		
-		//JScrollPane sp = new JScrollPane(ta);
-		//Border border ;
-
-		//border = BorderFactory.createLineBorder(Color.black);
 		
 		JPanel panel = new JPanel();
 		

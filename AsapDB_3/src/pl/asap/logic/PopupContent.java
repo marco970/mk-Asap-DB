@@ -5,14 +5,20 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 
+import pl.asap.entity.Notes;
 import pl.asap.models.MainTableModel;
+import pl.asap.models.NotesModel;
 import pl.test.notes.NotesScreen;
+import pl.test.notes.NotesView;
+import pl.test.notes.ReadNotes;
 
 @SuppressWarnings("serial")
 public class PopupContent extends JPopupMenu implements PropertyChangeListener, ActionListener {
@@ -61,7 +67,6 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 		
 		if (myPath.length() > 0) {		//
 			for (int i = 0; i <= directories.length - 1; i++) {
-				String x = "";
 				if (directories[i].toString().substring(myPath.length(), +myPath.length() + 7).equals(numerZZ))	{
 					path = directories[i].toString().substring(myPath.length());
 				}
@@ -121,8 +126,20 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 			//private String[] popupStr = {"modyfikacja", "zmień daty", "zakończ postępowanie", "zawieś postepowanie", "otwórz folder","notatki"};
 			int realSelectedRow = lista.convertRowIndexToModel(lista.getSelectedRow());
 			final int idPostepowanie = data.getId(realSelectedRow);
-			System.out.println("row= "+realSelectedRow+" id= "+idPostepowanie);
-			new NotesScreen(realSelectedRow, data);
+//			System.out.println("row= "+realSelectedRow+" id= "+idPostepowanie);
+//			--> to pełni rolę Main -> wywyłujemy obiekt bean i view
+			
+			
+			ReadNotes rn = new ReadNotes(idPostepowanie); //to do modelu
+			ArrayList<Notes> notes = rn.getNotes(); //to tez?
+			
+			NotesModel nm = new NotesModel(notes);
+			NotesView nv = new NotesView(nm);
+			
+			
+			String ZZPZ = data.getValueAt(realSelectedRow , 0)+", "+data.getValueAt(realSelectedRow , 1);
+			
+			new NotesScreen(ZZPZ, nv);
 
 			
 		}
