@@ -49,6 +49,9 @@ public class NotesModel {
 		ArrayList<Notes> newNotesList = notes;
 		newNotesList.add(nowaNotka);
 		this.setNotes(newNotesList);
+		for(Notes el: newNotesList)	{
+			System.out.println("--- "+el.toString());
+		}
 			
 	}
 	public void deleteNote()	{
