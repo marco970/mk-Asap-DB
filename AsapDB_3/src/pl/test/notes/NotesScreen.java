@@ -8,15 +8,19 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import net.miginfocom.swing.MigLayout;
+import pl.asap.models.NotesModel;
 
 @SuppressWarnings("serial")
 public class NotesScreen extends JFrame implements ActionListener {
 	
+	private int idPostepowanie;
+	private NotesModel nm;
 	
-	public NotesScreen(String ZZPZ, NotesView notesView)	{ //NotesView w konstr
+	public NotesScreen(String ZZPZ, NotesModel nm, NotesView notesView, int idPostepowanie)	{ //NotesView w konstr
 		
 		super("Notatki - "+ ZZPZ);
-//		int idPostepowanie = dane.getId(rowNr);
+		this.idPostepowanie = idPostepowanie;
+		this.nm = nm;
 //		ReadNotes rn = new ReadNotes(idPostepowanie); //to do modelu
 //		ArrayList<Notes> notes = rn.getNotes(); //to tez?
 
@@ -52,6 +56,7 @@ public class NotesScreen extends JFrame implements ActionListener {
 		/*
 		 * 
 		 */
+		nm.addNote();
 		
 	}
 

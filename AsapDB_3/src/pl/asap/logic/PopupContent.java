@@ -139,7 +139,8 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 			
 			String ZZPZ = data.getValueAt(realSelectedRow , 0)+", "+data.getValueAt(realSelectedRow , 1);
 			
-			new NotesScreen(ZZPZ, nv);
+			new NotesScreen(ZZPZ, nm, nv, idPostepowanie);
+			nm.addPropertyChangeListener(nv);
 
 			
 		}
