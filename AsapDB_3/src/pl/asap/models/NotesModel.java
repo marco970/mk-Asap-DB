@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.Iterator;
 
 import pl.asap.entity.Notes;
+import pl.test.notes.NewNote;
 import pl.test.notes.ReadNotes;
 
 public class NotesModel {
@@ -15,12 +16,14 @@ public class NotesModel {
 	
 	private ArrayList<Notes> notes;
 	private PropertyChangeSupport propertyChange = new PropertyChangeSupport(this);
+	private int idPostepowanie;
 	
 	public NotesModel() {
 		notes = null; 
 	}
-	public NotesModel(ArrayList<Notes> notes) {
+	public NotesModel(ArrayList<Notes> notes, int idPostepowanie) {
 		setNotes(notes);
+		this.idPostepowanie = idPostepowanie;
 	}
 	public ArrayList<Notes> getNotes() {
 		return notes;
@@ -33,9 +36,11 @@ public class NotesModel {
 		propertyChange.removePropertyChangeListener(listener);
 	}
 	public void setNotes(ArrayList<Notes> notes) {
+		System.out.println("odpalam metodę z fire...");
 		ArrayList<Notes> oldNotes = getNotes();
 		this.notes = notes;
 		propertyChange.firePropertyChange("notes", oldNotes, notes);
+		System.out.println("+++ "+notes.toString());
 	}
 	public void addNote()	{
 		
@@ -47,8 +52,11 @@ public class NotesModel {
 		
 		Notes nowaNotka = new Notes("",data, data, 0);
 		ArrayList<Notes> newNotesList = notes;
+		new NewNote(idPostepowanie,nowaNotka);
 		newNotesList.add(nowaNotka);
-		this.setNotes(newNotesList);
+		
+		
+		setNotes(newNotesList);
 		for(Notes el: newNotesList)	{
 			System.out.println("--- "+el.toString());
 		}

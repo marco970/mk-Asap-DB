@@ -133,14 +133,15 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 			ReadNotes rn = new ReadNotes(idPostepowanie); //to do modelu
 			ArrayList<Notes> notes = rn.getNotes(); //to tez?
 			
-			NotesModel nm = new NotesModel(notes);
-			NotesView nv = new NotesView(nm);
+			NotesModel nm = new NotesModel(notes, idPostepowanie);
+			NotesView nv = new NotesView(nm, idPostepowanie);
+			nm.addPropertyChangeListener(nv);
 			
 			
 			String ZZPZ = data.getValueAt(realSelectedRow , 0)+", "+data.getValueAt(realSelectedRow , 1);
 			
 			new NotesScreen(ZZPZ, nm, nv, idPostepowanie);
-			nm.addPropertyChangeListener(nv);
+			
 
 			
 		}
