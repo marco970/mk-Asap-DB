@@ -127,7 +127,7 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 			int realSelectedRow = lista.convertRowIndexToModel(lista.getSelectedRow());
 			final int idPostepowanie = data.getId(realSelectedRow);
 //			System.out.println("row= "+realSelectedRow+" id= "+idPostepowanie);
-//			--> to pełni rolę Main -> wywyłujemy obiekt bean i view
+//			--> to pełni rolę Main -> wywyłujemy obiekt bean i view///
 			
 			
 			ReadNotes rn = new ReadNotes(idPostepowanie); //to do modelu
