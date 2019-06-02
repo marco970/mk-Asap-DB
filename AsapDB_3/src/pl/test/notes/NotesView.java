@@ -42,6 +42,7 @@ public class NotesView extends Container implements PropertyChangeListener {
 			SingleNote sno = new SingleNote(el.getDateOpen(), el.getDateModified(), el.getNoteId().toString(), el.getNote()); 
 			this.add(sno);
 		}
+		this.revalidate();
 
 		
 		
