@@ -1,6 +1,5 @@
 package pl.test.notes;
 
-import java.awt.Component;
 import java.awt.Container;
 import java.awt.GridLayout;
 import java.beans.PropertyChangeEvent;
