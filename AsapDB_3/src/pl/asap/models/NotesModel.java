@@ -22,7 +22,8 @@ public class NotesModel {
 		notes = null; 
 	}
 	public NotesModel(ArrayList<Notes> notes, int idPostepowanie) {
-		setNotes(notes);
+		this.notes=notes;
+//		setNotes(notes);
 		this.idPostepowanie = idPostepowanie;
 	}
 	public ArrayList<Notes> getNotes() {
@@ -40,7 +41,8 @@ public class NotesModel {
 		ArrayList<Notes> oldNotes = getNotes();
 		this.notes = notes;
 		propertyChange.firePropertyChange("notes", oldNotes, notes);
-		System.out.println("+++ "+notes.toString());
+		System.out.println("+++nwe+++ "+notes.toString());
+		System.out.println("+++old+++ "+oldNotes.toString());
 	}
 	public void addNote()	{
 		
@@ -52,7 +54,7 @@ public class NotesModel {
 		
 		Notes nowaNotka = new Notes("",data, data, 0);
 		ArrayList<Notes> newNotesList = notes;
-		new NewNote(idPostepowanie,nowaNotka);
+//		new NewNote(idPostepowanie,nowaNotka);
 		newNotesList.add(nowaNotka);
 		
 		
