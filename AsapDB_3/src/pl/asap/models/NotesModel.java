@@ -8,18 +8,20 @@ import java.util.Date;
 import java.util.Iterator;
 
 import pl.asap.entity.Notes;
+import pl.test.notes.AddNewNote;
 import pl.test.notes.NewNote;
 import pl.test.notes.ReadNotes;
+import pl.test.notes.SingleNote;
 
 public class NotesModel {
 	
 	
 	private ArrayList<Notes> notes;
+	private Notes note;
 	private PropertyChangeSupport propertyChange = new PropertyChangeSupport(this);
 	private int idPostepowanie;
 	
 	public NotesModel() {
-		notes = null; 
 	}
 	public NotesModel(ArrayList<Notes> notes, int idPostepowanie) {
 		this.notes=notes;
@@ -37,12 +39,24 @@ public class NotesModel {
 		propertyChange.removePropertyChangeListener(listener);
 	}
 	public void setNotes(ArrayList<Notes> notes) {
-		System.out.println("odpalam metodę z fire...");
+		System.out.println("odpalam metodę z fire z listą notatek: ");
 		ArrayList<Notes> oldNotes = getNotes();
 		this.notes = notes;
 		propertyChange.firePropertyChange("notes", oldNotes, notes);
-		System.out.println("+++nwe+++ "+notes.toString());
+		System.out.println("+++nowe+++ "+notes.toString());
 		System.out.println("+++old+++ "+oldNotes.toString());
+	}
+	public Notes getNote() {
+		return note;
+	}
+	public void setNote(Notes note) {
+		
+		this.note = note;
+		Notes oldNote = new Notes("","","",0);
+		notes.add(note);
+		new AddNewNote(idPostepowanie, note);
+		propertyChange.firePropertyChange("note", oldNote, note);
+		
 	}
 	public void addNote()	{
 		
@@ -50,18 +64,10 @@ public class NotesModel {
 		Date date = new Date(System.currentTimeMillis());  
 		String data = formatter.format(date);  
 		
-		System.out.println("***"+data);
-		
+
 		Notes nowaNotka = new Notes("",data, data, 0);
-		ArrayList<Notes> newNotesList = notes;
-//		new NewNote(idPostepowanie,nowaNotka);
-		newNotesList.add(nowaNotka);
-		
-		
-		setNotes(newNotesList);
-		for(Notes el: newNotesList)	{
-			System.out.println("--- "+el.toString());
-		}
+		setNote(nowaNotka);
+
 			
 	}
 	public void deleteNote()	{

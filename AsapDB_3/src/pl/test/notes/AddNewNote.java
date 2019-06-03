@@ -24,14 +24,7 @@ public class AddNewNote {
 			session.beginTransaction();		
 			Query query = session.createQuery(getPostepowanie);		
 			Lista lista = (Lista) query.getSingleResult();		
-//			System.out.println(lista.toString());
-//			System.out.println(idPostepowanie);
-//			for (Notes el: args)	{
-//				
-//				System.out.println(el.toString()+" noteID: "+el.getNoteId());
-//				lista.addNote(el);
-//				session.persist(el);
-//			}
+
 			lista.addNote(note);
 			session.persist(note);
 			session.getTransaction().commit();
