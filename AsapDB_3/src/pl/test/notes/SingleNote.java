@@ -5,6 +5,7 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
+import pl.asap.entity.Notes;
 import pl.asap.transactions.UpdateTrans;
 
 
@@ -15,13 +16,28 @@ public class SingleNote extends Container implements ActionListener, FocusListen
 	
 	private String dateStart;
 	private String dateLastChange;
+	private String noteId;
+	private String noteText;
 	
 	
-	public SingleNote(String dateStart, String dateLastChange, String noteId, String text)	{
+	public SingleNote(String dateStart, String dateLastChange, String noteId, String noteText)	{
 		super();
-			
+		this.dateStart = dateStart;
+		this.dateLastChange = dateLastChange;
+		this.noteId = noteId;
+		this.noteText = noteText;	
+		construct();
+	}
+	public SingleNote(Notes note)	{
+		super();
+		this.dateStart = note.getDateOpen();
+		this.dateLastChange = note.getDateModified();
+		this.noteId = note.getNoteId().toString();
+		this.noteText = note.getNote();	
+		construct();
+	}
+	private void construct()	{
 		this.setLayout(new GridLayout(1,3));
-		
 		JLabel messLab = new JLabel(dateStart);
 		JLabel messLab2 = new JLabel(dateLastChange);
 
@@ -30,9 +46,7 @@ public class SingleNote extends Container implements ActionListener, FocusListen
 		formatuj(messLab);
 		formatuj(messLab2);
 		formatuj(chBox);
-		
-		//messLab.setFont(new Font("sansserif", Font.PLAIN, 12));
-		//messLab2.setFont(new Font("sansserif", Font.PLAIN, 12));
+
 		JPanel leftPanel = new JPanel();
 		leftPanel.setLayout(new GridLayout(5, 1));
 		leftPanel.add(messLab);
@@ -44,18 +58,14 @@ public class SingleNote extends Container implements ActionListener, FocusListen
 		ta = new TextArea(5, 40);
 		ta.addFocusListener(this);
 		ta.setName(noteId);
-		ta.setText(text);
+		ta.setText(noteText);
 		ta.setBackground(Color.WHITE);
 		ta.setCaretPosition(ta.getText().length());
 		
 		JPanel panel = new JPanel();
-		
 		panel.add(leftPanel);
-		
 		panel.add(ta);
-		
 		this.add(panel);
-		
 	}
 	private void formatuj (JComponent c)	{
 		c.setFont(new Font("sansserif", Font.PLAIN, 12));
@@ -99,7 +109,7 @@ public class SingleNote extends Container implements ActionListener, FocusListen
 	public void focusLost(FocusEvent ev) {
 		System.out.println(ta.getName() +" focusLostAction " + ta.getText());
 //		UpdateTrans updateNote = new UpdateTrans(bean);
-		String[] note = n
+//		String[] note = n
 		
 	}
 

@@ -8,13 +8,12 @@ import java.util.Date;
 import java.util.Iterator;
 
 import pl.asap.entity.Notes;
-import pl.test.notes.AddNewNote;
-import pl.test.notes.NewNote;
-import pl.test.notes.ReadNotes;
+import pl.asap.transactions.AddNewNote;
+import pl.asap.transactions.NewNote;
+import pl.asap.transactions.ReadNotes;
 import pl.test.notes.SingleNote;
 
-public class NotesModel {
-	
+public class NotesModel extends ArrayList {
 	
 	private ArrayList<Notes> notes;
 	private Notes note;
@@ -24,6 +23,7 @@ public class NotesModel {
 	public NotesModel() {
 	}
 	public NotesModel(ArrayList<Notes> notes, int idPostepowanie) {
+		super();
 		this.notes=notes;
 //		setNotes(notes);
 		this.idPostepowanie = idPostepowanie;
@@ -39,12 +39,12 @@ public class NotesModel {
 		propertyChange.removePropertyChangeListener(listener);
 	}
 	public void setNotes(ArrayList<Notes> notes) {
-		System.out.println("odpalam metodę z fire z listą notatek: ");
+//		System.out.println("odpalam metodę z fire z listą notatek: ");
 		ArrayList<Notes> oldNotes = getNotes();
 		this.notes = notes;
 		propertyChange.firePropertyChange("notes", oldNotes, notes);
-		System.out.println("+++nowe+++ "+notes.toString());
-		System.out.println("+++old+++ "+oldNotes.toString());
+//		System.out.println("+++nowe+++ "+notes.toString());
+//		System.out.println("+++old+++ "+oldNotes.toString());
 	}
 	public Notes getNote() {
 		return note;
@@ -63,12 +63,9 @@ public class NotesModel {
 		SimpleDateFormat formatter= new SimpleDateFormat("yyyy.MM.dd");  
 		Date date = new Date(System.currentTimeMillis());  
 		String data = formatter.format(date);  
-		
-
 		Notes nowaNotka = new Notes("",data, data, 0);
 		setNote(nowaNotka);
 
-			
 	}
 	public void deleteNote()	{
 		

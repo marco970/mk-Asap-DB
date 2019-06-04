@@ -23,14 +23,11 @@ public class NotesScreen extends JFrame implements ActionListener {
 		this.idPostepowanie = idPostepowanie;
 		this.nm = nm;
 
-
 		JPanel jpa = new JPanel();
 		
 		jpa.setLayout(new MigLayout("", "[grow]", "[grow][]"));
 		JScrollPane jscrollpane = new JScrollPane();
-		
 
-		
 		JButton newButton = new JButton("Dodaj notatkę"); //to musi być menu
 		newButton.addActionListener(this);
 		jpa.add(newButton, "cell 0 1");
@@ -38,7 +35,6 @@ public class NotesScreen extends JFrame implements ActionListener {
 		jpa.add(notesView, "cell 0 2");
 		int height = 120+nm.getNotes().size()*150;
 		if (height==200) jpa.add(new JLabel("nie ma jeszcze notatek, dodaj pierwszą!"), "cell 0 2");
-
 
 		jscrollpane.getViewport().add(jpa, null);
 		add(jscrollpane, BorderLayout.CENTER);
@@ -49,7 +45,6 @@ public class NotesScreen extends JFrame implements ActionListener {
 		setVisible(true);
 		
 	}
-
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {

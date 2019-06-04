@@ -8,6 +8,7 @@ package pl.asap.transactions;
 import org.hibernate.query.Query;
 
 import pl.asap.entity.Lista;
+import pl.asap.entity.Notes;
 
 /**
  *
@@ -60,7 +61,7 @@ public class UpdateTrans extends TransBlank {
         session.getTransaction().commit();
         factory.close();
     }
-    public void updateNote(String[] notatka, int postepowanieId)	{
+    public void updateNote(Notes notka, int postepowanieId)	{
     	System.out.println("UpdateTrans ---- updateNote()...");
     	if (bean.getClass().equals("Notes"))	System.out.println("1 "+bean.getClass());
     	else System.out.println("2 "+bean.getClass());

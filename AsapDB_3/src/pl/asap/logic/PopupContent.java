@@ -16,9 +16,9 @@ import javax.swing.JTable;
 import pl.asap.entity.Notes;
 import pl.asap.models.MainTableModel;
 import pl.asap.models.NotesModel;
+import pl.asap.transactions.ReadNotes;
 import pl.test.notes.NotesScreen;
 import pl.test.notes.NotesView;
-import pl.test.notes.ReadNotes;
 
 @SuppressWarnings("serial")
 public class PopupContent extends JPopupMenu implements PropertyChangeListener, ActionListener {

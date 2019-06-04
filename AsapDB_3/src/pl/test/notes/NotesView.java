@@ -7,6 +7,8 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import javax.swing.JTextArea;
+
 import net.miginfocom.swing.MigLayout;
 import pl.asap.entity.Notes;
 import pl.asap.models.NotesModel;
@@ -21,11 +23,23 @@ public class NotesView extends Container implements PropertyChangeListener {
 		
 		this.notes = nm.getNotes();
 		Collections.reverse(notes);
+//		if (nm.size()==0) {
+//			JTextArea emptyTA = new JTextArea(5,40);
+//			emptyTA.setEditable(false);
+//			emptyTA.setBackground(null);
+//			emptyTA.setBorder(null);
+//			emptyTA.setText("Brak Notatek");
+//			
+//			this.add(emptyTA);
+//		}
+			
 		this.setLayout(new MigLayout("wrap 1"));
 		for (Notes el: notes)	{
-			SingleNote sno = new SingleNote(el.getDateOpen(), el.getDateModified(), el.getNoteId().toString(), el.getNote()); 
+//			SingleNote sno = new SingleNote(el.getDateOpen(), el.getDateModified(), el.getNoteId().toString(), el.getNote()); 
+			SingleNote sno = new SingleNote(el);
 			this.add(sno);
 		}
+		this.setBounds(0, 0, 510, 700);
 	}
 
 	@Override
