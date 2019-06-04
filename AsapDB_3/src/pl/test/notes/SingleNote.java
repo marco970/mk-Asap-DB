@@ -13,13 +13,17 @@ public class SingleNote extends Container implements ActionListener, FocusListen
 	private JCheckBox chBox;
 	private TextArea ta;
 	
-	public SingleNote(String dateStart, String lastChangeDate, String noteId, String text)	{
+	private String dateStart;
+	private String dateLastChange;
+	
+	
+	public SingleNote(String dateStart, String dateLastChange, String noteId, String text)	{
 		super();
 			
 		this.setLayout(new GridLayout(1,3));
 		
 		JLabel messLab = new JLabel(dateStart);
-		JLabel messLab2 = new JLabel(lastChangeDate);
+		JLabel messLab2 = new JLabel(dateLastChange);
 
 		chBox = new JCheckBox("Zamknij");
 		chBox.setName(noteId);
@@ -95,6 +99,7 @@ public class SingleNote extends Container implements ActionListener, FocusListen
 	public void focusLost(FocusEvent ev) {
 		System.out.println(ta.getName() +" focusLostAction " + ta.getText());
 //		UpdateTrans updateNote = new UpdateTrans(bean);
+		String[] note = n
 		
 	}
 

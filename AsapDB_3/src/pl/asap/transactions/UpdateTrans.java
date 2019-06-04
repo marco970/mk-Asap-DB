@@ -22,10 +22,7 @@ public class UpdateTrans extends TransBlank {
     }
     public void updateLogic(Object field, Object newValue, int id)	{
     	String str = bean.getClass().getSimpleName(); //trzeba wykombinować przekazanie nazwy tabeli
-
         //System.out.println("str= "+str  + " field= "+field+ "newValue= "+newValue);
-        
-
         String clause = " where id_postepowanie=:id";       
 //        String update = "update "+str+" set "+ field+"=:"+field+ " where "+clauseLeft+"=:"+clauseRight;
         String update = "update "+str+" set "+ field+"=:"+field+ " where id_postepowanie=:id";
@@ -58,10 +55,14 @@ public class UpdateTrans extends TransBlank {
 
     	for (int i = 0; i<=a.length-2; i++)	{
     		if (savedRow[i]==null) savedRow[i] = "";
-    		updateLogic(a[i], savedRow[i], id);
-    		
+    		updateLogic(a[i], savedRow[i], id);   		
     	}
         session.getTransaction().commit();
         factory.close();
+    }
+    public void updateNote(String[] notatka, int postepowanieId)	{
+    	System.out.println("UpdateTrans ---- updateNote()...");
+    	if (bean.getClass().equals("Notes"))	System.out.println("1 "+bean.getClass());
+    	else System.out.println("2 "+bean.getClass());
     }
 }
