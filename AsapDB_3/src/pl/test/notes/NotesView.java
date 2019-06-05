@@ -36,7 +36,7 @@ public class NotesView extends Container implements PropertyChangeListener {
 		this.setLayout(new MigLayout("wrap 1"));
 		for (Notes el: notes)	{
 //			SingleNote sno = new SingleNote(el.getDateOpen(), el.getDateModified(), el.getNoteId().toString(), el.getNote()); 
-			SingleNote sno = new SingleNote(el);
+			SingleNote sno = new SingleNote(el, idPostepowanie);
 			this.add(sno);
 		}
 		this.setBounds(0, 0, 510, 700);
@@ -51,7 +51,7 @@ public class NotesView extends Container implements PropertyChangeListener {
 		Notes newNote = new Notes();
 		newNote = (Notes) evt.getNewValue();
 //		System.out.println("%%% "+ newNote.toString());
-		SingleNote nsno = new SingleNote(newNote.getDateOpen(), newNote.getDateModified(), newNote.getNoteId().toString(), newNote.getNote());
+		SingleNote nsno = new SingleNote(newNote.getDateOpen(), newNote.getDateModified(), newNote.getNoteId().toString(), newNote.getNote(), idPostepowanie);
 		this.add(nsno, 0);
 //		.add(nsno);
 		this.revalidate();

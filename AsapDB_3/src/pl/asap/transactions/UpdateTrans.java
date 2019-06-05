@@ -63,7 +63,21 @@ public class UpdateTrans extends TransBlank {
     }
     public void updateNote(Notes notka, int postepowanieId)	{
     	System.out.println("UpdateTrans ---- updateNote()...");
-    	if (bean.getClass().equals("Notes"))	System.out.println("1 "+bean.getClass());
-    	else System.out.println("2 "+bean.getClass());
+    	System.out.println("1 "+bean.getClass());
+    	
+    	Object[] a = ((Notes) bean).getArray();
+    	for (Object el: a)	{
+    		System.out.println("@@@ "+el);
+    	}
+    	updateLogic(a[0], notka.getNote(), postepowanieId );
+    	updateLogic(a[2], notka.getDateOpen(), postepowanieId );
+    	updateLogic(a[3], notka.getDateModified(), postepowanieId );
+    	updateLogic(a[4], notka.getIsOpen(), postepowanieId );
+
+    	
+    	
+    	
+    	
+    	
     }
 }

@@ -20,22 +20,26 @@ public class SingleNote extends Container implements ActionListener, FocusListen
 	private String noteText;
 	private Notes note;
 	
+	private int idPostepowanie;
 	
-	public SingleNote(String dateStart, String dateLastChange, String noteId, String noteText)	{
+	
+	public SingleNote(String dateStart, String dateLastChange, String noteId, String noteText, int idPostepowanie)	{
 		super();
 		this.dateStart = dateStart;
 		this.dateLastChange = dateLastChange;
 		this.noteId = noteId;
 		this.noteText = noteText;	
 		this.note = new Notes(noteText, dateStart, dateLastChange, 0); //?czy to potrzebne
+		this.idPostepowanie = idPostepowanie;
 		construct();
 	}
-	public SingleNote(Notes note)	{
+	public SingleNote(Notes note, int postepowanieId)	{
 		super();
 		this.dateStart = note.getDateOpen();
 		this.dateLastChange = note.getDateModified();
 		this.noteId = note.getNoteId().toString();
 		this.noteText = note.getNote();	
+		this.idPostepowanie = idPostepowanie;
 		this.note = note;
 		construct();
 	}
@@ -112,7 +116,7 @@ public class SingleNote extends Container implements ActionListener, FocusListen
 		System.out.println(ta.getName() +" focusLostAction " + ta.getText());
 		note.setNote(ta.getText());
 		UpdateTrans updateNote = new UpdateTrans(note);
-		updateNote.updateNote(notka, postepowanieId);
+		updateNote.updateNote(note, idPostepowanie);
 //		String[] note = n
 		
 	}
