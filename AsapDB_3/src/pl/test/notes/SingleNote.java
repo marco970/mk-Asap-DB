@@ -18,6 +18,7 @@ public class SingleNote extends Container implements ActionListener, FocusListen
 	private String dateLastChange;
 	private String noteId;
 	private String noteText;
+	private Notes note;
 	
 	
 	public SingleNote(String dateStart, String dateLastChange, String noteId, String noteText)	{
@@ -26,6 +27,7 @@ public class SingleNote extends Container implements ActionListener, FocusListen
 		this.dateLastChange = dateLastChange;
 		this.noteId = noteId;
 		this.noteText = noteText;	
+		this.note = new Notes(noteText, dateStart, dateLastChange, 0); //?czy to potrzebne
 		construct();
 	}
 	public SingleNote(Notes note)	{
@@ -34,6 +36,7 @@ public class SingleNote extends Container implements ActionListener, FocusListen
 		this.dateLastChange = note.getDateModified();
 		this.noteId = note.getNoteId().toString();
 		this.noteText = note.getNote();	
+		this.note = note;
 		construct();
 	}
 	private void construct()	{
@@ -90,7 +93,6 @@ public class SingleNote extends Container implements ActionListener, FocusListen
 		String a = "";
 		if(chBox.isSelected()) {
 			a = " zaznaczone";
-			
 			deactivate(ta);
 		}
 		else {
@@ -108,7 +110,9 @@ public class SingleNote extends Container implements ActionListener, FocusListen
 	@Override
 	public void focusLost(FocusEvent ev) {
 		System.out.println(ta.getName() +" focusLostAction " + ta.getText());
-//		UpdateTrans updateNote = new UpdateTrans(bean);
+		note.setNote(ta.getText());
+		UpdateTrans updateNote = new UpdateTrans(note);
+		updateNote.updateNote(notka, postepowanieId);
 //		String[] note = n
 		
 	}
