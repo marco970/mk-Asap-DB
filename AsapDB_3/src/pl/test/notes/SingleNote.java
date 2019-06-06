@@ -18,7 +18,9 @@ public class SingleNote extends Container implements ActionListener, FocusListen
 	private String dateLastChange;
 	private String noteId;
 	private String noteText;
-	private Notes note;
+	private Notes notka;
+	private int isOpen;
+	
 	
 	private int idPostepowanie;
 	
@@ -29,8 +31,9 @@ public class SingleNote extends Container implements ActionListener, FocusListen
 		this.dateLastChange = dateLastChange;
 		this.noteId = noteId;
 		this.noteText = noteText;	
-		this.note = new Notes(noteText, dateStart, dateLastChange, 0); //?czy to potrzebne
+		this.notka = new Notes(noteText, dateStart, dateLastChange, 0); //?czy to potrzebne
 		this.idPostepowanie = idPostepowanie;
+		this.isOpen = 0;
 		construct();
 	}
 	public SingleNote(Notes note, int postepowanieId)	{
@@ -40,7 +43,8 @@ public class SingleNote extends Container implements ActionListener, FocusListen
 		this.noteId = note.getNoteId().toString();
 		this.noteText = note.getNote();	
 		this.idPostepowanie = idPostepowanie;
-		this.note = note;
+		this.notka = note;
+		this.isOpen = note.getIsOpen();
 		construct();
 	}
 	private void construct()	{
@@ -114,9 +118,12 @@ public class SingleNote extends Container implements ActionListener, FocusListen
 	@Override
 	public void focusLost(FocusEvent ev) {
 		System.out.println(ta.getName() +" focusLostAction " + ta.getText());
-		note.setNote(ta.getText());
-		UpdateTrans updateNote = new UpdateTrans(note);
-		updateNote.updateNote(note, idPostepowanie);
+		this.noteText = ta.getText();
+		
+		Object[] note = {ta.getText(), ta.getName(), };
+		notka.setNote(ta.getText());
+		UpdateTrans updateNote = new UpdateTrans(notka);
+		updateNote.updateNote(notka, Integer.parseInt(ta.getName()));
 //		String[] note = n
 		
 	}

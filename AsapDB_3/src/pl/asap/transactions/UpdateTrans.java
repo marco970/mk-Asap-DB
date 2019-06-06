@@ -7,6 +7,7 @@ package pl.asap.transactions;
 
 import org.hibernate.query.Query;
 
+import pl.asap.entity.EntityBase;
 import pl.asap.entity.Lista;
 import pl.asap.entity.Notes;
 
@@ -18,19 +19,19 @@ public class UpdateTrans extends TransBlank {
 	
 	Query<?> query;
     
-    public UpdateTrans(Object bean) {
+    public UpdateTrans(EntityBase bean) {
         super(bean);      
     }
-    public void updateLogic(Object field, Object newValue, int id)	{
+    public void updateLogic(String clause, Object field, Object newValue, int id)	{
     	String str = bean.getClass().getSimpleName(); //trzeba wykombinować przekazanie nazwy tabeli
-        //System.out.println("str= "+str  + " field= "+field+ "newValue= "+newValue);
-        String clause = " where id_postepowanie=:id";       
+        String update = "update "+str+" set "+ field+"=:"+field+ clause;
+        System.out.println("str= "+str  + " field= "+field+ "newValue= "+newValue);
+        System.out.println(update+" ******** val= "+newValue+" id= "+id);
+//        String clause = " where id_postepowanie=:id";       
 //        String update = "update "+str+" set "+ field+"=:"+field+ " where "+clauseLeft+"=:"+clauseRight;
-        String update = "update "+str+" set "+ field+"=:"+field+ " where id_postepowanie=:id";
 //        String update2 = "update table =: table set "+ field+ "=:"+field+ " where id_postepowanie=:id";
 //        String update = "update "+str+" set "+ field+"=:"+field+ " where id_postepowanie=:id";
-        System.out.println(update+" ---------- val= "+newValue);
-      
+        
         query = session.createQuery(update);
 //        query.setParameter("table", str);
         query.setParameter("id", id);
@@ -41,7 +42,7 @@ public class UpdateTrans extends TransBlank {
     public void upadateCell(Object field, Object newValue, int id)	{
     	
     	session.beginTransaction();
-    	updateLogic(field, newValue, id); 	
+    	updateLogic(" where id_postepowanie=:id", field, newValue, id); 	
     	
         session.getTransaction().commit();
         factory.close();
@@ -52,27 +53,41 @@ public class UpdateTrans extends TransBlank {
     	System.out.println("UpdateTrans----updateRow---id---- "+id);
     	session.beginTransaction();
     	
-    	Object[] a = ((Lista) bean).getArray();
+    	Object[] a = bean.getArray();
 
     	for (int i = 0; i<=a.length-2; i++)	{
     		if (savedRow[i]==null) savedRow[i] = "";
-    		updateLogic(a[i], savedRow[i], id);   		
+    		updateLogic(" where id_postepowanie=:id", a[i], savedRow[i], id);   		
     	}
         session.getTransaction().commit();
         factory.close();
     }
-    public void updateNote(Notes notka, int postepowanieId)	{
-    	System.out.println("UpdateTrans ---- updateNote()...");
-    	System.out.println("1 "+bean.getClass());
+    public void updateNote(Notes notka, int notkaId)	{ // a moze to id Notki???
+    	session.beginTransaction();
+    	System.out.println("UpdateTrans ---- updateNote()..." +notkaId);
+    	System.out.println("Lista iset taka: "+notka.getLista().toString());
     	
-    	Object[] a = ((Notes) bean).getArray();
+    	Object[] a = ((EntityBase) bean).getArray();
     	for (Object el: a)	{
-    		System.out.println("@@@ "+el);
+    		System.out.println("@@@ "+el+" @@ "  );
     	}
-    	updateLogic(a[0], notka.getNote(), postepowanieId );
-    	updateLogic(a[2], notka.getDateOpen(), postepowanieId );
-    	updateLogic(a[3], notka.getDateModified(), postepowanieId );
-    	updateLogic(a[4], notka.getIsOpen(), postepowanieId );
+    	Object[] b = {notka.getNote(), notka.getLista(), notka.getDateOpen(), notka.getDateModified(),  notka.getIsOpen()};
+//    	System.out.println(notka.getNote());
+//    	System.out.println(notka.getDateOpen());
+//    	System.out.println(notka.getDateOpen());
+//    	System.out.println(notka.getIsOpen());
+//    	note_id
+    	for (int i=0; i<a.length; i++)	{
+    		if (i!=1) {
+				if (b[i] == null)
+					b[i] = "";
+				updateLogic(" where note_id=:id", a[i], b[i], notkaId);
+			}
+    	}
+//    	updateLogic(" where note_id=:id", a[0], notka.getNote(), notkaId );
+//    	updateLogic(" where note_id=:id", a[2], notka.getDateOpen(), notkaId );
+//    	updateLogic(" where note_id=:id", a[3], notka.getDateModified(), notkaId );
+//    	updateLogic(" where note_id=:id", a[4], notka.getIsOpen(), notkaId );
 
     	
     	
