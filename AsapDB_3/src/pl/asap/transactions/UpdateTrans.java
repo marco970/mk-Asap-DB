@@ -24,9 +24,12 @@ public class UpdateTrans extends TransBlank {
     }
     public void updateLogic(String clause, Object field, Object newValue, int id)	{
     	String str = bean.getClass().getSimpleName(); //trzeba wykombinować przekazanie nazwy tabeli
+    	Object newValueModified;
+    	if (field.equals("isOpen")) newValueModified = Integer.valueOf((String) newValue);
+    	else newValueModified = newValue.toString();
         String update = "update "+str+" set "+ field+"=:"+field+ clause;
-        System.out.println("str= "+str  + " field= "+field+ "newValue= "+newValue);
-        System.out.println(update+" ******** val= "+newValue+" id= "+id);
+        System.out.println(">>>>>>>>>  str= "+str  + " field= "+field+ " newValue= "+newValue.toString());
+        System.out.println(update+" <<******** val= "+newValue+" id= "+id);
 //        String clause = " where id_postepowanie=:id";       
 //        String update = "update "+str+" set "+ field+"=:"+field+ " where "+clauseLeft+"=:"+clauseRight;
 //        String update2 = "update table =: table set "+ field+ "=:"+field+ " where id_postepowanie=:id";
@@ -36,8 +39,9 @@ public class UpdateTrans extends TransBlank {
 //        query.setParameter("table", str);
         query.setParameter("id", id);
 //        query.setParameter("field", (String) field);
-        query.setParameter((String) field, newValue.toString());
-        query.executeUpdate();
+        query.setParameter((String) field, newValueModified);
+        int result = query.executeUpdate();
+        System.out.println("<><><>"+result);
     }
     public void upadateCell(Object field, Object newValue, int id)	{
     	
@@ -64,14 +68,14 @@ public class UpdateTrans extends TransBlank {
     }
     public void updateNote(Notes notka, int notkaId)	{ // a moze to id Notki???
     	session.beginTransaction();
-    	System.out.println("UpdateTrans ---- updateNote()..." +notkaId);
-    	System.out.println("Lista iset taka: "+notka.getLista().toString());
+//    	System.out.println("UpdateTrans ---- updateNote()..." +notkaId);
+//    	System.out.println("Lista iset taka: "+notka.getLista().toString());
     	
     	Object[] a = ((EntityBase) bean).getArray();
-    	for (Object el: a)	{
-    		System.out.println("@@@ "+el+" @@ "  );
-    	}
-    	Object[] b = {notka.getNote(), notka.getLista(), notka.getDateOpen(), notka.getDateModified(),  notka.getIsOpen()};
+//    	for (Object el: a)	{
+//    		System.out.println("@@@ "+el+" @@ "  );
+//    	}
+    	Object[] b = {notka.getNote()+"", notka.getLista()+"", notka.getDateOpen()+"", notka.getDateModified()+"",  notka.getIsOpen()+""};
 //    	System.out.println(notka.getNote());
 //    	System.out.println(notka.getDateOpen());
 //    	System.out.println(notka.getDateOpen());
@@ -79,8 +83,8 @@ public class UpdateTrans extends TransBlank {
 //    	note_id
     	for (int i=0; i<a.length; i++)	{
     		if (i!=1) {
-				if (b[i] == null)
-					b[i] = "";
+				if (b[i] == null)	b[i] = "";
+				System.out.println("^^^"+b[i].toString());
 				updateLogic(" where note_id=:id", a[i], b[i], notkaId);
 			}
     	}
