@@ -57,7 +57,7 @@ public class UpdateTrans extends TransBlank {
     	System.out.println("UpdateTrans----updateRow---id---- "+id);
     	session.beginTransaction();
     	
-    	Object[] a = bean.getArray();
+    	Object[] a = ((EntityBase) bean).getArray();
 
     	for (int i = 0; i<=a.length-2; i++)	{
     		if (savedRow[i]==null) savedRow[i] = "";
