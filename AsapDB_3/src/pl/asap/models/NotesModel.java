@@ -13,7 +13,7 @@ import pl.asap.transactions.NewNote;
 import pl.asap.transactions.ReadNotes;
 import pl.test.notes.SingleNote;
 
-public class NotesModel extends ArrayList {
+public class NotesModel   {
 	
 	private ArrayList<Notes> notes;
 	private Notes note;
@@ -23,7 +23,7 @@ public class NotesModel extends ArrayList {
 	public NotesModel() {
 	}
 	public NotesModel(ArrayList<Notes> notes, int idPostepowanie) {
-		super();
+//		super();
 		this.notes=notes;
 //		setNotes(notes);
 		this.idPostepowanie = idPostepowanie;
