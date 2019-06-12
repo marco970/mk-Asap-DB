@@ -23,8 +23,8 @@ public class NoteUpdateTest {
 		SessionFactory factory = conf.buildSessionFactory();
 		Session session = factory.getCurrentSession();
 		
-		int noteId = 17;
-		String note = "ślusarką nie łykniesz górki";
+		int noteId = 19;
+		String note = "półgębkiem nie łykniesz ogórków";
 		session.beginTransaction();
 		
 		String update = "update Notes e set e.note=:note where e.noteId=:noteId";
