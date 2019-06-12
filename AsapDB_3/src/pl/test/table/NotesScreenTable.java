@@ -27,7 +27,7 @@ public class NotesScreenTable extends JFrame {
 		JScrollPane scrollPane = new JScrollPane(table);
 		add(scrollPane, BorderLayout.CENTER);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setSize(300, 500);
+		setSize(700, 500);
 		setVisible(true);
 		
 	}

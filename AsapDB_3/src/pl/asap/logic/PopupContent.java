@@ -19,6 +19,7 @@ import pl.asap.models.NotesModel;
 import pl.asap.transactions.ReadNotes;
 import pl.test.notes.NotesScreen;
 import pl.test.notes.NotesView;
+import pl.test.table.NotesScreenTable;
 
 @SuppressWarnings("serial")
 public class PopupContent extends JPopupMenu implements PropertyChangeListener, ActionListener {
@@ -134,13 +135,14 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 			ArrayList<Notes> notes = rn.getNotes(); //to tez?
 			
 			NotesModel nm = new NotesModel(notes, idPostepowanie);
-			NotesView nv = new NotesView(nm, idPostepowanie);
-			nm.addPropertyChangeListener(nv);
+//			NotesView nv = new NotesView(nm, idPostepowanie);
+//			nm.addPropertyChangeListener(nv);
 			
 			
 			String ZZPZ = data.getValueAt(realSelectedRow , 0)+", "+data.getValueAt(realSelectedRow , 1);
+			new NotesScreenTable(nm, ZZPZ);
 			
-			new NotesScreen(ZZPZ, nm, nv, idPostepowanie);
+//			new NotesScreen(ZZPZ, nm, nv, idPostepowanie);
 			
 
 			

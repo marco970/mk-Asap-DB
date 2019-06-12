@@ -38,13 +38,7 @@ public class EditNoteScreen extends JFrame implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
-		if (e.getSource().equals(btnSave))	{
-			System.out.println("zapisujemy: "+ sno.getNoteText());
-		}
-		if (e.getSource().equals(btnDelete))	{
-			
-		}
+
 	}
 
 }
