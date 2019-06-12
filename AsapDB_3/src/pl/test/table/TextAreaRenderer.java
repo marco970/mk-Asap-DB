@@ -1,6 +1,10 @@
 package pl.test.table;
 
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -8,7 +12,7 @@ import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.TableCellRenderer;
 
-class TextAreaRenderer extends JScrollPane implements TableCellRenderer
+class TextAreaRenderer extends JScrollPane implements TableCellRenderer, FocusListener
 {
    /**
 	 * 
@@ -21,6 +25,7 @@ class TextAreaRenderer extends JScrollPane implements TableCellRenderer
       textarea.setLineWrap(true);
       textarea.setWrapStyleWord(true);
       textarea.setBorder(new TitledBorder("This is a JTextArea"));
+      textarea.addFocusListener(this);
       getViewport().add(textarea);
    }
   
@@ -44,4 +49,18 @@ class TextAreaRenderer extends JScrollPane implements TableCellRenderer
       textarea.setCaretPosition(0);
       return this;
    }
+
+
+
+@Override
+public void focusGained(FocusEvent eGained) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void focusLost(FocusEvent eLost) {
+	System.out.println("Hejka "+textarea.getText());
+	
+}
 }
