@@ -19,7 +19,7 @@ public class SingleNote extends Container implements ActionListener, FocusListen
 	private String noteId;
 	private String noteText;
 	private Notes notka;
-	private int isOpen;
+	private boolean isOpen;
 	
 	
 	private int idPostepowanie;
@@ -31,9 +31,9 @@ public class SingleNote extends Container implements ActionListener, FocusListen
 		this.dateLastChange = dateLastChange;
 		this.noteId = noteId;
 		this.noteText = noteText;	
-		this.notka = new Notes(noteText, dateStart, dateLastChange, 0); //?czy to potrzebne
+		this.notka = new Notes(noteText, dateStart, dateLastChange, false); //?czy to potrzebne
 		this.idPostepowanie = idPostepowanie;
-		this.isOpen = 0;
+		this.isOpen = false;
 		construct();
 	}
 	public SingleNote(Notes note, int postepowanieId)	{
