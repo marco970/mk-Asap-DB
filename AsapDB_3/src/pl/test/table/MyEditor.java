@@ -2,13 +2,15 @@ package pl.test.table;
 
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 import javax.swing.DefaultCellEditor;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-class MyEditor extends DefaultCellEditor {
+class MyEditor extends DefaultCellEditor implements FocusListener {
 	  public MyEditor() {
 	    super(new JTextField());
 	  }
@@ -17,6 +19,7 @@ class MyEditor extends DefaultCellEditor {
 	      int row, int column) {
 	    JTextField editor = (JTextField) super.getTableCellEditorComponent(table, value, isSelected,
 	        row, column);
+	    editor.addFocusListener(this);
 
 	    if (value != null)
 	      editor.setText(value.toString());
@@ -29,4 +32,16 @@ class MyEditor extends DefaultCellEditor {
 	    }
 	    return editor;
 	  }
+
+	@Override
+	public void focusGained(FocusEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void focusLost(FocusEvent e) {
+		System.out.println("Edytor");
+		
+	}
 	}

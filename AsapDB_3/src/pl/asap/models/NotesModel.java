@@ -36,6 +36,7 @@ public class NotesModel extends AbstractTableModel   {
 			dane[i][1] = notes.get(i).getDateModified();
 			dane[i][2] = notes.get(i).getNote();
 			dane[i][3] = notes.get(i).getIsOpen();
+//			System.out.println("row nr: "+i+" noteID: "+notes.get(i).getNoteId());
 		}	
 	}
 	public ArrayList<Notes> getNotes() {
@@ -89,15 +90,25 @@ public class NotesModel extends AbstractTableModel   {
 		return notes.size();
 	}
 	@Override
-	public Object getValueAt(int i, int j) {
-		return dane[i][j];
+	public Object getValueAt(int row, int col) {
+		if (dane[row][col]!=null)return dane[row][col];
+		else return null;
+		
 	}
-    public boolean isCellEditable(int row, int column)
+    public boolean isCellEditable(int row, int col)
     {
-       return !(column == 0);
+       if (col==2) return true;
+       else return false;
     }
     public String getColumnName(int i)	{
     	return columns[i];
+    }
+    public void setValueAt(Object value, int row, int col) {
+        dane[row][col] = value;
+        fireTableCellUpdated(row, col);
+    }
+    public int getNoteId(int row)	{
+    	return notes.get(row).getNoteId();
     }
 
 
