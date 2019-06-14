@@ -110,6 +110,9 @@ public class NotesModel extends AbstractTableModel   {
     public int getNoteId(int row)	{
     	return notes.get(row).getNoteId();
     }
+    public void updateNoFire(Object value, int row, int col) {
+    	dane[row][col] = value;
+    }
 
 
 	

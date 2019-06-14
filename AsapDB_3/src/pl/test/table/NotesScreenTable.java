@@ -13,30 +13,31 @@ import javax.swing.table.TableColumnModel;
 import javax.swing.text.TableView;
 import javax.swing.text.TableView.TableRow;
 
+import pl.asap.models.NotesModel;
 import pl.test.notes.NoteUpdateTest;
 
 @SuppressWarnings("serial")
 public class NotesScreenTable extends JFrame implements FocusListener {
 	
 	private JTable table;
-	private AbstractTableModel notesModel;
+	private NotesModel notesModel;
 	
-	public NotesScreenTable(AbstractTableModel notesModel, String frameTitle)	{
+	public NotesScreenTable(NotesModel notesModel, String frameTitle)	{
 		super(frameTitle);
 		
 		this.notesModel = notesModel;
 		table = new JTable(notesModel);
-		table.getModel().addTableModelListener(new NoteUpdateTest());
+		table.getModel().addTableModelListener(new NoteUpdateTest(notesModel));		//to jest istotne
 		//table.addFocusListener(this);
 //		table.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
 		
-		if (table.isEditing())	{
+		if (table.isEditing())	{	//wywalić?
 			System.out.println("uwaga...");
 			table.getCellEditor().stopCellEditing();
 		}
 		
-		TableColumnModel tcm = table.getColumnModel();
-		TableColumn tc = tcm.getColumn(2);
+		TableColumnModel tcm = table.getColumnModel();	//j.w.
+		TableColumn tc = tcm.getColumn(2);				//j.w.
 		
 		
 		tc.setCellRenderer(new TextAreaRenderer());
@@ -51,7 +52,7 @@ public class NotesScreenTable extends JFrame implements FocusListener {
 		setVisible(true);
 		
 	}
-
+//	i te 2 metody i interfejs, chyba to wszystko jest bez sensu i niepotrzebne
 	@Override
 	public void focusGained(FocusEvent e) {
 		System.out.println("FGained --- wiersz: "+table.getSelectedRow()+" kolumna: "+ 

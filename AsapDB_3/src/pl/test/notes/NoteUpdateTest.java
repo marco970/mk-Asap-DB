@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 
 import org.hibernate.Session;
@@ -20,18 +21,13 @@ import pl.asap.models.NotesModel;
 public class NoteUpdateTest implements TableModelListener {
 	
 //	private int noteId;
+	private NotesModel notesModel;
 
-	public NoteUpdateTest()	{
-		
+	public NoteUpdateTest(NotesModel notesModel)	{
+		this.notesModel= notesModel;
 	}
 	
-	public void carryOutUpdate(int noteId, String note) {
-		
-		SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");  
-		Date date = new Date(System.currentTimeMillis());  
-		String dateModified = date.toString();
-		System.out.println("---------------- "+dateModified);
-		dateModified = "abc";
+	public void carryOutUpdate(int noteId, String note, String dateModified) {
 		
 		Config config = new Config();
 		String hibernateConf = config.getHibernateXML();
@@ -65,12 +61,19 @@ public class NoteUpdateTest implements TableModelListener {
 	public void tableChanged(TableModelEvent e) {
 		int row = e.getFirstRow();
         int column = e.getColumn();
-        NotesModel model = (NotesModel)e.getSource();
-        Object data = model.getValueAt(row, column);
-        int noteId = model.getNoteId(row);
+        NotesModel dane = (NotesModel)e.getSource();
+        Object data = dane.getValueAt(row, column);
+        int noteId = dane.getNoteId(row);
+        
+		SimpleDateFormat formatter= new SimpleDateFormat("yyyy.MM.dd");  
+		Date date = new Date(System.currentTimeMillis());  
+		String dateModified = formatter.format(date);  
+		
+//		System.out.println("---------------- "+dateModified);
 //        System.out.println("słucham tabeli: "+noteId);
         
-        carryOutUpdate(noteId, data.toString());
+        carryOutUpdate(noteId, data.toString(), dateModified);
+        dane.updateNoFire(dateModified, row, 1);
 		
 	}
 
