@@ -19,7 +19,7 @@ class TextAreaEditor extends DefaultCellEditor {
 	      textarea = new JTextArea(); 
 	      textarea.setLineWrap(true);
 	      textarea.setWrapStyleWord(true);
-	      textarea.setBorder(new TitledBorder("This is a JTextArea"));
+//	      textarea.setBorder(new TitledBorder("This is a JTextArea"));
 	      scrollpane.getViewport().add(textarea);
 	   }
 	  

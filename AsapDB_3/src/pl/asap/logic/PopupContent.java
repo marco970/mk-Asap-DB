@@ -131,10 +131,10 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 //			--> to pełni rolę Main -> wywyłujemy obiekt bean i view///
 			
 			
-			ReadNotes rn = new ReadNotes(idPostepowanie); //to do modelu
-			ArrayList<Notes> notes = rn.getNotes(); //to tez?
+//			ReadNotes rn = new ReadNotes(idPostepowanie); //to do modelu
+//			ArrayList<Notes> notes = rn.getNotes(); //to tez?
 			
-			NotesModel nm = new NotesModel(notes, idPostepowanie);
+			NotesModel nm = new NotesModel(idPostepowanie);
 //			NotesView nv = new NotesView(nm, idPostepowanie);
 //			nm.addPropertyChangeListener(nv);
 			

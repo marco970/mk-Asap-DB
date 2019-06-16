@@ -1,4 +1,4 @@
-package pl.test.notes;
+package pl.asap.transactions;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -59,21 +59,27 @@ public class NoteUpdateTest implements TableModelListener {
 
 	@Override
 	public void tableChanged(TableModelEvent e) {
-		int row = e.getFirstRow();
+		
+		System.out.println(this.getClass()+" fr "+e.getFirstRow()+" lr "+e.getLastRow()+" col "+e.getColumn()+" src "+e.getSource());
+		
         int column = e.getColumn();
-        NotesModel dane = (NotesModel)e.getSource();
-        Object data = dane.getValueAt(row, column);
-        int noteId = dane.getNoteId(row);
         
-		SimpleDateFormat formatter= new SimpleDateFormat("yyyy.MM.dd");  
-		Date date = new Date(System.currentTimeMillis());  
-		String dateModified = formatter.format(date);  
+          
 		
 //		System.out.println("---------------- "+dateModified);
 //        System.out.println("słucham tabeli: "+noteId);
         
-        carryOutUpdate(noteId, data.toString(), dateModified);
-        dane.updateNoFire(dateModified, row, 1);
+        if (column==2) {
+        	int row = e.getFirstRow();
+			NotesModel dane = (NotesModel) e.getSource();
+			Object data = dane.getValueAt(row, column);
+			int noteId = dane.getNoteId(row);
+			SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+			Date date = new Date(System.currentTimeMillis());
+			String dateModified = formatter.format(date);
+			carryOutUpdate(noteId, data.toString(), dateModified);
+			dane.updateNoFire(dateModified, row, 1);
+		}
 		
 	}
 

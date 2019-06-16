@@ -24,7 +24,7 @@ class TextAreaRenderer extends JScrollPane implements TableCellRenderer, FocusLi
       textarea = new JTextArea();
       textarea.setLineWrap(true);
       textarea.setWrapStyleWord(true);
-      textarea.setBorder(new TitledBorder("This is a JTextArea"));
+//      textarea.setBorder(new TitledBorder("This is a JTextArea"));
       textarea.addFocusListener(this);
       getViewport().add(textarea);
    }
@@ -51,7 +51,7 @@ class TextAreaRenderer extends JScrollPane implements TableCellRenderer, FocusLi
    }
 
 
-
+//?wywalić to?
 @Override
 public void focusGained(FocusEvent eGained) {
 	// TODO Auto-generated method stub

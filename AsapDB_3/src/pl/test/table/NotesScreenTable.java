@@ -1,12 +1,25 @@
 package pl.test.table;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
+import java.awt.Menu;
+import java.awt.MenuBar;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
+import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.KeyStroke;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
@@ -14,60 +27,124 @@ import javax.swing.text.TableView;
 import javax.swing.text.TableView.TableRow;
 
 import pl.asap.models.NotesModel;
-import pl.test.notes.NoteUpdateTest;
+import pl.asap.transactions.NoteUpdateTest;
 
 @SuppressWarnings("serial")
-public class NotesScreenTable extends JFrame implements FocusListener {
+public class NotesScreenTable implements ActionListener, TableModelListener {
 	
 	private JTable table;
 	private NotesModel notesModel;
+	private JFrame frame;
+	
 	
 	public NotesScreenTable(NotesModel notesModel, String frameTitle)	{
-		super(frameTitle);
+		frame = new JFrame(frameTitle);
 		
 		this.notesModel = notesModel;
 		table = new JTable(notesModel);
 		table.getModel().addTableModelListener(new NoteUpdateTest(notesModel));		//to jest istotne
-		//table.addFocusListener(this);
-//		table.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
+		JMenu menu = new JMenu("start");
+		JMenuBar menuBar = new JMenuBar();
 		
-		if (table.isEditing())	{	//wywalić?
-			System.out.println("uwaga...");
-			table.getCellEditor().stopCellEditing();
-		}
+//		add(menuBar);
+		JMenuItem mi = mi("dodaj nową notatkę");
+		menu.add(mi);
+//		doMassAddMenu(menu, mi);
+		menuBar.add(menu);
+		frame.setJMenuBar(menuBar);
+		//doMassAddMenu(menuBar, "start", "dodaj notatkę");
+
 		
-		TableColumnModel tcm = table.getColumnModel();	//j.w.
-		TableColumn tc = tcm.getColumn(2);				//j.w.
 		
+
+			
 		
+		TableColumnModel tcm = table.getColumnModel();	
+		TableColumn tc = tcm.getColumn(2);				
+				
 		tc.setCellRenderer(new TextAreaRenderer());
 		tc.setCellEditor(new TextAreaEditor());
 		
-		table.setRowHeight(80);
+		table.setRowHeight(80);		//to do poprawy
 		
-		JScrollPane scrollPane = new JScrollPane(table);
-		add(scrollPane, BorderLayout.CENTER);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setSize(700, 500);
-		setVisible(true);
+		if(notesModel.getRowCount()==0)	{
+			JLabel brakNotatek = new JLabel("w postępowaniu nie ma jeszcze notatek...");
+			formatuj(brakNotatek);
+			frame.add(brakNotatek, BorderLayout.NORTH);
+		}
+		else	{
+			JScrollPane scrollPane = new JScrollPane(table);
+			frame.add(scrollPane, BorderLayout.CENTER);
+		}
+		
+
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setSize(1200, 700);
+		frame.setVisible(true);
 		
 	}
-//	i te 2 metody i interfejs, chyba to wszystko jest bez sensu i niepotrzebne
+	public void doMassAddMenu(JMenuBar mb, String...args)	{
+		JMenu menu = new JMenu(args[0]);
+		mb.add(menu);
+		for (int i =1; i<=args.length-1; i++)	{
+				JMenuItem menuItem = mi(args[i]);
+				menu.add(menuItem);
+		}
+	}
+	
+	public JMenuItem mi(String str)	{
+		JMenuItem mi = new JMenuItem(str);
+		mi.addActionListener(this);	
+		mi.setActionCommand(str);
+		return mi;
+	}
+	
+	public JMenuItem mi(String str, String acc, int mnem)	{
+		JMenuItem mi = new JMenuItem(str);
+		mi.addActionListener(this);	
+		mi.setAccelerator(KeyStroke.getKeyStroke(acc));
+		mi.setMnemonic(mnem);
+		mi.setActionCommand(str);
+		return mi;
+	}
+	public void doMassAddMenu(JMenu nazwa, JMenuItem...args)	{
+		for (JMenuItem el: args)	{
+			if (el==null)	{
+				nazwa.addSeparator();
+			}
+			else	{
+				nazwa.add(el);
+			}
+		}
+	}
 	@Override
-	public void focusGained(FocusEvent e) {
-		System.out.println("FGained --- wiersz: "+table.getSelectedRow()+" kolumna: "+ 
-				table.getSelectedColumn()+" wartość: "+
-				notesModel.getValueAt(table.getSelectedRow(), table.getSelectedColumn()));
+	public void actionPerformed(ActionEvent e) {
+		if (e.getActionCommand().equals("dodaj nową notatkę")) {
+			System.out.println("z komendą działa");
+			notesModel.newNote();
+			table.revalidate();
+			table.repaint();
+			
+			frame.repaint();
+			frame.revalidate();
+		}
+		
+		
+	}
+	private void formatuj (JComponent c)	{
+		c.setFont(new Font("sansserif", Font.PLAIN, 12));
+	}
+	@Override
+	public void tableChanged(TableModelEvent e) {
+		System.out.println("helo zmiana tabeli");
+
+		table.revalidate();
+		table.repaint();
+		
+		frame.repaint();
+		frame.revalidate();
 		
 	}
 
-	@Override
-	public void focusLost(FocusEvent e) {
-		
-		System.out.println("FLost --- wiersz: "+table.getSelectedRow()+" kolumna: "+ 
-		table.getSelectedColumn()+" wartość: "+
-		notesModel.getValueAt(table.getSelectedRow(), table.getSelectedColumn()));
-		
-	}
 
 }
