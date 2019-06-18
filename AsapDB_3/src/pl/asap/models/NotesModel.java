@@ -19,7 +19,7 @@ import pl.test.notes.SingleNote;
 
 @SuppressWarnings("serial")
 public class NotesModel extends AbstractTableModel   {
-	
+	//
 	private ArrayList<Notes> notes;
 	private Notes note;
 	private PropertyChangeSupport propertyChange = new PropertyChangeSupport(this);
