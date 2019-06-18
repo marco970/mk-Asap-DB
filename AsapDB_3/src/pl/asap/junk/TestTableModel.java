@@ -1,4 +1,4 @@
-package pl.test.table;
+package pl.asap.junk;
 
 import javax.swing.JTextArea;
 import javax.swing.table.AbstractTableModel;

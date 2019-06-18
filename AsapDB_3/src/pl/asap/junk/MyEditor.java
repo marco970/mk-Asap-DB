@@ -1,4 +1,4 @@
-package pl.test.table;
+package pl.asap.junk;
 
 import java.awt.Component;
 import java.awt.Font;

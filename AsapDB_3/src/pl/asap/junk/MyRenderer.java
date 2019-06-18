@@ -1,4 +1,4 @@
-package pl.test.table;
+package pl.asap.junk;
 
 import java.awt.Color;
 import java.awt.Component;

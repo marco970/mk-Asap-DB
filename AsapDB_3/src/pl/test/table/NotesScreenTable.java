@@ -36,7 +36,6 @@ public class NotesScreenTable implements ActionListener, TableModelListener {
 	private NotesModel notesModel;
 	private JFrame frame;
 	
-	
 	public NotesScreenTable(NotesModel notesModel, String frameTitle)	{
 		frame = new JFrame(frameTitle);
 		
@@ -45,19 +44,12 @@ public class NotesScreenTable implements ActionListener, TableModelListener {
 		table.getModel().addTableModelListener(new NoteUpdateTest(notesModel));		//to jest istotne
 		JMenu menu = new JMenu("start");
 		JMenuBar menuBar = new JMenuBar();
-		
-//		add(menuBar);
+
 		JMenuItem mi = mi("dodaj nową notatkę");
 		menu.add(mi);
-//		doMassAddMenu(menu, mi);
+
 		menuBar.add(menu);
 		frame.setJMenuBar(menuBar);
-		//doMassAddMenu(menuBar, "start", "dodaj notatkę");
-
-		
-		
-
-			
 		
 		TableColumnModel tcm = table.getColumnModel();	
 		TableColumn tc = tcm.getColumn(2);				
@@ -124,12 +116,10 @@ public class NotesScreenTable implements ActionListener, TableModelListener {
 			notesModel.newNote();
 			table.revalidate();
 			table.repaint();
-			
 			frame.repaint();
 			frame.revalidate();
 		}
-		
-		
+			
 	}
 	private void formatuj (JComponent c)	{
 		c.setFont(new Font("sansserif", Font.PLAIN, 12));
@@ -140,10 +130,8 @@ public class NotesScreenTable implements ActionListener, TableModelListener {
 
 		table.revalidate();
 		table.repaint();
-		
 		frame.repaint();
 		frame.revalidate();
-		
 	}
 
 

@@ -8,6 +8,8 @@ import javax.swing.JTable;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
+import pl.asap.junk.TestTableModel;
+
 public class MainTableTest {
 
 	public static void main(String[] args) {
