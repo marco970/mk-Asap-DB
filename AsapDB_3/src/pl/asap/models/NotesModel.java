@@ -143,7 +143,7 @@ public class NotesModel extends AbstractTableModel   {
 				newNote.getIsOpen()
 				};
 		for (Object o: noteArray)	{
-			System.out.println("c1- "+o.toString());
+//			System.out.println("c1- "+o.toString());
 		}
 		int n = getRowCount()+1;
 		
@@ -153,11 +153,11 @@ public class NotesModel extends AbstractTableModel   {
 		for (int i = 0; i<n; i++)	{
 			if (i<n-1) {
 				daneUpd[i]=dane[i];
-				System.out.println("przepisuje "+i);
+//				System.out.println("przepisuje "+i);
 			}
 			else	{
 				daneUpd[i]=noteArray;
-				System.out.println("dodaję "+i);
+//				System.out.println("dodaję "+i);
 			}
 		}
 		dane=daneUpd;
@@ -165,12 +165,10 @@ public class NotesModel extends AbstractTableModel   {
 		new AddNewNote(idPostepowanie, newNote);
 		fireTableRowsInserted(n-1, n-1);
 		fireTableDataChanged();
-		
 
-		
-		
-		
-		
+    }
+    public NotesModel getNotesModel()	{
+    	return this;
     }
 
 

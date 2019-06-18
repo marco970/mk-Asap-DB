@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import pl.asap.models.NotesModel;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -13,9 +15,14 @@ import javax.swing.JScrollPane;
 
 public class TableGui extends JFrame implements ActionListener{
 	
+	private TableBean tb;
+	int idPostepowanie;
 	
-	public TableGui(TableBean tb, TableElement te)	{
+	public TableGui(TableBean tb, TableElement te, int idPostepowanie)	{
 		super("Notatki - ");
+		System.out.println("---------------> "+this.getClass());
+		this.tb = tb;
+		this.idPostepowanie = idPostepowanie;
 		
 		JMenu menu = new JMenu("start");
 		JMenuBar menuBar = new JMenuBar();
@@ -59,7 +66,14 @@ public class TableGui extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("dodaj nową notatkę")) {
-			System.out.println("z komendą działa");
+			System.out.println("-------abc--------> "+this.getClass());
+//			System.out.println("z komendą działa");
+			NotesModel nm = tb.getAtm();
+			System.out.println("-----nm1---> "+nm.getRowCount());
+			nm.newNote();
+			NotesModel nm2 = new NotesModel(idPostepowanie);
+			System.out.println("-----nm2---> "+nm2.getRowCount());
+			tb.setAtm(nm2);
 //			notesModel.newNote();
 		}
 		

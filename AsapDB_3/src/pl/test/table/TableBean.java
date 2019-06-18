@@ -2,19 +2,25 @@ package pl.test.table;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import pl.asap.*;
+import pl.asap.models.NotesModel;
 
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 
-public class TableBean {
+import net.bytebuddy.asm.Advice.This;
+
+public class TableBean implements TableModelListener {
 	
-	private AbstractTableModel atm;
+	private NotesModel atm = null;
 //	private TableBean propertyChange;
 	
 	
-	public TableBean() {
-		
+	public TableBean(NotesModel atm, int i) {
+		this.atm = atm;
 	}	
-	public TableBean(AbstractTableModel atm)	{
+	public TableBean(NotesModel atm)	{
 		setAtm(atm);
 	}	
 	private PropertyChangeSupport propertyChange = new PropertyChangeSupport(this);
@@ -26,13 +32,22 @@ public class TableBean {
 		propertyChange.removePropertyChangeListener(l);
 	}
 
-	public AbstractTableModel getAtm() {
+	public NotesModel getAtm() {
 		return atm;
 	}
-	public synchronized void setAtm(AbstractTableModel atmParam) {
+	public synchronized void setAtm(NotesModel atmParam) {
+		System.out.println("-------set--------> "+this.getClass());
 		AbstractTableModel oldModel = atm;
+		System.out.println("old "+atm.getRowCount());
 		atm = atmParam;
-		propertyChange.firePropertyChange("atm", oldModel, atm);
+		System.out.println("new "+atmParam.getRowCount());
+		propertyChange.firePropertyChange("atm", oldModel, atmParam);
+	}
+	@Override
+	public void tableChanged(TableModelEvent e) {
+		System.out.println("-------tChang--------> "+this.getClass());
+		setAtm((NotesModel) e.getSource()); 
+		
 	}
 	
 

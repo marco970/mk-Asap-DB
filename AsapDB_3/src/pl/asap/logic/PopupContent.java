@@ -20,6 +20,9 @@ import pl.asap.transactions.ReadNotes;
 import pl.test.notes.NotesScreen;
 import pl.test.notes.NotesView;
 import pl.test.table.NotesScreenTable;
+import pl.test.table.TableBean;
+import pl.test.table.TableElement;
+import pl.test.table.TableGui;
 
 @SuppressWarnings("serial")
 public class PopupContent extends JPopupMenu implements PropertyChangeListener, ActionListener {
@@ -137,10 +140,16 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 			NotesModel nm = new NotesModel(idPostepowanie);
 //			NotesView nv = new NotesView(nm, idPostepowanie);
 //			nm.addPropertyChangeListener(nv);
+			System.out.println("---------------> "+this.getClass());
+			TableBean tb = new TableBean(nm, 1);
+			TableElement te = new TableElement(nm);
+			tb.addPropertyChangeListener(te);
 			
 			
 			String ZZPZ = data.getValueAt(realSelectedRow , 0)+", "+data.getValueAt(realSelectedRow , 1);
-			new NotesScreenTable(nm, ZZPZ);
+//			new NotesScreenTable(nm, ZZPZ);
+			
+			new TableGui(tb, te, idPostepowanie);
 			
 //			new NotesScreen(ZZPZ, nm, nv, idPostepowanie);
 			
