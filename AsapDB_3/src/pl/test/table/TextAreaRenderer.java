@@ -1,5 +1,6 @@
 package pl.test.table;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +12,8 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.TableCellRenderer;
+
+import pl.asap.models.NotesModel;
 
 class TextAreaRenderer extends JScrollPane implements TableCellRenderer, FocusListener
 {
@@ -25,7 +28,7 @@ class TextAreaRenderer extends JScrollPane implements TableCellRenderer, FocusLi
       textarea.setLineWrap(true);
       textarea.setWrapStyleWord(true);
 //      textarea.setBorder(new TitledBorder("This is a JTextArea"));
-      textarea.addFocusListener(this);
+      textarea.addFocusListener(this);		//to do wywalenia cały ten focusListener?
       getViewport().add(textarea);
    }
   
@@ -33,20 +36,21 @@ class TextAreaRenderer extends JScrollPane implements TableCellRenderer, FocusLi
                                   boolean isSelected, boolean hasFocus,
                                   int row, int column)
    {
-      if (isSelected) {
-         setForeground(table.getSelectionForeground());
-         setBackground(table.getSelectionBackground());
-         textarea.setForeground(table.getSelectionForeground());
-         textarea.setBackground(table.getSelectionBackground());
-      } else {
-         setForeground(table.getForeground());
-         setBackground(table.getBackground());
-         textarea.setForeground(table.getForeground());
-         textarea.setBackground(table.getBackground());
-      }
+//      if (isSelected) {
+//         setForeground(table.getSelectionForeground());
+//         setBackground(table.getSelectionBackground());
+//         textarea.setForeground(table.getSelectionForeground());
+//         textarea.setBackground(table.getSelectionBackground());
+//      } else {
+//         setForeground(table.getForeground());
+//         setBackground(table.getBackground());
+//         textarea.setForeground(table.getForeground());
+//         textarea.setBackground(table.getBackground());
+//      }
   
       textarea.setText(value.toString());
-      textarea.setCaretPosition(0);
+      table.setRowHeight(row, getPreferredSize().height+20);
+      textarea.setCaretPosition(0);	//dopracować
       return this;
    }
 

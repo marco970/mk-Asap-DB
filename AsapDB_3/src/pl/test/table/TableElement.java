@@ -18,23 +18,23 @@ public class TableElement extends JTable implements PropertyChangeListener {
 	public TableElement(NotesModel atm) {
 		super(atm);
 		System.out.println("-------te--------> "+this.getClass());
-		
-		TableColumnModel tcm = getColumnModel();	
-		TableColumn tc = tcm.getColumn(2);			
-		getModel().addTableModelListener(new NoteUpdateTest(atm));	
-				
-		tc.setCellRenderer(new TextAreaRenderer());
-		tc.setCellEditor(new TextAreaEditor());
-		
-		setRowHeight(80);		//to do poprawy
+		setTableAtributes(this, atm);
 	}
 
 	@Override
 	public void propertyChange(PropertyChangeEvent e) {
 		System.out.println("-------x--------> "+this.getClass());
 //		((NotesModel) e.getNewValue()).newNote();
-		this.setModel((TableModel) e.getNewValue());
-		
+		this.setModel((NotesModel) e.getNewValue());
+		setTableAtributes(this, (NotesModel) e.getNewValue());
+	}
+	public void setTableAtributes(JTable table, NotesModel nm)	{
+		TableColumnModel tcm = table.getColumnModel();	
+		TableColumn tc = tcm.getColumn(2);			
+		table.getModel().addTableModelListener(new NoteUpdateTest(nm));		
+		tc.setCellRenderer(new TextAreaRenderer());
+		tc.setCellEditor(new TextAreaEditor());
+		table.revalidate();
 	}
 
 }
