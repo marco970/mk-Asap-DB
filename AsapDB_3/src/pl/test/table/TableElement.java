@@ -30,10 +30,12 @@ public class TableElement extends JTable implements PropertyChangeListener {
 	}
 	public void setTableAtributes(JTable table, NotesModel nm)	{
 		TableColumnModel tcm = table.getColumnModel();	
-		TableColumn tc = tcm.getColumn(2);			
+		TableColumn tc = tcm.getColumn(2);	
+		TableColumn tcCheckBox = tcm.getColumn(3);	
 		table.getModel().addTableModelListener(new NoteUpdateTest(nm));		
 		tc.setCellRenderer(new TextAreaRenderer());
 		tc.setCellEditor(new TextAreaEditor());
+//		tcCheckBox.setCellRenderer(new CheckBoxRenderer(nm.get));
 		table.revalidate();
 	}
 

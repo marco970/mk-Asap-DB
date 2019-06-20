@@ -87,7 +87,7 @@ public class NotesModel extends AbstractTableModel   {
 	}
     public boolean isCellEditable(int row, int col)
     {
-       if (col==2) return true;
+       if (col==2 || col==3) return true;
        else return false;
     }
     public String getColumnName(int i)	{
@@ -96,6 +96,10 @@ public class NotesModel extends AbstractTableModel   {
     public void setValueAt(Object value, int row, int col) {
         dane[row][col] = value;
         fireTableCellUpdated(row, col);
+    }
+    
+    public Class getColumnClass(int column) {
+        return (getValueAt(0, column).getClass());
     }
     public int getNoteId(int row)	{
 		rn = new ReadNotes(idPostepowanie); //to do modelu
