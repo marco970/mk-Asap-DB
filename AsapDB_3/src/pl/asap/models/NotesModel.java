@@ -60,7 +60,7 @@ public class NotesModel extends AbstractTableModel   {
 		SimpleDateFormat formatter= new SimpleDateFormat("dd.MM.yyyy");  
 		Date date = new Date(System.currentTimeMillis());  
 		String data = formatter.format(date);  
-		Notes nowaNotka = new Notes("",data, data, true);
+		Notes nowaNotka = new Notes("",data, data, false);
 		new AddNewNote(idPostepowanie, nowaNotka);
 
 	}
