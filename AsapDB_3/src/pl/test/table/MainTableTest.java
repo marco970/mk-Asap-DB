@@ -21,8 +21,8 @@ public class MainTableTest {
 		TableColumnModel tcm = table.getColumnModel();
 		TableColumn tc = tcm.getColumn(2);
 		
-		tc.setCellRenderer(new TextAreaRenderer());
-		tc.setCellEditor(new TextAreaEditor());
+//		tc.setCellRenderer(new TextAreaRenderer());
+//		tc.setCellEditor(new TextAreaEditor());
 		
 		table.setRowHeight(80);
 		

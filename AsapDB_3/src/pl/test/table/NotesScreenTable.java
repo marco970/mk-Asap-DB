@@ -54,7 +54,7 @@ public class NotesScreenTable implements ActionListener, TableModelListener {
 		TableColumnModel tcm = table.getColumnModel();	
 		TableColumn tc = tcm.getColumn(2);				
 				
-		tc.setCellRenderer(new TextAreaRenderer());
+		tc.setCellRenderer(new TextAreaRenderer(notesModel));
 		tc.setCellEditor(new TextAreaEditor());
 		
 		table.setRowHeight(80);		//to do poprawy

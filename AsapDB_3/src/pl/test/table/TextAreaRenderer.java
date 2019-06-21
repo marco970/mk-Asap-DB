@@ -22,10 +22,10 @@ class TextAreaRenderer extends JScrollPane implements TableCellRenderer, FocusLi
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTextArea textarea;
-	private boolean isEnabled;
+	private NotesModel nm;
   
-   public TextAreaRenderer() {
-	  this.isEnabled = true;
+   public TextAreaRenderer(NotesModel nm) {
+	  this.nm = nm;
       textarea = new JTextArea();
       textarea.setLineWrap(true);
       textarea.setWrapStyleWord(true);
@@ -53,7 +53,8 @@ class TextAreaRenderer extends JScrollPane implements TableCellRenderer, FocusLi
       textarea.setText(value.toString());
       table.setRowHeight(row, getPreferredSize().height+10);
       textarea.setCaretPosition(0);	//dopracować
-      textarea.setEditable(isEnabled);
+      if ((boolean) nm.getValueAt(row, 3))	textarea.setBackground(Color.LIGHT_GRAY);
+//      textarea.setEditable(false); - tu się nie da tego zrobić
       return this;
    }
 

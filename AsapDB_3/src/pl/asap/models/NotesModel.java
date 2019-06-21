@@ -87,7 +87,8 @@ public class NotesModel extends AbstractTableModel   {
 	}
     public boolean isCellEditable(int row, int col)
     {
-       if (col==2 || col==3) return true;
+    	if (col==3) return true;
+    	if (col==2 && !((Boolean) getValueAt(row,3)).booleanValue()) return true;
        else return false;
     }
     public String getColumnName(int i)	{
@@ -116,7 +117,7 @@ public class NotesModel extends AbstractTableModel   {
     	SimpleDateFormat formatter= new SimpleDateFormat("dd.MM.yyyy");  
 		Date date = new Date(System.currentTimeMillis());  
 		String dateOpen = formatter.format(date);
-		Notes newNote = new Notes("", dateOpen, dateOpen, true);
+		Notes newNote = new Notes("", dateOpen, dateOpen, false);
 		Object[] noteArray = {
 				newNote.getDateOpen(),
 				newNote.getDateModified(),
