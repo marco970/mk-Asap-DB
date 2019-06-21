@@ -44,7 +44,7 @@ public class TableBean implements TableModelListener {
 		propertyChange.firePropertyChange("atm", oldModel, atmParam);
 	}
 	@Override
-	public void tableChanged(TableModelEvent e) {
+	public void tableChanged(TableModelEvent e) {		//nie jestem pewny, czy ten interfejs powinien zostać
 		System.out.println("-------tChang--------> "+this.getClass());
 		setAtm((NotesModel) e.getSource()); 
 		

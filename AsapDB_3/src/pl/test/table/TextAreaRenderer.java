@@ -22,8 +22,10 @@ class TextAreaRenderer extends JScrollPane implements TableCellRenderer, FocusLi
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTextArea textarea;
+	private boolean isEnabled;
   
    public TextAreaRenderer() {
+	  this.isEnabled = true;
       textarea = new JTextArea();
       textarea.setLineWrap(true);
       textarea.setWrapStyleWord(true);
@@ -47,10 +49,11 @@ class TextAreaRenderer extends JScrollPane implements TableCellRenderer, FocusLi
 //         textarea.setForeground(table.getForeground());
 //         textarea.setBackground(table.getBackground());
 //      }
-  
+	  
       textarea.setText(value.toString());
-      table.setRowHeight(row, getPreferredSize().height+20);
+      table.setRowHeight(row, getPreferredSize().height+10);
       textarea.setCaretPosition(0);	//dopracować
+      textarea.setEditable(isEnabled);
       return this;
    }
 
