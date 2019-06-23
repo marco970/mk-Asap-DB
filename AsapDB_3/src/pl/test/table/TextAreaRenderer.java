@@ -51,7 +51,7 @@ class TextAreaRenderer extends JScrollPane implements TableCellRenderer, TableMo
 //         textarea.setForeground(table.getForeground());
 //         textarea.setBackground(table.getBackground());
 //      }
-	  this.setBackground(nm.getRowColor(row));
+//	  table.getModel().ge.setBackground(Color.RED);
       textarea.setText(value.toString());
       table.setRowHeight(row, getPreferredSize().height+10);
       textarea.setCaretPosition(0);	//dopracować

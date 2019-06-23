@@ -111,7 +111,7 @@ public class NotesModel extends AbstractTableModel   {
 		rn = new ReadNotes(idPostepowanie); //to do modelu
 		
 		notes=rn.getNotes();
-    	System.out.println("uwaga" + row);
+//    	System.out.println("uwaga" + row);
     	
     	return notes.get(row).getNoteId();
     }
