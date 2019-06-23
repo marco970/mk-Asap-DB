@@ -80,6 +80,7 @@ public class NoteUpdateTest implements TableModelListener {
 		session.getTransaction().commit();
 		System.out.println(recordNo);
 		factory.close();
+
 	}
 
 	@Override
@@ -101,6 +102,8 @@ public class NoteUpdateTest implements TableModelListener {
 		}
         if (column==3) {
         	updateIsOpen(noteId, (Boolean) data, dateModified);
+//        	dane.setValueAt(data, row, 3);
+        	dane.setRowColor(row);
         }
         
         dane.updateNoFire(dateModified, row, 1);

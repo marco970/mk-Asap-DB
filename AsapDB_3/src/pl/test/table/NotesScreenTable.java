@@ -124,7 +124,7 @@ public class NotesScreenTable implements ActionListener, TableModelListener {
 	private void formatuj (JComponent c)	{
 		c.setFont(new Font("sansserif", Font.PLAIN, 12));
 	}
-	@Override
+	@Override		//do wywalenia
 	public void tableChanged(TableModelEvent e) {
 		System.out.println("helo zmiana tabeli");
 

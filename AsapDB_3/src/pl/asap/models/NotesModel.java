@@ -1,30 +1,23 @@
 package pl.asap.models;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
+import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
-
 import javax.swing.table.AbstractTableModel;
 
 import pl.asap.entity.Notes;
 import pl.asap.transactions.AddNewNote;
-import pl.asap.transactions.NewNote;
 import pl.asap.transactions.ReadNotes;
-import pl.asap.transactions.SaveTrans;
-import pl.asap.transactions.UpdateTrans;
-import pl.test.notes.SingleNote;
 
 @SuppressWarnings("serial")
 public class NotesModel extends AbstractTableModel   {
 	//
 	private ArrayList<Notes> notes;
 	private Notes note;
-	private PropertyChangeSupport propertyChange = new PropertyChangeSupport(this);
 	private int idPostepowanie;
 	private Object[][] dane;
+	private Color[] rowColor;
 	private String[] columns = {"data utworzenia", "data modyfikacji", "notatka", "zamknięta"};
 	private ReadNotes rn;
 	
@@ -38,6 +31,8 @@ public class NotesModel extends AbstractTableModel   {
 		
 		this.notes=rn.getNotes();
 		
+		rowColor = new Color[getRowCount()];
+		
 		dane = new Object[notes.size()][columns.length];
 		for (int i=0; i<notes.size(); i++)	{	// i - wiersze
 			dane[i][0] = notes.get(i).getDateOpen();
@@ -47,6 +42,16 @@ public class NotesModel extends AbstractTableModel   {
 //			System.out.println("row nr: "+i+" noteID: "+notes.get(i).getNoteId());
 		}	
 	}
+	public Color getRowColor(int row) {		//zrobić lambdę
+		if ((boolean)getValueAt(row,3)) rowColor[row]=Color.LIGHT_GRAY;
+		else rowColor[row]=Color.WHITE;
+		return rowColor[row];
+	}
+	public void setRowColor(int row) {
+		if ((boolean)getValueAt(row,3)) rowColor[row]=Color.LIGHT_GRAY;
+		else rowColor[row]=Color.WHITE;
+		fireTableRowsUpdated(row, row);
+	}
 	public ArrayList<Notes> getNotes() {
 		return notes;
 	}
@@ -55,7 +60,7 @@ public class NotesModel extends AbstractTableModel   {
 		return note;
 	}
 
-	public void addNote()	{
+	public void addNote()	{//w najnowszej wersji to może być niepotrzebne
 		
 		SimpleDateFormat formatter= new SimpleDateFormat("dd.MM.yyyy");  
 		Date date = new Date(System.currentTimeMillis());  
@@ -99,7 +104,7 @@ public class NotesModel extends AbstractTableModel   {
         fireTableCellUpdated(row, col);
     }
     
-    public Class getColumnClass(int column) {
+	public Class<?> getColumnClass(int column) {
         return (getValueAt(0, column).getClass());
     }
     public int getNoteId(int row)	{
@@ -124,13 +129,11 @@ public class NotesModel extends AbstractTableModel   {
 				newNote.getNote(),
 				newNote.getIsOpen()
 				};
-		for (Object o: noteArray)	{
-//			System.out.println("c1- "+o.toString());
-		}
+
 		int n = getRowCount()+1;
 		
 //		System.out.println("n = "+n);
-		System.out.println("recordAdd, n: "+n + " ilość wierszy :"+getRowCount());
+//		System.out.println("recordAdd, n: "+n + " ilość wierszy :"+getRowCount());
 		Object[][] daneUpd = new Object[n][columns.length];
 		for (int i = 0; i<n; i++)	{
 			if (i<n-1) {
@@ -143,7 +146,7 @@ public class NotesModel extends AbstractTableModel   {
 			}
 		}
 		dane=daneUpd;
-		System.out.println("teraz wierszy jest "+dane.length);
+//		System.out.println("teraz wierszy jest "+dane.length);
 		new AddNewNote(idPostepowanie, newNote);
 		fireTableRowsInserted(n-1, n-1);
 		fireTableDataChanged();
@@ -152,6 +155,7 @@ public class NotesModel extends AbstractTableModel   {
     public NotesModel getNotesModel()	{
     	return this;
     }
+
 
 
 	

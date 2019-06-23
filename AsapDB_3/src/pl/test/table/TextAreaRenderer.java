@@ -11,11 +11,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.TableCellRenderer;
 
 import pl.asap.models.NotesModel;
 
-class TextAreaRenderer extends JScrollPane implements TableCellRenderer, FocusListener
+class TextAreaRenderer extends JScrollPane implements TableCellRenderer, TableModelListener
 {
    /**
 	 * 
@@ -30,7 +32,7 @@ class TextAreaRenderer extends JScrollPane implements TableCellRenderer, FocusLi
       textarea.setLineWrap(true);
       textarea.setWrapStyleWord(true);
 //      textarea.setBorder(new TitledBorder("This is a JTextArea"));
-      textarea.addFocusListener(this);		//to do wywalenia cały ten focusListener?
+      
       getViewport().add(textarea);
    }
   
@@ -49,26 +51,19 @@ class TextAreaRenderer extends JScrollPane implements TableCellRenderer, FocusLi
 //         textarea.setForeground(table.getForeground());
 //         textarea.setBackground(table.getBackground());
 //      }
-	  
+	  this.setBackground(nm.getRowColor(row));
       textarea.setText(value.toString());
       table.setRowHeight(row, getPreferredSize().height+10);
       textarea.setCaretPosition(0);	//dopracować
-      if ((boolean) nm.getValueAt(row, 3))	textarea.setBackground(Color.LIGHT_GRAY);
-//      textarea.setEditable(false); - tu się nie da tego zrobić
+//      if ((boolean) nm.getValueAt(row, 3))	textarea.setBackground(Color.LIGHT_GRAY);
+////      textarea.setEditable(false); - tu się nie da tego zrobić
       return this;
    }
 
-
-//?wywalić to?
 @Override
-public void focusGained(FocusEvent eGained) {
-	// TODO Auto-generated method stub
+public void tableChanged(TableModelEvent e) {
+	System.out.println("--------rendererTabChanged--------->"+e.getSource().toString());
 	
 }
 
-@Override
-public void focusLost(FocusEvent eLost) {
-	System.out.println("Hejka "+textarea.getText());
-	
-}
 }
