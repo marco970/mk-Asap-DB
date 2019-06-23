@@ -2,21 +2,16 @@ package pl.test.table;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import pl.asap.*;
 import pl.asap.models.NotesModel;
 
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 
-import net.bytebuddy.asm.Advice.This;
-
 public class TableBean implements TableModelListener {
 	
-	private NotesModel atm = null;
-//	private TableBean propertyChange;
-	
-	
+	private NotesModel atm = null;		//abstract table model
+
 	public TableBean(NotesModel atm, int i) {
 		this.atm = atm;
 	}	

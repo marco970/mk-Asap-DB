@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import pl.asap.models.NotesModel;
 
+import javax.swing.FocusManager;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -27,8 +28,11 @@ public class TableGui extends JFrame implements ActionListener{
 		JMenu menu = new JMenu("start");
 		JMenuBar menuBar = new JMenuBar();
 
-		JMenuItem mi = mi("dodaj nową notatkę");
-		menu.add(mi);
+		JMenuItem mi1 = mi("dodaj nową notatkę");
+		JMenuItem mi2 = mi("zapisz bierzącą notatkę");
+		menu.add(mi1);
+		menu.add(mi2);
+
 
 		menuBar.add(menu);
 		setJMenuBar(menuBar);
@@ -75,6 +79,12 @@ public class TableGui extends JFrame implements ActionListener{
 			System.out.println("-----nm2---> "+nm2.getRowCount());
 			tb.setAtm(nm2);
 //			notesModel.newNote();
+		}
+		
+		if (e.getActionCommand().equals("zapisz bierzącą notatkę")) {
+			FocusManager focusMan = FocusManager.getCurrentManager();
+			focusMan.focusNextComponent();
+//			transferFocus();
 		}
 		
 	}
