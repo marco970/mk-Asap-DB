@@ -1,4 +1,4 @@
-package pl.test.table;
+package pl.asap.junk;
 
 import java.awt.BorderLayout;
 
@@ -7,8 +7,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
-
-import pl.asap.junk.TestTableModel;
 
 public class MainTableTest {
 

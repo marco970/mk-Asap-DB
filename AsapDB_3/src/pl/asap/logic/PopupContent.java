@@ -12,14 +12,15 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
+import javax.swing.table.AbstractTableModel;
 
 import pl.asap.entity.Notes;
+import pl.asap.junk.NotesScreenTable;
 import pl.asap.models.MainTableModel;
 import pl.asap.models.NotesModel;
 import pl.asap.transactions.ReadNotes;
 import pl.test.notes.NotesScreen;
 import pl.test.notes.NotesView;
-import pl.test.table.NotesScreenTable;
 import pl.test.table.TableBean;
 import pl.test.table.TableElement;
 import pl.test.table.TableGui;
@@ -28,13 +29,13 @@ import pl.test.table.TableGui;
 public class PopupContent extends JPopupMenu implements PropertyChangeListener, ActionListener {
 
 	private JTable lista;
-	private MainTableModel data;
+	private AbstractTableModel data;
 	private JFrame frame;
-	public PopupContent(JTable list, MainTableModel dane, JFrame fram, String[] popupStr)	{
+	public PopupContent(JTable list, AbstractTableModel dane, String[] popupStr)	{
 		super();
 		lista=list;
 		data = dane;
-		frame = fram;
+//		frame = fram;
 
 		//String[] popupStr = {"modyfikacja", "zmień daty", "zakończ postępowanie", "zawieś postepowanie"};
 		doMassAddMenu(this, popupStr);		
@@ -86,7 +87,7 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 		if (u.equals("modyfikacja"))	{
 			int selectedRow = lista.getSelectedRow();
 			int realSelectedRow = lista.convertRowIndexToModel(selectedRow);
-			new OpForm2("Edycja postępowania", realSelectedRow, data);
+			new OpForm2("Edycja postępowania", realSelectedRow, (MainTableModel) data);
 		}
 		if (u.equals("zakończ postępowanie"))	{
 			int selectedRow = lista.getSelectedRow();
@@ -95,21 +96,21 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 				JOptionPane.showMessageDialog(frame, "Nie można zakończyć tego postępowania"); //tu zrobić ostrzeżenie i tak/nie
 			}
 			else {
-				data.cellUpdate("zakonczone", realSelectedRow, 4);
-				new Zapis(data);
+				((MainTableModel) data).cellUpdate("zakonczone", realSelectedRow, 4);
+				new Zapis((MainTableModel) data);
 				new FolderCreator().moveFolder(getFolder(realSelectedRow), true);
 			}
 		
 		}
 		if (u.equals("zmień daty"))	{
-			new DateChangeForm2(data, lista.convertRowIndexToModel(lista.getSelectedRow()));
+			new DateChangeForm2((MainTableModel) data, lista.convertRowIndexToModel(lista.getSelectedRow()));
 		}
 		if (u.equals("zawieś postepowanie"))	{
 			int selectedRow = lista.getSelectedRow();
 			int realSelectedRow = lista.convertRowIndexToModel(selectedRow);
 			if(data.getValueAt(realSelectedRow, 4).equals("aktywne"))	{
-				data.cellUpdate("zawieszone", realSelectedRow, 4);
-				new Zapis(data);
+				((MainTableModel) data).cellUpdate("zawieszone", realSelectedRow, 4);
+				new Zapis((MainTableModel) data);
 			}
 			else if (data.getValueAt(realSelectedRow, 4).equals("zakonczone")) {
 				JOptionPane.showMessageDialog(frame, "Nie można zawiesić zamkniętego postępowania"); 
@@ -121,15 +122,15 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 		if (u.equals("odwieś postępowanie"))	{
 			int realSelectedRow = lista.convertRowIndexToModel(lista.getSelectedRow());
 			if (data.getValueAt(realSelectedRow, 4).equals("zakonczone")) {
-				data.cellUpdate("aktywne", realSelectedRow, 4);
-				new Zapis(data);
+				((MainTableModel) data).cellUpdate("aktywne", realSelectedRow, 4);
+				new Zapis((MainTableModel) data);
 				
 			}
 		}
 		if (u.equals("notatki"))	{
 			//private String[] popupStr = {"modyfikacja", "zmień daty", "zakończ postępowanie", "zawieś postepowanie", "otwórz folder","notatki"};
 			int realSelectedRow = lista.convertRowIndexToModel(lista.getSelectedRow());
-			final int idPostepowanie = data.getId(realSelectedRow);
+			final int idPostepowanie = ((MainTableModel) data).getId(realSelectedRow);
 //			System.out.println("row= "+realSelectedRow+" id= "+idPostepowanie);
 //			--> to pełni rolę Main -> wywyłujemy obiekt bean i view///
 			
@@ -144,16 +145,17 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 			TableBean tb = new TableBean(nm, 1);
 			TableElement te = new TableElement(nm);
 			tb.addPropertyChangeListener(te);
-			
-			
+	
 			String ZZPZ = data.getValueAt(realSelectedRow , 0)+", "+data.getValueAt(realSelectedRow , 1);
 //			new NotesScreenTable(nm, ZZPZ);
 			
 			new TableGui(tb, te, idPostepowanie);
 			
 //			new NotesScreen(ZZPZ, nm, nv, idPostepowanie);
-			
 
+		}
+		if (u.equals("delete"))	{
+			System.out.println("----------del------->"+lista.convertRowIndexToModel(lista.getSelectedRow()));
 			
 		}
 	}

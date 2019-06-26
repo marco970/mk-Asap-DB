@@ -9,7 +9,7 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 
-class TextAreaEditor extends DefaultCellEditor {
+public class TextAreaEditor extends DefaultCellEditor {
 	   protected JScrollPane scrollpane;
 	   protected JTextArea textarea;
 	  

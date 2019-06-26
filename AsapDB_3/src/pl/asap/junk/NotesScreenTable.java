@@ -1,14 +1,9 @@
-package pl.test.table;
+package pl.asap.junk;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
-import java.awt.Menu;
-import java.awt.MenuBar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,16 +15,13 @@ import javax.swing.JTable;
 import javax.swing.KeyStroke;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
-import javax.swing.text.TableView;
-import javax.swing.text.TableView.TableRow;
-
 import pl.asap.models.NotesModel;
 import pl.asap.transactions.NoteUpdateTest;
+import pl.test.table.TextAreaEditor;
+import pl.test.table.TextAreaRenderer;
 
-@SuppressWarnings("serial")
 public class NotesScreenTable implements ActionListener, TableModelListener {
 	
 	private JTable table;

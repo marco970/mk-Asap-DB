@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import pl.asap.logic.PopupContent;
 import pl.asap.models.NotesModel;
 
 import javax.swing.FocusManager;
@@ -20,7 +21,7 @@ public class TableGui extends JFrame implements ActionListener{
 	int idPostepowanie;
 	
 	public TableGui(TableBean tb, TableElement te, int idPostepowanie)	{
-		super("Notatki - ");
+		super("Notatki - "+idPostepowanie);
 		System.out.println("---------------> "+this.getClass());
 		this.tb = tb;
 		this.idPostepowanie = idPostepowanie;
@@ -47,7 +48,12 @@ public class TableGui extends JFrame implements ActionListener{
 			JScrollPane scrollPane = new JScrollPane(te);
 			add(scrollPane, BorderLayout.CENTER);
 		}
-	
+		PopupContent pc = new PopupContent(te, tb.getAtm(), new String[]{"delete"});
+		NotesMouseListener nml = new NotesMouseListener(te, tb.getAtm());
+		te.addMouseListener(nml);
+		te.setComponentPopupMenu(pc);
+		
+		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setSize(1200, 700);
 		setVisible(true);
@@ -67,6 +73,7 @@ public class TableGui extends JFrame implements ActionListener{
 		mi.setActionCommand(str);
 		return mi;
 	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("dodaj nową notatkę")) {
@@ -81,7 +88,7 @@ public class TableGui extends JFrame implements ActionListener{
 //			notesModel.newNote();
 		}
 		
-		if (e.getActionCommand().equals("zapisz bierzącą notatkę")) {
+		if (e.getActionCommand().equals("zapisz bierzącą notatkę")) { //to nie działa
 			FocusManager focusMan = FocusManager.getCurrentManager();
 			focusMan.focusNextComponent();
 //			transferFocus();

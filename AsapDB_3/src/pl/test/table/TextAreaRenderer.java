@@ -17,7 +17,7 @@ import javax.swing.table.TableCellRenderer;
 
 import pl.asap.models.NotesModel;
 
-class TextAreaRenderer extends JScrollPane implements TableCellRenderer, TableModelListener
+public class TextAreaRenderer extends JScrollPane implements TableCellRenderer, TableModelListener
 {
    /**
 	 * 
