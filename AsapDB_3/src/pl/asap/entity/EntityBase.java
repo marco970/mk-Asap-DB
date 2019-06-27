@@ -9,6 +9,7 @@ public abstract class EntityBase {
 		//zwraca nazwy pól klasy entity
 		Class c = getClass();
 		Field[] fields = c.getDeclaredFields();
+		
 		int length = fields.length;
 		Object[] array = new Object[length-1];
 		for (int i =0; i<= length -2; i++)	{

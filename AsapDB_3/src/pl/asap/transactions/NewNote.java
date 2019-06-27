@@ -1,4 +1,4 @@
-package pl.test.notes;
+package pl.asap.transactions;
 
 import javax.persistence.Query;
 
@@ -31,6 +31,7 @@ public class NewNote {
 		}
 		session.getTransaction().commit();
 		factory.close();
+		System.out.println("tu: "+this.getClass());
 	}
 
 }

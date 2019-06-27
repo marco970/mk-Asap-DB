@@ -67,8 +67,8 @@ public class MainTableModel extends AbstractTableModel {
 //			id = (Integer) cids[rowNr];
 //		}else
 //			id = (Integer) cids[rowNr];
-		System.out.println("MTM-getId----- row "+ rowNr + " id "+ id);
-		System.out.println("MTM-getId----- ids length " + (Integer) cids.length);
+//		System.out.println("MTM-getId----- row "+ rowNr + " id "+ id);
+//		System.out.println("MTM-getId----- ids length " + (Integer) cids.length);
 		return id;
 	}
 	
@@ -186,7 +186,7 @@ public class MainTableModel extends AbstractTableModel {
 		for (int i = 0; i<=getRowCount()-1; i++)	{
 			rowList.add(dane[i]);
 		}
-		System.out.println("MainTabModel ----- recordUpdate rowNr: "+rowNr + " ----id: "+getId(rowNr));
+//		System.out.println("MainTabModel ----- recordUpdate rowNr: "+rowNr + " ----id: "+getId(rowNr));
 		rowList.set(rowNr, savedRow);
 		Object[][] daneUpd = new Object[rowList.size()][nazwyKolumn.length];
 		int j = 0;
@@ -195,9 +195,9 @@ public class MainTableModel extends AbstractTableModel {
 			
 			j++;
 		}
-		for (Object el: savedRow)	{
-			System.out.print(el+", ");
-		}
+//		for (Object el: savedRow)	{
+//			System.out.print(el+", ");
+//		}
 		dane=daneUpd;
 		fireTableRowsUpdated(rowNr, rowNr);
 		fireTableDataChanged();	

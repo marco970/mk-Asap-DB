@@ -1,4 +1,4 @@
-package pl.test.notes;
+package pl.asap.transactions;
 
 import java.util.ArrayList;
 import java.util.List;

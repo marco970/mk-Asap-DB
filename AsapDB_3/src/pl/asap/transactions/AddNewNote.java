@@ -29,5 +29,6 @@ public class AddNewNote {
 			session.persist(note);
 			session.getTransaction().commit();
 			factory.close();
+//			System.out.println("tu: "+this.getClass());
 		}
 }

@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="notes")
-public class Notes {
+public class Notes extends EntityBase {
 	
 	
 	@Id
@@ -35,13 +35,13 @@ public class Notes {
 	private String dateModified;
 	
 	@Column(name="is_open")
-	private Integer isOpen;		//1 - open, 0 - closed
+	private boolean isOpen;		//1 - open, 0 - closed
 	
 	public Notes()	{
 		
 	}
 
-	public Notes(String note, String dateOpen, String dateModified, Integer isOpen) {
+	public Notes(String note, String dateOpen, String dateModified, boolean isOpen) {
 		this.note = note;
 		this.dateOpen = dateOpen;
 		this.dateModified = dateModified;
@@ -88,11 +88,11 @@ public class Notes {
 		this.dateModified = dateModified;
 	}
 
-	public Integer getIsOpen() {
+	public boolean getIsOpen() {
 		return isOpen;
 	}
 
-	public void setIsOpen(Integer isOpen) {
+	public void setIsOpen(boolean isOpen) {
 		this.isOpen = isOpen;
 	}
 	

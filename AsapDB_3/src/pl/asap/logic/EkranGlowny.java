@@ -53,7 +53,7 @@ public class EkranGlowny implements ActionListener {
 	AbstractTableModel dataModel;
 	DBConnect dbConnect;
 	
-	private class CloseListener implements ActionListener{
+	private class CloseListener implements ActionListener{	//czy to jest potrzebne?
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
 	        
@@ -93,12 +93,12 @@ public class EkranGlowny implements ActionListener {
 		int i = data.getRowCount();
 		int j = data.getColumnCount();
 		
-		for(int m = 0; m<=i-1; m++)	{
-			for (int n =0; n<=j-1; n++)	{
-				if (n==0)	{	
-				}
-			}
-		}	
+//		for(int m = 0; m<=i-1; m++)	{
+//			for (int n =0; n<=j-1; n++)	{
+//				if (n==0)	{	
+//				}
+//			}
+//		}	
 		eg = new JFrame("ASap - Lista Postępowań");
 		
 		width = data.getColumnCount()*100;
@@ -133,7 +133,6 @@ public class EkranGlowny implements ActionListener {
 		Dimension dim = new Dimension(width, height);
 		lista.setPreferredSize(dim);
 		JScrollPane scroll = new JScrollPane(lista);
-
 		
 		eg.add(scroll);
 		
@@ -141,15 +140,13 @@ public class EkranGlowny implements ActionListener {
 		
 		doMassAddMenu(menuBar, start);
 		doMassAddMenu(menuBar, sort);
-		//doMassAddMenu(menuBar, toDo);
-		//doMassAddMenu(menuBar, notatki);
 
 		eg.setJMenuBar(menuBar);
 		
 		PopupMenuBean pmb = new PopupMenuBean(popupStr);
 		
 		TableMouseListener tbml = new TableMouseListener(lista, data, pmb);
-		PopupContent pc = new PopupContent(lista, data, eg, popupStr);
+		PopupContent pc = new PopupContent(lista, data, popupStr);
 		
 		pmb.addPropertyChangeListener(pc);
 		
@@ -198,7 +195,6 @@ public class EkranGlowny implements ActionListener {
 		return mi;
 	}
 	public void doMassAddMenu(JMenu nazwa, JMenuItem...args)	{
-		//JMenuItem Sep = null;
 		for (JMenuItem el: args)	{
 			if (el==null)	{
 				nazwa.addSeparator();
