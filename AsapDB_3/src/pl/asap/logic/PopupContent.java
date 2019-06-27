@@ -128,19 +128,12 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 			}
 		}
 		if (u.equals("notatki"))	{
-			//private String[] popupStr = {"modyfikacja", "zmień daty", "zakończ postępowanie", "zawieś postepowanie", "otwórz folder","notatki"};
+			
 			int realSelectedRow = lista.convertRowIndexToModel(lista.getSelectedRow());
 			final int idPostepowanie = ((MainTableModel) data).getId(realSelectedRow);
-//			System.out.println("row= "+realSelectedRow+" id= "+idPostepowanie);
-//			--> to pełni rolę Main -> wywyłujemy obiekt bean i view///
-			
-			
-//			ReadNotes rn = new ReadNotes(idPostepowanie); //to do modelu
-//			ArrayList<Notes> notes = rn.getNotes(); //to tez?
-			
+
 			NotesModel nm = new NotesModel(idPostepowanie);
-//			NotesView nv = new NotesView(nm, idPostepowanie);
-//			nm.addPropertyChangeListener(nv);
+
 			System.out.println("---------------> "+this.getClass());
 			TableBean tb = new TableBean(nm, 1);
 			TableElement te = new TableElement(nm);
