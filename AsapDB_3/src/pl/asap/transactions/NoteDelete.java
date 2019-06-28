@@ -12,7 +12,7 @@ public class NoteDelete extends TransBlank {
 	public NoteDelete(EntityBase bean, int noteId) {		//to wypadałoby zuniwersalizować
 		super(bean);
 	
-		int a = JOptionPane.showConfirmDialog(null,"czy naprawdę chcesz skasować notatkę "+noteId,"", JOptionPane.YES_NO_OPTION);
+		int a = JOptionPane.showConfirmDialog(null,"czy naprawdę chcesz skasować notatkę nr "+noteId,"?", JOptionPane.YES_NO_OPTION);
 
 		System.out.println(a);
 		   // Tak a=0, nie a=1, anuluj a=2;
@@ -25,6 +25,7 @@ public class NoteDelete extends TransBlank {
 			System.out.println("ilosc usunietych notatek: " + rows);		//
 			session.getTransaction().commit();
 			factory.close();
+//			model.deleteNote(noteId);
 			JOptionPane.showMessageDialog(null, "Notatka została bezpowrotnie usunięta");	//to potem usunąć
 		 }
 	}

@@ -8,6 +8,7 @@ import javax.swing.table.AbstractTableModel;
 
 import pl.asap.entity.Notes;
 import pl.asap.transactions.AddNewNote;
+import pl.asap.transactions.NoteDelete;
 import pl.asap.transactions.ReadNotes;
 
 @SuppressWarnings("serial")
@@ -21,25 +22,61 @@ public class NotesModel extends AbstractTableModel   {
 	private String[] columns = {"data utworzenia", "data modyfikacji", "notatka", "zamknięta"};
 	private ReadNotes rn;
 	
+	public NotesModel(int idPostepowanie) {
+			
+			this.idPostepowanie = idPostepowanie;
+			rn = new ReadNotes(idPostepowanie); //to do modelu		
+			this.notes=rn.getNotes();
+			rowColor = new Color[getRowCount()];
+			dane = new Object[notes.size()][columns.length];
+			for (int i=0; i<notes.size(); i++)	{	// i - wiersze
+				dane[i][0] = notes.get(i).getDateOpen();
+				dane[i][1] = notes.get(i).getDateModified();
+				dane[i][2] = notes.get(i).getNote();
+				dane[i][3] = notes.get(i).getIsOpen();
+	//			System.out.println("row nr: "+i+" noteID: "+notes.get(i).getNoteId());
+			}	
+		}
 	public NotesModel() {
 	}
-	public NotesModel(int idPostepowanie) {
+
+	public void deleteNote(int rowToDelete)	{
+		int noteId = getNoteId(rowToDelete);
+		Object[][] newDane = new Object[notes.size()-1][columns.length];
+		for (int row=0; row<notes.size(); row++)	{
+			
+			if(row!=rowToDelete)	{
+				newDane[row]=dane[row];
+			}
+			
+		}
 		
-		this.idPostepowanie = idPostepowanie;
-		rn = new ReadNotes(idPostepowanie); //to do modelu		
-		this.notes=rn.getNotes();
-		rowColor = new Color[getRowCount()];
-		dane = new Object[notes.size()][columns.length];
-		for (int i=0; i<notes.size(); i++)	{	// i - wiersze
-			dane[i][0] = notes.get(i).getDateOpen();
-			dane[i][1] = notes.get(i).getDateModified();
-			dane[i][2] = notes.get(i).getNote();
-			dane[i][3] = notes.get(i).getIsOpen();
-//			System.out.println("row nr: "+i+" noteID: "+notes.get(i).getNoteId());
-		}	
+//		fireTableRowsDeleted(rowToDelete, rowToDelete);
+//		fireTableDataChanged();
+		dane = newDane;
+//		new NoteDelete(getNote(), noteId);
+		
+		
+		
 	}
-	
-	public Color getRowColor(int row) {		//zrobić lambdę
+	//	public void deleteNote(int noteId)	{
+	//		int row = getRowNr(noteId);
+	//		notes.remove(row);
+	//		Object[][] daneNew = new Object[notes.size()][columns.length];
+	//		for (int i=0; i<notes.size(); i++)	{	// i - wiersze
+	//			daneNew[i][0] = notes.get(i).getDateOpen();
+	//			daneNew[i][1] = notes.get(i).getDateModified();
+	//			daneNew[i][2] = notes.get(i).getNote();
+	//			daneNew[i][3] = notes.get(i).getIsOpen();
+	////			System.out.println("row nr: "+i+" noteID: "+notes.get(i).getNoteId());
+	//
+	//		}	
+	//		dane = daneNew;
+	////		fireTableRowsDeleted(row, row);
+	////		fireTableDataChanged();
+	//		
+	//	}
+	public Color getRowColor(int row) {		//zrobić lambdę albo to wyjebać wogóle
 		if ((boolean)getValueAt(row,3)) rowColor[row]=Color.LIGHT_GRAY;
 		else rowColor[row]=Color.WHITE;
 		return rowColor[row];
@@ -68,8 +105,20 @@ public class NotesModel extends AbstractTableModel   {
 		new AddNewNote(idPostepowanie, nowaNotka);
 
 	}
-	public void deleteNote()	{
-		
+	
+public int getRowNr(int noteId)	{		//problem, to jeśli nie będzie danej noteId wśród rekordów - do ogarniecia
+		int row =0;
+		for (int i=0; i<getRowCount(); i++)	{
+			if(getNoteId(i)==noteId) row=i;
+		}
+		return row;
+	}
+	public int getNoteId(int row)	{
+		rn = new ReadNotes(idPostepowanie); //to do modelu	
+		notes=rn.getNotes();
+	//    	System.out.println("uwaga" + row);
+	    	
+	    return notes.get(row).getNoteId();
 	}
 	@Override
 	public int getColumnCount() {
@@ -105,14 +154,6 @@ public class NotesModel extends AbstractTableModel   {
     
 	public Class<?> getColumnClass(int column) {
         return (getValueAt(0, column).getClass());
-    }
-    public int getNoteId(int row)	{
-		rn = new ReadNotes(idPostepowanie); //to do modelu
-		
-		notes=rn.getNotes();
-//    	System.out.println("uwaga" + row);
-    	
-    	return notes.get(row).getNoteId();
     }
     public void updateNoFire(Object value, int row, int col) {
     	dane[row][col] = value;

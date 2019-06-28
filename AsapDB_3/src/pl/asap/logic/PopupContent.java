@@ -152,8 +152,8 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 			
 			int row = lista.convertRowIndexToModel(lista.getSelectedRow());
 			System.out.println("----------del------->"+row);
-			
-			new NoteDelete(model.getNote(), model.getNoteId(row));
+			model.deleteNote(row);
+//			new NoteDelete(model.getNote(), model.getNoteId(row));
 			
 		}
 	}
