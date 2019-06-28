@@ -31,6 +31,7 @@ public class NoteDelete extends TransBlank {
 
 	public static void main(String[] args) {
 		NotesModel nm = new NotesModel(46);
+		System.out.println(nm.toString());
 		new NoteDelete(nm.getNote(), 27);
 		
 		
