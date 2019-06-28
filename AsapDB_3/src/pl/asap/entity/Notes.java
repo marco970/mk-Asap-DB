@@ -26,7 +26,7 @@ public class Notes extends EntityBase {
 	
 	@ManyToOne(cascade= {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name="id_postepowanie")
-	private Lista lista;
+	private Lista lista;		//to jest tabela z postępowaniami
 	
 	@Column(name="date_open")
 	private String dateOpen;

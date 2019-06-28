@@ -13,11 +13,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
 
 import pl.asap.entity.Notes;
 import pl.asap.junk.NotesScreenTable;
 import pl.asap.models.MainTableModel;
 import pl.asap.models.NotesModel;
+import pl.asap.transactions.NoteDelete;
 import pl.asap.transactions.ReadNotes;
 import pl.test.notes.NotesScreen;
 import pl.test.notes.NotesView;
@@ -35,9 +37,6 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 		super();
 		lista=list;
 		data = dane;
-//		frame = fram;
-
-		//String[] popupStr = {"modyfikacja", "zmień daty", "zakończ postępowanie", "zawieś postepowanie"};
 		doMassAddMenu(this, popupStr);		
 	}
 	
@@ -148,7 +147,13 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 
 		}
 		if (u.equals("delete"))	{
-			System.out.println("----------del------->"+lista.convertRowIndexToModel(lista.getSelectedRow()));
+			
+			NotesModel model = (NotesModel) lista.getModel();
+			
+			int row = lista.convertRowIndexToModel(lista.getSelectedRow());
+			System.out.println("----------del------->"+row);
+			
+			new NoteDelete(model.getNote(), model.getNoteId(row));
 			
 		}
 	}

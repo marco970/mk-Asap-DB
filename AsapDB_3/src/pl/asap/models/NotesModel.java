@@ -14,7 +14,7 @@ import pl.asap.transactions.ReadNotes;
 public class NotesModel extends AbstractTableModel   {
 	//
 	private ArrayList<Notes> notes;
-	private Notes note;
+//	private Notes note;
 	private int idPostepowanie;
 	private Object[][] dane;
 	private Color[] rowColor;
@@ -26,13 +26,9 @@ public class NotesModel extends AbstractTableModel   {
 	public NotesModel(int idPostepowanie) {
 		
 		this.idPostepowanie = idPostepowanie;
-		
-		rn = new ReadNotes(idPostepowanie); //to do modelu
-		
+		rn = new ReadNotes(idPostepowanie); //to do modelu		
 		this.notes=rn.getNotes();
-		
 		rowColor = new Color[getRowCount()];
-		
 		dane = new Object[notes.size()][columns.length];
 		for (int i=0; i<notes.size(); i++)	{	// i - wiersze
 			dane[i][0] = notes.get(i).getDateOpen();
@@ -42,6 +38,7 @@ public class NotesModel extends AbstractTableModel   {
 //			System.out.println("row nr: "+i+" noteID: "+notes.get(i).getNoteId());
 		}	
 	}
+	
 	public Color getRowColor(int row) {		//zrobić lambdę
 		if ((boolean)getValueAt(row,3)) rowColor[row]=Color.LIGHT_GRAY;
 		else rowColor[row]=Color.WHITE;
@@ -56,7 +53,9 @@ public class NotesModel extends AbstractTableModel   {
 		return notes;
 	}
 
-	public Notes getNote() {
+	public Notes getNote() {		
+		Notes note = new Notes();		//? i to działa? Tylko chyba w jednym przypadku, bo tam trzeba 
+										//tylko podać nazwę klasy a nie instancję z wartośnciami pól
 		return note;
 	}
 
