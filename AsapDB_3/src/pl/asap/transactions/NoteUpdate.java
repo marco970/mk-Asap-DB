@@ -18,7 +18,7 @@ import pl.asap.entity.Lista;
 import pl.asap.entity.Notes;
 import pl.asap.models.NotesModel;
 
-public class NoteUpdateTest implements TableModelListener {
+public class NoteUpdate implements TableModelListener {
 	
 //	private int noteId;
 	private NotesModel notesModel;
@@ -29,7 +29,7 @@ public class NoteUpdateTest implements TableModelListener {
 	Session session;
 	
 
-	public NoteUpdateTest(NotesModel notesModel)	{
+	public NoteUpdate(NotesModel notesModel)	{
 		this.notesModel= notesModel;
 	}
 	
@@ -88,6 +88,7 @@ public class NoteUpdateTest implements TableModelListener {
 		
 //		System.out.println(this.getClass()+" fr "+e.getFirstRow()+" lr "+e.getLastRow()+" col "+e.getColumn()+" src "+e.getSource());
         int column = e.getColumn();
+        System.out.println("=======tableChanged==========>>");
         
     	int row = e.getFirstRow();
 		NotesModel dane = (NotesModel) e.getSource();

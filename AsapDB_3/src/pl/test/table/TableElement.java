@@ -10,7 +10,7 @@ import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 
 import pl.asap.models.NotesModel;
-import pl.asap.transactions.NoteUpdateTest;
+import pl.asap.transactions.NoteUpdate;
 
 @SuppressWarnings("serial")
 public class TableElement extends JTable implements PropertyChangeListener {
@@ -32,7 +32,7 @@ public class TableElement extends JTable implements PropertyChangeListener {
 		TableColumnModel tcm = table.getColumnModel();	
 		TableColumn tc = tcm.getColumn(2);	
 //		TableColumn tcCheckBox = tcm.getColumn(3);	
-		table.getModel().addTableModelListener(new NoteUpdateTest(nm));		
+		table.getModel().addTableModelListener(new NoteUpdate(nm));		
 		
 		tc.setCellRenderer(new TextAreaRenderer(nm));
 		tc.setCellEditor(new TextAreaEditor());

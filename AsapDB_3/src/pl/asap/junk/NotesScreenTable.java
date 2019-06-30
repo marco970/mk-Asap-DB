@@ -18,7 +18,7 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import pl.asap.models.NotesModel;
-import pl.asap.transactions.NoteUpdateTest;
+import pl.asap.transactions.NoteUpdate;
 import pl.test.table.TextAreaEditor;
 import pl.test.table.TextAreaRenderer;
 
@@ -33,7 +33,7 @@ public class NotesScreenTable implements ActionListener, TableModelListener {
 		
 		this.notesModel = notesModel;
 		table = new JTable(notesModel);
-		table.getModel().addTableModelListener(new NoteUpdateTest(notesModel));		//to jest istotne
+		table.getModel().addTableModelListener(new NoteUpdate(notesModel));		//to jest istotne
 		JMenu menu = new JMenu("start");
 		JMenuBar menuBar = new JMenuBar();
 

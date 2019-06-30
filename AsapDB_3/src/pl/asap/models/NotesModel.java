@@ -41,41 +41,45 @@ public class NotesModel extends AbstractTableModel   {
 	}
 
 	public void deleteNote(int rowToDelete)	{
+		System.out.println("------deleteNote---before---> "+notes.size()+" i dane "+dane.length+" i rTD "+ rowToDelete);
 		int noteId = getNoteId(rowToDelete);
-		Object[][] newDane = new Object[notes.size()-1][columns.length];
-		for (int row=0; row<notes.size(); row++)	{
-			
-			if(row!=rowToDelete)	{
-				newDane[row]=dane[row];
+		
+		NoteDelete nd = new NoteDelete(getNote(), noteId);
+		
+		if (nd.getRezultatDelete()) {
+			notes.remove(rowToDelete);
+			Object[][] daneNew = new Object[notes.size()][columns.length];
+			for (int i = 0; i < notes.size(); i++) { // i - wiersze
+				daneNew[i][0] = notes.get(i).getDateOpen();
+				daneNew[i][1] = notes.get(i).getDateModified();
+				daneNew[i][2] = notes.get(i).getNote();
+				daneNew[i][3] = notes.get(i).getIsOpen();
+				//			System.out.println("row nr: "+i+" noteID: "+notes.get(i).getNoteId());
 			}
-			
-		}
-		
-//		fireTableRowsDeleted(rowToDelete, rowToDelete);
-//		fireTableDataChanged();
-		dane = newDane;
-//		new NoteDelete(getNote(), noteId);
-		
-		
-		
+			dane = daneNew;
+			System.out.println("------deleteNote---after---> " + notes.size() + " i dane " + dane.length + " i rTD "
+					+ rowToDelete);
+			if (rowToDelete >= 1) {
+				fireTableRowsDeleted(rowToDelete - 1, rowToDelete - 1);
+				fireTableDataChanged();
+			}
+			//		else fireTableRowsDeleted(rowToDelete, rowToDelete);
+		}	
 	}
-	//	public void deleteNote(int noteId)	{
-	//		int row = getRowNr(noteId);
-	//		notes.remove(row);
-	//		Object[][] daneNew = new Object[notes.size()][columns.length];
-	//		for (int i=0; i<notes.size(); i++)	{	// i - wiersze
-	//			daneNew[i][0] = notes.get(i).getDateOpen();
-	//			daneNew[i][1] = notes.get(i).getDateModified();
-	//			daneNew[i][2] = notes.get(i).getNote();
-	//			daneNew[i][3] = notes.get(i).getIsOpen();
-	////			System.out.println("row nr: "+i+" noteID: "+notes.get(i).getNoteId());
-	//
-	//		}	
-	//		dane = daneNew;
-	////		fireTableRowsDeleted(row, row);
-	////		fireTableDataChanged();
-	//		
-	//	}
+
+	public int getRowNr(int noteId)	{		//problem, to jeśli nie będzie danej noteId wśród rekordów - do ogarniecia
+		int row =0;
+		for (int i=0; i<getRowCount(); i++)	{
+			if(getNoteId(i)==noteId) row=i;
+		}
+		return row;
+	}
+	public int getNoteId(int row)	{
+		rn = new ReadNotes(idPostepowanie); //to do modelu	
+		notes=rn.getNotes();
+	//    	System.out.println("uwaga" + row);
+	    return notes.get(row).getNoteId();
+	}
 	public Color getRowColor(int row) {		//zrobić lambdę albo to wyjebać wogóle
 		if ((boolean)getValueAt(row,3)) rowColor[row]=Color.LIGHT_GRAY;
 		else rowColor[row]=Color.WHITE;
@@ -106,21 +110,7 @@ public class NotesModel extends AbstractTableModel   {
 
 	}
 	
-public int getRowNr(int noteId)	{		//problem, to jeśli nie będzie danej noteId wśród rekordów - do ogarniecia
-		int row =0;
-		for (int i=0; i<getRowCount(); i++)	{
-			if(getNoteId(i)==noteId) row=i;
-		}
-		return row;
-	}
-	public int getNoteId(int row)	{
-		rn = new ReadNotes(idPostepowanie); //to do modelu	
-		notes=rn.getNotes();
-	//    	System.out.println("uwaga" + row);
-	    	
-	    return notes.get(row).getNoteId();
-	}
-	@Override
+@Override
 	public int getColumnCount() {
 		return columns.length;
 	}
@@ -130,7 +120,7 @@ public int getRowNr(int noteId)	{		//problem, to jeśli nie będzie danej noteId
 	}
 	@Override
 	public Object getValueAt(int row, int col) {
-		if (row>=0 && row<=this.getRowCount() && col>=0 && col<=this.getColumnCount()) {
+		if (row>=0 && row<this.getRowCount() && col>=0 && col<this.getColumnCount()) {
 			if (dane[row][col] != null)
 				return dane[row][col];
 			else

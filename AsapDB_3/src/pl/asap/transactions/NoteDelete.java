@@ -8,11 +8,14 @@ import pl.asap.models.NotesModel;
 
 public class NoteDelete extends TransBlank {
 	
+	boolean rezultat;
+	
 
 	public NoteDelete(EntityBase bean, int noteId) {		//to wypadałoby zuniwersalizować
 		super(bean);
+		this.rezultat = false;
 	
-		int a = JOptionPane.showConfirmDialog(null,"czy naprawdę chcesz skasować notatkę nr "+noteId,"?", JOptionPane.YES_NO_OPTION);
+		int a = JOptionPane.showConfirmDialog(null,"czy naprawdę chcesz usunąć notatkę?","", JOptionPane.YES_NO_OPTION);
 
 		System.out.println(a);
 		   // Tak a=0, nie a=1, anuluj a=2;
@@ -27,6 +30,14 @@ public class NoteDelete extends TransBlank {
 			factory.close();
 //			model.deleteNote(noteId);
 			JOptionPane.showMessageDialog(null, "Notatka została bezpowrotnie usunięta");	//to potem usunąć
+			if(rows>0) rezultat = true;
+			else rezultat = false;
+			
+			
 		 }
+
+	}
+	public boolean getRezultatDelete()	{
+		return rezultat;
 	}
 }
