@@ -39,15 +39,9 @@ public class TableGui extends JFrame implements ActionListener{
 		setJMenuBar(menuBar);
 		int rc = tb.getAtm().getRowCount();
 		
-		if(tb.getAtm().getRowCount()==0)	{
-			JLabel brakNotatek = new JLabel("w postępowaniu nie ma jeszcze notatek...");
-//			formatuj(brakNotatek);
-			add(brakNotatek, BorderLayout.NORTH);
-		}
-		else	{
-			JScrollPane scrollPane = new JScrollPane(te);
-			add(scrollPane, BorderLayout.CENTER);
-		}
+		JScrollPane scrollPane = new JScrollPane(te);
+		add(scrollPane, BorderLayout.CENTER);
+
 		PopupContent pc = new PopupContent(te, tb.getAtm(), new String[]{"delete"});
 		NotesMouseListener nml = new NotesMouseListener(te, tb.getAtm());
 		te.addMouseListener(nml);
