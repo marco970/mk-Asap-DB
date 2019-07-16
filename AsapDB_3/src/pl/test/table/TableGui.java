@@ -14,6 +14,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 public class TableGui extends JFrame implements ActionListener{
 	
@@ -34,7 +35,6 @@ public class TableGui extends JFrame implements ActionListener{
 		menu.add(mi1);
 		menu.add(mi2);
 
-
 		menuBar.add(menu);
 		setJMenuBar(menuBar);
 		int rc = tb.getAtm().getRowCount();
@@ -46,8 +46,7 @@ public class TableGui extends JFrame implements ActionListener{
 		NotesMouseListener nml = new NotesMouseListener(te, tb.getAtm());
 		te.addMouseListener(nml);
 		te.setComponentPopupMenu(pc);
-		
-		
+				
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setSize(1200, 700);
 		setVisible(true);

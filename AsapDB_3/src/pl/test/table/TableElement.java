@@ -15,10 +15,19 @@ import pl.asap.transactions.NoteUpdate;
 @SuppressWarnings("serial")
 public class TableElement extends JTable implements PropertyChangeListener {
 	
+//	private static final TableElement pte = new Table
+	
 	public TableElement(NotesModel atm) {
 		super(atm);
 		System.out.println("-------te--------> "+this.getClass());
 		setTableAtributes(this, atm);
+		setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
+		TableColumnModel tcm = getColumnModel();	
+		tcm.getColumn(0).setPreferredWidth(30);
+		tcm.getColumn(1).setPreferredWidth(30);
+		tcm.getColumn(2).setPreferredWidth(400);
+		tcm.getColumn(3).setPreferredWidth(30);
+		
 	}
 
 	@Override
@@ -28,7 +37,7 @@ public class TableElement extends JTable implements PropertyChangeListener {
 		this.setModel((NotesModel) e.getNewValue());
 		setTableAtributes(this, (NotesModel) e.getNewValue());
 	}
-	public void setTableAtributes(JTable table, NotesModel nm)	{
+	public void setTableAtributes(JTable table, NotesModel nm)	{ //potrzebne? - tak
 		TableColumnModel tcm = table.getColumnModel();	
 		TableColumn tc = tcm.getColumn(2);	
 //		TableColumn tcCheckBox = tcm.getColumn(3);	
