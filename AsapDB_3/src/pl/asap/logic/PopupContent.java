@@ -33,6 +33,8 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 	private JTable lista;
 	private AbstractTableModel data;
 	private JFrame frame;
+//	private TableGui tGui;
+	
 	public PopupContent(JTable list, AbstractTableModel dane, String[] popupStr)	{
 		super();
 		lista=list;
@@ -141,8 +143,8 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 			String ZZPZ = data.getValueAt(realSelectedRow , 0)+", "+data.getValueAt(realSelectedRow , 1);
 //			new NotesScreenTable(nm, ZZPZ);
 			
-			new TableGui(tb, te, idPostepowanie);
-			
+//			new TableGui(tb, te, idPostepowanie);
+			TableGui.getInstance(tb, te, idPostepowanie);
 //			new NotesScreen(ZZPZ, nm, nv, idPostepowanie);
 
 		}
@@ -157,5 +159,8 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 			
 		}
 	}
+
+
+
 
 }

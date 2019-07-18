@@ -29,7 +29,9 @@ public class TableElement extends JTable implements PropertyChangeListener {
 		tcm.getColumn(3).setPreferredWidth(30);
 		
 	}
-
+	
+	
+	
 	@Override
 	public void propertyChange(PropertyChangeEvent e) {
 		System.out.println("-------x--------> "+this.getClass());

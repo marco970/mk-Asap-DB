@@ -3,6 +3,9 @@ package pl.test.table;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import pl.asap.logic.PopupContent;
 import pl.asap.models.NotesModel;
@@ -20,8 +23,9 @@ public class TableGui extends JFrame implements ActionListener{
 	
 	private TableBean tb;
 	int idPostepowanie;
-	
-	public TableGui(TableBean tb, TableElement te, int idPostepowanie)	{
+	private static Set<Integer> checkIfOpen = new HashSet<Integer>();
+		
+	private TableGui(TableBean tb, TableElement te, int idPostepowanie)	{
 		super("Notatki - "+idPostepowanie);
 		System.out.println("---------------> "+this.getClass());
 		this.tb = tb;
@@ -37,8 +41,6 @@ public class TableGui extends JFrame implements ActionListener{
 
 		menuBar.add(menu);
 		setJMenuBar(menuBar);
-		int rc = tb.getAtm().getRowCount();
-		
 		JScrollPane scrollPane = new JScrollPane(te);
 		add(scrollPane, BorderLayout.CENTER);
 
@@ -51,6 +53,14 @@ public class TableGui extends JFrame implements ActionListener{
 		setSize(1200, 700);
 		setVisible(true);
 	}
+	public static synchronized TableGui getInstance(TableBean tb, TableElement te, int idPostepowanie)	{
+		if (!checkIfOpen.contains(idPostepowanie))	{
+			checkIfOpen.add(idPostepowanie);
+			return new TableGui(tb, te, idPostepowanie);
+		}
+		else return null;
+	}
+	
 	public void doMassAddMenu(JMenuBar mb, String...args)	{
 		JMenu menu = new JMenu(args[0]);
 		mb.add(menu);
@@ -83,7 +93,7 @@ public class TableGui extends JFrame implements ActionListener{
 		
 		if (e.getActionCommand().equals("zapisz bierzącą notatkę")) { //to nie działa
 			FocusManager focusMan = FocusManager.getCurrentManager();
-			focusMan.focusNextComponent();
+			focusMan.focusNextComponent();			//moze dlatego, ze nie ma 
 //			transferFocus();
 		}
 		
