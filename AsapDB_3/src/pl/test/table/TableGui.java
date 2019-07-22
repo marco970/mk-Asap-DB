@@ -3,6 +3,8 @@ package pl.test.table;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -52,6 +54,13 @@ public class TableGui extends JFrame implements ActionListener{
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setSize(1200, 700);
 		setVisible(true);
+		this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                if (checkIfOpen.contains(idPostepowanie)) checkIfOpen.remove(idPostepowanie);
+            	System.out.println("WindowClosingDemo.windowClosing");
+            }
+        });
 	}
 	public static synchronized TableGui getInstance(TableBean tb, TableElement te, int idPostepowanie)	{
 		if (!checkIfOpen.contains(idPostepowanie))	{

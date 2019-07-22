@@ -5,24 +5,14 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
-import java.util.ArrayList;
-
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableModel;
-
-import pl.asap.entity.Notes;
-import pl.asap.junk.NotesScreenTable;
 import pl.asap.models.MainTableModel;
 import pl.asap.models.NotesModel;
-import pl.asap.transactions.NoteDelete;
-import pl.asap.transactions.ReadNotes;
-import pl.test.notes.NotesScreen;
-import pl.test.notes.NotesView;
 import pl.test.table.TableBean;
 import pl.test.table.TableElement;
 import pl.test.table.TableGui;
@@ -88,7 +78,7 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 		if (u.equals("modyfikacja"))	{
 			int selectedRow = lista.getSelectedRow();
 			int realSelectedRow = lista.convertRowIndexToModel(selectedRow);
-			new OpForm2("Edycja postępowania", realSelectedRow, (MainTableModel) data);
+			OpForm2.getInstance("Edycja postępowania", realSelectedRow, (MainTableModel) data);
 		}
 		if (u.equals("zakończ postępowanie"))	{
 			int selectedRow = lista.getSelectedRow();
@@ -100,8 +90,7 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 				((MainTableModel) data).cellUpdate("zakonczone", realSelectedRow, 4);
 				new Zapis((MainTableModel) data);
 				new FolderCreator().moveFolder(getFolder(realSelectedRow), true);
-			}
-		
+			}		
 		}
 		if (u.equals("zmień daty"))	{
 			new DateChangeForm2((MainTableModel) data, lista.convertRowIndexToModel(lista.getSelectedRow()));

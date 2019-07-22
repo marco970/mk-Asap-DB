@@ -7,10 +7,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -21,6 +26,9 @@ import javax.swing.text.JTextComponent;
 
 import net.miginfocom.swing.MigLayout;
 import pl.asap.models.MainTableModel;
+import pl.test.table.TableBean;
+import pl.test.table.TableElement;
+import pl.test.table.TableGui;
 
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -32,30 +40,23 @@ public class OpForm2 implements ActionListener, FocusListener {
 
 	private int colCount;
 	private MainTableModel model;
-	
 	private int rowNr;
-	
 	private Component[] tfAll;
-	
 	private JFrame opForm;
 	private ArrayList<Component> listaComp = new ArrayList<Component>();	
-
-	JComboBox<String> statusPole;
-	JComboBox<String> trybPole;
-	
-	JLabel errPZLab; 
-	JLabel errWPLab; 
-	JLabel errDKLab; 
-	
-	
-	JPanel panel;
-	
-	
+	private JComboBox<String> statusPole;
+	private JComboBox<String> trybPole;	
+	private JLabel errPZLab; 
+	private JLabel errWPLab; 
+	private JLabel errDKLab; 	
+	private JPanel panel;
 	private JButton btnSave;
 	private JButton btnClose;
 	private JButton btnNext;
+	
+	private static Set<Integer> checkIfOpen = new HashSet<Integer>();
 
-	public OpForm2(String nazwa, int rowNo, MainTableModel mod)  {
+	private OpForm2(String nazwa, int rowNo, MainTableModel mod)  {
 				
 		this.model = mod;
 		this.rowNr = rowNo;
@@ -68,6 +69,16 @@ public class OpForm2 implements ActionListener, FocusListener {
 		opForm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		opForm.setVisible(true);
 		opForm.setBounds(100, 100, 460, 600);
+		opForm.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                if (checkIfOpen.contains(rowNo)) checkIfOpen.remove(rowNo);
+            	System.out.println("WindowClosingDemo.windowClosing--->OpForm2");
+            }
+        });
+		
+		
+		
 		//panel
 		JPanel contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -84,12 +95,10 @@ public class OpForm2 implements ActionListener, FocusListener {
 		String migLayRowNo = "";
 		String[] targetNazwaPola = new String[colCount];
 		String[] targetField = new String[colCount];
-		//String[] targetErrMessage = new String[colCount];	//out
 		for (int i = 0; i<=colCount-1; i++)	{
 			migLayRowNo = migLayRowNo+"[]";
 			targetNazwaPola[i] = "cell 0 "+ i;
 			targetField[i] = "cell 1 "+ i;
-			//targetErrMessage[i] = "cell 2 "+ i; //out
 		}
 		
 		//rysujemy-----------------------------------
@@ -253,6 +262,14 @@ public class OpForm2 implements ActionListener, FocusListener {
 		//nowe etykiety błędów-----------
 	
 	}//koniec konstruktora
+	
+	public static synchronized OpForm2 getInstance(String nazwa, int rowNo, MainTableModel mod)	{
+		if (!checkIfOpen.contains(rowNo))	{
+			checkIfOpen.add(rowNo);
+			return new OpForm2 (nazwa, rowNo, mod);
+		}
+		else return null;
+	}
 
 	public Object[] DsIterator(String dateString, Object[] savedRow, int liczbaWierszy, int liczbaDs, int currRow)	{
 		for (int i = 0; i <= liczbaDs-1; i++)	{
