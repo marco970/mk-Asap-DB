@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,16 +13,16 @@ import pl.asap.models.NotesModel;
 
 import javax.swing.FocusManager;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 
+@SuppressWarnings("serial")
 public class TableGui extends JFrame implements ActionListener{
 	
 	private TableBean tb;
+	private TableElement te;
 	int idPostepowanie;
 	private static Set<Integer> checkIfOpen = new HashSet<Integer>();
 		
@@ -31,7 +30,24 @@ public class TableGui extends JFrame implements ActionListener{
 		super("Notatki - "+idPostepowanie);
 		System.out.println("---------------> "+this.getClass());
 		this.tb = tb;
+		this.te = te;
 		this.idPostepowanie = idPostepowanie;
+		this.addWindowListener(new WindowAdapter() {
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+//                System.out.println("A is closing");
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+//                System.out.println("A has closed");
+                checkIfOpen.remove(TableGui.this.idPostepowanie);
+//                showOpenWindows();
+            }
+
+        });
+		
 		
 		JMenu menu = new JMenu("start");
 		JMenuBar menuBar = new JMenuBar();
@@ -54,21 +70,22 @@ public class TableGui extends JFrame implements ActionListener{
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setSize(1200, 700);
 		setVisible(true);
-		this.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                if (checkIfOpen.contains(idPostepowanie)) checkIfOpen.remove(idPostepowanie);
-            	System.out.println("WindowClosingDemo.windowClosing");
-            }
-        });
+		
 	}
 	public static synchronized TableGui getInstance(TableBean tb, TableElement te, int idPostepowanie)	{
 		if (!checkIfOpen.contains(idPostepowanie))	{
 			checkIfOpen.add(idPostepowanie);
+//			showOpenWindows();
 			return new TableGui(tb, te, idPostepowanie);
 		}
 		else return null;
 	}
+//	private static void showOpenWindows()	{
+//		for (Integer el: checkIfOpen)	{
+//		System.out.print(el+", ");
+//		}
+//	}
+	
 	
 	public void doMassAddMenu(JMenuBar mb, String...args)	{
 		JMenu menu = new JMenu(args[0]);
@@ -104,6 +121,10 @@ public class TableGui extends JFrame implements ActionListener{
 			FocusManager focusMan = FocusManager.getCurrentManager();
 			focusMan.focusNextComponent();			//moze dlatego, ze nie ma 
 //			transferFocus();
+//			int col = te.getSelectedColumn()+1;
+			int row = te.getSelectedRow();
+			te.changeSelection(row, 3, true, false);
+			
 		}
 		
 	}

@@ -1,16 +1,9 @@
 package pl.test.table;
 
-import java.awt.Color;
 import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
-import javax.swing.border.TitledBorder;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableCellRenderer;
@@ -24,11 +17,8 @@ public class TextAreaRenderer extends JScrollPane implements TableCellRenderer, 
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTextArea textarea;
-	private NotesModel nm;
-  
-   public TextAreaRenderer(NotesModel nm) {
-	  this.nm = nm;
-      textarea = new JTextArea();
+	public TextAreaRenderer() {
+	  textarea = new JTextArea();
       textarea.setLineWrap(true);
       textarea.setWrapStyleWord(true);
 //      textarea.setBorder(new TitledBorder("This is a JTextArea"));
@@ -62,7 +52,7 @@ public class TextAreaRenderer extends JScrollPane implements TableCellRenderer, 
 
 @Override
 public void tableChanged(TableModelEvent e) {
-	System.out.println("--------rendererTabChanged--------->"+e.getSource().toString());
+	System.out.println("--------rendererTabChanged--------->"+e.getSource().toString());	//nie wiem, czy ten interfejs potrzebny
 	
 }
 
