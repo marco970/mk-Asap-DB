@@ -1,4 +1,4 @@
-package pl.test.notes;
+package pl.asap.junk;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;

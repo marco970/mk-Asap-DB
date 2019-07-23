@@ -13,9 +13,9 @@ import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import pl.asap.models.MainTableModel;
 import pl.asap.models.NotesModel;
-import pl.test.table.TableBean;
-import pl.test.table.TableElement;
-import pl.test.table.TableGui;
+import pl.asap.table.TableBean;
+import pl.asap.table.TableElement;
+import pl.asap.table.TableGui;
 
 @SuppressWarnings("serial")
 public class PopupContent extends JPopupMenu implements PropertyChangeListener, ActionListener {

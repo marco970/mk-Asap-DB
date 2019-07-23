@@ -18,9 +18,9 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import pl.asap.models.NotesModel;
+import pl.asap.table.TextAreaEditor;
+import pl.asap.table.TextAreaRenderer;
 import pl.asap.transactions.NoteUpdate;
-import pl.test.table.TextAreaEditor;
-import pl.test.table.TextAreaRenderer;
 
 public class NotesScreenTable implements ActionListener, TableModelListener {
 	
@@ -29,6 +29,7 @@ public class NotesScreenTable implements ActionListener, TableModelListener {
 	private JFrame frame;
 	
 	public NotesScreenTable(NotesModel notesModel, String frameTitle)	{
+		System.out.println("---> "+this.getClass());
 		frame = new JFrame(frameTitle);
 		
 		this.notesModel = notesModel;

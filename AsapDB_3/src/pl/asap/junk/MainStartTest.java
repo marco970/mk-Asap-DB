@@ -1,4 +1,4 @@
-package pl.test.notes;
+package pl.asap.junk;
 
 import pl.asap.entity.Notes;
 import pl.asap.transactions.NewNote;

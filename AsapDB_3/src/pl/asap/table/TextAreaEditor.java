@@ -1,4 +1,4 @@
-package pl.test.table;
+package pl.asap.table;
 
 import java.awt.Component;
 
@@ -15,9 +15,10 @@ public class TextAreaEditor extends DefaultCellEditor {
 	  
 	   public TextAreaEditor() {
 	      super(new JCheckBox());
+//	      System.out.println("---> "+this.getClass());
 	      scrollpane = new JScrollPane();
 	      textarea = new JTextArea(); 
-	      textarea.setLineWrap(true);
+	      textarea.setLineWrap(false);		//???
 	      textarea.setWrapStyleWord(true);
 //	      textarea.setBorder(new TitledBorder("This is a JTextArea"));
 	      scrollpane.getViewport().add(textarea);

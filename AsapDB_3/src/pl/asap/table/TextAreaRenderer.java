@@ -1,4 +1,4 @@
-package pl.test.table;
+package pl.asap.table;
 
 import java.awt.Component;
 import javax.swing.JScrollPane;
@@ -18,9 +18,10 @@ public class TextAreaRenderer extends JScrollPane implements TableCellRenderer, 
 	private static final long serialVersionUID = 1L;
 	private JTextArea textarea;
 	public TextAreaRenderer() {
-	  textarea = new JTextArea();
-      textarea.setLineWrap(true);
-      textarea.setWrapStyleWord(true);
+//		System.out.println("---> "+this.getClass());
+		textarea = new JTextArea();
+		textarea.setLineWrap(true);
+		textarea.setWrapStyleWord(true);
 //      textarea.setBorder(new TitledBorder("This is a JTextArea"));
       
       getViewport().add(textarea);

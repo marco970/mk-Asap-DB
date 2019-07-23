@@ -31,6 +31,7 @@ public class NoteUpdate implements TableModelListener {
 
 	public NoteUpdate(NotesModel notesModel)	{
 		this.notesModel= notesModel;
+		System.out.println("---> "+this.getClass());
 	}
 	
 	public void carryOutUpdate() {
@@ -52,6 +53,7 @@ public class NoteUpdate implements TableModelListener {
 
 	}
 	public void updateNote(int noteId, String note, String dateModified)	{
+		System.out.println("---> "+this.getClass()+"--> meth - updateNote");
 		carryOutUpdate();
 		String update = "update Notes e set "
 				+ "e.dateModified=:dateModified,"
@@ -63,7 +65,7 @@ public class NoteUpdate implements TableModelListener {
 		query.setParameter("noteId", noteId);
 		int recordNo = query.executeUpdate();
 		session.getTransaction().commit();
-		System.out.println(recordNo);
+		System.out.println(recordNo+" tutej!!!");
 		factory.close();
 	}
 	public void updateIsOpen(int noteId, boolean isOpen, String dateModified)	{
@@ -85,6 +87,7 @@ public class NoteUpdate implements TableModelListener {
 
 	@Override
 	public void tableChanged(TableModelEvent e) {
+		
 		
 //		System.out.println(this.getClass()+" fr "+e.getFirstRow()+" lr "+e.getLastRow()+" col "+e.getColumn()+" src "+e.getSource());
         int column = e.getColumn();

@@ -138,6 +138,7 @@ public class NotesModel extends AbstractTableModel   {
     	return columns[i];
     }
     public void setValueAt(Object value, int row, int col) {
+    	System.out.println("---setValueAt---> "+this.getClass());
         dane[row][col] = value;
         fireTableCellUpdated(row, col);
     }

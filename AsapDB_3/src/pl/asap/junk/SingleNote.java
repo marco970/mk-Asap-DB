@@ -1,4 +1,4 @@
-package pl.test.notes;
+package pl.asap.junk;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -6,7 +6,6 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import pl.asap.entity.Notes;
-import pl.asap.transactions.UpdateTrans;
 
 
 @SuppressWarnings("serial")

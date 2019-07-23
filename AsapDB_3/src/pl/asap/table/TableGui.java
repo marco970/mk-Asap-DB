@@ -1,4 +1,4 @@
-package pl.test.table;
+package pl.asap.table;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -28,7 +28,7 @@ public class TableGui extends JFrame implements ActionListener{
 		
 	private TableGui(TableBean tb, TableElement te, int idPostepowanie)	{
 		super("Notatki - "+idPostepowanie);
-		System.out.println("---------------> "+this.getClass());
+		System.out.println("---> "+this.getClass());
 		this.tb = tb;
 		this.te = te;
 		this.idPostepowanie = idPostepowanie;

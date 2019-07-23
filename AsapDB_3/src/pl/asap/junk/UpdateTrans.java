@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.asap.transactions;
+package pl.asap.junk;
 
 import org.hibernate.query.Query;
 
 import pl.asap.entity.EntityBase;
 import pl.asap.entity.Lista;
 import pl.asap.entity.Notes;
+import pl.asap.transactions.TransBlank;
 
 /**
  *
@@ -47,7 +48,7 @@ public class UpdateTrans extends TransBlank {
     
     public void updateRow(Object[] savedRow, int id)	{
     	
-    	System.out.println("UpdateTrans----updateRow---id---- "+id);
+//    	System.out.println("UpdateTrans----updateRow---id---- "+id);
     	session.beginTransaction();
     	
     	Object[] a = ((EntityBase) bean).getArray();
@@ -69,7 +70,7 @@ public class UpdateTrans extends TransBlank {
     	for (int i=0; i<a.length; i++)	{
     		if (i!=1) {
 				if (b[i] == null)	b[i] = "";
-				System.out.println("^^^"+b[i].toString());
+//				System.out.println("^^^"+b[i].toString());
 				updateLogic(" where note_id=:id", a[i], b[i], notkaId);
 			}
     	}

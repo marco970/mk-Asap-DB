@@ -1,4 +1,4 @@
-package pl.test.table;
+package pl.asap.table;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -36,6 +36,8 @@ public class TableElement extends JTable implements PropertyChangeListener {
 	}
 	public void setTableAtributes(JTable table, NotesModel nm)	{ //potrzebne? - tak
 		
+		System.out.println("-------y--------> "+this.getClass());
+		
 		table.setCellSelectionEnabled(true);
 		
 		TableColumnModel tcm = table.getColumnModel();	
@@ -52,9 +54,7 @@ public class TableElement extends JTable implements PropertyChangeListener {
 		tcm.getColumn(1).setPreferredWidth(20);
 		tcm.getColumn(2).setPreferredWidth(400);
 		tcm.getColumn(3).setPreferredWidth(20);
-		
-		
-		
+
 		table.revalidate();
 	}
 

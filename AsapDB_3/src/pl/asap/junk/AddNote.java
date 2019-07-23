@@ -1,4 +1,4 @@
-package pl.test.notes;
+package pl.asap.junk;
 
 import javax.persistence.Query;
 

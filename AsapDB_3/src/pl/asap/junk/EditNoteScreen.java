@@ -1,4 +1,4 @@
-package pl.test.notes;
+package pl.asap.junk;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

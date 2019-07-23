@@ -1,4 +1,4 @@
-package pl.test.table;
+package pl.asap.table;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -14,6 +14,7 @@ public class TableBean implements TableModelListener {
 
 	public TableBean(NotesModel atm, int i) {
 		this.atm = atm;
+		System.out.println("---> "+this.getClass());
 	}	
 	public TableBean(NotesModel atm)	{
 		setAtm(atm);
