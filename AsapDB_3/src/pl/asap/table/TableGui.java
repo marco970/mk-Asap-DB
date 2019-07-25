@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.HashSet;
+import java.util.Scanner;
 import java.util.Set;
 
 import pl.asap.logic.PopupContent;
@@ -118,13 +119,17 @@ public class TableGui extends JFrame implements ActionListener{
 		}
 		
 		if (e.getActionCommand().equals("zapisz bierzącą notatkę")) { //to nie działa
-			FocusManager focusMan = FocusManager.getCurrentManager();
-			focusMan.focusNextComponent();			//moze dlatego, ze nie ma 
+//			FocusManager focusMan = FocusManager.getCurrentManager();
+//			focusMan.focusNextComponent();			//moze dlatego, ze nie ma 
 //			transferFocus();
 //			int col = te.getSelectedColumn()+1;
-			int row = te.getSelectedRow();
-			te.changeSelection(row, 3, true, false);
+//			int row = te.getSelectedRow();
+//			te.changeSelection(row, 0, true, false);
+			if (!te.equals(null))	{
+				if (!te.getCellEditor().equals(null)) te.getCellEditor().stopCellEditing();
+			}
 			
+
 		}
 		
 	}

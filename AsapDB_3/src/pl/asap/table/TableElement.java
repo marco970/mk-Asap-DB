@@ -44,6 +44,7 @@ public class TableElement extends JTable implements PropertyChangeListener {
 		TableColumn tc = tcm.getColumn(2);	
 		
 		table.getModel().addTableModelListener(new NoteUpdate(nm));		
+		table.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
 		
 		tc.setCellRenderer(new TextAreaRenderer());
 		tc.setCellEditor(new TextAreaEditor());

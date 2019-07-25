@@ -23,6 +23,7 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 	private JTable lista;
 	private AbstractTableModel data;
 	private JFrame frame;
+	private TableElement te;
 //	private TableGui tGui;
 	
 	public PopupContent(JTable list, AbstractTableModel dane, String[] popupStr)	{
@@ -127,6 +128,7 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 			System.out.println("---------------> "+this.getClass());
 			TableBean tb = new TableBean(nm, 1);
 			TableElement te = new TableElement(nm);
+			this.te = te;
 			tb.addPropertyChangeListener(te);
 	
 			String ZZPZ = data.getValueAt(realSelectedRow , 0)+", "+data.getValueAt(realSelectedRow , 1);
@@ -146,6 +148,12 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 			model.deleteNote(row);
 //			new NoteDelete(model.getNote(), model.getNoteId(row));
 			
+		}
+		if (u.equals("save"))	{
+			NotesModel model = (NotesModel) lista.getModel();
+			int row = lista.convertRowIndexToModel(lista.getSelectedRow());
+			System.out.println("----------sav------->"+row);
+			te.getCellEditor().stopCellEditing();
 		}
 	}
 
