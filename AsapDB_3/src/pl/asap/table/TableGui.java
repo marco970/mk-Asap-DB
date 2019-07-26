@@ -29,7 +29,7 @@ public class TableGui extends JFrame implements ActionListener{
 		
 	private TableGui(TableBean tb, TableElement te, int idPostepowanie)	{
 		super("Notatki - "+idPostepowanie);
-		System.out.println("---> "+this.getClass());
+//		System.out.println("---> "+this.getClass());
 		this.tb = tb;
 		this.te = te;
 		this.idPostepowanie = idPostepowanie;
@@ -37,14 +37,11 @@ public class TableGui extends JFrame implements ActionListener{
 
             @Override
             public void windowClosing(WindowEvent e) {
-//                System.out.println("A is closing");
             }
 
             @Override
             public void windowClosed(WindowEvent e) {
-//                System.out.println("A has closed");
                 checkIfOpen.remove(TableGui.this.idPostepowanie);
-//                showOpenWindows();
             }
 
         });
@@ -81,12 +78,6 @@ public class TableGui extends JFrame implements ActionListener{
 		}
 		else return null;
 	}
-//	private static void showOpenWindows()	{
-//		for (Integer el: checkIfOpen)	{
-//		System.out.print(el+", ");
-//		}
-//	}
-	
 	
 	public void doMassAddMenu(JMenuBar mb, String...args)	{
 		JMenu menu = new JMenu(args[0]);
@@ -108,26 +99,19 @@ public class TableGui extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("dodaj nową notatkę")) {
 			System.out.println("-------abc--------> "+this.getClass());
-//			System.out.println("z komendą działa");
 			NotesModel nm = tb.getAtm();
 			System.out.println("-----nm1---> "+nm.getRowCount());
 			nm.newNote();
 			NotesModel nm2 = new NotesModel(idPostepowanie);
 			System.out.println("-----nm2---> "+nm2.getRowCount());
 			tb.setAtm(nm2);
-//			notesModel.newNote();
 		}
 		
 		if (e.getActionCommand().equals("zapisz bierzącą notatkę")) { //to nie działa
-//			FocusManager focusMan = FocusManager.getCurrentManager();
-//			focusMan.focusNextComponent();			//moze dlatego, ze nie ma 
-//			transferFocus();
-//			int col = te.getSelectedColumn()+1;
-//			int row = te.getSelectedRow();
-//			te.changeSelection(row, 0, true, false);
-			if (!te.equals(null))	{
-				if (!te.getCellEditor().equals(null)) te.getCellEditor().stopCellEditing();
+			if (te.getCellEditor()!=null) {
+				te.getCellEditor().stopCellEditing();
 			}
+			
 			
 
 		}

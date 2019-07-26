@@ -11,7 +11,6 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.KeyStroke;
@@ -32,19 +31,14 @@ public class EkranGlowny implements ActionListener {
 	private JMenuBar menuBar;
 	private MainTableModel data;
 	private JTable lista;
-	private JMenu raport=null;
+
 	private ImageIcon img = new ImageIcon("gui-elements/face1.png");
 
-	private String[] start = {"Start", "Nowe postępowanie", "Raport miesięczny", "Exit"};
+	private String[] start = {"Start", "Nowe postępowanie", "Czas pracy","Raport miesięczny", "Exit"};
 	private String[] sort = {"Sort","Nieaktywne", "Aktywne","Zawieszone", "Zakończone", "Wszystkie"};
-	private String[] toDo = {"ToDo", "Lista", "Notatki"};
-	private String[] notatki = {"Notatki","Nowa notatka","Edytuj"};
+	private String[] toDo = {"ToDo", "Otwarte", "Wszystkie", "Zamknięte"};
+
 	private String[] popupStr = {"modyfikacja", "zmień daty", "zakończ postępowanie", "zawieś postepowanie", "otwórz folder","notatki"};
-	
-	private static String[] nazwaMies = { "styczeń", "luty", "marzec", "kwiecień",
-            "maj", "czerwiec", "lipiec", "sierpień",
-            "wrzesień", "październik", "listopad", "grudzień"
-          };
 	
 	//sortowanie filtrowanie
 	TableRowSorter<MainTableModel> sorter;
@@ -53,19 +47,11 @@ public class EkranGlowny implements ActionListener {
 	AbstractTableModel dataModel;
 	DBConnect dbConnect;
 	
-	private class CloseListener implements ActionListener{	//czy to jest potrzebne?
-	    @Override
-	    public void actionPerformed(ActionEvent e) {
-	        
-	        System.exit(0);
-	    }
-	}
+
 	
 	public EkranGlowny(AbstractTableModel dataModel)	{ //do wywalenia
 		
 		this.dataModel = dataModel;
-		//img = new ImageIcon("/gui-elements/sleepy-worker-at-work.png");
-
 		SwingUtilities.invokeLater(new Runnable() {
 		      @Override
 		      public void run() {
@@ -78,8 +64,6 @@ public class EkranGlowny implements ActionListener {
 		this.dbConnect = dbConnect;
 		MainTableModel dane = new MainTableModel();
 		data = dane;
-		//img = new ImageIcon("gui-elements/sleepy-worker-at-work.png");
-
 		SwingUtilities.invokeLater(new Runnable() {
 		      @Override
 		      public void run() {
@@ -90,15 +74,6 @@ public class EkranGlowny implements ActionListener {
 	
 	public void createGui(String tytul)	{
 
-		int i = data.getRowCount();
-		int j = data.getColumnCount();
-		
-//		for(int m = 0; m<=i-1; m++)	{
-//			for (int n =0; n<=j-1; n++)	{
-//				if (n==0)	{	
-//				}
-//			}
-//		}	
 		eg = new JFrame("ASap - Lista Postępowań");
 		
 		width = data.getColumnCount()*100;
@@ -140,6 +115,7 @@ public class EkranGlowny implements ActionListener {
 		
 		doMassAddMenu(menuBar, start);
 		doMassAddMenu(menuBar, sort);
+		doMassAddMenu(menuBar, toDo);
 
 		eg.setJMenuBar(menuBar);
 		
