@@ -1,4 +1,4 @@
-package pl.test.table;
+package pl.asap.table;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;

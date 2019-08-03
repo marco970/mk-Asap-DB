@@ -1,4 +1,4 @@
-package pl.test.table;
+package pl.asap.table;
 
 import java.awt.Point;
 import java.awt.event.MouseAdapter;

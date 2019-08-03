@@ -1,4 +1,4 @@
-package pl.test.table;
+package pl.asap.table;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
