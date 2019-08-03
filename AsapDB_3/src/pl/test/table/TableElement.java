@@ -48,7 +48,7 @@ public class TableElement extends JTable implements PropertyChangeListener {
 		tc.setCellRenderer(new TextAreaRenderer(nm));
 		tc.setCellEditor(new TextAreaEditor());
 //		tcCheckBox.setCellRenderer(new CheckBoxRenderer(nm.get));
-		table.revalidate();
+		table.revalidate();	//czy to potrzebne?
 	}
 
 }
