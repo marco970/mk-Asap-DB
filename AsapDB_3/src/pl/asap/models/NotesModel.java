@@ -7,9 +7,9 @@ import java.util.Date;
 import javax.swing.table.AbstractTableModel;
 
 import pl.asap.entity.Notes;
-import pl.asap.transactions.AddNewNote;
-import pl.asap.transactions.NoteDelete;
-import pl.asap.transactions.ReadNotes;
+import pl.asap.transactions.notes.NoteDelete;
+import pl.asap.transactions.notes.NoteNew;
+import pl.asap.transactions.notes.NoteRead;
 
 @SuppressWarnings("serial")
 public class NotesModel extends AbstractTableModel   {
@@ -20,12 +20,12 @@ public class NotesModel extends AbstractTableModel   {
 	private Object[][] dane;
 	private Color[] rowColor;
 	private String[] columns = {"data utworzenia", "data modyfikacji", "notatka", "zamknięta"};
-	private ReadNotes rn;
+	private NoteRead rn;
 	
 	public NotesModel(int idPostepowanie) {
 			
 			this.idPostepowanie = idPostepowanie;
-			rn = new ReadNotes(idPostepowanie); //to do modelu		
+			rn = new NoteRead(idPostepowanie); //to do modelu		
 			this.notes=rn.getNotes();
 			rowColor = new Color[getRowCount()];
 			dane = new Object[notes.size()][columns.length];
@@ -75,7 +75,7 @@ public class NotesModel extends AbstractTableModel   {
 		return row;
 	}
 	public int getNoteId(int row)	{
-		rn = new ReadNotes(idPostepowanie); //to do modelu	
+		rn = new NoteRead(idPostepowanie); //to do modelu	
 		notes=rn.getNotes();
 	//    	System.out.println("uwaga" + row);
 	    return notes.get(row).getNoteId();
@@ -106,7 +106,7 @@ public class NotesModel extends AbstractTableModel   {
 		Date date = new Date(System.currentTimeMillis());  
 		String data = formatter.format(date);  
 		Notes nowaNotka = new Notes("",data, data, false);
-		new AddNewNote(idPostepowanie, nowaNotka);
+		new NoteNew(idPostepowanie, nowaNotka);
 
 	}
 	
@@ -177,7 +177,7 @@ public class NotesModel extends AbstractTableModel   {
 		}
 		dane=daneUpd;
 //		System.out.println("teraz wierszy jest "+dane.length);
-		new AddNewNote(idPostepowanie, newNote);
+		new NoteNew(idPostepowanie, newNote);
 		fireTableRowsInserted(n-1, n-1);
 		fireTableDataChanged();
 

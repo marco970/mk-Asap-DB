@@ -1,10 +1,11 @@
-package pl.asap.transactions;
+package pl.asap.transactions.notes;
 
 import javax.persistence.Query;
 import javax.swing.JOptionPane;
 
 import pl.asap.entity.EntityBase;
 import pl.asap.models.NotesModel;
+import pl.asap.transactions.TransBlank;
 
 public class NoteDelete extends TransBlank {
 	

@@ -1,4 +1,4 @@
-package pl.asap.transactions;
+package pl.asap.transactions.notes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ import org.hibernate.cfg.Configuration;
 import pl.asap.entity.Lista;
 import pl.asap.entity.Notes;
 
-public class ReadNotes {
+public class NoteRead {
 	
 	private static int idPostepowanie;
 	private ArrayList<Notes> notes;
@@ -20,7 +20,7 @@ public class ReadNotes {
 	
 	
 
-	public ReadNotes(int idPostepowanie) {
+	public NoteRead(int idPostepowanie) {
 		this.idPostepowanie = idPostepowanie;
 		notes = new ArrayList<Notes>();
 		Configuration conf = new Configuration();
@@ -49,14 +49,5 @@ public class ReadNotes {
 		return notes;
 	}
 
-
-
-	public static void main(String[] args) {
-		
-		new ReadNotes(10);
-		
-
-
-	}
 
 }

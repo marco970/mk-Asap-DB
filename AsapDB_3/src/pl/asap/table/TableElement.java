@@ -10,7 +10,7 @@ import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 
 import pl.asap.models.NotesModel;
-import pl.asap.transactions.NoteUpdate;
+import pl.asap.transactions.notes.NoteUpdate;
 
 @SuppressWarnings("serial")
 public class TableElement extends JTable implements PropertyChangeListener {

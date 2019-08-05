@@ -2,11 +2,12 @@ package pl.asap.table;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import pl.asap.models.NotesModel;
 
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
+
+import pl.asap.models.NotesModel;
 
 public class TableBean implements TableModelListener {
 	

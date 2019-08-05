@@ -1,4 +1,4 @@
-package pl.asap.transactions;
+package pl.asap.transactions.notes;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

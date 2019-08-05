@@ -1,4 +1,4 @@
-package pl.asap.transactions;
+package pl.asap.transactions.notes;
 
 import javax.persistence.Query;
 
@@ -9,10 +9,10 @@ import org.hibernate.cfg.Configuration;
 import pl.asap.entity.Lista;
 import pl.asap.entity.Notes;
 
-public class AddNewNote {
+public class NoteNew {
 	
 	
-	public AddNewNote(int idPostepowanie, Notes note)	{
+	public NoteNew(int idPostepowanie, Notes note)	{
 			
 			Configuration conf = new Configuration();
 			conf.configure("hibernate.cfg.xml");

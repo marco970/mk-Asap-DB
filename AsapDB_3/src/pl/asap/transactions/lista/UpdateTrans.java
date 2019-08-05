@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.asap.transactions;
+package pl.asap.transactions.lista;
 
 import org.hibernate.query.Query;
 
 import pl.asap.entity.EntityBase;
 import pl.asap.entity.Lista;
 import pl.asap.entity.Notes;
+import pl.asap.transactions.TransBlank;
 
 /**
  *

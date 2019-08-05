@@ -11,10 +11,10 @@ import pl.asap.entity.Notes;
 
 public abstract class TransBlank {
 	
-		final SessionFactory factory;
-		final Session session;
+		protected final SessionFactory factory;
+		protected final Session session;
 		
-		final Object bean;
+		protected final Object bean;
 		final Object[] array;
 	
 	public TransBlank(Object bean)		{

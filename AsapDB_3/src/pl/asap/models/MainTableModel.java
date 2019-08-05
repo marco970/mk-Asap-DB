@@ -9,9 +9,9 @@ import javax.swing.table.AbstractTableModel;
 
 import pl.asap.DB.DBConnect;
 import pl.asap.entity.Lista;
-import pl.asap.transactions.ReadTrans;
-import pl.asap.transactions.SaveTrans;
-import pl.asap.transactions.UpdateTrans;
+import pl.asap.transactions.lista.ReadTrans;
+import pl.asap.transactions.lista.SaveTrans;
+import pl.asap.transactions.lista.UpdateTrans;
 
 public class MainTableModel extends AbstractTableModel {
 	
