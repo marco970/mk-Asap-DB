@@ -6,8 +6,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import pl.asap.entity.Config;
 import pl.asap.entity.Lista;
 import pl.asap.entity.Notes;
+import pl.asap.entity.TimeSheetEntity;
 
 public class NoteNew {
 	
@@ -15,9 +17,10 @@ public class NoteNew {
 	public NoteNew(int idPostepowanie, Notes note)	{
 			
 			Configuration conf = new Configuration();
-			conf.configure("hibernate.cfg.xml");
-			conf.addAnnotatedClass(Lista.class);
-			conf.addAnnotatedClass(Notes.class);
+			Config config = new Config();
+			conf.configure(config.getHibernateXML());
+			config.setAnnotatedClass(conf);
+			
 			SessionFactory factory = conf.buildSessionFactory();
 			Session session = factory.getCurrentSession();		
 			String getPostepowanie = "select c from Lista c where c.idPostepowanie="+idPostepowanie;

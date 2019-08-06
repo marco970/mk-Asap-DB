@@ -24,6 +24,14 @@ public class TimeSheetEntity extends EntityBase {
 	@JoinColumn(name = "id_postepowanie")
 	private Lista lista;
 	
+	public Lista getLista() {
+		return lista;
+	}
+
+	public void setLista(Lista lista) {
+		this.lista = lista;
+	}
+
 	@Column(name = "sap_nr")
 	private String sapNr;
 	
@@ -32,6 +40,10 @@ public class TimeSheetEntity extends EntityBase {
 	
 	@Column(name = "time_passed")
 	private Integer timePassed;
+	
+	public TimeSheetEntity()	{
+		
+	}
 
 	public TimeSheetEntity(Integer entryId, String sapNr, String dateEntry, Integer timePassed) {
 		this.entryId = entryId;

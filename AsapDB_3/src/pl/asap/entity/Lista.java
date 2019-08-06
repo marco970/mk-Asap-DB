@@ -26,6 +26,7 @@ public class Lista extends EntityBase {
 	@Column(name="WP")
 	private String WP;
 	
+
 	@Column(name="DK")
 	private String DK;
 	
@@ -61,6 +62,11 @@ public class Lista extends EntityBase {
 	
 	@OneToMany(mappedBy = "lista", cascade = CascadeType.ALL)
 	private List<Notes> notes;
+	
+	@OneToMany(mappedBy = "lista", cascade = CascadeType.ALL)
+	private List<TimeSheetEntity> entries;
+	
+	
 
 	public Integer getIdPostepowanie() {
 		return idPostepowanie;
@@ -165,6 +171,21 @@ public class Lista extends EntityBase {
 		notes.add(note);
 		note.setLista(this);
 	}
+	public List<TimeSheetEntity> getEntries() {
+		return entries;
+	}
+	public void setEntries(List<TimeSheetEntity> entries) {
+		this.entries = entries;
+	}
+	
+	public void addEntry(TimeSheetEntity entry)	{
+		if (entries==null)	{
+			 entries=new ArrayList<>();
+		}
+		entries.add(entry);
+		entry.setLista(this);
+	}
+	
 	public Object[] getArray()	{
 		//zwraca nazwy pól klasy entity
 		Class c = getClass();

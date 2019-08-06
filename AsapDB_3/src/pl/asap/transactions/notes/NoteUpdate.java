@@ -36,11 +36,11 @@ public class NoteUpdate implements TableModelListener {
 	public void carryOutUpdate() {
 		
 		config = new Config();
-		hibernateConf = config.getHibernateXML();
+
 		conf = new Configuration();
-		conf.configure(hibernateConf);
-		conf.addAnnotatedClass(Lista.class);
-		conf.addAnnotatedClass(Notes.class);
+		conf.configure(config.getHibernateXML());
+		config.setAnnotatedClass(conf);
+
 		factory = conf.buildSessionFactory();
 		session = factory.getCurrentSession();
 		

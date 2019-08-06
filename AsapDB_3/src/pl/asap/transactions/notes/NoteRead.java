@@ -9,8 +9,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import pl.asap.entity.Config;
 import pl.asap.entity.Lista;
 import pl.asap.entity.Notes;
+import pl.asap.entity.TimeSheetEntity;
+import pl.asap.transactions.timesheet.TimeSheetRead;
 
 public class NoteRead {
 	
@@ -24,9 +27,9 @@ public class NoteRead {
 		this.idPostepowanie = idPostepowanie;
 		notes = new ArrayList<Notes>();
 		Configuration conf = new Configuration();
-		conf.configure("hibernate.cfg.xml");
-		conf.addAnnotatedClass(Lista.class);
-		conf.addAnnotatedClass(Notes.class);
+		Config config = new Config();
+		conf.configure(config.getHibernateXML());
+		config.setAnnotatedClass(conf);
 
 		SessionFactory factory = conf.buildSessionFactory();
 		Session session = factory.getCurrentSession();
@@ -34,13 +37,15 @@ public class NoteRead {
 		session.beginTransaction();		
 		Query query = session.createQuery(getPostepowanie);
 		Lista lista = (Lista) query.getSingleResult();		
-		//System.out.println(lista.toString());
+		System.out.println(lista.toString());
 		
 		for(Notes note: lista.getNotes() )	{
 			
 			notes.add(note);
 
 		}
+		
+		System.out.println(notes.toString());
 		
 		session.getTransaction().commit();
 		factory.close();
@@ -49,5 +54,8 @@ public class NoteRead {
 		return notes;
 	}
 
+	public static void main(String[] args) {
+		new NoteRead(45);
+	}
 
 }
