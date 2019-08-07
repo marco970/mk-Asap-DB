@@ -29,13 +29,13 @@ public class UpdateTrans extends TransBlank {
     	if (field.equals("isOpen")) newValueModified = Integer.valueOf((String) newValue);
     	else newValueModified = newValue.toString();
         String update = "update "+str+" set "+ field+"=:"+field+ clause;
-        System.out.println(">>>>>>>>>  str= "+str  + " field= "+field+ " newValue= "+newValue.toString());
-        System.out.println(update+" <<******** val= "+newValue+" id= "+id);        
+//        System.out.println(">>>>>>>>>  str= "+str  + " field= "+field+ " newValue= "+newValue.toString());
+//        System.out.println(update+" <<******** val= "+newValue+" id= "+id);        
         query = session.createQuery(update);
         query.setParameter("id", id);
         query.setParameter((String) field, newValueModified);
         int result = query.executeUpdate();
-        System.out.println("<><><>"+result);
+//        System.out.println("<><><>"+result);
     }
     public void upadateCell(Object field, Object newValue, int id)	{
     	
@@ -48,12 +48,12 @@ public class UpdateTrans extends TransBlank {
     
     public void updateRow(Object[] savedRow, int id)	{
     	
-    	System.out.println("UpdateTrans----updateRow---id---- "+id);
+//    	System.out.println("UpdateTrans----updateRow---id---- "+id);
     	session.beginTransaction();
     	
     	Object[] a = ((EntityBase) bean).getArray();
 
-    	for (int i = 0; i<=a.length-2; i++)	{
+    	for (int i = 0; i<=a.length-3; i++)	{
     		if (savedRow[i]==null) savedRow[i] = "";
     		updateLogic(" where id_postepowanie=:id", a[i], savedRow[i], id);   		
     	}
@@ -70,7 +70,7 @@ public class UpdateTrans extends TransBlank {
     	for (int i=0; i<a.length; i++)	{
     		if (i!=1) {
 				if (b[i] == null)	b[i] = "";
-				System.out.println("^^^"+b[i].toString());
+//				System.out.println("^^^"+b[i].toString());
 				updateLogic(" where note_id=:id", a[i], b[i], notkaId);
 			}
     	}

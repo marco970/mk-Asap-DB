@@ -45,8 +45,8 @@ public class TimeSheetEntity extends EntityBase {
 		
 	}
 
-	public TimeSheetEntity(Integer entryId, String sapNr, String dateEntry, Integer timePassed) {
-		this.entryId = entryId;
+	public TimeSheetEntity(String sapNr, String dateEntry, Integer timePassed) {
+		
 		this.sapNr = sapNr;
 		this.dateEntry = dateEntry;
 		this.timePassed = timePassed;

@@ -12,6 +12,7 @@ import pl.asap.entity.Lista;
 import pl.asap.transactions.lista.ReadTrans;
 import pl.asap.transactions.lista.SaveTrans;
 import pl.asap.transactions.lista.UpdateTrans;
+import pl.asap.transactions.timesheet.TimeSheetEntryNew;
 
 public class MainTableModel extends AbstractTableModel {
 	
@@ -62,13 +63,11 @@ public class MainTableModel extends AbstractTableModel {
 	public Integer getId(int rowNr)	{
 		int id;
 		Object[] cids = new ReadTrans(lista).getIDs();
-		id = (Integer) cids[rowNr];
-//		if (rowNr>0)	{
-//			id = (Integer) cids[rowNr];
-//		}else
-//			id = (Integer) cids[rowNr];
-//		System.out.println("MTM-getId----- row "+ rowNr + " id "+ id);
-//		System.out.println("MTM-getId----- ids length " + (Integer) cids.length);
+//		System.out.println("n -> "+rowNr+ " il.pozycji w DB -> "+cids.length+" max index w DB -> "+cids[cids.length-1]);
+		if (rowNr<=getRowCount()) {
+			id = (Integer) cids[rowNr];
+		}
+		else id = (Integer) cids[cids.length-1];
 		return id;
 	}
 	
@@ -168,6 +167,7 @@ public class MainTableModel extends AbstractTableModel {
 	}
 	public void recordAdd(Object[] savedRow) {	//--zapis do DB
 		int n = getRowCount()+1;
+		
 		//System.out.println("recordAdd, n: "+n + " ilość wierszy :"+getRowCount());
 		Object[][] daneUpd = new Object[n][nazwyKolumn.length];
 		for (int i = 0; i<= n-1; i++)	{
@@ -179,13 +179,33 @@ public class MainTableModel extends AbstractTableModel {
 		st.saveRow(savedRow);
 		fireTableRowsInserted(n-1, n-1);
 		fireTableDataChanged();
-
+		Object[] cids = new ReadTrans(lista).getIDs();
+		int a = (int) cids[cids.length-1];
+		System.out.println("idPostepowanie----> "+a);
+		int j=0;
+		for (Object el: savedRow)	{
+			System.out.println("--> "+el.toString()+" -- "+j);
+			j++;
+		}
+		new TimeSheetEntryNew(a, (String) savedRow[0], (String) savedRow[10], 1);
 	}
 	public void recordUpdate(Object[] savedRow, int rowNr) { //--zapis do DB
 		ArrayList<Object[]> rowList = new ArrayList<Object[]>();
+		
 		for (int i = 0; i<=getRowCount()-1; i++)	{
 			rowList.add(dane[i]);
+			
 		}
+		String nrSap = "";
+		String dateEntry = "";
+		for (int i=0; i<savedRow.length; i++)	{
+			if (!savedRow[i].equals(dane[rowNr][i]) && i<=3)	{
+				nrSap = (String) savedRow[i];
+				dateEntry = (String) savedRow[i+10];
+			}
+		}
+		
+		System.out.println("nrSap -> "+nrSap+" --> "+dateEntry);
 //		System.out.println("MainTabModel ----- recordUpdate rowNr: "+rowNr + " ----id: "+getId(rowNr));
 		rowList.set(rowNr, savedRow);
 		Object[][] daneUpd = new Object[rowList.size()][nazwyKolumn.length];

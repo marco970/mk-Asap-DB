@@ -351,6 +351,7 @@ public class OpForm2 implements ActionListener, FocusListener {
 			}
 
 			model.recordUpdate(savedRow, rowNr);
+			if (checkIfOpen.contains(rowNr)) checkIfOpen.remove(rowNr);
 
 			opForm.dispose();
 		}
