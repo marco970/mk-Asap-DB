@@ -1,4 +1,4 @@
-package pl.asap.table;
+package pl.asap.note;
 
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
@@ -10,8 +10,6 @@ import javax.swing.table.AbstractTableModel;
 public class NotesMouseListener extends MouseAdapter{
 	private JTable table;
 	private AbstractTableModel model; 
-	
-
 
 	public NotesMouseListener(JTable table, AbstractTableModel model) {
 		super();

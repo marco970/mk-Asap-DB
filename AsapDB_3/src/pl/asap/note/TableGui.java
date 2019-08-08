@@ -1,4 +1,4 @@
-package pl.asap.table;
+package pl.asap.note;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -46,7 +46,7 @@ public class TableGui extends JFrame implements ActionListener{
 		JScrollPane scrollPane = new JScrollPane(te);
 		add(scrollPane, BorderLayout.CENTER);
 
-		PopupContent pc = new PopupContent(te, tb.getAtm(), new String[]{"delete"});
+		PopupContent pc = new PopupContent(te, tb.getAtm(), new String[]{"delete", "edit"});
 		NotesMouseListener nml = new NotesMouseListener(te, tb.getAtm());
 		te.addMouseListener(nml);
 		te.setComponentPopupMenu(pc);

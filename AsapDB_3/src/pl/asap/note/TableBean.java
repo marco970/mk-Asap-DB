@@ -1,4 +1,4 @@
-package pl.asap.table;
+package pl.asap.note;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;

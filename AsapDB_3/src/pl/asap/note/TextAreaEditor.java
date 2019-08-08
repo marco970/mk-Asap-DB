@@ -1,4 +1,4 @@
-package pl.asap.table;
+package pl.asap.note;
 
 import java.awt.Component;
 
@@ -19,7 +19,6 @@ public class TextAreaEditor extends DefaultCellEditor {
 	      textarea = new JTextArea(); 
 	      textarea.setLineWrap(true);
 	      textarea.setWrapStyleWord(true);
-//	      textarea.setBorder(new TitledBorder("This is a JTextArea"));
 	      scrollpane.getViewport().add(textarea);
 	   }
 	  

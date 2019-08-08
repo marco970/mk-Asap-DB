@@ -26,9 +26,9 @@ import javax.swing.text.JTextComponent;
 
 import net.miginfocom.swing.MigLayout;
 import pl.asap.models.MainTableModel;
-import pl.asap.table.TableBean;
-import pl.asap.table.TableElement;
-import pl.asap.table.TableGui;
+import pl.asap.note.TableBean;
+import pl.asap.note.TableElement;
+import pl.asap.note.TableGui;
 
 import javax.swing.JTextArea;
 import javax.swing.JTextField;

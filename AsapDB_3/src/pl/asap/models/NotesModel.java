@@ -10,6 +10,8 @@ import pl.asap.entity.Notes;
 import pl.asap.transactions.notes.NoteDelete;
 import pl.asap.transactions.notes.NoteNew;
 import pl.asap.transactions.notes.NoteRead;
+import pl.asap.transactions.notes.NoteUpdate;
+import pl.asap.transactions.notes.NoteUpdate2;
 
 @SuppressWarnings("serial")
 public class NotesModel extends AbstractTableModel   {
@@ -131,7 +133,7 @@ public class NotesModel extends AbstractTableModel   {
     public boolean isCellEditable(int row, int col)
     {
     	if (col==3) return true;
-    	if (col==2 && !((Boolean) getValueAt(row,3)).booleanValue()) return true;
+//    	if (col==2 && !((Boolean) getValueAt(row,3)).booleanValue()) return true;
        else return false;
     }
     public String getColumnName(int i)	{
@@ -145,7 +147,16 @@ public class NotesModel extends AbstractTableModel   {
 	public Class<?> getColumnClass(int column) {
         return (getValueAt(0, column).getClass());
     }
-    public void updateNoFire(Object value, int row, int col) {
+	public void updateNote (Object value, int row, int col) {	// dostosować
+		
+		NoteUpdate2 nu2 = new NoteUpdate2(this);
+//		nu2.updateNote(noteId, note, dateModified); //-dostosować 
+		
+		
+		fireTableCellUpdated(row, col);
+		fireTableDataChanged();
+	}
+    public void updateNoFire(Object value, int row, int col) {	//do wywalenia
     	dane[row][col] = value;
     }
     public void newNote()	{

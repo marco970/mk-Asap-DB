@@ -13,9 +13,10 @@ import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import pl.asap.models.MainTableModel;
 import pl.asap.models.NotesModel;
-import pl.asap.table.TableBean;
-import pl.asap.table.TableElement;
-import pl.asap.table.TableGui;
+import pl.asap.note.NoteEditForm;
+import pl.asap.note.TableBean;
+import pl.asap.note.TableElement;
+import pl.asap.note.TableGui;
 
 @SuppressWarnings("serial")
 public class PopupContent extends JPopupMenu implements PropertyChangeListener, ActionListener {
@@ -145,6 +146,13 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 			System.out.println("----------del------->"+row);
 			model.deleteNote(row);
 //			new NoteDelete(model.getNote(), model.getNoteId(row));
+			
+		}
+		if (u.equals("edit"))	{
+			System.out.println("odpalam edycję notatki");
+			NotesModel model = (NotesModel) lista.getModel();
+			int row = lista.convertRowIndexToModel(lista.getSelectedRow());
+			NoteEditForm.getInstance("", row, model);
 			
 		}
 	}

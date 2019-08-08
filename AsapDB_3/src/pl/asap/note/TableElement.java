@@ -1,4 +1,4 @@
-package pl.asap.table;
+package pl.asap.note;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -29,9 +29,7 @@ public class TableElement extends JTable implements PropertyChangeListener {
 		tcm.getColumn(3).setPreferredWidth(30);
 		
 	}
-	
-	
-	
+
 	@Override
 	public void propertyChange(PropertyChangeEvent e) {
 		System.out.println("-------x--------> "+this.getClass());
@@ -43,7 +41,7 @@ public class TableElement extends JTable implements PropertyChangeListener {
 		TableColumnModel tcm = table.getColumnModel();	
 		TableColumn tc = tcm.getColumn(2);	
 //		TableColumn tcCheckBox = tcm.getColumn(3);	
-		table.getModel().addTableModelListener(new NoteUpdate(nm));		
+//		table.getModel().addTableModelListener(new NoteUpdate(nm));		
 		
 		tc.setCellRenderer(new TextAreaRenderer(nm));
 		tc.setCellEditor(new TextAreaEditor());

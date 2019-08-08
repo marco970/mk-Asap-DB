@@ -1,4 +1,4 @@
-package pl.asap.table;
+package pl.asap.note;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -31,7 +31,6 @@ public class TextAreaRenderer extends JScrollPane implements TableCellRenderer, 
       textarea = new JTextArea();
       textarea.setLineWrap(true);
       textarea.setWrapStyleWord(true);
-//      textarea.setBorder(new TitledBorder("This is a JTextArea"));
       
       getViewport().add(textarea);
    }
@@ -40,28 +39,15 @@ public class TextAreaRenderer extends JScrollPane implements TableCellRenderer, 
                                   boolean isSelected, boolean hasFocus,
                                   int row, int column)
    {
-//      if (isSelected) {
-//         setForeground(table.getSelectionForeground());
-//         setBackground(table.getSelectionBackground());
-//         textarea.setForeground(table.getSelectionForeground());
-//         textarea.setBackground(table.getSelectionBackground());
-//      } else {
-//         setForeground(table.getForeground());
-//         setBackground(table.getBackground());
-//         textarea.setForeground(table.getForeground());
-//         textarea.setBackground(table.getBackground());
-//      }
-//	  table.getModel().ge.setBackground(Color.RED);
+
       textarea.setText(value.toString());
       table.setRowHeight(row, getPreferredSize().height+10);
       textarea.setCaretPosition(0);	//dopracować
-//      if ((boolean) nm.getValueAt(row, 3))	textarea.setBackground(Color.LIGHT_GRAY);
-////      textarea.setEditable(false); - tu się nie da tego zrobić
       return this;
    }
 
 @Override
-public void tableChanged(TableModelEvent e) {
+public void tableChanged(TableModelEvent e) {		//po co to?
 	System.out.println("--------rendererTabChanged--------->"+e.getSource().toString());
 	
 }
