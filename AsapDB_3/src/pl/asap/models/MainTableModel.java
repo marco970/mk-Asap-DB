@@ -194,17 +194,17 @@ public class MainTableModel extends AbstractTableModel {
 		
 		for (int i = 0; i<=getRowCount()-1; i++)	{
 			rowList.add(dane[i]);
-			
 		}
+		
 		String nrSap = "";
 		String dateEntry = "";
 		for (int i=0; i<savedRow.length; i++)	{
 			if (!savedRow[i].equals(dane[rowNr][i]) && i<=3)	{
-				nrSap = (String) savedRow[i];
+				if (i==2) nrSap = (String) savedRow[i-1];
+				else nrSap = (String) savedRow[i];
 				dateEntry = (String) savedRow[i+10];
 			}
 		}
-		
 		System.out.println("nrSap -> "+nrSap+" --> "+dateEntry);
 //		System.out.println("MainTabModel ----- recordUpdate rowNr: "+rowNr + " ----id: "+getId(rowNr));
 		rowList.set(rowNr, savedRow);
@@ -212,17 +212,16 @@ public class MainTableModel extends AbstractTableModel {
 		int j = 0;
 		for (Object[] el: rowList)	{
 			daneUpd[j]=el;
-			
 			j++;
 		}
-//		for (Object el: savedRow)	{
-//			System.out.print(el+", ");
-//		}
+
 		dane=daneUpd;
 		fireTableRowsUpdated(rowNr, rowNr);
 		fireTableDataChanged();	
 		UpdateTrans ut = new UpdateTrans(lista);
 		ut.updateRow(savedRow, getId(rowNr));
+		
+		if (!"".equals(nrSap)) new TimeSheetEntryNew(getId(rowNr), nrSap, dateEntry, 1);
 
 	}
 	public void cellUpdate(Object value, int rowNr, int kolNr)	{ //--zapis do DB
