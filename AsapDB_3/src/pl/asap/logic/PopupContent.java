@@ -24,13 +24,15 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 	private JTable lista;
 	private AbstractTableModel data;
 	private JFrame frame;
-	private String ZZPZ = "";
+	private String ZZPZ;
 	
+
 	public PopupContent(JTable list, AbstractTableModel dane, String[] popupStr)	{
 		super();
 		lista=list;
 		data = dane;
 		doMassAddMenu(this, popupStr);		
+		setZZPZ("");
 	}	
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
@@ -66,6 +68,13 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 		}		
 		return path;
 	}
+	public String getZZPZ() {
+		return ZZPZ;
+	}
+	public void setZZPZ(String zZPZ) {
+		ZZPZ = zZPZ;
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String u = e.getActionCommand();
@@ -114,11 +123,13 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 			int realSelectedRow = lista.convertRowIndexToModel(lista.getSelectedRow());
 			final int idPostepowanie = ((MainTableModel) data).getId(realSelectedRow);
 			NotesModel nm = new NotesModel(idPostepowanie);
-			System.out.println("---------------> "+this.getClass());
+			
 			TableBean tb = new TableBean(nm, 1);
 			TableElement te = new TableElement(nm);
 			tb.addPropertyChangeListener(te);
-			ZZPZ = data.getValueAt(realSelectedRow , 0)+", "+data.getValueAt(realSelectedRow , 1);
+			String post = data.getValueAt(realSelectedRow , 0)+", "+data.getValueAt(realSelectedRow , 1);
+			setZZPZ(post);
+			System.out.println(ZZPZ+" --------112233-------> "+this.getClass());
 			TableGui.getInstance(tb, te, idPostepowanie);
 
 		}
@@ -130,10 +141,12 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 			
 		}
 		if (u.equals("edit"))	{
-			System.out.println("odpalam edycję notatki");
+			int realSelectedRow = lista.convertRowIndexToModel(lista.getSelectedRow());
+			
+			System.out.println("odpalam edycję notatki"+getZZPZ());
 			NotesModel model = (NotesModel) lista.getModel();
-			int row = lista.convertRowIndexToModel(lista.getSelectedRow());
-			NoteEditForm.getInstance(ZZPZ, row, model);
+
+			NoteEditForm.getInstance(getZZPZ(), realSelectedRow, model);
 			
 		}
 	}

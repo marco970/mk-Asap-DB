@@ -1,11 +1,13 @@
 package pl.asap.note;
 
-import java.awt.Panel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -14,17 +16,19 @@ import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
-import pl.asap.logic.OpForm2;
-import pl.asap.models.MainTableModel;
 import pl.asap.models.NotesModel;
 
-public class NoteEditForm extends JFrame {
+public class NoteEditForm extends JFrame implements ActionListener {
 	
 	private static Set<Integer> checkIfOpen = new HashSet<Integer>();
 	
 	private int colCount;
 	private NotesModel model;
 	private int rowNr;
+	
+	private JButton btnSave;
+	private JButton btnCancel;
+	
 	
 	private NoteEditForm(String nazwa, NotesModel model, int rowNr)	{
 		super("Postępowanie "+nazwa);
@@ -67,6 +71,16 @@ public class NoteEditForm extends JFrame {
 		panel.add(new JLabel(model.getValueAt(rowNr, 3).toString()), "cell 1 5");
 		
 		
+		btnSave = new JButton("Zapisz");
+		btnCancel = new JButton("Anuluj");
+		
+		btnSave.addActionListener(this);
+		btnCancel.addActionListener(this);
+		
+		contentPane.add(btnCancel, "cell 0 2");
+		contentPane.add(btnSave, "cell 0 2");
+
+		
 		
 		
 		
@@ -86,6 +100,20 @@ public class NoteEditForm extends JFrame {
 	public static void main(String[] args) {
 		NotesModel nm = new NotesModel(46);
 		getInstance("ABCDE", nm.getRowNr(7), nm);
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getActionCommand().equals("Anuluj"))	{
+			this.dispose(); 
+		}
+		if (e.getActionCommand().equals("Zapisz")) {
+			System.out.println("Zapis");
+			
+			this.dispose();
+		}
+		
 		
 	}
 	
