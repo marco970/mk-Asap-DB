@@ -24,22 +24,19 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 	private JTable lista;
 	private AbstractTableModel data;
 	private JFrame frame;
-//	private TableGui tGui;
+	private String ZZPZ = "";
 	
 	public PopupContent(JTable list, AbstractTableModel dane, String[] popupStr)	{
 		super();
 		lista=list;
 		data = dane;
 		doMassAddMenu(this, popupStr);		
-	}
-	
-	
+	}	
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		this.removeAll();
 		String[] a = (String[]) evt.getNewValue();
 		doMassAddMenu(this, a);
-		
 	}
 	public void doMassAddMenu(JPopupMenu popup, String...args)	{
 		for (int i =0; i<=args.length-1; i++)	{
@@ -58,24 +55,20 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 		String path = "";
 		String numerZZ = data.getValueAt(rowNr, 0).toString().substring(6);
 		FolderCreator folder = new FolderCreator();
-		String myPath = folder.getDefaultPath() + folder.getAktywne();
-		
-		File[] directories = new File(myPath).listFiles(File::isDirectory);
-		
+		String myPath = folder.getDefaultPath() + folder.getAktywne();		
+		File[] directories = new File(myPath).listFiles(File::isDirectory);		
 		if (myPath.length() > 0) {		//
 			for (int i = 0; i <= directories.length - 1; i++) {
 				if (directories[i].toString().substring(myPath.length(), +myPath.length() + 7).equals(numerZZ))	{
 					path = directories[i].toString().substring(myPath.length());
 				}
 			}
-		}
-		
+		}		
 		return path;
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String u = e.getActionCommand();
-	
 		if (u.equals("modyfikacja"))	{
 			int selectedRow = lista.getSelectedRow();
 			int realSelectedRow = lista.convertRowIndexToModel(selectedRow);
@@ -114,45 +107,33 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 			int realSelectedRow = lista.convertRowIndexToModel(lista.getSelectedRow());
 			if (data.getValueAt(realSelectedRow, 4).equals("zakonczone")) {
 				((MainTableModel) data).cellUpdate("aktywne", realSelectedRow, 4);
-				new Zapis((MainTableModel) data);
-				
+				new Zapis((MainTableModel) data);				
 			}
 		}
-		if (u.equals("notatki"))	{
-			
+		if (u.equals("notatki"))	{			
 			int realSelectedRow = lista.convertRowIndexToModel(lista.getSelectedRow());
 			final int idPostepowanie = ((MainTableModel) data).getId(realSelectedRow);
-
 			NotesModel nm = new NotesModel(idPostepowanie);
-
 			System.out.println("---------------> "+this.getClass());
 			TableBean tb = new TableBean(nm, 1);
 			TableElement te = new TableElement(nm);
 			tb.addPropertyChangeListener(te);
-	
-			String ZZPZ = data.getValueAt(realSelectedRow , 0)+", "+data.getValueAt(realSelectedRow , 1);
-//			new NotesScreenTable(nm, ZZPZ);
-			
-//			new TableGui(tb, te, idPostepowanie);
+			ZZPZ = data.getValueAt(realSelectedRow , 0)+", "+data.getValueAt(realSelectedRow , 1);
 			TableGui.getInstance(tb, te, idPostepowanie);
-//			new NotesScreen(ZZPZ, nm, nv, idPostepowanie);
 
 		}
-		if (u.equals("delete"))	{
-			
-			NotesModel model = (NotesModel) lista.getModel();
-			
+		if (u.equals("delete"))	{			
+			NotesModel model = (NotesModel) lista.getModel();			
 			int row = lista.convertRowIndexToModel(lista.getSelectedRow());
 			System.out.println("----------del------->"+row);
 			model.deleteNote(row);
-//			new NoteDelete(model.getNote(), model.getNoteId(row));
 			
 		}
 		if (u.equals("edit"))	{
 			System.out.println("odpalam edycję notatki");
 			NotesModel model = (NotesModel) lista.getModel();
 			int row = lista.convertRowIndexToModel(lista.getSelectedRow());
-			NoteEditForm.getInstance("", row, model);
+			NoteEditForm.getInstance(ZZPZ, row, model);
 			
 		}
 	}

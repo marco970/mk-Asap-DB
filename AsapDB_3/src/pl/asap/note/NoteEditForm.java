@@ -26,8 +26,8 @@ public class NoteEditForm extends JFrame {
 	private NotesModel model;
 	private int rowNr;
 	
-	private NoteEditForm(NotesModel model, int rowNr)	{
-		super("Edycja Notatki");
+	private NoteEditForm(String nazwa, NotesModel model, int rowNr)	{
+		super("Postępowanie "+nazwa);
 		
 		this.model = model;
 		this.rowNr = rowNr;
@@ -78,7 +78,7 @@ public class NoteEditForm extends JFrame {
 	public static synchronized NoteEditForm getInstance(String nazwa, int rowNo, NotesModel mod)	{
 		if (!checkIfOpen.contains(rowNo))	{
 			checkIfOpen.add(rowNo);
-			return new NoteEditForm (mod, rowNo);
+			return new NoteEditForm (nazwa, mod, rowNo);
 		}
 		else return null;
 	}
