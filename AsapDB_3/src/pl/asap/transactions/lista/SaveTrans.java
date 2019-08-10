@@ -1,9 +1,10 @@
-package pl.asap.transactions;
+package pl.asap.transactions.lista;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import pl.asap.entity.Lista;
+import pl.asap.transactions.TransBlank;
 
 public class SaveTrans extends TransBlank {
 	
@@ -39,7 +40,7 @@ public class SaveTrans extends TransBlank {
 //			fieldLogic((String) el, values[i].toString());
 //			i++;
 //		}
-		for(int i=0; i<=array.length-2; i++)	{
+		for(int i=0; i<=values.length-2; i++)	{
 			fieldLogic((String) array[i], values[i].toString());
 		}
 		

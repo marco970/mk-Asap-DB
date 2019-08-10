@@ -1,10 +1,11 @@
-package pl.asap.transactions;
+package pl.asap.transactions.lista;
 
 import java.util.List;
 
 import org.hibernate.query.Query;
 
 import pl.asap.entity.Lista;
+import pl.asap.transactions.TransBlank;
 
 public class ReadTrans extends TransBlank{
 	

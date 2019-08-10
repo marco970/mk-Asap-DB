@@ -20,7 +20,7 @@ create table if not exists time_sheet(
   `date_entry` varchar(12) NOT NULL,
   `time_passed` int(11) NOT NULL,
   PRIMARY KEY (`entry_id`),
-  KEY `id_postepowanie` (`id_postepowanie`)
+  FOREIGN KEY (`id_postepowanie`) REFERENCES lista(`id_postepowanie`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --

@@ -16,7 +16,7 @@ public abstract class TransBlank {
 		protected final Session session;
 		
 		protected final Object bean;
-//		final Object[] array;
+		protected final Object[] array;
 	
 	public TransBlank(Object bean)		{
 		Config config = new Config();
@@ -25,7 +25,7 @@ public abstract class TransBlank {
 		Configuration conf = new Configuration();
 		conf.configure(hibernateConf);
 		this.bean = bean;
-//		array = ((EntityBase) bean).getArray();
+		array = ((EntityBase) bean).getArray();
 		
 		Class<? extends Object> beanClass = bean.getClass();
 		
