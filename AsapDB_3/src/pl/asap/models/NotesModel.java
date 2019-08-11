@@ -94,7 +94,7 @@ public class NotesModel extends AbstractTableModel   {
 //	public void setRowColor(int row) {
 //		if ((boolean)getValueAt(row,3)) rowColor[row]=Color.LIGHT_GRAY;
 //		else rowColor[row]=Color.WHITE;
-//		fireTableRowsUpdated(row, row);
+//		fireTableRowsUpdated(row, row);  
 //	}
 	public ArrayList<Notes> getNotes() {
 		return notes;
