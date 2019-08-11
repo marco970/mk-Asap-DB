@@ -17,6 +17,7 @@ import pl.asap.note.NoteEditForm;
 import pl.asap.note.TableBean;
 import pl.asap.note.TableElement;
 import pl.asap.note.TableGui;
+import pl.asap.note2.NotesTable;
 
 @SuppressWarnings("serial")
 public class PopupContent extends JPopupMenu implements PropertyChangeListener, ActionListener {
@@ -120,17 +121,28 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 			}
 		}
 		if (u.equals("notatki"))	{			
+//			int realSelectedRow = lista.convertRowIndexToModel(lista.getSelectedRow());
+//			final int idPostepowanie = ((MainTableModel) data).getId(realSelectedRow);
+//			NotesModel nm = new NotesModel(idPostepowanie);
+//			
+//			TableBean tb = new TableBean(nm, 1);
+//			TableElement te = new TableElement(nm);
+//			tb.addPropertyChangeListener(te);
+//			String post = data.getValueAt(realSelectedRow , 0)+", "+data.getValueAt(realSelectedRow , 1);
+//			setZZPZ(post);
+//			System.out.println(ZZPZ+" --------112233-------> "+this.getClass());
+//			TableGui.getInstance(tb, te, idPostepowanie);
 			int realSelectedRow = lista.convertRowIndexToModel(lista.getSelectedRow());
 			final int idPostepowanie = ((MainTableModel) data).getId(realSelectedRow);
 			NotesModel nm = new NotesModel(idPostepowanie);
 			
-			TableBean tb = new TableBean(nm, 1);
-			TableElement te = new TableElement(nm);
-			tb.addPropertyChangeListener(te);
+//			TableBean tb = new TableBean(nm, 1);
+//			TableElement te = new TableElement(nm);
+//			tb.addPropertyChangeListener(te);
 			String post = data.getValueAt(realSelectedRow , 0)+", "+data.getValueAt(realSelectedRow , 1);
 			setZZPZ(post);
 			System.out.println(ZZPZ+" --------112233-------> "+this.getClass());
-			TableGui.getInstance(tb, te, idPostepowanie);
+			NotesTable.getNotesTableInstance(idPostepowanie);
 
 		}
 		if (u.equals("delete"))	{			
@@ -143,8 +155,10 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 		if (u.equals("edit"))	{
 			int realSelectedRow = lista.convertRowIndexToModel(lista.getSelectedRow());
 			
-			System.out.println("odpalam edycję notatki"+getZZPZ());
+			
 			NotesModel model = (NotesModel) lista.getModel();
+			
+			System.out.println("odpalam edycję notatki"+model.getNoteId(realSelectedRow));
 
 			NoteEditForm.getInstance(getZZPZ(), realSelectedRow, model);
 			

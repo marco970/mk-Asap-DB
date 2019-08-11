@@ -41,6 +41,10 @@ public class NotesModel extends AbstractTableModel   {
 		}
 	public NotesModel() {
 	}
+	
+	public Object[][]	getNotesMatrix()	{
+		return dane;
+	}
 
 	public void deleteNote(int rowToDelete)	{
 		System.out.println("------deleteNote---before---> "+notes.size()+" i dane "+dane.length+" i rTD "+ rowToDelete);
@@ -82,16 +86,16 @@ public class NotesModel extends AbstractTableModel   {
 	//    	System.out.println("uwaga" + row);
 	    return notes.get(row).getNoteId();
 	}
-	public Color getRowColor(int row) {		//zrobić lambdę albo to wyjebać wogóle
-		if ((boolean)getValueAt(row,3)) rowColor[row]=Color.LIGHT_GRAY;
-		else rowColor[row]=Color.WHITE;
-		return rowColor[row];
-	}
-	public void setRowColor(int row) {
-		if ((boolean)getValueAt(row,3)) rowColor[row]=Color.LIGHT_GRAY;
-		else rowColor[row]=Color.WHITE;
-		fireTableRowsUpdated(row, row);
-	}
+//	public Color getRowColor(int row) {		//zrobić lambdę albo to wyjebać wogóle
+//		if ((boolean)getValueAt(row,3)) rowColor[row]=Color.LIGHT_GRAY;
+//		else rowColor[row]=Color.WHITE;
+//		return rowColor[row];
+//	}
+//	public void setRowColor(int row) {
+//		if ((boolean)getValueAt(row,3)) rowColor[row]=Color.LIGHT_GRAY;
+//		else rowColor[row]=Color.WHITE;
+//		fireTableRowsUpdated(row, row);
+//	}
 	public ArrayList<Notes> getNotes() {
 		return notes;
 	}
@@ -149,16 +153,23 @@ public class NotesModel extends AbstractTableModel   {
     }
 	public void updateNote (Object value, int row, int col) {	// dostosować
 		
+		SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+		Date date = new Date(System.currentTimeMillis());
+		String dateModified = formatter.format(date);
+		setValueAt(value, row, col);
+		setValueAt(dateModified, row, 1);
+		
+		
 		NoteUpdate2 nu2 = new NoteUpdate2(this);
-//		nu2.updateNote(noteId, note, dateModified); //-dostosować 
+		nu2.updateNote(getNoteId(row), value.toString(), dateModified); //-dostosować 
 		
 		
 		fireTableCellUpdated(row, col);
 		fireTableDataChanged();
 	}
-    public void updateNoFire(Object value, int row, int col) {	//do wywalenia
-    	dane[row][col] = value;
-    }
+//    public void updateNoFire(Object value, int row, int col) {	//do wywalenia
+//    	dane[row][col] = value;
+//    }
     public void newNote()	{
     	SimpleDateFormat formatter= new SimpleDateFormat("dd.MM.yyyy");  
 		Date date = new Date(System.currentTimeMillis());  
@@ -173,24 +184,25 @@ public class NotesModel extends AbstractTableModel   {
 
 		int n = getRowCount()+1;
 		
-//		System.out.println("n = "+n);
-//		System.out.println("recordAdd, n: "+n + " ilość wierszy :"+getRowCount());
+		System.out.println("n = "+n);
+		System.out.println("recordAdd, n: "+n + " ilość wierszy :"+getRowCount());
 		Object[][] daneUpd = new Object[n][columns.length];
 		for (int i = 0; i<n; i++)	{
 			if (i<n-1) {
 				daneUpd[i]=dane[i];
-//				System.out.println("przepisuje "+i);
+				System.out.println("przepisuje "+i+" - ");
 			}
 			else	{
 				daneUpd[i]=noteArray;
-//				System.out.println("dodaję "+i);
+				System.out.println("dodaję "+i);
 			}
 		}
 		dane=daneUpd;
-//		System.out.println("teraz wierszy jest "+dane.length);
-		new NoteNew(idPostepowanie, newNote);
+		System.out.println("teraz wierszy jest "+dane.length);
+		
 		fireTableRowsInserted(n-1, n-1);
 		fireTableDataChanged();
+		new NoteNew(idPostepowanie, newNote);
 
     }
     public NotesModel getNotesModel()	{

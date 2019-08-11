@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -17,7 +18,7 @@ import javax.swing.table.TableCellRenderer;
 
 import pl.asap.models.NotesModel;
 
-public class TextAreaRenderer extends JScrollPane implements TableCellRenderer, TableModelListener
+public class TextAreaRenderer extends JScrollPane implements TableCellRenderer //, TableModelListener
 {
    /**
 	 * 
@@ -28,6 +29,7 @@ public class TextAreaRenderer extends JScrollPane implements TableCellRenderer, 
   
    public TextAreaRenderer(NotesModel nm) {
 	  this.nm = nm;
+	  this.setBorder(BorderFactory.createEmptyBorder());
       textarea = new JTextArea();
       textarea.setLineWrap(true);
       textarea.setWrapStyleWord(true);
@@ -46,10 +48,10 @@ public class TextAreaRenderer extends JScrollPane implements TableCellRenderer, 
       return this;
    }
 
-@Override
-public void tableChanged(TableModelEvent e) {		//po co to?
-	System.out.println("--------rendererTabChanged--------->"+e.getSource().toString());
-	
-}
+//@Override
+//public void tableChanged(TableModelEvent e) {		//po co to?
+//	System.out.println("--------rendererTabChanged--------->"+e.getSource().toString());
+//	
+//}
 
 }

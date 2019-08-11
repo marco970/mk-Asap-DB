@@ -26,6 +26,8 @@ public class NoteEditForm extends JFrame implements ActionListener {
 	private NotesModel model;
 	private int rowNr;
 	
+	JTextArea ta;
+	
 	private JButton btnSave;
 	private JButton btnCancel;
 	
@@ -37,7 +39,7 @@ public class NoteEditForm extends JFrame implements ActionListener {
 		this.rowNr = rowNr;
 		this.colCount=model.getColumnCount();
 		
-		JTextArea ta = new JTextArea(20,25);
+		ta = new JTextArea(20,25);
 		ta.setText(model.getValueAt(rowNr, 2).toString());
 		ta.setLineWrap(true);
 		JScrollPane sp = new JScrollPane(ta);
@@ -97,7 +99,7 @@ public class NoteEditForm extends JFrame implements ActionListener {
 		else return null;
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) {		//testowe, do wywalenia
 		NotesModel nm = new NotesModel(46);
 		getInstance("ABCDE", nm.getRowNr(7), nm);
 		
@@ -106,10 +108,13 @@ public class NoteEditForm extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("Anuluj"))	{
+			if (checkIfOpen.contains(rowNr)) checkIfOpen.remove(rowNr);
 			this.dispose(); 
 		}
 		if (e.getActionCommand().equals("Zapisz")) {
 			System.out.println("Zapis");
+			if (checkIfOpen.contains(rowNr)) checkIfOpen.remove(rowNr);
+			model.updateNote(ta.getText(), rowNr, 2);
 			
 			this.dispose();
 		}

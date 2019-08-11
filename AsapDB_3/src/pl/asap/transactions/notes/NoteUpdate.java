@@ -63,7 +63,7 @@ public class NoteUpdate implements TableModelListener {
 		query.setParameter("noteId", noteId);
 		int recordNo = query.executeUpdate();
 		session.getTransaction().commit();
-		System.out.println(recordNo);
+		System.out.println(recordNo);		//potem out
 		factory.close();
 	}
 	public void updateIsOpen(int noteId, boolean isOpen, String dateModified)	{
@@ -104,10 +104,10 @@ public class NoteUpdate implements TableModelListener {
         if (column==3) {
         	updateIsOpen(noteId, (Boolean) data, dateModified);
 //        	dane.setValueAt(data, row, 3);
-        	dane.setRowColor(row);
+//        	dane.setRowColor(row);
         }
         
-        dane.updateNoFire(dateModified, row, 1);
+//        dane.updateNoFire(dateModified, row, 1);
 		
 	}
 

@@ -23,14 +23,19 @@ import javax.swing.JTable;
 
 public class TableGui extends JFrame implements ActionListener{
 	
-	private TableBean tb;
+//	private TableBean tb;
 	int idPostepowanie;
 	private static Set<Integer> checkIfOpen = new HashSet<Integer>();
+	NotesModel nm;
+	TableElement te;
 		
-	private TableGui(TableBean tb, TableElement te, int idPostepowanie)	{
+	private TableGui(int idPostepowanie)	{
 		super("Notatki - "+idPostepowanie);
+		
 		System.out.println("---------------> "+this.getClass());
-		this.tb = tb;
+		this.nm = new NotesModel(idPostepowanie);
+		te = new TableElement(idPostepowanie);
+//		this.tb = tb;
 		this.idPostepowanie = idPostepowanie;
 		
 		JMenu menu = new JMenu("start");
@@ -46,8 +51,8 @@ public class TableGui extends JFrame implements ActionListener{
 		JScrollPane scrollPane = new JScrollPane(te);
 		add(scrollPane, BorderLayout.CENTER);
 
-		PopupContent pc = new PopupContent(te, tb.getAtm(), new String[]{"delete", "edit"});
-		NotesMouseListener nml = new NotesMouseListener(te, tb.getAtm());
+		PopupContent pc = new PopupContent(te, nm, new String[]{"delete", "edit"});
+		NotesMouseListener nml = new NotesMouseListener(te, nm);
 		te.addMouseListener(nml);
 		te.setComponentPopupMenu(pc);
 				
@@ -62,10 +67,10 @@ public class TableGui extends JFrame implements ActionListener{
             }
         });
 	}
-	public static synchronized TableGui getInstance(TableBean tb, TableElement te, int idPostepowanie)	{
+	public static synchronized TableGui getInstance(int idPostepowanie)	{
 		if (!checkIfOpen.contains(idPostepowanie))	{
 			checkIfOpen.add(idPostepowanie);
-			return new TableGui(tb, te, idPostepowanie);
+			return new TableGui(idPostepowanie);
 		}
 		else return null;
 	}
@@ -89,14 +94,15 @@ public class TableGui extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("dodaj nową notatkę")) {
-			System.out.println("-------abc--------> "+this.getClass());
+//			System.out.println("-------abc--------> "+this.getClass());
 //			System.out.println("z komendą działa");
-			NotesModel nm = tb.getAtm();
+//			NotesModel nm = tb.getAtm();
 			System.out.println("-----nm1---> "+nm.getRowCount());
 			nm.newNote();
-			NotesModel nm2 = new NotesModel(idPostepowanie);
-			System.out.println("-----nm2---> "+nm2.getRowCount());
-			tb.setAtm(nm2);
+			
+//			NotesModel nm2 = new NotesModel(idPostepowanie);
+//			System.out.println("-----nm2---> "+nm2.getRowCount());
+//			tb.setAtm(nm2);
 //			notesModel.newNote();
 		}
 		
@@ -104,6 +110,7 @@ public class TableGui extends JFrame implements ActionListener{
 			FocusManager focusMan = FocusManager.getCurrentManager();
 			focusMan.focusNextComponent();			//moze dlatego, ze nie ma 
 //			transferFocus();
+			
 		}
 		
 	}

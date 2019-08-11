@@ -17,8 +17,13 @@ public class TableElement extends JTable implements PropertyChangeListener {
 	
 //	private static final TableElement pte = new Table
 	
-	public TableElement(NotesModel atm) {
-		super(atm);
+	public TableElement(int idPostepowanie) {
+		
+		super();
+		
+		NotesModel atm = new NotesModel(idPostepowanie);
+		
+		setModel(atm);
 		System.out.println("-------te--------> "+this.getClass());
 		setTableAtributes(this, atm);
 		setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
@@ -40,13 +45,14 @@ public class TableElement extends JTable implements PropertyChangeListener {
 	public void setTableAtributes(JTable table, NotesModel nm)	{ //potrzebne? - tak
 		TableColumnModel tcm = table.getColumnModel();	
 		TableColumn tc = tcm.getColumn(2);	
+		tc.setCellRenderer(new TextAreaRenderer(nm));
 //		TableColumn tcCheckBox = tcm.getColumn(3);	
 //		table.getModel().addTableModelListener(new NoteUpdate(nm));		
 		
-		tc.setCellRenderer(new TextAreaRenderer(nm));
-		tc.setCellEditor(new TextAreaEditor());
+		
+//		tc.setCellEditor(new TextAreaEditor());
 //		tcCheckBox.setCellRenderer(new CheckBoxRenderer(nm.get));
-		table.revalidate();	//czy to potrzebne?
+//		table.revalidate();	//czy to potrzebne?
 	}
 
 }
