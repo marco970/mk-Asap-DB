@@ -21,7 +21,6 @@ import javax.swing.table.TableColumnModel;
 
 import pl.asap.logic.PopupContent;
 import pl.asap.models.NotesModel;
-import pl.asap.note.NoteEditForm;
 import pl.asap.note.NotesMouseListener;
 import pl.asap.note.TextAreaRenderer;
 import pl.asap.transactions.notes.NoteUpdate2;

@@ -13,10 +13,10 @@ import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import pl.asap.models.MainTableModel;
 import pl.asap.models.NotesModel;
-import pl.asap.note.NoteEditForm;
 import pl.asap.note.TableBean;
 import pl.asap.note.TableElement;
 import pl.asap.note.TableGui;
+import pl.asap.note2.NoteEditForm;
 import pl.asap.note2.NotesTable;
 
 @SuppressWarnings("serial")

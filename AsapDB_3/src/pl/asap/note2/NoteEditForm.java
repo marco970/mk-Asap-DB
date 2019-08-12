@@ -1,4 +1,4 @@
-package pl.asap.note;
+package pl.asap.note2;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
