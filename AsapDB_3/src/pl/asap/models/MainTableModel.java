@@ -227,12 +227,15 @@ public class MainTableModel extends AbstractTableModel {
 	public void cellUpdate(Object value, int rowNr, int kolNr)	{ //--zapis do DB
 
 		dane[rowNr][kolNr] = value;
-		fireTableCellUpdated(rowNr, kolNr);
+		fireTableCellUpdated(rowNr, kolNr); 
 		UpdateTrans ut = new UpdateTrans(lista);
 		String field = getColumnName(kolNr);
 		int id = getId(rowNr);
 		System.out.println("cellUpdate id= "+id);
 		ut.upadateCell(field, value, id);
 		
+	}
+	public boolean isCellEditable(int row, int col) {
+		return true;
 	}
 }
