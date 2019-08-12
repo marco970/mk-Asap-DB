@@ -16,8 +16,10 @@ import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.event.TableModelListener;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
 
 import pl.asap.logic.PopupContent;
 import pl.asap.models.NotesModel;
@@ -40,10 +42,11 @@ public class NotesTable extends JFrame implements ActionListener {
 		
 		nt = new JTable(nm);
 		
-		nt.getModel().addTableModelListener(new NoteUpdate2()); 
+//		nt.getModel().addTableModelListener(new NoteUpdate2()); 
 		
 		TableColumnModel tcm = nt.getColumnModel();	
 		TableColumn tc = tcm.getColumn(2);	
+		
 		tc.setCellRenderer(new TextAreaRenderer(nm));
 		nt.setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
 		tcm.getColumn(0).setPreferredWidth(20);

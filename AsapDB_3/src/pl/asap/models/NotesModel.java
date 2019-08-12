@@ -179,10 +179,17 @@ public class NotesModel extends AbstractTableModel   {
 		return row;
 	}
 	public int getNoteId(int row)	{
-		rn = new NoteRead(idPostepowanie); //to do modelu	
-		notes=rn.getNotes();
-	//    	System.out.println("uwaga" + row);
-	    return notes.get(row).getNoteId();
+//		if (row>=0) {
+			rn = new NoteRead(idPostepowanie); //to do modelu	
+			notes = rn.getNotes();
+			//    	System.out.println("uwaga" + row);
+			return notes.get(row).getNoteId();
+//		}
+//		else {
+//			rn = new NoteRead(); //to do modelu	
+//			notes = rn.getNotes();
+//			return notes.get(notes.size()-1).getNoteId();
+//		}
 	}
 public Object[][]	getNotesMatrix()	{
 		return dane;
@@ -220,9 +227,10 @@ public Object[][]	getNotesMatrix()	{
 	}
 	public boolean isCellEditable(int row, int col)
     {
-    	if (col==3) return true;
-//    	if (col==2 && !((Boolean) getValueAt(row,3)).booleanValue()) return true;
-       else return false;
+//    	if (col==3) return true;
+////    	if (col==2 && !((Boolean) getValueAt(row,3)).booleanValue()) return true;
+//       else return false;
+		return false;
     }
     public String getColumnName(int i)	{
     	return columns[i];
