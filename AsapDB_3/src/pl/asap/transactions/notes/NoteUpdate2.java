@@ -1,5 +1,11 @@
 package pl.asap.transactions.notes;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -8,7 +14,7 @@ import org.hibernate.query.Query;
 import pl.asap.entity.Config;
 import pl.asap.models.NotesModel;
 
-public class NoteUpdate2 {
+public class NoteUpdate2 implements TableModelListener {
 	
 	Config config;
 	String hibernateConf;
@@ -17,7 +23,7 @@ public class NoteUpdate2 {
 	Session session;
 	
 
-	public NoteUpdate2(NotesModel notesModel)	{
+	public NoteUpdate2()	{
 	}
 	
 	public void carryOutUpdate() {
@@ -63,6 +69,35 @@ public class NoteUpdate2 {
 		System.out.println(recordNo);
 		factory.close();
 
+	}
+	@Override
+	public void tableChanged(TableModelEvent e) {
+		
+        int column = e.getColumn();
+        System.out.println("=======tableChanged==========>>");
+        
+    	int row = e.getFirstRow();
+		NotesModel dane = (NotesModel) e.getSource();
+		Object data = dane.getValueAt(row, column);
+		int noteId; 
+		if (row>=0) {
+			noteId = dane.getNoteId(row);
+		}
+//		} else	{
+//			noteId = dane.getNoteId(0);
+//		}
+		SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+		Date date = new Date(System.currentTimeMillis());
+		String dateModified = formatter.format(date);
+
+        if (column==3) {
+        	updateIsOpen(noteId, (Boolean) data, dateModified);
+//        	dane.updateNoFire(data, row, 3);
+
+        }
+        
+
+		
 	}
 }
 

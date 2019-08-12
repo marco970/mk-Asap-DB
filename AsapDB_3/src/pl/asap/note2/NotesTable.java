@@ -24,6 +24,7 @@ import pl.asap.models.NotesModel;
 import pl.asap.note.NoteEditForm;
 import pl.asap.note.NotesMouseListener;
 import pl.asap.note.TextAreaRenderer;
+import pl.asap.transactions.notes.NoteUpdate2;
 
 public class NotesTable extends JFrame implements ActionListener {
 
@@ -37,16 +38,19 @@ public class NotesTable extends JFrame implements ActionListener {
 		super("tu dodać nazwę postępowania");
 		this.idPostepowanie=idPostepowanie;
 		NotesModel nm = new NotesModel(idPostepowanie);
+		
 		nt = new JTable(nm);
+		
+		nt.getModel().addTableModelListener(new NoteUpdate2()); 
 		
 		TableColumnModel tcm = nt.getColumnModel();	
 		TableColumn tc = tcm.getColumn(2);	
 		tc.setCellRenderer(new TextAreaRenderer(nm));
 		nt.setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
-		tcm.getColumn(0).setPreferredWidth(30);
-		tcm.getColumn(1).setPreferredWidth(30);
+		tcm.getColumn(0).setPreferredWidth(20);
+		tcm.getColumn(1).setPreferredWidth(20);
 		tcm.getColumn(2).setPreferredWidth(400);
-		tcm.getColumn(3).setPreferredWidth(30);
+		tcm.getColumn(3).setPreferredWidth(20);
 		
 		JMenu menu = new JMenu("start");
 		JMenuBar menuBar = new JMenuBar();
@@ -124,7 +128,7 @@ public class NotesTable extends JFrame implements ActionListener {
 			//System.out.println("qqqqq-----qqqq----> "+b);
 			((NotesModel) nt.getModel()).newNote();
 			b = ((NotesModel) nt.getModel()).getNotesMatrix().length;
-			System.out.println("qqqqq-----qqqq----> "+b);
+			System.out.println("qqqqq-----qqqq----> "+b+" - "+ (NotesModel) nt.getModel().getValueAt(b-1, 0));
 			NoteEditForm.getInstance("", b-1, (NotesModel) nt.getModel());
 			
 			
