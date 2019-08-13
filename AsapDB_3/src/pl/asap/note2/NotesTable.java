@@ -23,8 +23,6 @@ import javax.swing.table.TableModel;
 
 import pl.asap.logic.PopupContent;
 import pl.asap.models.NotesModel;
-import pl.asap.note.NotesMouseListener;
-import pl.asap.note.TextAreaRenderer;
 import pl.asap.transactions.notes.NoteUpdate2;
 
 public class NotesTable extends JFrame implements ActionListener {
