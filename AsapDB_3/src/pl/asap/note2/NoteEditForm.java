@@ -129,11 +129,11 @@ public class NoteEditForm extends JFrame implements ActionListener {
 		else return null;
 	}
 	
-	public static void main(String[] args) {		//testowe, do wywalenia
-		NotesModel nm = new NotesModel(46);
-		getInstance("ABCDE", nm.getRowNr(7), nm);
-		
-	}
+//	public static void main(String[] args) {		//testowe, do wywalenia
+//		NotesModel nm = new NotesModel(46);
+//		getInstance("ABCDE", nm.getRowNr(7), nm);
+//		
+//	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {

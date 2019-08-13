@@ -73,9 +73,9 @@ public class NotesModel extends AbstractTableModel   {
 		}	
 	}
 
-	    public void updateNoFire(Object value, int row, int col) {	//do wywalenia
-	    	dane[row][col] = value;
-	    }
+//	    public void updateNoFire(Object value, int row, int col) {	//do wywalenia
+//	    	dane[row][col] = value;
+//	    }
 	    public void newNote()	{
 	    	SimpleDateFormat formatter= new SimpleDateFormat("dd.MM.yyyy");  
 			Date date = new Date(System.currentTimeMillis());  
@@ -139,12 +139,10 @@ public class NotesModel extends AbstractTableModel   {
 			String dateModified = formatter.format(date);
 			setValueAt(value, row, col);
 			setValueAt(dateModified, row, 1);
-			
-			
+					
 			NoteUpdate2 nu2 = new NoteUpdate2();
 			nu2.updateNote(getNoteId(row), value.toString(), dateModified); //-dostosować 
-			
-			
+					
 			fireTableCellUpdated(row, col);
 			fireTableDataChanged();
 		}

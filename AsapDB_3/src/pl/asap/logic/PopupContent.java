@@ -139,10 +139,10 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 //			TableBean tb = new TableBean(nm, 1);
 //			TableElement te = new TableElement(nm);
 //			tb.addPropertyChangeListener(te);
-			String post = data.getValueAt(realSelectedRow , 0)+", "+data.getValueAt(realSelectedRow , 1);
+			String post = data.getValueAt(realSelectedRow , 0)+", "+data.getValueAt(realSelectedRow , 1)+", "+data.getValueAt(realSelectedRow , 7);
 			setZZPZ(post);
 			System.out.println(ZZPZ+" --------112233-------> "+this.getClass());
-			NotesTable.getNotesTableInstance(idPostepowanie);
+			NotesTable.getNotesTableInstance(idPostepowanie, ZZPZ);
 
 		}
 		if (u.equals("delete"))	{			
@@ -160,7 +160,7 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 			
 			System.out.println("odpalam edycję notatki"+model.getNoteId(realSelectedRow));
 
-			NoteEditForm.getInstance(getZZPZ(), realSelectedRow, model);
+			NoteEditForm.getInstance(NotesTable.getZZPZ(), realSelectedRow, model);
 			
 		}
 	}

@@ -32,25 +32,21 @@ public class NotesTable extends JFrame implements ActionListener {
 	private static Set<Integer> checkIfOpen = new HashSet<Integer>();
 	
 	private JTable nt;
+	private static String ZZPZ;
 	
-	private NotesTable(int idPostepowanie)	{
-		super("tu dodać nazwę postępowania");
+	
+	private NotesTable(int idPostepowanie, String ZZPZ)	{
+		super(ZZPZ);
+		NotesTable.ZZPZ = ZZPZ;
 		this.idPostepowanie=idPostepowanie;
 		NotesModel nm = new NotesModel(idPostepowanie);
 		
 		nt = new JTable(nm);
+		setTableAttributes();
 		
 //		nt.getModel().addTableModelListener(new NoteUpdate2()); 
 		
-		TableColumnModel tcm = nt.getColumnModel();	
-		TableColumn tc = tcm.getColumn(2);	
 		
-		tc.setCellRenderer(new TextAreaRenderer(nm));
-		nt.setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
-		tcm.getColumn(0).setPreferredWidth(20);
-		tcm.getColumn(1).setPreferredWidth(20);
-		tcm.getColumn(2).setPreferredWidth(400);
-		tcm.getColumn(3).setPreferredWidth(20);
 		
 		JMenu menu = new JMenu("start");
 		JMenuBar menuBar = new JMenuBar();
@@ -93,6 +89,26 @@ public class NotesTable extends JFrame implements ActionListener {
 
 	}
 	
+	public static String getZZPZ() {
+		return ZZPZ;
+	}
+
+	public void setZZPZ(String zZPZ) {
+		ZZPZ = zZPZ;
+	}
+
+	public void setTableAttributes()	{
+		TableColumnModel tcm = nt.getColumnModel();	
+		TableColumn tc = tcm.getColumn(2);	
+		
+		tc.setCellRenderer(new TextAreaRenderer());
+		nt.setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
+		tcm.getColumn(0).setPreferredWidth(20);
+		tcm.getColumn(1).setPreferredWidth(20);
+		tcm.getColumn(2).setPreferredWidth(400);
+		tcm.getColumn(3).setPreferredWidth(20);
+	}
+	
 	public void doMassAddMenu(JMenuBar mb, String...args)	{
 		JMenu menu = new JMenu(args[0]);
 		mb.add(menu);
@@ -112,10 +128,10 @@ public class NotesTable extends JFrame implements ActionListener {
 	
 	
 	
-	public static synchronized NotesTable getNotesTableInstance(int idPostepowanie)	{
+	public static synchronized NotesTable getNotesTableInstance(int idPostepowanie, String ZZPZ)	{
 		if (!checkIfOpen.contains(idPostepowanie))	{
 			checkIfOpen.add(idPostepowanie);
-			return new NotesTable(idPostepowanie);
+			return new NotesTable(idPostepowanie, ZZPZ);
 		}
 		else return null;
 	}
@@ -128,8 +144,9 @@ public class NotesTable extends JFrame implements ActionListener {
 			//System.out.println("qqqqq-----qqqq----> "+b);
 			((NotesModel) nt.getModel()).newNote();
 			b = ((NotesModel) nt.getModel()).getNotesMatrix().length;
-			System.out.println("qqqqq-----qqqq----> "+b+" - "+ (NotesModel) nt.getModel().getValueAt(b-1, 0));
+//			System.out.println("qqqqq-----qqqq----> "+b+" - "+ (NotesModel) nt.getModel().getValueAt(b-1, 0));
 			NoteEditForm.getInstance("", b-1, (NotesModel) nt.getModel());
+			setTableAttributes();
 			
 			
 
