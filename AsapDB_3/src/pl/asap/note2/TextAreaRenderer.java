@@ -1,4 +1,4 @@
-package pl.asap.note;
+package pl.asap.note2;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -27,7 +27,7 @@ public class TextAreaRenderer extends JScrollPane implements TableCellRenderer /
 	private JTextArea textarea;
 	private NotesModel nm;
   
-   public TextAreaRenderer(NotesModel nm) {
+   public TextAreaRenderer() {
 	  this.nm = nm;
 	  this.setBorder(BorderFactory.createEmptyBorder());
       textarea = new JTextArea();
@@ -37,7 +37,9 @@ public class TextAreaRenderer extends JScrollPane implements TableCellRenderer /
       getViewport().add(textarea);
    }
   
-   public Component getTableCellRendererComponent(JTable table, Object value,
+
+
+public Component getTableCellRendererComponent(JTable table, Object value,
                                   boolean isSelected, boolean hasFocus,
                                   int row, int column)
    {

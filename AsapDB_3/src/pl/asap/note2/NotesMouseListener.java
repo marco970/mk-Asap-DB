@@ -1,4 +1,4 @@
-package pl.asap.note;
+package pl.asap.note2;
 
 import java.awt.Point;
 import java.awt.event.MouseAdapter;

@@ -11,6 +11,7 @@ import java.util.Set;
 
 import pl.asap.logic.PopupContent;
 import pl.asap.models.NotesModel;
+import pl.asap.note2.NotesMouseListener;
 
 import javax.swing.FocusManager;
 import javax.swing.JFrame;
