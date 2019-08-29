@@ -37,8 +37,12 @@ public class TimeSheetEntryNew {
 	}
 
 	public static void main(String[] args) {
-		new TimeSheetEntryNew(37, "ZZ/PLI0003499", "25.07.2019", 3);
-		new TimeSheetEntryNew(37, "PZ/0000008878", "29.07.2019", 3);
+		new TimeSheetEntryNew(27, "ZZ/CPO0007777", "19.05.2019", 3);
+		new TimeSheetEntryNew(27, "PZ/0000009999", "19.05.2019", 2);
+		new TimeSheetEntryNew(27, "WP/CPO0003344", "07.06.2019", 4);
+//		33 	ZZ/PLI0004511 	PZ/0000007733 			aktywne 			Książeczka z Hipciem 	przetarg 	PLI 	16.06.2019 	10.08.2019 	
+		new TimeSheetEntryNew(33, "ZZ/PLI0004511", "16.06.2019", 2);
+		
 
 	}
 
