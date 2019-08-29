@@ -2,11 +2,14 @@ package pl.asap.models;
 
 import javax.swing.table.AbstractTableModel;
 
+import pl.asap.transactions.timesheet.TimeSheetRead2;
+
 public class TimeSheetModel extends AbstractTableModel  {
 	
 	
 	
-	public TimeSheetModel(int idPostepowanie, int month)	{
+	public TimeSheetModel(int month, int year)	{
+		TimeSheetRead2 tsr2 = new TimeSheetRead2(month, year);
 		
 	}
 

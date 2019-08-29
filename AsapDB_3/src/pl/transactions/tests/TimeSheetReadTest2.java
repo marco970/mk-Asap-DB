@@ -67,12 +67,12 @@ public class TimeSheetReadTest2 {
 	
 		session.getTransaction().commit();
 		
-//		for (String[] el1:entries) {
-//			for (String el2: el1)	{
-//				System.out.print("|| "+el2);
-//			}
-//			System.out.println(" --------- ");
-//		}
+		for (String[] el1:entries) {
+			for (String el2: el1)	{
+				System.out.print("|| "+el2);
+			}
+			System.out.println(" --------- ");
+		}
 
 	
 	}
@@ -98,7 +98,7 @@ public class TimeSheetReadTest2 {
 	}
 
 	public static void main(String[] args) {
-		new TimeSheetReadTest2(6, 2019);
+		new TimeSheetReadTest2(8, 2019);
 
 	}
 

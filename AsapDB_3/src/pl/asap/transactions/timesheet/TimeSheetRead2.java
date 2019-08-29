@@ -27,7 +27,19 @@ public class TimeSheetRead2 {
 		SessionFactory factory = conf.buildSessionFactory();
 		Session session = factory.getCurrentSession();
 
-		String hql2 = "select t.lista.ZZ, t.lista.Nazwa, t.sapNr, t.dateEntry, t.timePassed from TimeSheetEntity as t ";
+//		String hql2 = "select t.lista.ZZ, t.lista.Nazwa, t.sapNr, t.dateEntry, t.timePassed, t.lista.Status "
+//				+ "from TimeSheetEntity as t "
+//				+ "where t.lista.Status = 'aktywne'";
+		String hql2 = "select t.lista.ZZ, t.lista.Nazwa, t.sapNr, t.dateEntry, t.timePassed, t.lista.Status "
+				+ "from TimeSheetEntity as t ";
+		
+//		String hql2 = "select t.lista.ZZ, t.lista.Nazwa, t.sapNr, t.dateEntry, t.timePassed "
+//				+ "from TimeSheetEntity as t ";
+
+		
+//		String hql2 = "select t.lista.ZZ, t.lista.Nazwa, t.sapNr, t.dateEntry, t.timePassed "
+//				+ "from TimeSheetEntity as t ";
+
 				
 		session.beginTransaction();		
 		Query query = session.createQuery(hql2);
@@ -45,6 +57,14 @@ public class TimeSheetRead2 {
 			}
 		}
 		session.getTransaction().commit();
+		for (String[] el1:entries) {
+			for (String el2: el1)	{
+				System.out.print("|| "+el2);
+			}
+			System.out.println(" --------- ");
+		}
+		session.close();
+		factory.close();
 	}
 	public ArrayList<String[]> getEntryMatrix()	{
 		return entries; 
@@ -65,7 +85,7 @@ public class TimeSheetRead2 {
 	}
 
 	public static void main(String[] args) {
-		new TimeSheetRead2(6, 2019);
+		new TimeSheetRead2(8, 2019);
 	}
 
 }
