@@ -1,0 +1,10 @@
+
+			/**
+			 * 1. uruchamiam klasę z JTable - TimeSheetTable
+			 * 2. ta klasa tworzy w konstruktorze instancję jej modelu - TimeSheetModel
+			 * 3. potem tworzy tabelę
+			 * 4. tworzę cellRenderer i cellEditor
+			 * 
+			 */
+			 
+TimeSheetModel

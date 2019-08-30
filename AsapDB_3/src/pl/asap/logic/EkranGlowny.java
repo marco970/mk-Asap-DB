@@ -22,6 +22,7 @@ import javax.swing.table.TableRowSorter;
 
 import pl.asap.DB.DBConnect;
 import pl.asap.models.MainTableModel;
+import pl.asap.raport.RaportForm;
 
 	
 public class EkranGlowny implements ActionListener {
@@ -225,7 +226,7 @@ public class EkranGlowny implements ActionListener {
 			new NewForm(data.getRowCount()+1, data);
 		}
 		if (u.equals(start[2])){
-			//new RaportForm(data);
+			new RaportForm(data);
 		}
 		
 		if (u.equals(sort[1]))	{

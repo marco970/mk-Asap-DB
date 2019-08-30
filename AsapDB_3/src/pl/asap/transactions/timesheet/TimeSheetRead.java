@@ -1,30 +1,23 @@
 package pl.asap.transactions.timesheet;
 
 import java.util.ArrayList;
-
 import javax.persistence.Query;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import pl.asap.entity.Config;
-import pl.asap.entity.Lista;
-import pl.asap.entity.Notes;
-import pl.asap.entity.TimeSheetEntity;
-import pl.asap.transactions.TransBlank;
 
 public class TimeSheetRead {
 	
-	private ArrayList<TimeSheetEntity> entries;
+	private ArrayList<String[]> entries;
 	private int month;
 
-	public TimeSheetRead(int idPostepowanie, int month) {
+	
+	public TimeSheetRead(int mounth, int year) {
 		
-		// TODO Auto-generated constructor stub
-		
-		this.entries= new ArrayList<>();
-		this.month = month;
+		this.entries = new ArrayList<>();
+		this.month = mounth;
 		
 		Configuration conf = new Configuration();
 		Config config = new Config();
@@ -33,31 +26,54 @@ public class TimeSheetRead {
 		
 		SessionFactory factory = conf.buildSessionFactory();
 		Session session = factory.getCurrentSession();
+
+//		String hql2 = "select t.lista.ZZ, t.lista.Nazwa, t.sapNr, t.dateEntry, t.timePassed, t.lista.Status "
+//				+ "from TimeSheetEntity as t "
+//				+ "where t.lista.Status = 'aktywne'";
+		String hql2 = "select t.lista.ZZ, t.lista.Nazwa, t.sapNr, t.dateEntry, t.timePassed, t.lista.Status "
+				+ "from TimeSheetEntity as t ";
 		
-		String getPostepowanie = "select c from Lista c where c.idPostepowanie="+idPostepowanie;
+//		String hql2 = "select t.lista.ZZ, t.lista.Nazwa, t.sapNr, t.dateEntry, t.timePassed "
+//				+ "from TimeSheetEntity as t ";
+
+		
+//		String hql2 = "select t.lista.ZZ, t.lista.Nazwa, t.sapNr, t.dateEntry, t.timePassed "
+//				+ "from TimeSheetEntity as t ";
+
+				
 		session.beginTransaction();		
-		Query query = session.createQuery(getPostepowanie);
+		Query query = session.createQuery(hql2);
+		@SuppressWarnings("unchecked")
+		ArrayList<String[]> entryRow = (ArrayList<String[]>) query.getResultList();
 		
-		Lista lista = (Lista) query.getSingleResult();		
-		System.out.println(lista.toString());
-		
-		for(TimeSheetEntity entry: lista.getEntries())	{
-			
-			if (checkMonth(entry, month)) {
-				System.out.println(entry.getDateEntry().substring(3, 5));
-				entries.add(entry);
+		for (int i = 0; i<entryRow.size(); i++)	{
+			Object[] atom = (Object[]) entryRow.get(i);
+			String[] atomS = new String[atom.length];
+			if(checkDate(atom[3].toString(), month, year))	{
+				for (int j = 0; j < atom.length; j++)	{
+					atomS[j] = atom[j].toString();
+				}
+				entries.add(atomS);
 			}
 		}
-		
-		System.out.println(entries.toString());
-		
 		session.getTransaction().commit();
+		for (String[] el1:entries) {
+			for (String el2: el1)	{
+				System.out.print("|| "+el2);
+			}
+			System.out.println(" --------- ");
+		}
+		session.close();
 		factory.close();
-		
 	}
-	public boolean checkMonth(TimeSheetEntity entry, int month)	{
-		System.out.println();
-		if (entry.getDateEntry().substring(3, 5).equals(monthString(month))) return true;
+	public ArrayList<String[]> getEntryMatrix()	{
+		return entries; 
+	}
+	public boolean checkDate(String date, int month, int year)	{
+
+		if (date.substring(3, 5).equals(monthString(month)) && date.substring(6, 10).equals(year+"")) {
+			return true;
+		}
 		else return false;
 		
 	}
@@ -65,14 +81,11 @@ public class TimeSheetRead {
 		String monthStr;
 		if (month<10) monthStr = "0"+month;
 		else monthStr = ""+month;
-		System.out.println(monthStr+" <--");
 		return monthStr;
 	}
-	
-	
-	public static void main(String[] args) {
-		new TimeSheetRead(10, 7);
 
+	public static void main(String[] args) {
+		new TimeSheetRead(8, 2019);
 	}
 
 }
