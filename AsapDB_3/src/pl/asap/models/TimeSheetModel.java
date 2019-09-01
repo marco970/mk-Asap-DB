@@ -46,16 +46,22 @@ public class TimeSheetModel extends AbstractTableModel  {
 //		utworzyć leftModel
 		List<List<String>> leftModel = new ArrayList<>();	//pewnie nie będzie potrzebne
 		Set<List<String>> leftSet = new HashSet<>();
+		Set<List<String>> checkSet = new HashSet<>();
 		
 		for(String[] el: leftSide)	{
 			List<String> leftModelRow = new ArrayList<>();
+			List<String> checkRow = new ArrayList<>();
 			for (int i=0; i<6; i++)	{
 				if (i<=2 || i==5) {
 					leftModelRow.add(el[i]);
 				}
+				if (i==2 || i==3)	{
+					checkRow.add(el[i]);
+				}
 			}
 			leftModel.add(leftModelRow);
 			leftSet.add(leftModelRow);
+			checkSet.add(checkRow);
 		}
 		for(List<String> el: leftModel)	{
 			for (String elem: el)	{
@@ -85,6 +91,10 @@ public class TimeSheetModel extends AbstractTableModel  {
 				 rowEntries.add(0);
 			 }
 //			 rowEntries.set(colPosition, el.get(4));
+			 
+//			 aktualizacja tu:
+			 
+			 
 
 			 for (Object elem: rowEntries)	{
 				 System.out.print(elem+ " | ");
@@ -93,7 +103,15 @@ public class TimeSheetModel extends AbstractTableModel  {
 
 			 System.out.println("------x"+daneEntries.size()+" -- "+daneEntries.get(daneEntries.size()-1).size()+"x------");
 		}
-//		aktualizacja rightModel
+//		aktualizacja rightModel (Model)
+		/*
+		 * w każeym wierszu aktualizujemy wszystkie daty
+		 * idiemy po wierszu
+		 * 	idziemy po liście
+		 * 		jeśli zgadza się sapNr, to aktualizujemy datę
+		 * 		
+		 * 
+		 */
 
 	}
 
