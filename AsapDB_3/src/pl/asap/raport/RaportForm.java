@@ -52,7 +52,7 @@ public class RaportForm extends RawForm implements ActionListener {
 	public RaportForm(MainTableModel model) {
 		super("Generowanie Raportu", "powitanie");
 		
-		model = model;
+		this.model = model;
 		//data - miesiąc
 		Calendar cal = Calendar.getInstance();
 		

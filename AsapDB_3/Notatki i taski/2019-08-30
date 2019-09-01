@@ -8,3 +8,7 @@
 			 */
 			 
 TimeSheetModel
+pobieramy dane z BD
+
+tworzymy model:
+Object[][]

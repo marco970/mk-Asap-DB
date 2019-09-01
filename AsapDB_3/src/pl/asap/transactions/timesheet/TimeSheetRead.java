@@ -30,16 +30,15 @@ public class TimeSheetRead {
 //		String hql2 = "select t.lista.ZZ, t.lista.Nazwa, t.sapNr, t.dateEntry, t.timePassed, t.lista.Status "
 //				+ "from TimeSheetEntity as t "
 //				+ "where t.lista.Status = 'aktywne'";
+	
+//		String hql2 = "select t.lista.ZZ, t.lista.Nazwa, t.sapNr, t.dateEntry, t.timePassed "
+//				+ "from TimeSheetEntity as t ";
+	
+//		String hql2 = "select t.lista.ZZ, t.lista.Nazwa, t.sapNr, t.dateEntry, t.timePassed "
+//				+ "from TimeSheetEntity as t ";
+
 		String hql2 = "select t.lista.ZZ, t.lista.Nazwa, t.sapNr, t.dateEntry, t.timePassed, t.lista.Status "
 				+ "from TimeSheetEntity as t ";
-		
-//		String hql2 = "select t.lista.ZZ, t.lista.Nazwa, t.sapNr, t.dateEntry, t.timePassed "
-//				+ "from TimeSheetEntity as t ";
-
-		
-//		String hql2 = "select t.lista.ZZ, t.lista.Nazwa, t.sapNr, t.dateEntry, t.timePassed "
-//				+ "from TimeSheetEntity as t ";
-
 				
 		session.beginTransaction();		
 		Query query = session.createQuery(hql2);
@@ -71,18 +70,18 @@ public class TimeSheetRead {
 	}
 	public boolean checkDate(String date, int month, int year)	{
 
-		if (date.substring(3, 5).equals(monthString(month)) && date.substring(6, 10).equals(year+"")) {
+		if (date.substring(3, 5).equals(numString(month)) && date.substring(6, 10).equals(year+"")) {
 			return true;
 		}
 		else return false;
 		
 	}
-	public String monthString(int month)	{
-		String monthStr;
-		if (month<10) monthStr = "0"+month;
-		else monthStr = ""+month;
-		return monthStr;
-	}
+	  public String numString(int num)	{
+			String numStr;
+			if (num<10) numStr = "0"+ num;
+			else numStr = ""+num;
+			return numStr;
+		}
 
 	public static void main(String[] args) {
 		new TimeSheetRead(8, 2019);
