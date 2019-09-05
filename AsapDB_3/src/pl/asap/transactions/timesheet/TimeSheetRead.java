@@ -47,9 +47,14 @@ public class TimeSheetRead {
 		
 		for (int i = 0; i<entryRow.size(); i++)	{
 			Object[] atom = (Object[]) entryRow.get(i);
+			for (Object el: atom)	{
+				System.out.println("---> "+el.toString());
+			}
 			String[] atomS = new String[atom.length];
+			System.out.println(atom.length+" -asd- "+atomS.length);
 			if(checkDate(atom[3].toString(), month, year))	{
 				for (int j = 0; j < atom.length; j++)	{
+					System.out.println(atom[j].toString());
 					atomS[j] = atom[j].toString();
 				}
 				entries.add(atomS);
@@ -84,7 +89,7 @@ public class TimeSheetRead {
 		}
 
 	public static void main(String[] args) {
-		new TimeSheetRead(8, 2019);
+		new TimeSheetRead(2, 2019);
 	}
 
 }

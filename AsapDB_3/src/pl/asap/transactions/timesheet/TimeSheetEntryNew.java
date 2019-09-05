@@ -45,9 +45,10 @@ public class TimeSheetEntryNew {
 //		new TimeSheetEntryNew(27, "PZ/0000009999", "20.05.2019", 3);
 //		new TimeSheetEntryNew(27, "PZ/0000009999", "26.05.2019", 2);
 //		34 	ZZ/PLI0004433 	PZ/0000003998 			aktywne 			gąbka do czesania dla łysych 	przetarg 	PLI 	10.08.2019 	10.08.2019 	
-		new TimeSheetEntryNew(34, "ZZ/PLI0004433", "10.08.2019", 2);
-		new TimeSheetEntryNew(34, "PZ/0000003998", "12.08.2019", 3);
-		new TimeSheetEntryNew(34, "PZ/0000003998", "16.08.2019", 2);
+//		16 	ZZ/CPO0003498 	PZ/0000002345 			aktywne 	przemiot zak 	Durex 		NULL		11.02.2019 	11.03.2019 	
+		new TimeSheetEntryNew(16, "ZZ/CPO0003498", "11.02.2019", 2);
+		new TimeSheetEntryNew(16, "PZ/0000002345", "11.03.2019", 3);
+//		new TimeSheetEntryNew(34, "PZ/0000003998", "16.08.2019", 2);
 
 	}
 
