@@ -205,9 +205,9 @@ public class EkranGlowny implements ActionListener {
 			}
 		}
 	}
-	public MainTableModel getModel()	{	//nie jestem pewien, czy metoda jest potrzebna
-		return data;
-	}
+//	public MainTableModel getModel()	{	//do wywalenia
+//		return data;
+//	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
