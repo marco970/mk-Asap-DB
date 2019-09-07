@@ -50,7 +50,7 @@ public class TimeSheetTable extends JFrame {
 	
 	
 	public static void main(String[] args) {
-		new TimeSheetTable(8, 2019);
+		new TimeSheetTable(5, 2019);
 	}
 
 }

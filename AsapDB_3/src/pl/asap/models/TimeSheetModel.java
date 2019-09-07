@@ -5,9 +5,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.swing.JComboBox;
 import javax.swing.table.AbstractTableModel;
 
-import antlr.collections.impl.Vector;
 import pl.asap.raport.CalendarInside;
 import pl.asap.transactions.timesheet.TimeSheetRead;
 
@@ -19,11 +19,7 @@ public class TimeSheetModel extends AbstractTableModel  {
 	private List<List<Object>> daneEntries;
 	
 	public TimeSheetModel(int month, int year)	{
-		TimeSheetRead tsr = new TimeSheetRead(month, year);
-		
-		List<String[]> leftSide = tsr.getEntryMatrix();
-		List<Integer[]> rightSide = new ArrayList<Integer[]>();
-		
+		super();
 		CalendarInside ci = new CalendarInside(year, month);
 		this.ColumnNames = new ArrayList<>();
 		this.daneEntries = new ArrayList<>();
@@ -35,18 +31,13 @@ public class TimeSheetModel extends AbstractTableModel  {
 			ColumnNames.add(el);
 		}
 //		utworzyć source
-		
-//		for(String[] el: leftSide)	{
-//			for (String elem: el)	{
-//				System.out.print(elem+" ||| ");
-//			}
-//			System.out.println("---source----");
-//		}
+		TimeSheetRead tsr = new TimeSheetRead(month, year);
+		List<String[]> leftSide = tsr.getEntryMatrix();
 
 //		utworzyć leftModel
-		List<List<String>> leftModel = new ArrayList<>();	//pewnie nie będzie potrzebne
+//		List<List<String>> leftModel = new ArrayList<>();	//nie będzie potrzebne - tylko kontrolnie
 		Set<List<String>> leftSet = new HashSet<>();
-		Set<List<String>> checkSet = new HashSet<>();
+		List<List<String>> checkList = new ArrayList<>();
 		
 		for(String[] el: leftSide)	{
 			List<String> leftModelRow = new ArrayList<>();
@@ -55,66 +46,78 @@ public class TimeSheetModel extends AbstractTableModel  {
 				if (i<=2 || i==5) {
 					leftModelRow.add(el[i]);
 				}
-				if (i==2 || i==3)	{
+				if (i==2 || i==3 || i==4)	{
 					checkRow.add(el[i]);
 				}
 			}
-			leftModel.add(leftModelRow);
+//			leftModel.add(leftModelRow);	
 			leftSet.add(leftModelRow);
-			checkSet.add(checkRow);
+			checkList.add(checkRow);
 		}
-		for(List<String> el: leftModel)	{
-			for (String elem: el)	{
-				System.out.print(elem+" ||| ");
-			}
-			System.out.println("---leftModel----");
-		}
+//		for(List<String> el: leftModel)	{
+//			for (String elem: el)	{
+//				System.out.print(elem+" ||| ");
+//			}
+//			System.out.println("---leftModel----");
+//		}
 		for(List<String> el: leftSet)	{
 			for (String elem: el)	{
 				System.out.print(elem+" ||| ");
 			}
 			System.out.println("---leftSet----");
 		}
-
+		for(List<String> el: checkList)	{
+			for (String elem: el)	{
+				System.out.print(elem+" |-| ");
+			}
+			System.out.println("---checkSList----");
+		}
 //		utworzyć rightModel i skleić
 		String dayEntry;
+		//iteracja po "lewej stronie"
 		for(List<String> el: leftSet)	{
-			 List<Object> rowEntries = new ArrayList<Object>();	
-//			 dayEntry = el.get(3).substring(0, 2);
-//			 int colPosition = Integer.valueOf(dayEntry)+3;
-			 //iteracja po "lewej stronie"
+			 List<Object> rowEntries = new ArrayList<Object>();	 
 			 rowEntries.add(el.get(0));
 			 rowEntries.add(el.get(1));
 			 rowEntries.add(el.get(3));
 			 rowEntries.add(el.get(2));
-			 for (Object elem: ci.getAllDays())	{
+			 for (@SuppressWarnings("unused") Object elem: ci.getAllDays())	{		//tworzenie rightModel
 				 rowEntries.add(0);
 			 }
-//			 rowEntries.set(colPosition, el.get(4));
 			 
-//			 aktualizacja tu:
-			 
-			 
+//			 aktualizacja rightModel (Model) tu: 
+				/*
+				 * w każeym wierszu rowEntries aktualizujemy wszystkie daty
+				 * idiemy po wierszu rowEntries 
+				 * 	idziemy po liście - dla każdego rowEntries
+				 * 		sprawdzamy czy sapNr z listy z sapNr z rowEtries - jeśli ok, to nadpisujemy rowEntries
+				 */
+			 for (List<String> checkEl: checkList)	{
+				 if (checkEl.get(0).equals(rowEntries.get(3)))	{
+					 dayEntry = checkEl.get(1).substring(0,2);
+					 int colPosition = Integer.valueOf(dayEntry)+3;
+					 rowEntries.set(colPosition, checkEl.get(2));
+				 }
+			 }
 
 			 for (Object elem: rowEntries)	{
 				 System.out.print(elem+ " | ");
 			 }
 			 daneEntries.add(rowEntries);
-
 			 System.out.println("------x"+daneEntries.size()+" -- "+daneEntries.get(daneEntries.size()-1).size()+"x------");
 		}
-//		aktualizacja rightModel (Model)
-		/*
-		 * w każeym wierszu aktualizujemy wszystkie daty
-		 * idiemy po wierszu
-		 * 	idziemy po liście
-		 * 		jeśli zgadza się sapNr, to aktualizujemy datę
-		 * 		
-		 * 
-		 */
-
 	}
-
+	public boolean isCellEditable(int row, int col)
+    {
+		if(col>3) return true;
+		else return false;
+    }
+    public Class<?> getColumnClass(int col) {
+    	
+		if(col>3) return JComboBox.class;
+		else return String.class;
+        
+    }
 	@Override
 	public int getColumnCount() {
 //		System.out.println("ColumnNames "+ColumnNames.size());

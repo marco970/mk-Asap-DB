@@ -194,16 +194,7 @@ public class NotesModel extends AbstractTableModel   {
 public Object[][]	getNotesMatrix()	{
 		return dane;
 	}
-	//	public Color getRowColor(int row) {		//zrobić lambdę albo to wyjebać wogóle
-//		if ((boolean)getValueAt(row,3)) rowColor[row]=Color.LIGHT_GRAY;
-//		else rowColor[row]=Color.WHITE;
-//		return rowColor[row];
-//	}
-//	public void setRowColor(int row) {
-//		if ((boolean)getValueAt(row,3)) rowColor[row]=Color.LIGHT_GRAY;
-//		else rowColor[row]=Color.WHITE;
-//		fireTableRowsUpdated(row, row);  
-//	}
+
 	public ArrayList<Notes> getNotes() {
 		return notes;
 	}
@@ -227,9 +218,6 @@ public Object[][]	getNotesMatrix()	{
 	}
 	public boolean isCellEditable(int row, int col)
     {
-//    	if (col==3) return true;
-////    	if (col==2 && !((Boolean) getValueAt(row,3)).booleanValue()) return true;
-//       else return false;
 		return false;
     }
     public String getColumnName(int i)	{
