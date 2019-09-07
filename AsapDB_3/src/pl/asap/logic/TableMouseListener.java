@@ -24,7 +24,7 @@ public class TableMouseListener extends MouseAdapter  {
        Point point = event.getPoint();
        int currentRow = table.rowAtPoint(point);
 
-       if (currentRow<0 || currentRow > model.getRowCount()) currentRow = model.getRowCount()-1;
+       if (currentRow < 0 || currentRow > model.getRowCount()) currentRow = model.getRowCount()-1;
        table.setRowSelectionInterval(currentRow, currentRow);
        
        int selectedRow = table.getSelectedRow();
