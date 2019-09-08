@@ -12,8 +12,8 @@ public class CalendarInside {
 
 	  private Calendar kalend;
 
-	  static String[] nazwaDnia = {  "nd", "pon", "wt",
-	                                 "śr", "czw", "pt", "sb" };
+	  static String[] nazwaDnia = {  "nd ", "pon", "wt ",
+	                                 "śr ", "czw", "pt ", "sob" };
 
 	  static String[] nazwaMies = { "styczeń", "luty", "marzec", "kwiecień",
 	                           "maj", "czerwiec", "lipiec", "sierpień",

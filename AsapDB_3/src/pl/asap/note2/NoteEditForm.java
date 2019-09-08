@@ -39,8 +39,7 @@ public class NoteEditForm extends JFrame implements ActionListener {
 	
 	private NoteEditForm(String nazwa, NotesModel model, int rowNr)	{
 		super("Postępowanie "+nazwa);
-		
-		
+
 		this.model = model;
 		this.rowNr = rowNr;
 		this.colCount=model.getColumnCount();
@@ -55,8 +54,6 @@ public class NoteEditForm extends JFrame implements ActionListener {
 			
 		ta.setLineWrap(true);
 		JScrollPane sp = new JScrollPane(ta);
-		
-		
 
 		addWindowListener(new WindowAdapter() {
             @Override

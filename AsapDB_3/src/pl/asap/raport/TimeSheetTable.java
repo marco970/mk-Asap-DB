@@ -24,21 +24,23 @@ public class TimeSheetTable extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 	private JTable table;
+	TimeSheetModel tsm;
+	
 
 
 	public TimeSheetTable(int month, int year)	{
 		super("Edycja Czasu Pracy");
-		TimeSheetModel tsm =new TimeSheetModel(month, year);
-		table = new JTable(tsm);
+		this.tsm =new TimeSheetModel(month, year);
+		this.table = new JTable(tsm);
 		
 		EntryMouseListener eml = new EntryMouseListener(table, tsm);
 		table.addMouseListener(eml);
 		
-		JPopupMenu popup = new JPopupMenu();
-		
-		doMassAddMenu(popup, new String[]{"edytuj czas pracy"});
-		
-		table.setComponentPopupMenu(popup);
+//		JPopupMenu popup = new JPopupMenu();
+//		
+//		doMassAddMenu(popup, new String[]{"edytuj czas pracy"});
+//		
+//		table.setComponentPopupMenu(popup);
 
 		table.setCellSelectionEnabled(true);
 		
@@ -73,14 +75,16 @@ public class TimeSheetTable extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String u = e.getActionCommand();
-		if (u.equals("edytuj czas pracy"))	{
-			System.out.println("jak dalej?");
-			int selectedRow = table.getSelectedRow();
-			int selectedCol = table.getSelectedColumn();
-			
-			System.out.println("MouseEvent: row "+selectedRow+" Col: "+selectedCol);
-		}
+//		String u = e.getActionCommand();
+//		if (u.equals("edytuj czas pracy"))	{
+//			System.out.println("jak dalej?");
+//			int selectedRow = table.getSelectedRow();
+//			int selectedCol = table.getSelectedColumn();
+//			
+//			EntryEditForm.getInstance("elo",tsm, selectedRow, selectedCol);
+//			
+//			System.out.println("MouseEvent: row "+selectedRow+" Col: "+selectedCol);
+//		}
 		
 
 	}

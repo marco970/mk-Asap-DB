@@ -11,13 +11,15 @@ import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
 
+import pl.asap.models.TimeSheetModel;
+
 public class EntryMouseListener extends MouseAdapter implements ActionListener {
 	
 	private JTable table;
-	private TableModel model;
+	private TimeSheetModel model;
 	JPopupMenu popup;
 	
-	public EntryMouseListener(JTable table, TableModel model)	{
+	public EntryMouseListener(JTable table, TimeSheetModel model)	{
 		this.table = table;
 		this.model = model;
 		
@@ -26,18 +28,23 @@ public class EntryMouseListener extends MouseAdapter implements ActionListener {
 		
 	}
 	
+	public void popupOnOf(boolean x)	{
+		popup.setEnabled(x);
+	}
 
-	
+
 	@Override
 	   public void mouseClicked(MouseEvent e) {
 		
-		popup.show(e.getComponent(), e.getX(), e.getY());
+//		popup.show(e.getComponent(), e.getX(), e.getY());
 		 Point point = e.getPoint();
 		 
 		 int currentRow = table.rowAtPoint(point);
 		 int currentCol = table.columnAtPoint(point);
 		 
-		 System.out.println("MouseEvent: "+e.isPopupTrigger());
+		 EntryEditForm.getInstance(this, model.getValueAt(currentRow, 0).toString(), model, currentRow, currentCol);
+		 
+//		 System.out.println("MouseEvent: "+e.isPopupTrigger());
 		
 	}
 	
