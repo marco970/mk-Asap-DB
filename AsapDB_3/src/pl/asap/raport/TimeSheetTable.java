@@ -3,6 +3,8 @@ package pl.asap.raport;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Enumeration;
 
 import javax.swing.JFrame;
@@ -10,6 +12,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
@@ -26,21 +29,13 @@ public class TimeSheetTable extends JFrame implements ActionListener {
 	private JTable table;
 	TimeSheetModel tsm;
 	
-
-
 	public TimeSheetTable(int month, int year)	{
 		super("Edycja Czasu Pracy");
 		this.tsm =new TimeSheetModel(month, year);
 		this.table = new JTable(tsm);
 		
-		EntryMouseListener eml = new EntryMouseListener(table, tsm);
+		EntryMouseListener eml = new EntryMouseListener(table, tsm, this);
 		table.addMouseListener(eml);
-		
-//		JPopupMenu popup = new JPopupMenu();
-//		
-//		doMassAddMenu(popup, new String[]{"edytuj czas pracy"});
-		
-//		table.setComponentPopupMenu(popup);
 
 		table.setCellSelectionEnabled(true);
 		
@@ -51,41 +46,20 @@ public class TimeSheetTable extends JFrame implements ActionListener {
 	    while (e.hasMoreElements()) {
 	      ((TableColumn) e.nextElement()).setHeaderRenderer(renderer);
 	    }
-		
-		
-		
+
 		JScrollPane sc = new JScrollPane(table);
-		
-		
+				
 		add(sc, BorderLayout.CENTER);
-		
-		
-		
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setSize(1500, 700);
 		setVisible(true);
+		
+
 	}
-	
-
-	
-
-
-
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-//		String u = e.getActionCommand();
-//		if (u.equals("edytuj czas pracy"))	{
-//			System.out.println("jak dalej?");
-//			int selectedRow = table.getSelectedRow();
-//			int selectedCol = table.getSelectedColumn();
-//			
-//			EntryEditForm.getInstance("elo",tsm, selectedRow, selectedCol);
-//			
-//			System.out.println("MouseEvent: row "+selectedRow+" Col: "+selectedCol);
-//		}
-		
 
 	}
 		
@@ -105,7 +79,14 @@ public class TimeSheetTable extends JFrame implements ActionListener {
 		
 		
 		public static void main(String[] args) {
-			new TimeSheetTable(8, 2019);
+			
+			
+			SwingUtilities.invokeLater(new Runnable() {
+			      @Override
+			      public void run() {
+			    	  new TimeSheetTable(8, 2019);
+			      }
+			    });
 		}
 
 }

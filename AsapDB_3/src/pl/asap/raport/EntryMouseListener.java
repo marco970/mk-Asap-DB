@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
@@ -21,14 +23,18 @@ public class EntryMouseListener extends MouseAdapter implements ActionListener {
 	private JTable table;
 	private TimeSheetModel model;
 	JPopupMenu popup;
+	TimeSheetTable timeSheetTable;
 	
-	public EntryMouseListener(JTable table, TimeSheetModel model)	{
+	public EntryMouseListener(JTable table, TimeSheetModel model, TimeSheetTable timeSheetTable)	{
 		this.table = table;
 		this.model = model;
+		this.timeSheetTable = timeSheetTable;
 		
 		popup = new JPopupMenu();
-		doMassAddMenu(popup, new String[]{"edytuj czas pracy"});
+		doMassAddMenu(popup, new String[]{"edytuj czas pracy"});	
 //		table.setComponentPopupMenu(popup);
+		
+
 		
 	}
 	
@@ -63,7 +69,7 @@ public class EntryMouseListener extends MouseAdapter implements ActionListener {
 		 table.addRowSelectionInterval(row,row);
 //		 table.setComponentPopupMenu(popup);
 		 popup.show(e.getComponent(), e.getX(), e.getY());
-		 //your popup menu goes here.
+		 
 		 }
 		
 	}
@@ -88,11 +94,22 @@ public class EntryMouseListener extends MouseAdapter implements ActionListener {
 			System.out.println("jak dalej?");
 			int currentRow = table.getSelectedRow();
 			int currentCol = table.getSelectedColumn();
-			if (false) {		//tu dać warunek dnia roboczego i obecności
+			if (true) {		//tu dać warunek dnia roboczego i obecności
 				EntryEditForm.getInstance(this, model.getValueAt(currentRow, 0).toString(), model, currentRow,
 						currentCol);
+				//dodawać do listy wszystkie otwarte instancje
 			}
-			else JOptionPane.showMessageDialog(new JFrame(), "Tego dnia Nie było Cię w pracy");
+			else JOptionPane.showMessageDialog(new JFrame(), "Tego dnia nie było Cię w pracy!");
+			timeSheetTable.addWindowListener(new WindowAdapter() {
+	            @Override
+	            public void windowClosing(WindowEvent e) {
+	               
+	            	System.out.println("WindowClosingDemo.windowClosing--->TimeSheetTable");
+//	            	przejść przez listę otwartych instancji i wszystkie pozamykać
+//	            	frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+//	            	albo frame.dispose...
+	            }
+	        });
 			System.out.println("MouseEvent: row "+currentRow+" Col: "+currentCol);
 		}
 		
