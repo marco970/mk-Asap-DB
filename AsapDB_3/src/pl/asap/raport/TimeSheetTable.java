@@ -39,7 +39,7 @@ public class TimeSheetTable extends JFrame implements ActionListener {
 //		JPopupMenu popup = new JPopupMenu();
 //		
 //		doMassAddMenu(popup, new String[]{"edytuj czas pracy"});
-//		
+		
 //		table.setComponentPopupMenu(popup);
 
 		table.setCellSelectionEnabled(true);
