@@ -7,6 +7,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
@@ -22,13 +23,15 @@ public class EntryMouseListener extends MouseAdapter implements ActionListener {
 	
 	private JTable table;
 	private TimeSheetModel model;
-	JPopupMenu popup;
-	TimeSheetTable timeSheetTable;
+	private JPopupMenu popup;
+	private TimeSheetTable timeSheetTable;
+	private ArrayList<EntryEditForm> instancje;
 	
 	public EntryMouseListener(JTable table, TimeSheetModel model, TimeSheetTable timeSheetTable)	{
 		this.table = table;
 		this.model = model;
 		this.timeSheetTable = timeSheetTable;
+		instancje = new ArrayList<>();
 		
 		popup = new JPopupMenu();
 		doMassAddMenu(popup, new String[]{"edytuj czas pracy"});	
@@ -90,21 +93,30 @@ public class EntryMouseListener extends MouseAdapter implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String u = e.getActionCommand();
+		
 		if (u.equals("edytuj czas pracy"))	{
 			System.out.println("jak dalej?");
 			int currentRow = table.getSelectedRow();
 			int currentCol = table.getSelectedColumn();
 			if (true) {		//tu dać warunek dnia roboczego i obecności
-				EntryEditForm.getInstance(this, model.getValueAt(currentRow, 0).toString(), model, currentRow,
+				EntryEditForm a = EntryEditForm.getInstance(this, model.getValueAt(currentRow, 0).toString(), model, currentRow,
 						currentCol);
+//				timeSheetTable.toBack();
+				
 				//dodawać do listy wszystkie otwarte instancje
+				instancje.add(a);
 			}
 			else JOptionPane.showMessageDialog(new JFrame(), "Tego dnia nie było Cię w pracy!");
+//			timeSheetTable.toBack();
 			timeSheetTable.addWindowListener(new WindowAdapter() {
 	            @Override
 	            public void windowClosing(WindowEvent e) {
 	               
 	            	System.out.println("WindowClosingDemo.windowClosing--->TimeSheetTable");
+	            	for (EntryEditForm el: instancje)	{
+	            		el.dispatchEvent(new WindowEvent(el, WindowEvent.WINDOW_CLOSING));
+//	            		System.out.println(el.getTitle()+" --> close");
+	            	}
 //	            	przejść przez listę otwartych instancji i wszystkie pozamykać
 //	            	frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 //	            	albo frame.dispose...
