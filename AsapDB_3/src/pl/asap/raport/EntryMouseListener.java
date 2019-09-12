@@ -43,6 +43,7 @@ public class EntryMouseListener extends MouseAdapter implements ActionListener {
 	
 	public void popupOnOf(boolean x)	{
 		popup.setEnabled(x);
+		instancje.add(null);
 	}
 
 
