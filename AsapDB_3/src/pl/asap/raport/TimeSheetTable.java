@@ -84,7 +84,7 @@ public class TimeSheetTable extends JFrame implements ActionListener {
 			SwingUtilities.invokeLater(new Runnable() {
 			      @Override
 			      public void run() {
-			    	  new TimeSheetTable(9, 2019);
+			    	  new TimeSheetTable(8, 2019);
 			      }
 			    });
 		}

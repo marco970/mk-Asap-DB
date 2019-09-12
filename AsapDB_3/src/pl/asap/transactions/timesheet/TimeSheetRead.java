@@ -73,11 +73,22 @@ public class TimeSheetRead {
 	public ArrayList<String[]> getEntryMatrix()	{
 		return entries; 
 	}
-	public int getIdPostepowanie(int row)	{
-		return Integer.parseInt(entries.get(row)[6]);
+	public int getIdPostepowanie(String sapNr, String date)	{
+		int entryId = 0;
+		int rowNr = 0;
+		for (String[] el: entries)	{
+			if (el[2].equals(sapNr) && el[3].equals(date))	rowNr = entries.indexOf(el);
+		}
+		return Integer.parseInt(entries.get(rowNr)[6]);
 	}
-	public int getIdEntry(int row)	{
-		return Integer.parseInt(entries.get(row)[7]);
+	public int getIdEntry(String sapNr, String date)	{
+		int entryId = 0;
+		int rowNr = 0;
+		for (String[] el: entries)	{
+			if (el[2].equals(sapNr) && el[3].equals(date))	rowNr = entries.indexOf(el);
+		}
+		return Integer.parseInt(entries.get(rowNr)[7]);
+
 	}
 	public boolean checkDate(String date, int month, int year)	{
 

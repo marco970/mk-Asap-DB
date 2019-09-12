@@ -162,11 +162,11 @@ public class TimeSheetModel extends AbstractTableModel  {
 		System.out.println("setValueAt test 2: "+getValueAt(row,col).toString());
 		int next = Integer.parseInt(getValueAt(row,col).toString());
 		if (previous==0)	{
-			System.out.println("new TimeSheetEntryNew("+tsr.getIdPostepowanie(row)+"date: "+ numString(col-3)+monthYear+")");
-			new TimeSheetEntryNew(tsr.getIdPostepowanie(row), getValueAt(row,3).toString(), numString(col-3)+monthYear, Integer.parseInt(o.toString()));
+			System.out.println("new TimeSheetEntryNew("+tsr.getIdPostepowanie(getValueAt(row, 3).toString(), numString(col-3)+monthYear)+", "+ numString(col-3)+monthYear+")");
+			new TimeSheetEntryNew(tsr.getIdPostepowanie(getValueAt(row, 3).toString(), numString(col-3)+monthYear), getValueAt(row,3).toString(), numString(col-3)+monthYear, Integer.parseInt(o.toString()));
 		}
 		if (next==0 && previous>0)	{
-			System.out.println("to delete: "+tsr.getIdEntry(row));
+			System.out.println("to delete: "+tsr.getIdEntry(getValueAt(row,3).toString(),numString(col-3)+monthYear));
 		}
 		
 		

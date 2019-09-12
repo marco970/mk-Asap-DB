@@ -7,7 +7,7 @@ public class ParaEntry {
 	
 	private int col;
 
-	public ParaEntry(int row, int col) {
+	public ParaEntry(int row, int col) {	//klasa do wywalenia
 		this.row = row;
 		this.col = col;
 	}
