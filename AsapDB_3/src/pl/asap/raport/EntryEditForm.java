@@ -30,14 +30,23 @@ public class EntryEditForm extends JFrame implements ActionListener {
 	
 	private static Set<String> checkIfOpenPara = new HashSet<String>();
 	
-	EntryMouseListener eml;
+	private EntryMouseListener eml;
 	
 	private JButton btnSave;
 	private JButton btnCancel;
+	TimeSheetModel model;
+	int rowNr;
+	int colNr;
+	
+	
+	JComboBox<Integer> jcb;
 	
 	
 	private EntryEditForm(EntryMouseListener eml, String nazwa, TimeSheetModel model, int rowNr, int colNr)	{
 		super("Czas pracy dla: "+nazwa);
+		this.model = model;
+		this.rowNr = rowNr;
+		this.colNr = colNr;
 		
 		this.eml = eml;
 
@@ -65,7 +74,7 @@ public class EntryEditForm extends JFrame implements ActionListener {
 		contentPane.add(panel, "cell 0 0,grow");
 		panel.add(new JLabel("Ilość godzin dla "+ nazwa), "cell 0 0");
 		
-		JComboBox<Integer> jcb = new JComboBox<>(vector);
+		jcb = new JComboBox<>(vector);
 		jcb.setSelectedItem(currentValue);
 		String colName = model.getColumnName(colNr);
 		System.out.println(colName.substring(14, 19)+" "+colName.substring(23, 26));
@@ -103,8 +112,15 @@ public class EntryEditForm extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		String u = e.getActionCommand();
 		
-			this.dispose();
+		System.out.println("action: "+u);
+		if(u=="Zapisz")	{
+//			System.out.println(jcb.getSelectedItem().toString());
+			model.setValueAt(jcb.getSelectedItem(), rowNr, colNr);
+		}
+		
+		this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING)); //to zamiast dispose, bo na to reague WindowsCloseListener
 	}
 
 }

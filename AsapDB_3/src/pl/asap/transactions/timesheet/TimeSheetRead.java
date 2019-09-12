@@ -37,7 +37,7 @@ public class TimeSheetRead {
 //		String hql2 = "select t.lista.ZZ, t.lista.Nazwa, t.sapNr, t.dateEntry, t.timePassed "
 //				+ "from TimeSheetEntity as t ";
 
-		String hql2 = "select t.lista.ZZ, t.lista.Nazwa, t.sapNr, t.dateEntry, t.timePassed, t.lista.Status "
+		String hql2 = "select t.lista.ZZ, t.lista.Nazwa, t.sapNr, t.dateEntry, t.timePassed, t.lista.Status, t.lista.idPostepowanie, t.entryId "
 				+ "from TimeSheetEntity as t ";
 				
 		session.beginTransaction();		
@@ -72,6 +72,12 @@ public class TimeSheetRead {
 	}
 	public ArrayList<String[]> getEntryMatrix()	{
 		return entries; 
+	}
+	public int getIdPostepowanie(int row)	{
+		return Integer.parseInt(entries.get(row)[6]);
+	}
+	public int getIdEntry(int row)	{
+		return Integer.parseInt(entries.get(row)[7]);
 	}
 	public boolean checkDate(String date, int month, int year)	{
 

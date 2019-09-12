@@ -42,7 +42,7 @@ public class CalendarInside {
 		  else return false;  
 	  }
 	  
-	  public String getDayName(int dayNo) {
+	  public String getDayName(int dayNo) {	//właściwie to Day of Week
 		  String CalendarOutput ="";
 		  kalend.set(rok, mies, dayNo);
 //		  System.out.println("getDayName: rok = "+rok+" mies = "+(mies+1)+" dayNo: "+dayNo+" --> "+(kalend.get(Calendar.DAY_OF_WEEK)-1));

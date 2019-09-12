@@ -9,6 +9,7 @@ import javax.swing.JComboBox;
 import javax.swing.table.AbstractTableModel;
 
 import pl.asap.raport.CalendarInside;
+import pl.asap.transactions.timesheet.TimeSheetEntryNew;
 import pl.asap.transactions.timesheet.TimeSheetRead;
 
 
@@ -17,12 +18,15 @@ public class TimeSheetModel extends AbstractTableModel  {
 	private static String[] fixedNames = {"ZZ", "Nazwa", "Status", "Numer Wpisu"};
 	private List<String> ColumnNames;
 	private List<List<Object>> daneEntries;
+	private TimeSheetRead tsr;
+	private String monthYear;
 	
 	public TimeSheetModel(int month, int year)	{
 		super();
 		CalendarInside ci = new CalendarInside(year, month);
 		this.ColumnNames = new ArrayList<>();
 		this.daneEntries = new ArrayList<>();
+		this.monthYear = "."+numString(month)+"."+year;	//data nie zawiera dnia
 		for(String el: fixedNames)	{		//dodanie lewej strony do headera
 			ColumnNames.add(el);		
 		}
@@ -31,7 +35,7 @@ public class TimeSheetModel extends AbstractTableModel  {
 			ColumnNames.add(el);
 		}
 //		utworzyć source
-		TimeSheetRead tsr = new TimeSheetRead(month, year);
+		tsr = new TimeSheetRead(month, year);
 		List<String[]> leftSide = tsr.getEntryMatrix();
 
 //		utworzyć leftModel
@@ -132,13 +136,47 @@ public class TimeSheetModel extends AbstractTableModel  {
 	@Override
 	public int getRowCount() {
 //		System.out.println("daneEntries "+daneEntries.size());
+		
+		///
+		
+		
+		////ames
+		
 		return daneEntries.size();
 	}
 	@Override
 	public Object getValueAt(int row, int col) {
 //		List<Object> rowData = daneEntries.get(row);
+		///
 		return daneEntries.get(row).get(col);
 	}
+	public void setValueAt(Object o, int row, int col)	{
+//		sprawdzenie:
+		
+		int previous = Integer.parseInt(getValueAt(row,col).toString());
+		System.out.println("setValueAt test 1: "+previous);
+		List<Object> arrRow = daneEntries.get(row);
+		arrRow.set(col, o);
+		daneEntries.set(row, arrRow);
+		fireTableCellUpdated(row, col);
+		System.out.println("setValueAt test 2: "+getValueAt(row,col).toString());
+		int next = Integer.parseInt(getValueAt(row,col).toString());
+		if (previous==0)	{
+			System.out.println("new TimeSheetEntryNew("+tsr.getIdPostepowanie(row)+"date: "+ numString(col-3)+monthYear+")");
+			new TimeSheetEntryNew(tsr.getIdPostepowanie(row), getValueAt(row,3).toString(), numString(col-3)+monthYear, Integer.parseInt(o.toString()));
+		}
+		if (next==0 && previous>0)	{
+			System.out.println("to delete: "+tsr.getIdEntry(row));
+		}
+		
+		
+	}
+	  public String numString(int num)	{
+			String numStr;
+			if (num<10) numStr = "0"+ num;
+			else numStr = ""+num;
+			return numStr;
+		}
 	public static void main(String[] args) {
 		new TimeSheetModel(8, 2019);
 	}
