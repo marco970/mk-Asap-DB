@@ -3,8 +3,6 @@ package pl.asap.raport;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.Enumeration;
 
 import javax.swing.JFrame;
@@ -84,7 +82,7 @@ public class TimeSheetTable extends JFrame implements ActionListener {
 			SwingUtilities.invokeLater(new Runnable() {
 			      @Override
 			      public void run() {
-			    	  new TimeSheetTable(8, 2019);
+			    	  new TimeSheetTable(9, 2019);
 			      }
 			    });
 		}

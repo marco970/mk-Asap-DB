@@ -20,6 +20,7 @@ public class TimeSheetModel extends AbstractTableModel  {
 	private List<List<Object>> daneEntries;
 	private TimeSheetRead tsr;
 	private String monthYear;
+	List<String[]> leftSide;
 	
 	public TimeSheetModel(int month, int year)	{
 		super();
@@ -27,6 +28,10 @@ public class TimeSheetModel extends AbstractTableModel  {
 		this.ColumnNames = new ArrayList<>();
 		this.daneEntries = new ArrayList<>();
 		this.monthYear = "."+numString(month)+"."+year;	//data nie zawiera dnia
+		
+		this.tsr = new TimeSheetRead(month, year);
+		this.leftSide = tsr.getEntryMatrix();
+		
 		for(String el: fixedNames)	{		//dodanie lewej strony do headera
 			ColumnNames.add(el);		
 		}
@@ -35,8 +40,7 @@ public class TimeSheetModel extends AbstractTableModel  {
 			ColumnNames.add(el);
 		}
 //		utworzyć source
-		tsr = new TimeSheetRead(month, year);
-		List<String[]> leftSide = tsr.getEntryMatrix();
+
 
 //		utworzyć leftModel
 //		List<List<String>> leftModel = new ArrayList<>();	//nie będzie potrzebne - tylko kontrolnie
@@ -154,16 +158,18 @@ public class TimeSheetModel extends AbstractTableModel  {
 //		sprawdzenie:
 		
 		int previous = Integer.parseInt(getValueAt(row,col).toString());
-		System.out.println("setValueAt test 1: "+previous);
+//		System.out.println("setValueAt test 1: "+previous);
 		List<Object> arrRow = daneEntries.get(row);
 		arrRow.set(col, o);
 		daneEntries.set(row, arrRow);
 		fireTableCellUpdated(row, col);
-		System.out.println("setValueAt test 2: "+getValueAt(row,col).toString());
+//		System.out.println("setValueAt test 2: "+getValueAt(row,col).toString());
 		int next = Integer.parseInt(getValueAt(row,col).toString());
 		if (previous==0)	{
-			System.out.println("new TimeSheetEntryNew("+tsr.getIdPostepowanie(getValueAt(row, 3).toString(), numString(col-3)+monthYear)+", "+ numString(col-3)+monthYear+")");
+//			System.out.println("new TimeSheetEntryNew("+tsr.getIdPostepowanie(getValueAt(row, 3).toString(), numString(col-3)+monthYear)+", "+ numString(col-3)+monthYear+")");
 			new TimeSheetEntryNew(tsr.getIdPostepowanie(getValueAt(row, 3).toString(), numString(col-3)+monthYear), getValueAt(row,3).toString(), numString(col-3)+monthYear, Integer.parseInt(o.toString()));
+//			tsr.getIdPostepowanie(getValueAt(row, 3).toString(), numString(col-3)+monthYear) - to mozna inaczej.... -->  leftSide.get(row)[6]
+			System.out.println("sprawdzamy: "+tsr.getIdPostepowanie(getValueAt(row, 3).toString(), numString(col-3)+monthYear)+" vs "+leftSide.get(row)[6]);
 		}
 		if (next==0 && previous>0)	{
 			System.out.println("to delete: "+tsr.getIdEntry(getValueAt(row,3).toString(),numString(col-3)+monthYear));
