@@ -13,16 +13,16 @@ import pl.asap.transactions.timesheet.TimeSheetEntryNew;
 import pl.asap.transactions.timesheet.TimeSheetRead;
 
 
-public class TimeSheetModel extends AbstractTableModel  {
+public class TimeSheetModel2 extends AbstractTableModel  {
 	
 	private static String[] fixedNames = {"ZZ", "Nazwa", "Status", "Numer Wpisu"};
 	private List<String> ColumnNames;
-	private List<List<Object>> daneEntries;
+	private List<List<Object>> daneEntries;	//dane modelu tabeli
 	private TimeSheetRead tsr;
 	private String monthYear;
-	List<String[]> leftSide;
+	List<String[]> leftSide;		//dane z odczytu z BD
 	
-	public TimeSheetModel(int month, int year)	{
+	public TimeSheetModel2(int month, int year)	{
 		super();
 		CalendarInside ci = new CalendarInside(year, month);
 		this.ColumnNames = new ArrayList<>();
@@ -48,21 +48,26 @@ public class TimeSheetModel extends AbstractTableModel  {
 //		List<List<String>> leftModel = new ArrayList<>();	//nie będzie potrzebne - tylko kontrolnie
 		Set<List<String>> leftSet = new HashSet<>();
 		List<List<String>> checkList = new ArrayList<>();
+		Set<String> nrSapSet = new HashSet<>();
+		List<String[]> leftComponent = new ArrayList<>();
+		
+		
 		
 		for(String[] el: leftSide)	{
-			List<String> leftModelRow = new ArrayList<>();
-			List<String> checkRow = new ArrayList<>();
-			for (int i=0; i<6; i++)	{
-				if (i<=2 || i==5) {
-					leftModelRow.add(el[i]);
-				}
-				if (i==2 || i==3 || i==4)	{
-					checkRow.add(el[i]);
-				}
+			int setBefore = nrSapSet.size();
+			nrSapSet.add(el[2]);
+			System.out.println("toSet --> " + el[2]);
+			int setAfter=nrSapSet.size();
+			if (setBefore==(setAfter-1))	{
+				leftComponent.add(el);
 			}
-//			leftModel.add(leftModelRow);	
-			leftSet.add(leftModelRow);
-			checkList.add(checkRow);
+			
+		}
+		for(String[] el: leftComponent)	{
+			for(int i = 0; i<7; i++)	{
+				System.out.print (el[i]+" ,, ");
+			}
+			System.out.println("----- ");
 		}
 //		for(List<String> el: leftModel)	{
 //			for (String elem: el)	{
@@ -72,7 +77,7 @@ public class TimeSheetModel extends AbstractTableModel  {
 //		}
 		for(List<String> el: leftSet)	{
 			for (String elem: el)	{
-				System.out.print(elem+" ||| ");
+				System.out.print(elem+", ");
 			}
 			System.out.println("---leftSet----");
 		}
@@ -186,7 +191,7 @@ public class TimeSheetModel extends AbstractTableModel  {
 			return numStr;
 		}
 	public static void main(String[] args) {
-		new TimeSheetModel(8, 2019);
+		new TimeSheetModel2(9, 2019);
 	}
 
 }
