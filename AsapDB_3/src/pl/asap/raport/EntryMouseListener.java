@@ -18,16 +18,17 @@ import javax.swing.SwingUtilities;
 import javax.swing.table.TableModel;
 
 import pl.asap.models.TimeSheetModel;
+import pl.asap.models.TimeSheetModel3;
 
 public class EntryMouseListener extends MouseAdapter implements ActionListener {
 	
 	private JTable table;
-	private TimeSheetModel model;
+	private TimeSheetModel3 model;
 	private JPopupMenu popup;
 	private TimeSheetTable timeSheetTable;
 	private ArrayList<EntryEditForm> instancje;
 	
-	public EntryMouseListener(JTable table, TimeSheetModel model, TimeSheetTable timeSheetTable)	{
+	public EntryMouseListener(JTable table, TimeSheetModel3 model, TimeSheetTable timeSheetTable)	{
 		this.table = table;
 		this.model = model;
 		this.timeSheetTable = timeSheetTable;
@@ -41,6 +42,10 @@ public class EntryMouseListener extends MouseAdapter implements ActionListener {
 		
 	}
 	
+	public EntryMouseListener(JTable table2, TimeSheetModel tsm, TimeSheetTable timeSheetTable2) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public void popupOnOf(boolean x)	{
 		popup.setEnabled(x);
 		instancje.add(null);

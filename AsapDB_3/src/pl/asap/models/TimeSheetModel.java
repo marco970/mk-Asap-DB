@@ -8,7 +8,9 @@ import java.util.Set;
 import javax.swing.JComboBox;
 import javax.swing.table.AbstractTableModel;
 
+import pl.asap.entity.Lista;
 import pl.asap.raport.CalendarInside;
+import pl.asap.transactions.lista.ReadTrans;
 import pl.asap.transactions.timesheet.TimeSheetEntryNew;
 import pl.asap.transactions.timesheet.TimeSheetRead;
 
@@ -17,10 +19,10 @@ public class TimeSheetModel extends AbstractTableModel  {
 	
 	private static String[] fixedNames = {"ZZ", "Nazwa", "Status", "Numer Wpisu"};
 	private List<String> ColumnNames;
-	private List<List<Object>> daneEntries;
+	private List<List<Object>> daneEntries;	//dane modelu tabeli
 	private TimeSheetRead tsr;
 	private String monthYear;
-	List<String[]> leftSide;
+	List<String[]> leftSide;		//dane z odczytu z BD
 	
 	public TimeSheetModel(int month, int year)	{
 		super();
@@ -48,21 +50,26 @@ public class TimeSheetModel extends AbstractTableModel  {
 //		List<List<String>> leftModel = new ArrayList<>();	//nie będzie potrzebne - tylko kontrolnie
 		Set<List<String>> leftSet = new HashSet<>();
 		List<List<String>> checkList = new ArrayList<>();
+		Set<String> nrSapSet = new HashSet<>();
+		List<String[]> leftComponent = new ArrayList<>();
+		
+		
 		
 		for(String[] el: leftSide)	{
-			List<String> leftModelRow = new ArrayList<>();
-			List<String> checkRow = new ArrayList<>();
-			for (int i=0; i<6; i++)	{
-				if (i<=2 || i==5) {
-					leftModelRow.add(el[i]);
-				}
-				if (i==2 || i==3 || i==4)	{
-					checkRow.add(el[i]);
-				}
+			int setBefore = nrSapSet.size();
+			nrSapSet.add(el[2]);
+			System.out.println("toSet --> " + el[2]);
+			int setAfter=nrSapSet.size();
+			if (setBefore==(setAfter-1))	{
+				leftComponent.add(el);
 			}
-//			leftModel.add(leftModelRow);	
-			leftSet.add(leftModelRow);
-			checkList.add(checkRow);
+			
+		}
+		for(String[] el: leftComponent)	{
+			for(int i = 0; i<7; i++)	{
+				System.out.print (el[i]+" ,, ");
+			}
+			System.out.println("----- ");
 		}
 //		for(List<String> el: leftModel)	{
 //			for (String elem: el)	{
@@ -72,7 +79,7 @@ public class TimeSheetModel extends AbstractTableModel  {
 //		}
 		for(List<String> el: leftSet)	{
 			for (String elem: el)	{
-				System.out.print(elem+" ||| ");
+				System.out.print(elem+", ");
 			}
 			System.out.println("---leftSet----");
 		}
@@ -169,9 +176,18 @@ public class TimeSheetModel extends AbstractTableModel  {
 		int next = Integer.parseInt(getValueAt(row,col).toString());
 		if (previous==0)	{
 //			System.out.println("new TimeSheetEntryNew("+tsr.getIdPostepowanie(getValueAt(row, 3).toString(), numString(col-3)+monthYear)+", "+ numString(col-3)+monthYear+")");
-			new TimeSheetEntryNew(tsr.getIdPostepowanie(getValueAt(row, 3).toString(), numString(col-3)+monthYear), getValueAt(row,3).toString(), numString(col-3)+monthYear, Integer.parseInt(o.toString()));
+//			new TimeSheetEntryNew(tsr.getIdPostepowanie(getValueAt(row, 3).toString(), numString(col-3)+monthYear), getValueAt(row,3).toString(), numString(col-3)+monthYear, Integer.parseInt(o.toString()));
 //			tsr.getIdPostepowanie(getValueAt(row, 3).toString(), numString(col-3)+monthYear) - to mozna inaczej.... -->  leftSide.get(row)[6]
+			
+			Lista lista = new Lista();
+			ReadTrans readDB = new ReadTrans(lista);
+			List<Lista> result = readDB.getResult();
+			for(Lista el: result)	{
+				System.out.println("res-check "+el.toString());
+			}
+			System.out.println("res-check end");
 			System.out.println("sprawdzamy: "+tsr.getIdPostepowanie(getValueAt(row, 3).toString(), numString(col-3)+monthYear)+" vs "+leftSide.get(row)[6]);
+			
 		}
 		if (next==0 && previous>0)	{
 			System.out.println("to delete: "+tsr.getIdEntry(getValueAt(row,3).toString(),numString(col-3)+monthYear));

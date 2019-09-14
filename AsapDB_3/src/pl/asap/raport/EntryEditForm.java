@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
-import pl.asap.models.TimeSheetModel;
+import pl.asap.models.TimeSheetModel3;
 
 public class EntryEditForm extends JFrame implements ActionListener {
 	
@@ -34,7 +34,7 @@ public class EntryEditForm extends JFrame implements ActionListener {
 	
 	private JButton btnSave;
 	private JButton btnCancel;
-	TimeSheetModel model;
+	TimeSheetModel3 model;
 	int rowNr;
 	int colNr;
 	
@@ -42,7 +42,7 @@ public class EntryEditForm extends JFrame implements ActionListener {
 	JComboBox<Integer> jcb;
 	
 	
-	private EntryEditForm(EntryMouseListener eml, String nazwa, TimeSheetModel model, int rowNr, int colNr)	{
+	private EntryEditForm(EntryMouseListener eml, String nazwa, TimeSheetModel3 model, int rowNr, int colNr)	{
 		super("Czas pracy dla: "+nazwa);
 		this.model = model;
 		this.rowNr = rowNr;
@@ -96,7 +96,7 @@ public class EntryEditForm extends JFrame implements ActionListener {
 		setBounds(100, 100, 460, 300);
 	}
 	
-	public static synchronized EntryEditForm getInstance(EntryMouseListener eml, String nazwa, TimeSheetModel mod, int rowNo, int colNo)	{
+	public static synchronized EntryEditForm getInstance(EntryMouseListener eml, String nazwa, TimeSheetModel3 mod, int rowNo, int colNo)	{
 		for(String el: checkIfOpenPara)	{
 			System.out.println("set: "+el);
 		}

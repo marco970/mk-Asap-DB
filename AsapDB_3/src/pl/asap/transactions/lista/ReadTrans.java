@@ -12,6 +12,8 @@ public class ReadTrans extends TransBlank{
 	public Object[][] dane;
 	private Object[] ids;
 	public int rowNr;
+	
+	List<Lista> result;
 
 	public ReadTrans(Object bean) {
 		super(bean);
@@ -21,7 +23,7 @@ public class ReadTrans extends TransBlank{
 		String select = "from Lista";
 				
 		Query query = session.createQuery(select);
-		List<Lista> result = query.getResultList();
+		result = query.getResultList();
 		
 		session.getTransaction().commit();
 		factory.close();
@@ -71,6 +73,9 @@ public class ReadTrans extends TransBlank{
 	}
 	public Object[][] getMatrix()	{
 		return dane;
+	}
+	public List<Lista> getResult()	{
+		return result;
 	}
 	public int rowNr()	{
 		return dane[0].length;

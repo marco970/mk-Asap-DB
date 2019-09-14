@@ -15,6 +15,7 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 import pl.asap.models.TimeSheetModel;
+import pl.asap.models.TimeSheetModel3;
 
 public class TimeSheetTable extends JFrame implements ActionListener {
 	
@@ -25,11 +26,11 @@ public class TimeSheetTable extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 	private JTable table;
-	TimeSheetModel tsm;
+	TimeSheetModel3 tsm;
 	
 	public TimeSheetTable(int month, int year)	{
 		super("Edycja Czasu Pracy");
-		this.tsm =new TimeSheetModel(month, year);
+		this.tsm =new TimeSheetModel3(month, year);
 		this.table = new JTable(tsm);
 		
 		EntryMouseListener eml = new EntryMouseListener(table, tsm, this);
@@ -82,7 +83,7 @@ public class TimeSheetTable extends JFrame implements ActionListener {
 			SwingUtilities.invokeLater(new Runnable() {
 			      @Override
 			      public void run() {
-			    	  new TimeSheetTable(9, 2019);
+			    	  new TimeSheetTable(8, 2019);
 			      }
 			    });
 		}
