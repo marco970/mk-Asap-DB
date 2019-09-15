@@ -171,16 +171,26 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 		int next = Integer.parseInt(getValueAt(row,col).toString());
 		if (previous==0)	{
 //			System.out.println("new TimeSheetEntryNew("+tsr.getIdPostepowanie(getValueAt(row, 3).toString(), numString(col-3)+monthYear)+", "+ numString(col-3)+monthYear+")");
-//			new TimeSheetEntryNew(tsr.getIdPostepowanie(getValueAt(row, 3).toString(), numString(col-3)+monthYear), getValueAt(row,3).toString(), numString(col-3)+monthYear, Integer.parseInt(o.toString()));
+			
 //			tsr.getIdPostepowanie(getValueAt(row, 3).toString(), numString(col-3)+monthYear) - to mozna inaczej.... -->  leftSide.get(row)[6]
 			
 			Lista lista = new Lista();
 			ReadTrans readDB = new ReadTrans(lista);
 			List<Lista> result = readDB.getResult();
+			String nrSap = this.getValueAt(row, 3).toString();
+			int idPostepowanie = 0;
+			System.out.println("nrSap: "+nrSap);
+//			System.out.println("z Listy: "+result.get(row).getZZ());
 			for(Lista el: result)	{
 				System.out.println("res-check "+el.toString());
+//				tu szukamy idPostepowanie 
+				if (nrSap.equals(el.getZZ()) || nrSap.equals(el.getPZ()) || nrSap.equals(el.getDK()))	{
+					idPostepowanie = el.getIdPostepowanie();
+				}
+				
 			}
-			System.out.println("res-check end");
+			System.out.println("res-check end; idPostepowanie = "+idPostepowanie);
+			new TimeSheetEntryNew(idPostepowanie, getValueAt(row,3).toString(), numString(col-3)+monthYear, Integer.parseInt(o.toString()));
 			System.out.println("sprawdzamy: "+tsr.getIdPostepowanie(getValueAt(row, 3).toString(), numString(col-3)+monthYear)+" vs "+leftSide.get(row)[6]);
 			
 		}

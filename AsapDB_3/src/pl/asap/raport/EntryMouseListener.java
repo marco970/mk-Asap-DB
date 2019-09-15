@@ -17,7 +17,6 @@ import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.TableModel;
 
-import pl.asap.models.TimeSheetModel;
 import pl.asap.models.TimeSheetModel3;
 
 public class EntryMouseListener extends MouseAdapter implements ActionListener {
@@ -42,9 +41,7 @@ public class EntryMouseListener extends MouseAdapter implements ActionListener {
 		
 	}
 	
-	public EntryMouseListener(JTable table2, TimeSheetModel tsm, TimeSheetTable timeSheetTable2) {
-		// TODO Auto-generated constructor stub
-	}
+
 
 	public void popupOnOf(boolean x)	{
 		popup.setEnabled(x);

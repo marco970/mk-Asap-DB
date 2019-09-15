@@ -14,7 +14,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
-import pl.asap.models.TimeSheetModel;
 import pl.asap.models.TimeSheetModel3;
 
 public class TimeSheetTable extends JFrame implements ActionListener {
@@ -83,7 +82,7 @@ public class TimeSheetTable extends JFrame implements ActionListener {
 			SwingUtilities.invokeLater(new Runnable() {
 			      @Override
 			      public void run() {
-			    	  new TimeSheetTable(8, 2019);
+			    	  new TimeSheetTable(9, 2019);
 			      }
 			    });
 		}

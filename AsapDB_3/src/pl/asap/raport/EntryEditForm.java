@@ -117,6 +117,7 @@ public class EntryEditForm extends JFrame implements ActionListener {
 		System.out.println("action: "+u);
 		if(u=="Zapisz")	{
 //			System.out.println(jcb.getSelectedItem().toString());
+			
 			model.setValueAt(jcb.getSelectedItem(), rowNr, colNr);
 		}
 		
