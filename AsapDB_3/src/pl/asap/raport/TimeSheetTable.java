@@ -32,12 +32,19 @@ public class TimeSheetTable extends JFrame implements ActionListener {
 		this.tsm =new TimeSheetModel3(month, year);
 		this.table = new JTable(tsm);
 		
+		
+		
 		EntryMouseListener eml = new EntryMouseListener(table, tsm, this);
 		table.addMouseListener(eml);
 
 		table.setCellSelectionEnabled(true);
 		
 		TableColumnModel tcm = table.getColumnModel();	
+		tcm.getColumn(0).setPreferredWidth(230);
+		tcm.getColumn(1).setPreferredWidth(200);
+		tcm.getColumn(2).setPreferredWidth(100);
+		tcm.getColumn(3).setPreferredWidth(230);
+		
 		
 	    MultiLineHeaderRenderer renderer = new MultiLineHeaderRenderer();
 	    Enumeration<TableColumn> e = table.getColumnModel().getColumns();
