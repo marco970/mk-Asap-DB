@@ -6,11 +6,13 @@ import java.awt.event.ActionListener;
 import java.util.Enumeration;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
@@ -44,6 +46,13 @@ public class TimeSheetTable extends JFrame implements ActionListener {
 		tcm.getColumn(1).setPreferredWidth(200);
 		tcm.getColumn(2).setPreferredWidth(100);
 		tcm.getColumn(3).setPreferredWidth(230);
+		
+	    DefaultTableCellRenderer rendererAlign = new DefaultTableCellRenderer();
+	    rendererAlign.setHorizontalAlignment(JLabel.CENTER);
+	    for (int i =4; i<tsm.getColumnCount(); i++)	{
+	    	tcm.getColumn(i).setCellRenderer(rendererAlign);
+	    }
+	    
 		
 		
 	    MultiLineHeaderRenderer renderer = new MultiLineHeaderRenderer();
