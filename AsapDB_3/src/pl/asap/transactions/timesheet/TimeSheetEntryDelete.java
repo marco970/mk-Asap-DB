@@ -26,10 +26,7 @@ public class TimeSheetEntryDelete {
 		
 		session.getTransaction().commit();
 		factory.close();
-		System.out.println("updated?");
-		
-		
-		
+	
 	}
 
 }

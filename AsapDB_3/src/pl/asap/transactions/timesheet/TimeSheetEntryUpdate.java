@@ -26,7 +26,7 @@ public class TimeSheetEntryUpdate {
 		
 		session.getTransaction().commit();
 		factory.close();
-		System.out.println("updated?");
+//		System.out.println("updated");
 		
 		
 		

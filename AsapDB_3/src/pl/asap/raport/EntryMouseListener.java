@@ -92,7 +92,7 @@ public class EntryMouseListener extends MouseAdapter implements ActionListener {
 		String u = e.getActionCommand();
 		
 		if (u.equals("edytuj czas pracy"))	{
-			System.out.println("jak dalej?");
+//			System.out.println("jak dalej?");
 			int currentRow = table.getSelectedRow();
 			int currentCol = table.getSelectedColumn();
 			if (true) {		//tu dać warunek dnia roboczego i obecności
