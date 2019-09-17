@@ -4,6 +4,8 @@ package pl.asap.raport;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.TimeZone;
 
 public class CalendarInside {
@@ -55,11 +57,19 @@ public class CalendarInside {
 		  date = dayNo+"/"+(mies+1)+"/"+rok;
 		  return date;
 	  }
-	  public int getColumn(int month, int dayNo)	{
-		  
-		  return 1;
+	  public List<Integer> getWeekendDays()	{
+		  List<Integer> weekendDays = new LinkedList<>();
+		  System.out.println("weekendDays:");
+		  for (int i = 1; i <= getDayNo(mies); i++ )	{
+			  System.out.print(getDayName(i)+", ");
+			  if(getDayName(i).equals("nd ") || getDayName(i).equals("sob"))	{
+				  weekendDays.add(i);
+				  System.out.print(i+", ");
+			  } 
+		  }
+		  return weekendDays;
 	  }
-	  
+
 	  public ArrayList<String> getAllDays()	{
 		  ArrayList<String> days = new ArrayList<String>();
 		  String a;
@@ -71,6 +81,7 @@ public class CalendarInside {
 		  }
 		return days;
 	  }
+	  
 	  public String numString(int num)	{
 			String numStr;
 			if (num<10) numStr = "0"+ num;

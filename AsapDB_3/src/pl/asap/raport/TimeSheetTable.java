@@ -1,6 +1,7 @@
 package pl.asap.raport;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Enumeration;
@@ -52,7 +53,12 @@ public class TimeSheetTable extends JFrame implements ActionListener {
 	    for (int i =4; i<tsm.getColumnCount(); i++)	{
 	    	tcm.getColumn(i).setCellRenderer(rendererAlign);
 	    }
-	    
+	    DefaultTableCellRenderer rendererDayOff = new DefaultTableCellRenderer();
+	    rendererDayOff.setBackground(Color.lightGray);
+	    rendererDayOff.setHorizontalAlignment(JLabel.CENTER);
+	    for (int el: tsm.getCi().getWeekendDays())	{
+	    	tcm.getColumn(el+3).setCellRenderer(rendererDayOff);
+	    }
 		
 		
 	    MultiLineHeaderRenderer renderer = new MultiLineHeaderRenderer();

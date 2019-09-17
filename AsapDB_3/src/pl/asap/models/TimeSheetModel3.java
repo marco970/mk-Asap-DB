@@ -24,10 +24,11 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 	private TimeSheetRead tsr;
 	private String monthYear;
 	List<String[]> leftSide;
+	CalendarInside ci;
 	
 	public TimeSheetModel3(int month, int year)	{
 		super();
-		CalendarInside ci = new CalendarInside(year, month);
+		this.ci = new CalendarInside(year, month);
 		this.ColumnNames = new ArrayList<>();
 		this.daneEntries = new ArrayList<>();
 		this.monthYear = "."+numString(month)+"."+year;	//data nie zawiera dnia
@@ -119,6 +120,9 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 			 daneEntries.add(rowEntries);
 			 System.out.println("------x"+daneEntries.size()+" -- "+daneEntries.get(daneEntries.size()-1).size()+"x------");
 		}
+	}
+	public CalendarInside getCi() {
+		return ci;
 	}
 	public boolean isCellEditable(int row, int col)
     {
