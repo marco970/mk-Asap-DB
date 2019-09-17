@@ -59,12 +59,12 @@ public class CalendarInside {
 	  }
 	  public List<Integer> getWeekendDays()	{
 		  List<Integer> weekendDays = new LinkedList<>();
-		  System.out.println("weekendDays:");
+//		  System.out.println("weekendDays:");
 		  for (int i = 1; i <= getDayNo(mies); i++ )	{
-			  System.out.print(getDayName(i)+", ");
+//			  System.out.print(getDayName(i)+", ");
 			  if(getDayName(i).equals("nd ") || getDayName(i).equals("sob"))	{
 				  weekendDays.add(i);
-				  System.out.print(i+", ");
+//				  System.out.print(i+", ");
 			  } 
 		  }
 		  return weekendDays;

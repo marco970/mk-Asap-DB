@@ -47,26 +47,26 @@ public class TimeSheetRead {
 		
 		for (int i = 0; i<entryRow.size(); i++)	{
 			Object[] atom = (Object[]) entryRow.get(i);
-			for (Object el: atom)	{
-				System.out.println("---> "+el.toString());
-			}
+//			for (Object el: atom)	{
+//				System.out.println("---> "+el.toString());
+//			}
 			String[] atomS = new String[atom.length];
-			System.out.println(atom.length+" -asd- "+atomS.length);
+//			System.out.println(atom.length+" -asd- "+atomS.length);
 			if(checkDate(atom[3].toString(), month, year))	{
 				for (int j = 0; j < atom.length; j++)	{
-					System.out.println(atom[j].toString());
+//					System.out.println(atom[j].toString());
 					atomS[j] = atom[j].toString();
 				}
 				entries.add(atomS);
 			}
 		}
 		session.getTransaction().commit();
-		for (String[] el1:entries) {
-			for (String el2: el1)	{
-				System.out.print("|| "+el2);
-			}
-			System.out.println(" --------- ");
-		}
+//		for (String[] el1:entries) {
+//			for (String el2: el1)	{
+//				System.out.print("|| "+el2);
+//			}
+//			System.out.println(" --------- ");
+//		}
 		session.close();
 		factory.close();
 	}

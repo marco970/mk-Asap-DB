@@ -11,6 +11,7 @@ import javax.swing.table.AbstractTableModel;
 import pl.asap.entity.Lista;
 import pl.asap.raport.CalendarInside;
 import pl.asap.transactions.lista.ReadTrans;
+import pl.asap.transactions.timesheet.TimeSheetEntryDelete;
 import pl.asap.transactions.timesheet.TimeSheetEntryNew;
 import pl.asap.transactions.timesheet.TimeSheetEntryUpdate;
 import pl.asap.transactions.timesheet.TimeSheetRead;
@@ -74,18 +75,18 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 //			}
 //			System.out.println("---leftModel----");
 //		}
-		for(List<String> el: leftSet)	{
-			for (String elem: el)	{
-				System.out.print(elem+" ||| ");
-			}
-			System.out.println("---leftSet----");
-		}
-		for(List<String> el: checkList)	{
-			for (String elem: el)	{
-				System.out.print(elem+" |-| ");
-			}
-			System.out.println("---checkSList----");
-		}
+//		for(List<String> el: leftSet)	{
+//			for (String elem: el)	{
+//				System.out.print(elem+" ||| ");
+//			}
+//			System.out.println("---leftSet----");
+//		}
+//		for(List<String> el: checkList)	{
+//			for (String elem: el)	{
+//				System.out.print(elem+" |-| ");
+//			}
+//			System.out.println("---checkSList----");
+//		}
 //		utworzyć rightModel i skleić
 		String dayEntry;
 		//iteracja po "lewej stronie"
@@ -114,11 +115,11 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 				 }
 			 }
 
-			 for (Object elem: rowEntries)	{
-				 System.out.print(elem+ " | ");
-			 }
+//			 for (Object elem: rowEntries)	{
+//				 System.out.print(elem+ " | ");
+//			 }
 			 daneEntries.add(rowEntries);
-			 System.out.println("------x"+daneEntries.size()+" -- "+daneEntries.get(daneEntries.size()-1).size()+"x------");
+//			 System.out.println("------x"+daneEntries.size()+" -- "+daneEntries.get(daneEntries.size()-1).size()+"x------");
 		}
 	}
 	public CalendarInside getCi() {
@@ -149,12 +150,6 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 	@Override
 	public int getRowCount() {
 //		System.out.println("daneEntries "+daneEntries.size());
-		
-		///
-		
-		
-		////ames
-		
 		return daneEntries.size();
 	}
 	@Override
@@ -185,32 +180,31 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 			List<Lista> result = readDB.getResult();
 			String nrSap = this.getValueAt(row, 3).toString();
 			
-			System.out.println("nrSap: "+nrSap);
+//			System.out.println("nrSap: "+nrSap);
 //			System.out.println("z Listy: "+result.get(row).getZZ());
 			for(Lista el: result)	{
-				System.out.println("res-check "+el.toString());
+//				System.out.println("res-check "+el.toString());
 //				tu szukamy idPostepowanie 
 				if (nrSap.equals(el.getZZ()) || nrSap.equals(el.getPZ()) || nrSap.equals(el.getDK()))	{
 					idPostepowanie = el.getIdPostepowanie();
-				}
-				
+				}	
 			}
-			System.out.println("res-check end; idPostepowanie = "+idPostepowanie);
+//			System.out.println("res-check end; idPostepowanie = "+idPostepowanie);
 			new TimeSheetEntryNew(idPostepowanie, getValueAt(row,3).toString(), numString(col-3)+monthYear, Integer.parseInt(o.toString()));
-			System.out.println("sprawdzamy: "+tsr.getIdPostepowanie(getValueAt(row, 3).toString(), numString(col-3)+monthYear)+" vs "+leftSide.get(row)[6]);
+//			System.out.println("sprawdzamy: "+tsr.getIdPostepowanie(getValueAt(row, 3).toString(), numString(col-3)+monthYear)+" vs "+leftSide.get(row)[6]);
 			
 		}
 		if (next == 0 && previous > 0)	{
+			int entryId = tsr.getIdEntry(getValueAt(row,3).toString(),numString(col-3)+monthYear);
+			new TimeSheetEntryDelete(entryId);
 //			System.out.println("to delete: "+idPostepowanie);
-			System.out.println("to delete: "+tsr.getIdEntry(getValueAt(row,3).toString(),numString(col-3)+monthYear));
+//			System.out.println("to delete: "+tsr.getIdEntry(getValueAt(row,3).toString(),numString(col-3)+monthYear));
 		}
 		if (next > 0 && previous > 0)		{
 			int entryId = tsr.getIdEntry(getValueAt(row,3).toString(),numString(col-3)+monthYear);
-			System.out.println("to update :"+entryId);
+//			System.out.println("to update :"+entryId);
 			new TimeSheetEntryUpdate(entryId, next);
-		}
-		
-		
+		}	
 	}
 	  public String numString(int num)	{
 			String numStr;
@@ -221,5 +215,4 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 	public static void main(String[] args) {
 		new TimeSheetModel3(8, 2019);
 	}
-
 }

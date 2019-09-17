@@ -13,7 +13,6 @@ import pl.asap.entity.Config;
 import pl.asap.entity.Lista;
 import pl.asap.entity.Notes;
 import pl.asap.entity.TimeSheetEntity;
-import pl.asap.transactions.timesheet.TimeSheetRead3;
 
 public class NoteRead {
 	
@@ -67,10 +66,10 @@ public class NoteRead {
 		for(Notes note: lista.getNotes() )	{
 			
 			notes.add(note);
-			System.out.println(note.toString());
+//			System.out.println(note.toString());
 		}
 		
-		System.out.println("xxxxxxxxxxxxxxx-> "+notes.toString());
+//		System.out.println("xxxxxxxxxxxxxxx-> "+notes.toString());
 		
 		session.getTransaction().commit();
 		factory.close();

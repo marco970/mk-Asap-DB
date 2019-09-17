@@ -36,18 +36,12 @@ public class EntryMouseListener extends MouseAdapter implements ActionListener {
 		popup = new JPopupMenu();
 		doMassAddMenu(popup, new String[]{"edytuj czas pracy"});	
 //		table.setComponentPopupMenu(popup);
-		
-
-		
-	}
 	
-
-
+	}	
 	public void popupOnOf(boolean x)	{
 		popup.setEnabled(x);
 		instancje.add(null);
 	}
-
 
 	@Override
 	   public void mouseClicked(MouseEvent e) {
@@ -62,7 +56,7 @@ public class EntryMouseListener extends MouseAdapter implements ActionListener {
 		 
 //		 System.out.println("MouseEvent: "+e.isPopupTrigger());
 		 
-		 System.out.println("abc -> SwingUtilities.isRightMouseButton(e) == "+SwingUtilities.isRightMouseButton(e));
+//		 System.out.println("abc -> SwingUtilities.isRightMouseButton(e) == "+SwingUtilities.isRightMouseButton(e));
 		 
 		 if(SwingUtilities.isRightMouseButton(e) == true)
 		 {
@@ -115,7 +109,7 @@ public class EntryMouseListener extends MouseAdapter implements ActionListener {
 	            @Override
 	            public void windowClosing(WindowEvent e) {
 	               
-	            	System.out.println("WindowClosingDemo.windowClosing--->TimeSheetTable");
+//	            	System.out.println("WindowClosingDemo.windowClosing--->TimeSheetTable");
 	            	for (EntryEditForm el: instancje)	{
 	            		el.dispatchEvent(new WindowEvent(el, WindowEvent.WINDOW_CLOSING));
 //	            		System.out.println(el.getTitle()+" --> close");
@@ -125,7 +119,7 @@ public class EntryMouseListener extends MouseAdapter implements ActionListener {
 //	            	albo frame.dispose...
 	            }
 	        });
-			System.out.println("MouseEvent: row "+currentRow+" Col: "+currentCol);
+//			System.out.println("MouseEvent: row "+currentRow+" Col: "+currentCol);
 		}
 		
 	}

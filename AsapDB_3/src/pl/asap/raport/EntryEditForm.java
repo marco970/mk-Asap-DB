@@ -24,22 +24,14 @@ public class EntryEditForm extends JFrame implements ActionListener {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-//	private static Set<Integer> checkIfOpenRow = new HashSet<Integer>();
-//	private static Set<Integer> checkIfOpenCol = new HashSet<Integer>();
-	
 	private static Set<String> checkIfOpenPara = new HashSet<String>();
-	
 	private EntryMouseListener eml;
-	
 	private JButton btnSave;
 	private JButton btnCancel;
-	TimeSheetModel3 model;
-	int rowNr;
-	int colNr;
-	
-	
-	JComboBox<Integer> jcb;
+	private TimeSheetModel3 model;
+	private int rowNr;
+	private int colNr;
+	private JComboBox<Integer> jcb;
 	
 	
 	private EntryEditForm(EntryMouseListener eml, String nazwa, TimeSheetModel3 model, int rowNr, int colNr)	{
@@ -60,7 +52,7 @@ public class EntryEditForm extends JFrame implements ActionListener {
             @Override
             public void windowClosing(WindowEvent e) {
                 if (checkIfOpenPara.contains("r"+rowNr+"c"+colNr)) checkIfOpenPara.remove("r"+rowNr+"c"+colNr);
-            	System.out.println("WindowClosingDemo.windowClosing--->EntryEditForm");
+//            	System.out.println("WindowClosingDemo.windowClosing--->EntryEditForm");
             }
         });
 		
@@ -77,7 +69,7 @@ public class EntryEditForm extends JFrame implements ActionListener {
 		jcb = new JComboBox<>(vector);
 		jcb.setSelectedItem(currentValue);
 		String colName = model.getColumnName(colNr);
-		System.out.println(colName.substring(14, 19)+" "+colName.substring(23, 26));
+//		System.out.println(colName.substring(14, 19)+" "+colName.substring(23, 26));
 		
 		panel.add(new JLabel(model.getColumnName(colNr)), "cell 0 5");
 		panel.add(jcb, "cell 1 5");
@@ -97,9 +89,9 @@ public class EntryEditForm extends JFrame implements ActionListener {
 	}
 	
 	public static synchronized EntryEditForm getInstance(EntryMouseListener eml, String nazwa, TimeSheetModel3 mod, int rowNo, int colNo)	{
-		for(String el: checkIfOpenPara)	{
-			System.out.println("set: "+el);
-		}
+//		for(String el: checkIfOpenPara)	{
+//			System.out.println("set: "+el);
+//		}
 		if (!checkIfOpenPara.contains("r"+rowNo+"c"+colNo))	{
 			checkIfOpenPara.add("r"+rowNo+"c"+colNo);
 			return new EntryEditForm (eml, nazwa, mod, rowNo, colNo);
@@ -114,7 +106,7 @@ public class EntryEditForm extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String u = e.getActionCommand();
 		
-		System.out.println("action: "+u);
+//		System.out.println("action: "+u);
 		if(u=="Zapisz")	{
 //			System.out.println(jcb.getSelectedItem().toString());
 			
