@@ -47,7 +47,18 @@ public class DataExtractor2 {
 	}
 
 	public Object getExRow(String string) {
-		// TODO Auto-generated method stub
+		
+		//deklaracja kolekcji kol
+		//lecimy po wierszu od pos 4
+		//if string = subStrint sapNr
+			//dodajemy do kolekcji sapNr
+		//else
+			//dodajemy do kolekcji ""
+		
+		
+		
+		
+		
 		return null;
 	}
 
