@@ -24,12 +24,15 @@ public class DataExtractor2 {
 
 	public Object getExRow(String string) {
 		
-		//deklaracja kolekcji kol
-		//lecimy po wierszu od pos 4
-		//if string = subStrint sapNr
-			//dodajemy do kolekcji sapNr
-		//else
-			//dodajemy do kolekcji ""
+//		deklaracje kolekcji 
+//		przydałaby się definicja obiektu
+//		obiekt jest listą list albo mapą list k-nr dnia V - lista PZ jeszcze nazwa (ZZ, PZ, DK) i druga mapa z godzinami....
+		
+//		lecimy po cyferkach
+		
+//		jeśli nrSap = PZ
+		
+		
 		
 		
 		
