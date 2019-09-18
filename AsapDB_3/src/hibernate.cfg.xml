@@ -6,7 +6,7 @@
 
 	<session-factory>
 
-		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
 		<property name="connection.url">jdbc:mysql://localhost:3307/portableu?useSSL=false&amp;serverTimezone=UTC</property>
 		<!--  <property name="connection.url">jdbc:mysql://localhost/openmeetings?autoReconnect=true&amp;useUnicode=true&amp;createDatabaseIfNotExist=true&amp;characterEncoding=utf-8</property>-->  
 		
