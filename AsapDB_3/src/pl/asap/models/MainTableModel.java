@@ -12,7 +12,9 @@ import pl.asap.entity.Lista;
 import pl.asap.transactions.lista.ReadTrans;
 import pl.asap.transactions.lista.SaveTrans;
 import pl.asap.transactions.lista.UpdateTrans;
+import pl.asap.transactions.timesheet.TSEQueryGet;
 import pl.asap.transactions.timesheet.TimeSheetEntryNew;
+import pl.asap.transactions.timesheet.TimeSheetEntryUpdate;
 
 public class MainTableModel extends AbstractTableModel {
 	
@@ -181,12 +183,12 @@ public class MainTableModel extends AbstractTableModel {
 		fireTableDataChanged();
 		Object[] cids = new ReadTrans(lista).getIDs();
 		int a = (int) cids[cids.length-1];
-		System.out.println("idPostepowanie----> "+a);
-		int j=0;
-		for (Object el: savedRow)	{
-			System.out.println("--> "+el.toString()+" -- "+j);
-			j++;
-		}
+//		System.out.println("idPostepowanie----> "+a);
+//		int j=0;
+//		for (Object el: savedRow)	{
+//			System.out.println("--> "+el.toString()+" -- "+j);
+//			j++;
+//		}
 		new TimeSheetEntryNew(a, (String) savedRow[0], (String) savedRow[10], 1);
 	}
 	public void recordUpdate(Object[] savedRow, int rowNr) { //--zapis do DB
@@ -200,7 +202,26 @@ public class MainTableModel extends AbstractTableModel {
 		String dateEntry = "";
 		for (int i=0; i<savedRow.length; i++)	{
 			if (!savedRow[i].equals(dane[rowNr][i]) && i<=3)	{
-				if (i==2) nrSap = (String) savedRow[i-1];
+				if (i==2) {		//jeśli WP nie ma
+//					nrSap = (String) savedRow[i-1];		//to do usunięcia
+//					System.out.println("WP? "+savedRow[i-1]);
+					//tu mozemy wrzucić aktualizację wpisu
+					
+					
+					//uzyskanie entyId
+					System.out.println("idPost -> "+this.getId(rowNr));
+					System.out.println("PZ -> "+this.getValueAt(rowNr, 1).toString());
+					
+					TSEQueryGet tse = new TSEQueryGet(this.getValueAt(rowNr, 1).toString());
+					int entryId = tse.getEntryId();
+					if (entryId==0)	nrSap = (String) savedRow[i-1];	
+					else	{
+						int timePassed = tse.getTimePassed();
+						System.out.println("entryId-> "+entryId+" timePassed-> "+timePassed);
+						//aktualizacja entry
+						new TimeSheetEntryUpdate(entryId, timePassed+1);
+					}
+				}
 				else nrSap = (String) savedRow[i];
 				dateEntry = (String) savedRow[i+10];
 			}
