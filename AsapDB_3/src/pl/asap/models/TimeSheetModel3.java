@@ -24,8 +24,9 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 	private List<List<Object>> daneEntries;
 	private TimeSheetRead tsr;
 	private String monthYear;
-	List<String[]> leftSide;
-	CalendarInside ci;
+	private List<String[]> leftSide;
+	private CalendarInside ci;
+	private List<Integer> leftDayHours;
 	
 	public TimeSheetModel3(int month, int year)	{
 		super();

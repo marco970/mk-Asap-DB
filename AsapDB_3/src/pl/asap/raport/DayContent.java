@@ -39,7 +39,7 @@ public class DayContent {
 	
 	public void addContent(String sapNr, int time)	{
 		String str = sapNr.substring(0, 2);
-		System.out.println("-> "+str);
+//		System.out.println("-> "+str);
 		if (str.equals("ZZ")) {
 //			System.out.println(str);
 			
@@ -77,6 +77,7 @@ public class DayContent {
 	
 	public void DayContentShow()	{
 		System.out.println("dzień: "+ dayNr);
+		System.out.println("--------------------------------------");
 		System.out.println("ZZ time: "+ zzTime);
 		for (String el: zzSet)	{
 			System.out.print(el+", ");

@@ -21,19 +21,37 @@ public class DataExtractor2 {
 		
 		List<DayContent> dcl = new ArrayList<>();
 		
+		for (int j = 0; j < tsm3.getColumnCount(); j++)	{
+			if (j>3)	{
+			DayContent dc = DayContent.getInstance(j-4);
+			dcl.add(dc);
+//			System.out.println("dayNrA: "+(j-4));
+			}
+		}
+		
 		for (int i = 0; i < tsm3.getRowCount(); i++)		{
 			for (int j = 0; j < tsm3.getColumnCount(); j++)	{
 				System.out.print(tsm3.getValueAt(i, j)+" | ");
 				if (j>3)	{
-					DayContent dc = DayContent.getInstance(j-4);
-					dc.addContent(tsm3.getValueAt(i, 3).toString(), Integer.valueOf(tsm3.getValueAt(i, j).toString()));
-					dcl.add(dc);
+					
+					dcl.get(j-4).addContent(tsm3.getValueAt(i, 3).toString(), Integer.valueOf(tsm3.getValueAt(i, j).toString()));
+//					System.out.println("dayNrB: "+(j-4));
 				}
 				
 			}
 			System.out.println();
 		}
 		System.out.println("--------------------------------------------------");
+		//tu wyślietlamy dla przetestowania
+		
+		for (int i=0; i<tsm3.getColumnCount(); i++)	{
+			
+			if (i>3) {
+				dcl.get(i-4).DayContentShow();
+//				stąd mozna sobie brać dane odpowiednimi metodami
+			}
+		}
+		
 		
 	}
 
