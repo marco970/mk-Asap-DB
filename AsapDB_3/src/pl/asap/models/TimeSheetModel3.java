@@ -27,6 +27,7 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 	private List<String[]> leftSide;
 	private CalendarInside ci;
 	private List<Integer> leftDayHours;
+	private List<Integer> totalDayTime;
 	
 	public TimeSheetModel3(int month, int year)	{
 		super();
@@ -47,11 +48,7 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 		for (String el: ci.getAllDays())	{		//dodanie prawej strony do headera
 			ColumnNames.add(el);
 		}
-
-
-
 //		utworzyć leftModel
-//		List<List<String>> leftModel = new ArrayList<>();	//nie będzie potrzebne - tylko kontrolnie
 		Set<List<String>> leftSet = new HashSet<>();
 		List<List<String>> checkList = new ArrayList<>();
 		
@@ -66,29 +63,10 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 					checkRow.add(el[i]);
 				}
 			}
-//			leftModel.add(leftModelRow);	
 			leftSet.add(leftModelRow);
 			checkList.add(checkRow);
 		}
-//		for(List<String> el: leftModel)	{
-//			for (String elem: el)	{
-//				System.out.print(elem+" ||| ");
-//			}
-//			System.out.println("---leftModel----");
-//		}
-//		for(List<String> el: leftSet)	{
-//			for (String elem: el)	{
-//				System.out.print(elem+" ||| ");
-//			}
-//			System.out.println("---leftSet----");
-//		}
-//		for(List<String> el: checkList)	{
-//			for (String elem: el)	{
-//				System.out.print(elem+" |-| ");
-//			}
-//			System.out.println("---checkSList----");
-//		}
-//		utworzyć rightModel i skleić
+
 		String dayEntry;
 		//iteracja po "lewej stronie"
 		for(List<String> el: leftSet)	{
@@ -102,12 +80,6 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 			 }
 			 
 //			 aktualizacja rightModel (Model) tu: 
-				/*
-				 * w każeym wierszu rowEntries aktualizujemy wszystkie daty
-				 * idiemy po wierszu rowEntries 
-				 * 	idziemy po liście - dla każdego rowEntries
-				 * 		sprawdzamy czy sapNr z listy z sapNr z rowEtries - jeśli ok, to nadpisujemy rowEntries
-				 */
 			 for (List<String> checkEl: checkList)	{
 				 if (checkEl.get(0).equals(rowEntries.get(3)))	{
 					 dayEntry = checkEl.get(1).substring(0,2);
@@ -116,12 +88,47 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 				 }
 			 }
 
-//			 for (Object elem: rowEntries)	{
-//				 System.out.print(elem+ " | ");
-//			 }
 			 daneEntries.add(rowEntries);
 //			 System.out.println("------x"+daneEntries.size()+" -- "+daneEntries.get(daneEntries.size()-1).size()+"x------");
 		}
+//		List<Object>
+		totalDayTime = new ArrayList<>();
+		for(int i=0; i<getColumnCount()-4;i++)	{
+			
+			totalDayTime.add(i, 0);
+		}
+		for(List<Object> elR: daneEntries)	{
+			System.out.println();
+			for(int i=0; i<getColumnCount()-4;i++)	{
+				int val = Integer.valueOf(elR.get(i+4).toString());
+				
+				int dayTime = totalDayTime.get(i);
+				
+				System.out.print(val+" | ");
+				setDayTime(i, val);
+//				if ((dayTime+val)<=8) {
+//					dayTime = dayTime + val;
+//				}
+//				else dayTime = 8;
+//				totalDayTime.set(i, dayTime);
+				
+			}
+		}
+		System.out.println();
+		System.out.println("------------------");
+		
+		for(int i=0; i<getColumnCount()-4;i++)	{
+			System.out.print(totalDayTime.get(i)+" | ");
+		}
+		System.out.println();
+	}
+	public void setDayTime(int i, int val)	{
+		int dayTime = totalDayTime.get(i);
+		if ((dayTime+val)<=8) {
+			dayTime = dayTime + val;
+		}
+		else dayTime = 8;
+		totalDayTime.set(i, dayTime);		
 	}
 	public CalendarInside getCi() {
 		return ci;
@@ -170,6 +177,7 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 		fireTableCellUpdated(row, col);
 //		System.out.println("setValueAt test 2: "+getValueAt(row,col).toString());
 		int next = Integer.parseInt(getValueAt(row,col).toString());
+		this.setDayTime(col-4, next);
 		int idPostepowanie = 0;
 		if (next > 0 && previous == 0)	{
 //			System.out.println("new TimeSheetEntryNew("+tsr.getIdPostepowanie(getValueAt(row, 3).toString(), numString(col-3)+monthYear)+", "+ numString(col-3)+monthYear+")");
@@ -207,7 +215,10 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 			new TimeSheetEntryUpdate(entryId, next);
 		}	
 	}
-	  public String numString(int num)	{
+	  public int getTotalDayTime(int i) {
+		return totalDayTime.get(i);
+	}
+	public String numString(int num)	{
 			String numStr;
 			if (num<10) numStr = "0"+ num;
 			else numStr = ""+num;

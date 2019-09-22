@@ -76,6 +76,8 @@ public class DayContent {
 	}
 	
 	public void DayContentShow()	{
+		System.out.println();
+		System.out.println("--------------------------------------");
 		System.out.println("dzień: "+ dayNr);
 		System.out.println("--------------------------------------");
 		System.out.println("ZZ time: "+ zzTime);

@@ -6,6 +6,7 @@ package pl.asap.raport;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.PropertyConfigurator;
 
 import pl.asap.models.TimeSheetModel3;
@@ -78,9 +79,9 @@ public class DataExtractor2 {
 		
 		System.out.println("hello");
 
-//		BasicConfigurator.configure();
-		String log4jConfPath = "D:\\GitRepo\\mk-Asap-DB\\AsapDB_3\\log4j.properties";
-		PropertyConfigurator.configure(log4jConfPath);
+		BasicConfigurator.configure();
+//		String log4jConfPath = "D:\\GitRepo\\mk-Asap-DB\\AsapDB_3\\log4j.properties";
+//		PropertyConfigurator.configure(log4jConfPath);
 		
 		TimeSheetModel3 tsm3 = new TimeSheetModel3(9, 2019);
 		new DataExtractor2(tsm3);
