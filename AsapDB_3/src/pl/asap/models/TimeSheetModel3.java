@@ -105,12 +105,7 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 				int dayTime = totalDayTime.get(i);
 				
 				System.out.print(val+" | ");
-				setDayTime(i, val);
-//				if ((dayTime+val)<=8) {
-//					dayTime = dayTime + val;
-//				}
-//				else dayTime = 8;
-//				totalDayTime.set(i, dayTime);
+				addDayTime(i, val);
 				
 			}
 		}
@@ -122,14 +117,7 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 		}
 		System.out.println();
 	}
-	public void setDayTime(int i, int val)	{
-		int dayTime = totalDayTime.get(i);
-		if ((dayTime+val)<=8) {
-			dayTime = dayTime + val;
-		}
-		else dayTime = 8;
-		totalDayTime.set(i, dayTime);		
-	}
+
 	public CalendarInside getCi() {
 		return ci;
 	}
@@ -177,7 +165,7 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 		fireTableCellUpdated(row, col);
 //		System.out.println("setValueAt test 2: "+getValueAt(row,col).toString());
 		int next = Integer.parseInt(getValueAt(row,col).toString());
-		this.setDayTime(col-4, next);
+//		this.setDayTime(col-4, next);
 		int idPostepowanie = 0;
 		if (next > 0 && previous == 0)	{
 //			System.out.println("new TimeSheetEntryNew("+tsr.getIdPostepowanie(getValueAt(row, 3).toString(), numString(col-3)+monthYear)+", "+ numString(col-3)+monthYear+")");
@@ -215,8 +203,25 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 			new TimeSheetEntryUpdate(entryId, next);
 		}	
 	}
-	  public int getTotalDayTime(int i) {
+	public int getTotalDayTime(int i) {
 		return totalDayTime.get(i);
+	}
+	public void addDayTime(int i, int val)	{
+		int dayTime = totalDayTime.get(i);
+		dayTime = dayTime + val;
+//		if ((dayTime+val)<=8) {
+//			dayTime = dayTime + val;
+//		}
+//		else dayTime = 8;
+		totalDayTime.set(i, dayTime);		
+//		System.out.println("TSM3 - > ["+i+"] "+totalDayTime.get(i));
+	}
+	public void setTotalDayTime(int rowNr, int i, int val)	{
+		int colNr = i+4;
+		int delta = val - Integer.valueOf(daneEntries.get(rowNr).get(colNr).toString()); 
+		System.out.println("delta = "+delta);
+		addDayTime(i, delta);
+		System.out.println("TSM3 - > ["+i+"] "+totalDayTime.get(i));
 	}
 	public String numString(int num)	{
 			String numStr;
