@@ -28,20 +28,21 @@ public class DayContent {
 		this.dayNr = dayNr;
 		this.zzSet = new HashSet<>();
 		this.zzTime = 0;
-		this.pzSet = new HashSet<>();;
+		this.pzSet = new HashSet<>();
 		this.pzTime = 0;
-		this.wpSet = new HashSet<>();;
+		this.wpSet = new HashSet<>();
 		this.wpTime = 0;
-		this.dkSet = new HashSet<>();;
+		this.dkSet = new HashSet<>();
 		this.dkTime = 0;
 	}
 	
 	
 	public void addContent(String sapNr, int time)	{
 		String str = sapNr.substring(0, 2);
-//		System.out.println("-> "+str);
+//		String comp = zzNumer.substring(3, 6);
+//		System.out.println("company-> "+comp);
 		if (str.equals("ZZ")) {
-//			System.out.println(str);
+//			System.out.println("addContent-"+str);
 			
 			if (time>0) {
 				zzSet.add(sapNr);
@@ -50,7 +51,7 @@ public class DayContent {
 			else zzSet.add("");
 		}
 		if (str.equals("PZ")) {
-//			System.out.println(str);
+//			System.out.println("addContent-"+str);
 			if (time>0) {
 				pzSet.add(sapNr);
 				pzTime = pzTime + time;
@@ -58,7 +59,7 @@ public class DayContent {
 			else pzSet.add("");
 		}
 		if (str.equals("WP")) {
-//			System.out.println(str);
+//			System.out.println("addContent-"+str);
 			if (time>0) {
 				wpSet.add(sapNr);
 				wpTime = wpTime + time;
@@ -66,13 +67,78 @@ public class DayContent {
 			else wpSet.add("");
 		}
 		if (str.equals("DK")) {
-//			System.out.println(str);
+//			System.out.println("addContent-"+str);
 			if (time>0) {
 				dkSet.add(sapNr);
 				dkTime = dkTime + time;
 			}
 			else dkSet.add("");
 		}
+	}
+	
+	public Integer getHours(String typeOfSapNr)	{
+		int dayHours = 0;
+		
+		if (typeOfSapNr.equals("ZZ")) {
+			dayHours=zzTime;
+		}
+		if (typeOfSapNr.equals("PZ")) {
+			dayHours=pzTime;
+		}
+		if (typeOfSapNr.equals("WP")) {
+			dayHours=wpTime;
+		}
+		if (typeOfSapNr.equals("DK")) {
+			dayHours=dkTime;
+		}
+		
+		return dayHours;
+	}
+	
+	public String getContent(String typeOfSapNr)		{
+		
+		String resultString = "";
+		if (typeOfSapNr.equals("ZZ")) {
+			for (String el: zzSet)	{	
+					if (!el.equals("")) {
+						if (!resultString.equals("")) {
+							resultString = resultString + ", " + el;
+						}
+						else resultString = el;
+					} 
+			}
+		}
+		if (typeOfSapNr.equals("PZ")) {
+			for (String el: pzSet)	{	
+					if (!el.equals("")) {
+						if (!resultString.equals("")) {
+							resultString = resultString + ", " + el;
+						}
+						else resultString = el;
+					} 
+			}
+		}
+		if (typeOfSapNr.equals("WP")) {
+			for (String el: wpSet)	{	
+					if (!el.equals("")) {
+						if (!resultString.equals("")) {
+							resultString = resultString + ", " + el;
+						}
+						else resultString = el;
+					} 
+			}
+		}
+		if (typeOfSapNr.equals("DK")) {
+			for (String el: dkSet)	{	
+					if (!el.equals("")) {
+						if (!resultString.equals("")) {
+							resultString = resultString + ", " + el;
+						}
+						else resultString = el;
+					} 
+			}
+		}
+		return resultString;
 	}
 	
 	public void DayContentShow()	{
@@ -107,22 +173,20 @@ public class DayContent {
 			return new DayContent(dayNr);
 		}
 		else return null;
-			
-		
 	}
 	
 	public static void main(String[] args) {
 		
 //		System.out.println("DayContent");
 		DayContent dc = new DayContent(1);
-		dc.addContent("ZZ/PLI0002234", 2);
-		dc.addContent("WP/PLI0002234", 1);
-		dc.addContent("DK/PLI0002234",1);
-		dc.addContent("PZ/0000002234",0);
-		dc.addContent("ZZ/PLI0002235", 2);
-		dc.addContent("WP/PLI0002261", 3);
-		dc.addContent("DK/PLI0002237",5);
-		dc.addContent("PZ/0000002558",1);
+//		dc.addContent("ZZ/PLI0002234", 2);
+//		dc.addContent("WP/PLI0002234", 1);
+//		dc.addContent("DK/PLI0002234",1);
+//		dc.addContent("PZ/0000002234",0);
+//		dc.addContent("ZZ/PLI0002235", 2);
+//		dc.addContent("WP/PLI0002261", 3);
+//		dc.addContent("DK/PLI0002237",5);
+//		dc.addContent("PZ/0000002558",1);
 		dc.DayContentShow();
 		
 		

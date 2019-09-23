@@ -146,7 +146,9 @@ public class RaportForm extends RawForm implements ActionListener {
 			
 			String a = comboBoxYear.getSelectedItem().toString();
 			int y = Integer.parseInt(a);
-			
+			System.out.println("u "+u);
+			System.out.println("w "+w);
+			System.out.println("v "+v);
 			
 
 //			try {
