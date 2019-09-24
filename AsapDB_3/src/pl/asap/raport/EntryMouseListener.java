@@ -46,41 +46,35 @@ public class EntryMouseListener extends MouseAdapter implements ActionListener {
 	@Override
 	   public void mouseClicked(MouseEvent e) {
 		
-//		popup.show(e.getComponent(), e.getX(), e.getY());
 		 Point point = e.getPoint();
 		 
-		 int currentRow = table.rowAtPoint(point);
-		 int currentCol = table.columnAtPoint(point);
-		 
-//		 EntryEditForm.getInstance(this, model.getValueAt(currentRow, 0).toString(), model, currentRow, currentCol);
-		 
-//		 System.out.println("MouseEvent: "+e.isPopupTrigger());
-		 
-//		 System.out.println("abc -> SwingUtilities.isRightMouseButton(e) == "+SwingUtilities.isRightMouseButton(e));
-		 
+//		 int currentRow = table.rowAtPoint(point);
+//		 int currentCol = table.columnAtPoint(point);
+//		 System.out.println("EML, currerntCol-"+currentCol);
+
 		 if(SwingUtilities.isRightMouseButton(e) == true)
 		 {
-			 System.out.println("SwingUtilities.isRightMouseButton(e) == "+SwingUtilities.isRightMouseButton(e));
+//			 System.out.println("SwingUtilities.isRightMouseButton(e) == "+SwingUtilities.isRightMouseButton(e));
 		 int row = table.rowAtPoint(e.getPoint());
 		 int col = table.columnAtPoint(e.getPoint());
+		 
+//		 System.out.println("EML, col-"+col);
+		 
 
 		 table.clearSelection();
 		 table.addColumnSelectionInterval(col, col);
 		 table.addRowSelectionInterval(row,row);
-//		 table.setComponentPopupMenu(popup);
-		 popup.show(e.getComponent(), e.getX(), e.getY());
-		 
+		 if (col>3) {
+			popup.show(e.getComponent(), e.getX(), e.getY());
+		}
 		 }
-		
 	}
-	
 	public void doMassAddMenu(JPopupMenu popup, String...args)	{
 		for (int i =0; i<=args.length-1; i++)	{
 			JMenuItem menuItem = mi(args[i]);	
 			popup.add(menuItem);
 		}
 	}
-	
 	public JMenuItem mi(String str)	{
 		JMenuItem mi = new JMenuItem(str);
 		mi.addActionListener(this);	
@@ -92,7 +86,6 @@ public class EntryMouseListener extends MouseAdapter implements ActionListener {
 		String u = e.getActionCommand();
 		
 		if (u.equals("edytuj czas pracy"))	{
-//			System.out.println("jak dalej?");
 			int currentRow = table.getSelectedRow();
 			int currentCol = table.getSelectedColumn();
 			if (true) {		//tu dać warunek dnia roboczego i obecności

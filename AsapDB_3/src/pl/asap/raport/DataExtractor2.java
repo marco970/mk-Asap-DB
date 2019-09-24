@@ -30,7 +30,8 @@ public class DataExtractor2 {
 			if (j>3)	{
 			DayContent dc = DayContent.getInstance(j-4);
 			dcl.add(dc);
-//			System.out.println("dayNrA: "+(j-4));
+			System.out.println("dayNrA: "+(j-4));
+			dc.DayContentShow();
 			}
 		}
 		
@@ -107,7 +108,7 @@ public class DataExtractor2 {
 		PropertyConfigurator.configure(log4jConfPath);
 		
 		TimeSheetModel3 tsm3 = new TimeSheetModel3(9, 2019);
-		DataExtractor2 de2 = new DataExtractor2(tsm3, "", "", "CPO");
+		DataExtractor2 de2 = new DataExtractor2(tsm3, "PLK", "", "");
 		String[] nrSap = de2.getExRow("ZZ");
 		Integer[] hours = de2.getExHours("ZZ");
 		
