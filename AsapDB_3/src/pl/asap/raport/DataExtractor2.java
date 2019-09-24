@@ -30,16 +30,16 @@ public class DataExtractor2 {
 			if (j>3)	{
 			DayContent dc = DayContent.getInstance(j-4);
 			dcl.add(dc);
-			System.out.println("dayNrA: "+(j-4));
-			dc.DayContentShow();
+//			System.out.println("dayNrA: "+(j-4));
+//			dc.DayContentShow();
 			}
 		}
 		
 		for (int i = 0; i < tsm3.getRowCount(); i++)	{
 			String company = tsm3.getValueAt(i, 0).toString().substring(3, 6);
 			boolean companyCondition = !company.equals(u) && !company.equals(w) && !company.equals(v);
-			System.out.println();
-			System.out.println("row-"+i+" company-"+company+" u-"+u+" w-"+w+" v-"+v+" condit-"+companyCondition);
+//			System.out.println();
+//			System.out.println("row-"+i+" company-"+company+" u-"+u+" w-"+w+" v-"+v+" condit-"+companyCondition);
 			if (companyCondition) {
 				for (int j = 0; j < tsm3.getColumnCount(); j++) {
 					if (!(j == 1 || j == 2)) {
@@ -72,18 +72,18 @@ public class DataExtractor2 {
 
 	public String[] getExRow(String string) {
 
-		System.out.println();
+//		System.out.println();
 		List<String> extRow = new ArrayList<>();
 		for (int i = 0; i<dcl.size();i++)	{
-			System.out.print(i+" ");
-			System.out.println(dcl.get(i).getContent(string));
+//			System.out.print(i+" ");
+//			System.out.println(dcl.get(i).getContent(string));
 			extRow.add(dcl.get(i).getContent(string));
 		}
 		
 		String[] extRowArr = new String[extRow.size()];
 		for (int i = 0; i<dcl.size();i++)	{
-			System.out.print(i+" ");
-			System.out.println(extRow.get(i));
+//			System.out.print(i+" ");
+//			System.out.println(extRow.get(i));
 			extRowArr[i] = extRow.get(i);
 		}
 		return extRowArr;

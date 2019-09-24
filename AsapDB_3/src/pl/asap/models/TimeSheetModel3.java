@@ -35,6 +35,7 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 		this.ColumnNames = new ArrayList<>();
 		this.daneEntries = new ArrayList<>();
 		this.monthYear = "."+numString(month)+"."+year;	//data nie zawiera dnia
+		System.out.println("tsm3, monthYear-"+monthYear);
 		
 		this.tsr = new TimeSheetRead(month, year);
 		

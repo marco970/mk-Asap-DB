@@ -50,6 +50,7 @@ public class RaportExcell {
 		int rowNumber = 9;
 		CalendarInside ct = new CalendarInside(year, month);
 		int dniMies = ct.getDayNo(month);
+		System.out.println("dniMies-"+dniMies);
 		
 		TimeSheetModel3 tsm3 = new TimeSheetModel3(month+1, year);
 		
@@ -163,8 +164,8 @@ public class RaportExcell {
 					//pole z sumą
 					
 					String formula = "SUM("+kolumns[l-1]+"4:"+kolumns[l-1]+"7)";
-					//System.out.println(formula);
-					cellArr[7][j].setCellType(CellType.FORMULA);
+//					System.out.println(formula);
+//					cellArr[7][j].setCellType(CellType.FORMULA);
 					cellArr[7][j].setCellFormula(formula);
 					cellArr[7][j].setCellStyle(cs2);
 					
@@ -185,7 +186,7 @@ public class RaportExcell {
 				String begin = kolumns[0];
 				String end = kolumns[dniMies-1];
 				String formulaSum = "SUM("+begin+"8:"+end+"8)";
-				cellArr[7][dniMies*2+2].setCellType(CellType.FORMULA);
+//				cellArr[7][dniMies*2+2].setCellType(CellType.FORMULA);
 				cellArr[7][dniMies*2+2].setCellFormula(formulaSum);
 				cellArr[7][dniMies*2+2].setCellStyle(cs2);
 				
@@ -250,8 +251,7 @@ public class RaportExcell {
 				cellArr[7][1].setCellStyle(cs3);
 				
 				//generowanie zawartości
-
-			for (int i = 2; i<=dniMies*2-1+2; i=i+2)	{
+				
 //				String[] zz = new String[de.getExRow("ZZ").length];
 //				String[] pz = new String[de.getExRow("PZ").length];
 //				String[] dk = new String[de.getExRow("DK").length];
@@ -264,6 +264,9 @@ public class RaportExcell {
 				Integer[] zzHours = de.getExHours("ZZ");
 				Integer[] pzHours = de.getExHours("PZ");
 				Integer[] dkHours = de.getExHours("DK");
+
+			for (int i = 2; i<=dniMies*2-1+2; i=i+2)	{
+
 				
 				//System.out.println("RE i/2 : "+(i/2)+" dniMies "+dniMies);
 				cellArr[3][i+1].setCellValue(zz[i/2]);
@@ -284,7 +287,7 @@ public class RaportExcell {
 
 			String defaultPath = new JFileChooser().getFileSystemView().getDefaultDirectory().toString()+"\\02_TimeSheets\\";
 			new File(defaultPath).getAbsoluteFile().mkdirs();
-			File file = new File(defaultPath+kupiec+"_TimeSheet_"+(month+1)+"_"+year+"_"+"_Raport.xls");
+			File file = new File(defaultPath+kupiec+"_TimeSheet_"+(month+1)+"_"+year+"_"+"_RaportTest.xls");
 			FileOutputStream fos = new FileOutputStream(file);
 				workbook.write(fos);
 				
@@ -300,7 +303,7 @@ public class RaportExcell {
 				
 		}
 	public static void main(String[] args) throws IOException	{ //metoda do wywalenia
-		new RaportExcell(new MainTableModel(), "Marcin Kuciak", 11, 2018, "PLK", "", "");
+		new RaportExcell(new MainTableModel(), "Marcin Kuciak", 9, 2019, "PLK", "", "");
 		//do testów, potem wywalić metodę
 	}
 }
