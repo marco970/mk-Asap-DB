@@ -91,8 +91,8 @@ public class EkranGlowny implements ActionListener {
 	
 	public void createGui(String tytul)	{
 
-		int i = data.getRowCount();
-		int j = data.getColumnCount();
+//		int i = data.getRowCount();
+//		int j = data.getColumnCount();
 		
 //		for(int m = 0; m<=i-1; m++)	{
 //			for (int n =0; n<=j-1; n++)	{

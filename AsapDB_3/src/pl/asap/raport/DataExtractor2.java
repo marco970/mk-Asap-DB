@@ -40,7 +40,7 @@ public class DataExtractor2 {
 			boolean companyCondition = !company.equals(u) && !company.equals(w) && !company.equals(v);
 //			System.out.println();
 //			System.out.println("row-"+i+" company-"+company+" u-"+u+" w-"+w+" v-"+v+" condit-"+companyCondition);
-			if (companyCondition) {
+			if (true) {
 				for (int j = 0; j < tsm3.getColumnCount(); j++) {
 					if (!(j == 1 || j == 2)) {
 //						System.out.print(tsm3.getValueAt(i, j) + " | ");

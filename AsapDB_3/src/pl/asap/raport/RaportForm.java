@@ -20,7 +20,7 @@ import pl.asap.models.MainTableModel;
 public class RaportForm extends RawForm implements ActionListener {
 	
 
-	private JButton btnSave = new JButton("Generuj raport");
+	private JButton btnSave = new JButton("Dalej");
 	private JButton btnCancel = new JButton("Anuluj");
 
 	private JCheckBox plk;
@@ -50,7 +50,7 @@ public class RaportForm extends RawForm implements ActionListener {
 	private MainTableModel model;
 
 	public RaportForm(MainTableModel model) {
-		super("Generowanie Raportu", "powitanie");
+		super("Tworzenie raportu miesięcznego", "powitanie");
 		
 		this.model = model;
 		//data - miesiąc
@@ -133,7 +133,7 @@ public class RaportForm extends RawForm implements ActionListener {
 		if(command.equals("Anuluj"))	{
 			closeThisFrame();
 		}
-		if(command.equals("Generuj raport"))	{
+		if(command.equals("Dalej"))	{
 			ArrayList<String> monthsList = new ArrayList<String>(Arrays.asList(monate));
 			
 			String u = " ";
@@ -149,19 +149,17 @@ public class RaportForm extends RawForm implements ActionListener {
 			System.out.println("u "+u);
 			System.out.println("w "+w);
 			System.out.println("v "+v);
-			
+//			System.out.println("miesiąc: "+(monthsList.indexOf(comboBoxMonth.getSelectedItem())+1));
 
+			new TimeSheetTable(monthsList.indexOf(comboBoxMonth.getSelectedItem())+1, y, u, w, v);
+			
 //			try {
-//				new RaportExcell(model , "Marcin Kuciak", monthsList.indexOf(comboBoxMonth.getSelectedItem()), y, u, w, v);
+//				new RaportExcell(model , "Marcin Kuciak", (monthsList.indexOf(comboBoxMonth.getSelectedItem())+1), y, u, w, v);
 //			} catch (IOException e1) {
 //				e1.printStackTrace();
 //			}
 			closeThisFrame();
-
-			
 		}
-
-
 	}
 	public static void main(String[] args) {		//do testów
 		

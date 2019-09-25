@@ -42,9 +42,9 @@ public class RaportExcell {
 			"BA", "BC", "BE", "BG", "BI", "BK"
 			};
 	private DataExtractor2 de;
-	private static int version;
+//	private static int version;
 	
-	public RaportExcell(MainTableModel model, String kupiec, int monthP, int yearP, String u, String w, String v) throws IOException	{
+	public RaportExcell(String kupiec, int monthP, int yearP, String u, String w, String v) throws IOException	{
 		
 		this.year = yearP;
 		this.month = monthP;
@@ -53,7 +53,7 @@ public class RaportExcell {
 		int dniMies = ct.getDayNo(month-1);
 //		System.out.println("dniMies-"+dniMies);
 		
-		TimeSheetModel3 tsm3 = new TimeSheetModel3(month, year);
+		TimeSheetModel3 tsm3 = new TimeSheetModel3(month, year, u, w, v);
 		
 		de = new DataExtractor2(tsm3, u, w, v);
 
@@ -298,15 +298,10 @@ public class RaportExcell {
 				fos.close();
 				
 				Desktop.getDesktop().open(file);
-				
-				
-
-				
-				
-				
+		
 		}
 	public static void main(String[] args) throws IOException	{ //metoda do wywalenia
-		new RaportExcell(new MainTableModel(), "Marcin Kuciak", 9, 2019, "PLK", "", "");
+		new RaportExcell("Marcin Kuciak", 9, 2019, "PLK", "", "");
 		//do testów, potem wywalić metodę
 	}
 }

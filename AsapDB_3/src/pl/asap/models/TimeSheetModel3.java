@@ -29,13 +29,13 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 	private List<Integer> leftDayHours;
 	private List<Integer> totalDayTime;
 	
-	public TimeSheetModel3(int month, int year)	{
+	public TimeSheetModel3(int month, int year, String u, String w, String v)	{
 		super();
 		this.ci = new CalendarInside(year, month);
 		this.ColumnNames = new ArrayList<>();
 		this.daneEntries = new ArrayList<>();
 		this.monthYear = "."+numString(month)+"."+year;	//data nie zawiera dnia
-		System.out.println("tsm3, monthYear-"+monthYear);
+//		System.out.println("tsm3, monthYear-"+monthYear);
 		
 		this.tsr = new TimeSheetRead(month, year);
 		
@@ -76,7 +76,7 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 			 rowEntries.add(el.get(1));
 			 rowEntries.add(el.get(3));
 			 rowEntries.add(el.get(2));
-			 for (@SuppressWarnings("unused") Object elem: ci.getAllDays())	{		//tworzenie rightModel
+			 for (Object elem: ci.getAllDays())	{		//tworzenie rightModel
 				 rowEntries.add(0);
 			 }
 			 
@@ -88,9 +88,15 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 					 rowEntries.set(colPosition, checkEl.get(2));
 				 }
 			 }
-
-			 daneEntries.add(rowEntries);
-//			 System.out.println("------x"+daneEntries.size()+" -- "+daneEntries.get(daneEntries.size()-1).size()+"x------");
+//			 System.out.println("tsm3-> testy-"+el.get(0).toString());
+			 String company = el.get(0).toString().substring(3, 6);
+			 boolean companyCondition = !company.equals(u) && !company.equals(w) && !company.equals(v);
+//			 System.out.println();
+//			 System.out.println("company-"+company+" u-"+u+" w-"+w+" v-"+v+" condit-"+companyCondition);
+			 if (companyCondition) {
+				daneEntries.add(rowEntries);
+				//			 System.out.println("------x"+daneEntries.size()+" -- "+daneEntries.get(daneEntries.size()-1).size()+"x------");
+			}
 		}
 //		List<Object>
 		totalDayTime = new ArrayList<>();
@@ -101,13 +107,10 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 		for(List<Object> elR: daneEntries)	{
 //			System.out.println();
 			for(int i=0; i<getColumnCount()-4;i++)	{
-				int val = Integer.valueOf(elR.get(i+4).toString());
-				
-				int dayTime = totalDayTime.get(i);
-				
+				int val = Integer.valueOf(elR.get(i+4).toString());			
+				int dayTime = totalDayTime.get(i);			
 //				System.out.print(val+" | ");
 				addDayTime(i, val);
-				
 			}
 		}
 //		System.out.println();
@@ -231,6 +234,6 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 			return numStr;
 		}
 	public static void main(String[] args) {
-		new TimeSheetModel3(8, 2019);
+		new TimeSheetModel3(8, 2019, "", "", "");
 	}
 }
