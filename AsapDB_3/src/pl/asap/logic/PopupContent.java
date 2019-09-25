@@ -120,6 +120,11 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 				new Zapis((MainTableModel) data);				
 			}
 		}
+//		"otwórz folder"
+		
+		if (u.equals("otwórz folder"))	{
+			
+		}
 		if (u.equals("notatki"))	{			
 //			int realSelectedRow = lista.convertRowIndexToModel(lista.getSelectedRow());
 //			final int idPostepowanie = ((MainTableModel) data).getId(realSelectedRow);
