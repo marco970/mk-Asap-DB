@@ -46,7 +46,6 @@ public class DataExtractor2 {
 //						System.out.print(tsm3.getValueAt(i, j) + " | ");
 					}
 					if (j > 3) {
-
 						dcl.get(j - 4).addContent(tsm3.getValueAt(i, 3).toString(),
 								Integer.valueOf(tsm3.getValueAt(i, j).toString()));
 						//					System.out.println("dayNrB: "+(j-4));
@@ -118,6 +117,5 @@ public class DataExtractor2 {
 //		
 //
 //	}
-
 
 }

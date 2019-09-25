@@ -51,7 +51,7 @@ public class RaportExcell {
 		int rowNumber = 9;
 		CalendarInside ct = new CalendarInside(year, month);
 		int dniMies = ct.getDayNo(month-1);
-		System.out.println("dniMies-"+dniMies);
+//		System.out.println("dniMies-"+dniMies);
 		
 		TimeSheetModel3 tsm3 = new TimeSheetModel3(month, year);
 		

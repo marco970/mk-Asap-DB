@@ -113,7 +113,7 @@ public class EntryEditForm extends JFrame implements ActionListener {
 			model.setValueAt(jcb.getSelectedItem(), rowNr, colNr);
 		}
 		
-		this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING)); //to zamiast dispose, bo na to reague WindowsCloseListener
+		this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING)); //to zamiast dispose, bo na to reaguje WindowsCloseListener
 	}
 
 }

@@ -175,22 +175,22 @@ public class DayContent {
 		else return null;
 	}
 	
-	public static void main(String[] args) {
-		
-//		System.out.println("DayContent");
-		DayContent dc = new DayContent(1);
-//		dc.addContent("ZZ/PLI0002234", 2);
-//		dc.addContent("WP/PLI0002234", 1);
-//		dc.addContent("DK/PLI0002234",1);
-//		dc.addContent("PZ/0000002234",0);
-//		dc.addContent("ZZ/PLI0002235", 2);
-//		dc.addContent("WP/PLI0002261", 3);
-//		dc.addContent("DK/PLI0002237",5);
-//		dc.addContent("PZ/0000002558",1);
-		dc.DayContentShow();
-		
-		
-	}
+//	public static void main(String[] args) {
+//		
+////		System.out.println("DayContent");
+//		DayContent dc = new DayContent(1);
+////		dc.addContent("ZZ/PLI0002234", 2);
+////		dc.addContent("WP/PLI0002234", 1);
+////		dc.addContent("DK/PLI0002234",1);
+////		dc.addContent("PZ/0000002234",0);
+////		dc.addContent("ZZ/PLI0002235", 2);
+////		dc.addContent("WP/PLI0002261", 3);
+////		dc.addContent("DK/PLI0002237",5);
+////		dc.addContent("PZ/0000002558",1);
+//		dc.DayContentShow();
+//		
+//		
+//	}
 
 	
 	
