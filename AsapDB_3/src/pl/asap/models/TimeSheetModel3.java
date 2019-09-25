@@ -99,24 +99,24 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 			totalDayTime.add(i, 0);
 		}
 		for(List<Object> elR: daneEntries)	{
-			System.out.println();
+//			System.out.println();
 			for(int i=0; i<getColumnCount()-4;i++)	{
 				int val = Integer.valueOf(elR.get(i+4).toString());
 				
 				int dayTime = totalDayTime.get(i);
 				
-				System.out.print(val+" | ");
+//				System.out.print(val+" | ");
 				addDayTime(i, val);
 				
 			}
 		}
-		System.out.println();
-		System.out.println("------------------");
-		
-		for(int i=0; i<getColumnCount()-4;i++)	{
-			System.out.print(totalDayTime.get(i)+" | ");
-		}
-		System.out.println();
+//		System.out.println();
+//		System.out.println("------------------");
+//		
+//		for(int i=0; i<getColumnCount()-4;i++)	{
+//			System.out.print(totalDayTime.get(i)+" | ");
+//		}
+//		System.out.println();
 	}
 
 	public CalendarInside getCi() {

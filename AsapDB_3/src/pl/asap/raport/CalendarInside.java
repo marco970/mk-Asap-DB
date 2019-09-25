@@ -33,9 +33,9 @@ public class CalendarInside {
 	     kalend.setTimeZone(TimeZone.getTimeZone("GMT+1"));
 	  }
 	  public int getDayNo(int month)	{
-		  if (month == 2 && rokPrzest()) return 29;
+		  if (month == 1 && rokPrzest()) return 29;
 		  else {
-//			  System.out.println("getDayNo "+ldni[month-1]);
+//			  System.out.println("rok sprzestępny "+month);
 			  return ldni[month];
 		  }
 	  }

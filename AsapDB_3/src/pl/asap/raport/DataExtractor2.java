@@ -43,7 +43,7 @@ public class DataExtractor2 {
 			if (companyCondition) {
 				for (int j = 0; j < tsm3.getColumnCount(); j++) {
 					if (!(j == 1 || j == 2)) {
-						System.out.print(tsm3.getValueAt(i, j) + " | ");
+//						System.out.print(tsm3.getValueAt(i, j) + " | ");
 					}
 					if (j > 3) {
 
@@ -54,18 +54,18 @@ public class DataExtractor2 {
 
 				} 
 			}
-			System.out.println();
+//			System.out.println();
 		}
 //		System.out.println("--------------------------------------------------");
 		//tu wyślietlamy dla przetestowania
 		
-		for (int i=0; i<tsm3.getColumnCount(); i++)	{
-			
-			if (i>3) {
+//		for (int i=0; i<tsm3.getColumnCount(); i++)	{
+//			
+//			if (i>3) {
 //				dcl.get(i-4).DayContentShow();
-//				stąd mozna sobie brać dane odpowiednimi metodami
-			}
-		}
+////				stąd mozna sobie brać dane odpowiednimi metodami
+//			}
+//		}
 		
 		
 	}
@@ -99,25 +99,25 @@ public class DataExtractor2 {
 		return extHoursArr;		
 	}
 	
-	public static void main(String[] args) {
-		
-
-
-//		BasicConfigurator.configure();
-		String log4jConfPath = "D:\\GitRepo\\mk-Asap-DB\\AsapDB_3\\log4j.properties";
-		PropertyConfigurator.configure(log4jConfPath);
-		
-		TimeSheetModel3 tsm3 = new TimeSheetModel3(9, 2019);
-		DataExtractor2 de2 = new DataExtractor2(tsm3, "PLK", "", "");
-		String[] nrSap = de2.getExRow("ZZ");
-		Integer[] hours = de2.getExHours("ZZ");
-		
-		for(int i=0; i<nrSap.length; i++)	{
-			System.out.println("---> "+i+" "+nrSap[i]+"---> "+hours[i]);
-		}
-		
-
-	}
+//	public static void main(String[] args) {
+//		
+//
+//
+////		BasicConfigurator.configure();
+//		String log4jConfPath = "D:\\GitRepo\\mk-Asap-DB\\AsapDB_3\\log4j.properties";
+//		PropertyConfigurator.configure(log4jConfPath);
+//		
+//		TimeSheetModel3 tsm3 = new TimeSheetModel3(9, 2019);
+//		DataExtractor2 de2 = new DataExtractor2(tsm3, "PLK", "", "");
+//		String[] nrSap = de2.getExRow("ZZ");
+//		Integer[] hours = de2.getExHours("ZZ");
+//		
+//		for(int i=0; i<nrSap.length; i++)	{
+//			System.out.println("---> "+i+" "+nrSap[i]+"---> "+hours[i]);
+//		}
+//		
+//
+//	}
 
 
 }

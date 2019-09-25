@@ -42,6 +42,7 @@ public class RaportExcell {
 			"BA", "BC", "BE", "BG", "BI", "BK"
 			};
 	private DataExtractor2 de;
+	private static int version;
 	
 	public RaportExcell(MainTableModel model, String kupiec, int monthP, int yearP, String u, String w, String v) throws IOException	{
 		
@@ -49,10 +50,10 @@ public class RaportExcell {
 		this.month = monthP;
 		int rowNumber = 9;
 		CalendarInside ct = new CalendarInside(year, month);
-		int dniMies = ct.getDayNo(month);
+		int dniMies = ct.getDayNo(month-1);
 		System.out.println("dniMies-"+dniMies);
 		
-		TimeSheetModel3 tsm3 = new TimeSheetModel3(month+1, year);
+		TimeSheetModel3 tsm3 = new TimeSheetModel3(month, year);
 		
 		de = new DataExtractor2(tsm3, u, w, v);
 
@@ -252,36 +253,38 @@ public class RaportExcell {
 				
 				//generowanie zawartości
 				
-//				String[] zz = new String[de.getExRow("ZZ").length];
-//				String[] pz = new String[de.getExRow("PZ").length];
-//				String[] dk = new String[de.getExRow("DK").length];
-				String[] zz = de.getExRow("ZZ");
-				String[] pz = de.getExRow("PZ");
-				String[] dk = de.getExRow("DK");
-//				Integer[] zzHours = new Integer[de.getExHours("ZZ").length];
-//				Integer[] pzHours = new Integer[de.getExHours("PZ").length];
-//				Integer[] dkHours = new Integer[de.getExHours("DK").length];
-				Integer[] zzHours = de.getExHours("ZZ");
-				Integer[] pzHours = de.getExHours("PZ");
-				Integer[] dkHours = de.getExHours("DK");
+				String[] zz = new String[de.getExRow("ZZ").length];
+				String[] pz = new String[de.getExRow("PZ").length];
+				String[] dk = new String[de.getExRow("DK").length];
+				zz = de.getExRow("ZZ");
+				pz = de.getExRow("PZ");
+				dk = de.getExRow("DK");
+				Integer[] zzHours = new Integer[de.getExHours("ZZ").length];
+				Integer[] pzHours = new Integer[de.getExHours("PZ").length];
+				Integer[] dkHours = new Integer[de.getExHours("DK").length];
+				zzHours = de.getExHours("ZZ");
+				pzHours = de.getExHours("PZ");
+				dkHours = de.getExHours("DK");
+				
+//				System.out.println("i_max="+(dniMies*2-1+2)+" zz.length="+zz.length+" last_el="+zz[29]);
 
 			for (int i = 2; i<=dniMies*2-1+2; i=i+2)	{
 
 				
-				//System.out.println("RE i/2 : "+(i/2)+" dniMies "+dniMies);
-				cellArr[3][i+1].setCellValue(zz[i/2]);
+//				System.out.println("RE i/2 : "+(i/2-1));
+				cellArr[3][i+1].setCellValue(zz[i/2-1]);
 				cellArr[3][i+1].setCellStyle(cs1);
-				cellArr[3][i].setCellValue(zzHours[i/2]);
+				cellArr[3][i].setCellValue(zzHours[i/2-1]);
 				cellArr[3][i].setCellStyle(cs1);
 				
-				cellArr[4][i+1].setCellValue(pz[i/2]);
+				cellArr[4][i+1].setCellValue(pz[i/2-1]);
 				cellArr[4][i+1].setCellStyle(cs1);
-				cellArr[4][i].setCellValue(pzHours[i/2]);
+				cellArr[4][i].setCellValue(pzHours[i/2-1]);
 				cellArr[4][i].setCellStyle(cs1);
 				
-				cellArr[5][i+1].setCellValue(dk[i/2]);
+				cellArr[5][i+1].setCellValue(dk[i/2-1]);
 				cellArr[5][i+1].setCellStyle(cs1);
-				cellArr[5][i].setCellValue(dkHours[i/2]);
+				cellArr[5][i].setCellValue(dkHours[i/2-1]);
 				cellArr[5][i].setCellStyle(cs1);
 			}
 
