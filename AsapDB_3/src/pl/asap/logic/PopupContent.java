@@ -126,10 +126,7 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 			
 		}
 		if (u.equals("notatki"))	{			
-//			int realSelectedRow = lista.convertRowIndexToModel(lista.getSelectedRow());
-//			final int idPostepowanie = ((MainTableModel) data).getId(realSelectedRow);
-//			NotesModel nm = new NotesModel(idPostepowanie);
-//			
+			
 //			TableBean tb = new TableBean(nm, 1);
 //			TableElement te = new TableElement(nm);
 //			tb.addPropertyChangeListener(te);
@@ -139,6 +136,7 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 //			TableGui.getInstance(tb, te, idPostepowanie);
 			int realSelectedRow = lista.convertRowIndexToModel(lista.getSelectedRow());
 			final int idPostepowanie = ((MainTableModel) data).getId(realSelectedRow);
+			System.out.println("PopupContent-idPostepowanie-"+idPostepowanie);
 			NotesModel nm = new NotesModel(idPostepowanie);
 			
 //			TableBean tb = new TableBean(nm, 1);

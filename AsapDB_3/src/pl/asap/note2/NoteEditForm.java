@@ -58,8 +58,8 @@ public class NoteEditForm extends JFrame implements ActionListener {
 		addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-//                if (checkIfOpen.contains(rowNo)) checkIfOpen.remove(rowNo);
-            	System.out.println("WindowClosingDemo.windowClosing--->NoteEditForm");
+                if (checkIfOpen.contains(rowNr)) checkIfOpen.remove(rowNr);
+//            	System.out.println("WindowClosingDemo.windowClosing--->NoteEditForm");
             }
         });
 		
@@ -139,7 +139,8 @@ public class NoteEditForm extends JFrame implements ActionListener {
 			this.dispose(); 
 		}
 		if (e.getActionCommand().equals("Zapisz")) {
-			System.out.println("Zapis");
+//			System.out.println("NoteEditForm - Zapis-"+ta.getText());
+//			System.out.println("NoteEditForm - Zapis-"+chb.isSelected());
 			if (checkIfOpen.contains(rowNr)) checkIfOpen.remove(rowNr);
 			model.updateNote(ta.getText(), rowNr, 2);
 			model.updateNote(chb.isSelected(), rowNr, 3);

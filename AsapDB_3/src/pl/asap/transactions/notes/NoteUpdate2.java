@@ -52,7 +52,7 @@ public class NoteUpdate2 //implements TableModelListener
 		query.setParameter("noteId", noteId);
 		int recordNo = query.executeUpdate();
 		session.getTransaction().commit();
-		System.out.println(recordNo);
+//		System.out.println("nu2-updNote"+recordNo);
 		factory.close();
 	}
 	public void updateIsOpen(int noteId, boolean isOpen, String dateModified)	{
@@ -67,38 +67,9 @@ public class NoteUpdate2 //implements TableModelListener
 		query.setParameter("noteId", noteId);
 		int recordNo = query.executeUpdate();
 		session.getTransaction().commit();
-		System.out.println(recordNo);
+//		System.out.println("nu2-updIsOpen"+recordNo);
 		factory.close();
 
 	}
-//	@Override
-//	public void tableChanged(TableModelEvent e) {
-//		
-//        int column = e.getColumn();
-//        System.out.println("=======tableChanged==========>>");
-//        
-//    	int row = e.getFirstRow();
-//		NotesModel dane = (NotesModel) e.getSource();
-//		Object data = dane.getValueAt(row, column);
-//		int noteId = dane.getNoteId(row); 
-////		if (row>=0) {
-////			noteId = dane.getNoteId(row);
-////		
-////		} else	{
-////			noteId = dane.getNoteId(1);
-////		}
-//		SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
-//		Date date = new Date(System.currentTimeMillis());
-//		String dateModified = formatter.format(date);
-//
-//        if (column==3) {
-//        	updateIsOpen(noteId, (Boolean) data, dateModified);
-////        	dane.updateNoFire(data, row, 3);
-//
-//        }
-        
-
-		
-//	}
 }
 

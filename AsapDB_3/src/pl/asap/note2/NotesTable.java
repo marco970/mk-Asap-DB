@@ -38,6 +38,7 @@ public class NotesTable extends JFrame implements ActionListener {
 	private NotesTable(int idPostepowanie)	{
 		super("tu dodać nazwę postępowania");
 		this.idPostepowanie=idPostepowanie;
+		System.out.println("NotesTable-idPostepowanie-"+idPostepowanie);
 		NotesModel nm = new NotesModel(idPostepowanie);
 		
 		nt = new JTable(nm);
@@ -79,7 +80,7 @@ public class NotesTable extends JFrame implements ActionListener {
             @Override
             public void windowClosing(WindowEvent e) {
                 if (checkIfOpen.contains(idPostepowanie)) checkIfOpen.remove(idPostepowanie);
-            	System.out.println("WindowClosingDemo.windowClosing");
+//            	System.out.println("WindowClosingDemo.windowClosing");
             }
         });
 		
@@ -87,10 +88,10 @@ public class NotesTable extends JFrame implements ActionListener {
 		setSize(1200, 700);
 		setVisible(true);
 		//------
-		System.out.println("-----tmL-------> now below");
+//		System.out.println("-----tmL-------> now below");
 		TableModelListener[] tmL = nm.getTableModelListeners();
 		for(TableModelListener el: tmL)	{
-			System.out.println(el.getClass()+" - "+el.toString());
+//			System.out.println(el.getClass()+" - "+el.toString());
 		}
 
 	}

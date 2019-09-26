@@ -48,11 +48,11 @@ public class EkranGlowny implements ActionListener {
           };
 	
 	//sortowanie filtrowanie
-	TableRowSorter<MainTableModel> sorter;
-	RowFilter<Object, Object> filter;
+	private TableRowSorter<MainTableModel> sorter;
+	private RowFilter<Object, Object> filter;
 	
-	AbstractTableModel dataModel;
-	DBConnect dbConnect;
+	private AbstractTableModel dataModel;
+	private DBConnect dbConnect;
 	
 	private class CloseListener implements ActionListener{	//czy to jest potrzebne?
 	    @Override
@@ -91,15 +91,6 @@ public class EkranGlowny implements ActionListener {
 	
 	public void createGui(String tytul)	{
 
-//		int i = data.getRowCount();
-//		int j = data.getColumnCount();
-		
-//		for(int m = 0; m<=i-1; m++)	{
-//			for (int n =0; n<=j-1; n++)	{
-//				if (n==0)	{	
-//				}
-//			}
-//		}	
 		eg = new JFrame("ASap - Lista Postępowań");
 		
 		width = data.getColumnCount()*100;
@@ -110,7 +101,6 @@ public class EkranGlowny implements ActionListener {
 		lista = new JTable(data);
 
 		sorter = new TableRowSorter<MainTableModel>(data);
-		
 		
 			sorter.setComparator(0, new CompareZZ());
 			sorter.setComparator(2, new CompareZZ());
@@ -205,9 +195,7 @@ public class EkranGlowny implements ActionListener {
 			}
 		}
 	}
-//	public MainTableModel getModel()	{	//do wywalenia
-//		return data;
-//	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
