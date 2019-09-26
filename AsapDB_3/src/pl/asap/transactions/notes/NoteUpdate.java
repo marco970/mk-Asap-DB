@@ -93,7 +93,7 @@ public class NoteUpdate implements TableModelListener {
     	int row = e.getFirstRow();
 		NotesModel dane = (NotesModel) e.getSource();
 		Object data = dane.getValueAt(row, column);
-		int noteId = dane.getNoteId(row);
+		int noteId = dane.getNoteIdFromRow(row);
 		SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
 		Date date = new Date(System.currentTimeMillis());
 		String dateModified = formatter.format(date);

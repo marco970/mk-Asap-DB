@@ -18,9 +18,8 @@ import pl.asap.transactions.notes.NoteUpdate2;
 
 @SuppressWarnings("serial")
 public class NotesModel extends AbstractTableModel   {
-	//
+
 	private ArrayList<Notes> notes;
-//	private Notes note;
 	private int idPostepowanie;
 	private Object[][] dane;
 	private Color[] rowColor;
@@ -39,20 +38,12 @@ public class NotesModel extends AbstractTableModel   {
 				dane[i][1] = notes.get(i).getDateModified();
 				dane[i][2] = notes.get(i).getNote();
 				dane[i][3] = notes.get(i).getIsOpen();
-//				System.out.println("NotesModel-"+"row nr: "+i+" noteID: "+notes.get(i).getNoteId());
-//				System.out.println("NotesModel-"+"row nr: "+i+" note: "+notes.get(i).getNote());
-//				System.out.println("NotesModel-"+"row nr: "+i+" IsOpen: "+notes.get(i).getIsOpen());
 			}	
-
 		}
 
-	
 	public void deleteNote(int rowToDelete)	{
-//		System.out.println("------deleteNote---before---> "+notes.size()+" i dane "+dane.length+" i rTD "+ rowToDelete);
-		int noteId = getNoteId(rowToDelete);
-		
+		int noteId = getNoteIdFromRow(rowToDelete);
 		NoteDelete nd = new NoteDelete(getNote(), noteId);
-		
 		if (nd.getRezultatDelete()) {
 			notes.remove(rowToDelete);
 			Object[][] daneNew = new Object[notes.size()][columns.length];
@@ -61,16 +52,12 @@ public class NotesModel extends AbstractTableModel   {
 				daneNew[i][1] = notes.get(i).getDateModified();
 				daneNew[i][2] = notes.get(i).getNote();
 				daneNew[i][3] = notes.get(i).getIsOpen();
-				//			System.out.println("row nr: "+i+" noteID: "+notes.get(i).getNoteId());
 			}
 			dane = daneNew;
-//			System.out.println("------deleteNote---after---> " + notes.size() + " i dane " + dane.length + " i rTD "
-//					+ rowToDelete);
 			if (rowToDelete >= 1) {
 				fireTableRowsDeleted(rowToDelete - 1, rowToDelete - 1);
 				fireTableDataChanged();
 			}
-			//		else fireTableRowsDeleted(rowToDelete, rowToDelete);
 		}	
 	}
 
@@ -90,44 +77,18 @@ public class NotesModel extends AbstractTableModel   {
 					};
 	
 			int n = getRowCount()+1;
-			
-//			System.out.println("n = "+n);
-//			System.out.println("recordAdd, n: "+n + " ilość wierszy :"+getRowCount());
+
 			Object[][] daneUpd = new Object[n][columns.length];
 			for (int i = 0; i<n; i++)	{
 				if (i<n-1) {
 					daneUpd[i]=dane[i];
-//					System.out.println("przepisuje "+i+" - ");
 				}
 				else	{
 					daneUpd[i]=noteArray;
-//					System.out.println("dodaję "+i);
 				}
 			}
 			dane=daneUpd;
-//			System.out.println("teraz wierszy jest "+dane.length);
-			n = dane.length-1;
-			
-//			for (int i = 0; i<dane.length; i++)	{
-//				System.out.println("**** "+i);
-//				for (Object el: dane[i])	{
-//					System.out.print("** "+el+" ; ");
-//				}
-//			}
-			
-//			this.setValueAt(dateOpen, n-1, 0);
-//			this.setValueAt(dateOpen, n-1, 1);
-//			this.setValueAt("", n-1, 2);
-//			this.setValueAt(false, n-1, 3);
-			
-			
-//			for (int i = 0; i<dane.length; i++)	{
-//				System.out.println("** "+i);
-//				for (Object el: dane[i])	{
-//					System.out.print("* "+el+" ; ");
-//				}
-//			}
-					
+			n = dane.length-1;					
 			fireTableRowsInserted(n-1, n-1);
 			fireTableDataChanged();
 			new NoteNew(idPostepowanie, newNote);
@@ -145,24 +106,16 @@ public class NotesModel extends AbstractTableModel   {
 			
 			NoteUpdate2 nu2 = new NoteUpdate2();
 			if(col==2)	{
-				nu2.updateNote(getNoteId(row), value.toString(), dateModified); //-dostosować 
+				nu2.updateNote(getNoteIdFromRow(row), value.toString(), dateModified); //-dostosować 
 			}
 			if(col==3)	{
-				nu2.updateIsOpen(getNoteId(row), Boolean.valueOf(value.toString()), dateModified);
+				nu2.updateIsOpen(getNoteIdFromRow(row), Boolean.valueOf(value.toString()), dateModified);
 			}
 			
 			fireTableCellUpdated(row, col);
 			fireTableDataChanged();
 		}
-	public void addNote()	{//w najnowszej wersji to może być niepotrzebne
-		
-		SimpleDateFormat formatter= new SimpleDateFormat("dd.MM.yyyy");  
-		Date date = new Date(System.currentTimeMillis());  
-		String data = formatter.format(date);  
-		Notes nowaNotka = new Notes("",data, data, false);
-		new NoteNew(idPostepowanie, nowaNotka);
-	
-	}
+
 	public void setValueAt(Object value, int row, int col) {
 	    dane[row][col] = value;
 	    fireTableCellUpdated(row, col);
@@ -180,11 +133,11 @@ public class NotesModel extends AbstractTableModel   {
 	public int getRowNr(int noteId)	{		//problem, to jeśli nie będzie danej noteId wśród rekordów - do ogarniecia
 		int row =0;
 		for (int i=0; i<getRowCount(); i++)	{
-			if(getNoteId(i)==noteId) row=i;
+			if(getNoteIdFromRow(i)==noteId) row=i;
 		}
 		return row;
 	}
-	public int getNoteId(int row)	{
+	public int getNoteIdFromRow(int row)	{
 			rn = new NoteRead(idPostepowanie); //to do modelu	
 			notes = rn.getNotes();
 			return notes.get(row).getNoteId();
@@ -202,8 +155,7 @@ public Object[][]	getNotesMatrix()	{
 		return this;
 	}
 	public Notes getNote() {		
-		Notes note = new Notes();		//? i to działa? Tylko chyba w jednym przypadku, bo tam trzeba 
-										//tylko podać nazwę klasy a nie instancję z wartośnciami pól
+		Notes note = new Notes();		
 		return note;
 	}
 

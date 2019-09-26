@@ -94,7 +94,7 @@ public class EkranGlowny implements ActionListener {
 		eg = new JFrame("ASap - Lista Postępowań");
 		
 		width = data.getColumnCount()*100;
-		height=	data.getRowCount()*12+200;	
+		height=	data.getRowCount()*15+200;	
 		eg.setSize(width, height);
 		eg.setIconImage(img.getImage());
 		

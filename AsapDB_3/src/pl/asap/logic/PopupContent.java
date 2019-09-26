@@ -161,7 +161,7 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 			
 			NotesModel model = (NotesModel) lista.getModel();
 			
-			System.out.println("odpalam edycję notatki"+model.getNoteId(realSelectedRow));
+			System.out.println("odpalam edycję notatki"+model.getNoteIdFromRow(realSelectedRow));
 
 			NoteEditForm.getInstance(getZZPZ(), realSelectedRow, model);
 			

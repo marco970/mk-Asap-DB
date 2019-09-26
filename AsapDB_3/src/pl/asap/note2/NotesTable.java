@@ -28,7 +28,6 @@ import pl.asap.note.TextAreaRenderer;
 import pl.asap.transactions.notes.NoteUpdate2;
 
 public class NotesTable extends JFrame implements ActionListener {
-
 	
 	private int idPostepowanie;
 	private static Set<Integer> checkIfOpen = new HashSet<Integer>();
@@ -43,8 +42,6 @@ public class NotesTable extends JFrame implements ActionListener {
 		
 		nt = new JTable(nm);
 		
-//		nt.getModel().addTableModelListener(new NoteUpdate2()); 
-		
 		TableColumnModel tcm = nt.getColumnModel();	
 		TableColumn tc = tcm.getColumn(2);	
 		
@@ -58,12 +55,10 @@ public class NotesTable extends JFrame implements ActionListener {
 		JMenu menu = new JMenu("start");
 		JMenuBar menuBar = new JMenuBar();
 		
-		
 		JMenuItem mi1 = mi("dodaj nową notatkę");
 		JMenuItem mi2 = mi("zapisz bierzącą notatkę");
 		menu.add(mi1);
 		menu.add(mi2);
-
 		
 		menuBar.add(menu);
 		setJMenuBar(menuBar);
@@ -75,25 +70,19 @@ public class NotesTable extends JFrame implements ActionListener {
 		nt.addMouseListener(nml);
 		nt.setComponentPopupMenu(pc);
 		
-		
 		this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 if (checkIfOpen.contains(idPostepowanie)) checkIfOpen.remove(idPostepowanie);
-//            	System.out.println("WindowClosingDemo.windowClosing");
             }
         });
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setSize(1200, 700);
 		setVisible(true);
-		//------
-//		System.out.println("-----tmL-------> now below");
 		TableModelListener[] tmL = nm.getTableModelListeners();
 		for(TableModelListener el: tmL)	{
-//			System.out.println(el.getClass()+" - "+el.toString());
 		}
-
 	}
 	
 	public void doMassAddMenu(JMenuBar mb, String...args)	{
@@ -111,10 +100,7 @@ public class NotesTable extends JFrame implements ActionListener {
 		mi.setActionCommand(str);
 		return mi;
 	}
-	
-	
-	
-	
+
 	public static synchronized NotesTable getNotesTableInstance(int idPostepowanie)	{
 		if (!checkIfOpen.contains(idPostepowanie))	{
 			checkIfOpen.add(idPostepowanie);
@@ -125,19 +111,10 @@ public class NotesTable extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("dodaj nową notatkę")) {
-
-//			System.out.println("-----nm1---> "+nm.getRowCount());
 			int b = ((NotesModel) nt.getModel()).getNotesMatrix().length;
-			//System.out.println("qqqqq-----qqqq----> "+b);
 			((NotesModel) nt.getModel()).newNote();
 			b = ((NotesModel) nt.getModel()).getNotesMatrix().length;
-			System.out.println("qqqqq-----qqqq----> "+b+" - "+ (NotesModel) nt.getModel().getValueAt(b-1, 0));
 			NoteEditForm.getInstance("", b-1, (NotesModel) nt.getModel());
-			
-			
-
 		}
-		
 	}
-
 }

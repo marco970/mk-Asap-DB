@@ -25,18 +25,14 @@ import pl.asap.models.NotesModel;
 public class NoteEditForm extends JFrame implements ActionListener {
 	
 	private static Set<Integer> checkIfOpen = new HashSet<Integer>();
-	
 	private int colCount;
 	private NotesModel model;
 	private int rowNr;
-	
 	private JTextArea ta;
 	private JCheckBox chb;
-	
 	private JButton btnSave;
 	private JButton btnCancel;
-	
-	
+
 	private NoteEditForm(String nazwa, NotesModel model, int rowNr)	{
 		super("Postępowanie "+nazwa);
 
@@ -50,8 +46,7 @@ public class NoteEditForm extends JFrame implements ActionListener {
 		
 		ta = new JTextArea(20,25);
 		chb = new JCheckBox();
-
-			
+	
 		ta.setLineWrap(true);
 		JScrollPane sp = new JScrollPane(ta);
 
@@ -59,11 +54,9 @@ public class NoteEditForm extends JFrame implements ActionListener {
             @Override
             public void windowClosing(WindowEvent e) {
                 if (checkIfOpen.contains(rowNr)) checkIfOpen.remove(rowNr);
-//            	System.out.println("WindowClosingDemo.windowClosing--->NoteEditForm");
             }
         });
-		
-		//panel
+
 		JPanel contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -102,8 +95,7 @@ public class NoteEditForm extends JFrame implements ActionListener {
 			chb.setSelected(false);
 		}
 		panel.add(chb, "cell 1 5");
-		
-		
+
 		btnSave = new JButton("Zapisz");
 		btnCancel = new JButton("Anuluj");
 		
@@ -129,7 +121,6 @@ public class NoteEditForm extends JFrame implements ActionListener {
 	public static void main(String[] args) {		//testowe, do wywalenia
 		NotesModel nm = new NotesModel(46);
 		getInstance("ABCDE", nm.getRowNr(7), nm);
-		
 	}
 
 	@Override
@@ -139,18 +130,10 @@ public class NoteEditForm extends JFrame implements ActionListener {
 			this.dispose(); 
 		}
 		if (e.getActionCommand().equals("Zapisz")) {
-//			System.out.println("NoteEditForm - Zapis-"+ta.getText());
-//			System.out.println("NoteEditForm - Zapis-"+chb.isSelected());
 			if (checkIfOpen.contains(rowNr)) checkIfOpen.remove(rowNr);
 			model.updateNote(ta.getText(), rowNr, 2);
 			model.updateNote(chb.isSelected(), rowNr, 3);
-			
 			this.dispose();
 		}
-		
-		
 	}
-	
-	
-
 }

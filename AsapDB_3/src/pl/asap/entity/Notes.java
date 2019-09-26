@@ -64,14 +64,6 @@ public class Notes extends EntityBase {
 		this.note = note;
 	}
 
-//	public Integer getIdPostepowanie() {
-//		return idPostepowanie;
-//	}
-//
-//	public void setIdPostepowanie(Integer idPostepowanie) {
-//		this.idPostepowanie = idPostepowanie;
-//	}
-
 	public String getDateOpen() {
 		return dateOpen;
 	}
