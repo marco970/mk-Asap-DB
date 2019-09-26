@@ -1,7 +1,6 @@
 package pl.asap.note2;
 
 import java.awt.BorderLayout;
-import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -15,28 +14,22 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.event.TableModelListener;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
-import javax.swing.table.TableModel;
-
 import pl.asap.logic.PopupContent;
 import pl.asap.models.NotesModel;
 import pl.asap.note.NotesMouseListener;
 import pl.asap.note.TextAreaRenderer;
-import pl.asap.transactions.notes.NoteUpdate2;
 
+@SuppressWarnings("serial")
 public class NotesTable extends JFrame implements ActionListener {
 	
-	private int idPostepowanie;
 	private static Set<Integer> checkIfOpen = new HashSet<Integer>();
 	
 	private JTable nt;
 	
 	private NotesTable(int idPostepowanie)	{
 		super("tu dodać nazwę postępowania");
-		this.idPostepowanie=idPostepowanie;
 		System.out.println("NotesTable-idPostepowanie-"+idPostepowanie);
 		NotesModel nm = new NotesModel(idPostepowanie);
 		
@@ -80,9 +73,6 @@ public class NotesTable extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setSize(1200, 700);
 		setVisible(true);
-		TableModelListener[] tmL = nm.getTableModelListeners();
-		for(TableModelListener el: tmL)	{
-		}
 	}
 	
 	public void doMassAddMenu(JMenuBar mb, String...args)	{
