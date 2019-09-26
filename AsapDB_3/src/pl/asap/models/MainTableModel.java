@@ -41,26 +41,21 @@ public class MainTableModel extends AbstractTableModel {
 		lista = new Lista();
 		DBConnect dbConnect = new DBConnect();
 		ReadTrans readDB = new ReadTrans(lista);
-		//this.dane=adane;
 		this.dane=readDB.getMatrix();
 		this.ids = readDB.getIDs();
-		//System.out.print("ids "+ ids.length + " _ "+ dane.length);
 		
+//		i - wiersze
 		int i = dane.length;
+//		j - kolumny
 		int j = nazwyKolumn.length;
-		
-		//System.out.print("ids "+ ids.length + " _ "+ j);
 
-		for(int m = 0; m<=i-1; m++)	{
-					
+		for(int m = 0; m<=i-1; m++)	{	
 			for (int n =0; n<=j-1; n++)	{
 				if (n==0)	{							
 				}
 			}
 		}	
-		
 	}
-	//----------metody--
 
 	public Integer getId(int rowNr)	{
 		int id;
@@ -208,16 +203,16 @@ public class MainTableModel extends AbstractTableModel {
 					//tu mozemy wrzucić aktualizację wpisu
 					
 					
-					//uzyskanie entyId
-					System.out.println("idPost -> "+this.getId(rowNr));
-					System.out.println("PZ -> "+this.getValueAt(rowNr, 1).toString());
+//					//uzyskanie entyId
+//					System.out.println("idPost -> "+this.getId(rowNr));
+//					System.out.println("PZ -> "+this.getValueAt(rowNr, 1).toString());
 					
 					TSEQueryGet tse = new TSEQueryGet(this.getValueAt(rowNr, 1).toString());
 					int entryId = tse.getEntryId();
 					if (entryId==0)	nrSap = (String) savedRow[i-1];	
 					else	{
 						int timePassed = tse.getTimePassed();
-						System.out.println("entryId-> "+entryId+" timePassed-> "+timePassed);
+//						System.out.println("entryId-> "+entryId+" timePassed-> "+timePassed);
 						//aktualizacja entry
 						new TimeSheetEntryUpdate(entryId, timePassed+1);
 					}
@@ -226,7 +221,7 @@ public class MainTableModel extends AbstractTableModel {
 				dateEntry = (String) savedRow[i+10];
 			}
 		}
-		System.out.println("nrSap -> "+nrSap+" --> "+dateEntry);
+//		System.out.println("nrSap -> "+nrSap+" --> "+dateEntry);
 //		System.out.println("MainTabModel ----- recordUpdate rowNr: "+rowNr + " ----id: "+getId(rowNr));
 		rowList.set(rowNr, savedRow);
 		Object[][] daneUpd = new Object[rowList.size()][nazwyKolumn.length];
@@ -252,7 +247,7 @@ public class MainTableModel extends AbstractTableModel {
 		UpdateTrans ut = new UpdateTrans(lista);
 		String field = getColumnName(kolNr);
 		int id = getId(rowNr);
-		System.out.println("cellUpdate id= "+id);
+//		System.out.println("cellUpdate id= "+id);
 		ut.upadateCell(field, value, id);
 		
 	}

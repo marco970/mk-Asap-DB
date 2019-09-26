@@ -49,10 +49,10 @@ public class RaportForm extends RawForm implements ActionListener {
 	private ArrayList<String> yearList = new ArrayList<String>();
 	private MainTableModel model;
 
-	public RaportForm(MainTableModel model) {
+	public RaportForm() {
 		super("Tworzenie raportu miesięcznego", "powitanie");
 		
-		this.model = model;
+//		this.model = model;
 		//data - miesiąc
 		Calendar cal = Calendar.getInstance();
 		
@@ -161,16 +161,16 @@ public class RaportForm extends RawForm implements ActionListener {
 			closeThisFrame();
 		}
 	}
-	public static void main(String[] args) {		//do testów
-		
-		MainTableModel mod = new MainTableModel();
-		
-		
-		SwingUtilities.invokeLater(new Runnable() {
-		      @Override
-		      public void run() {
-		    	  new RaportForm(mod);
-		      }
-		    });
-	}
+//	public static void main(String[] args) {		//do testów
+//		
+//		MainTableModel mod = new MainTableModel();
+//		
+//		
+//		SwingUtilities.invokeLater(new Runnable() {
+//		      @Override
+//		      public void run() {
+//		    	  new RaportForm();
+//		      }
+//		    });
+//	}
 }

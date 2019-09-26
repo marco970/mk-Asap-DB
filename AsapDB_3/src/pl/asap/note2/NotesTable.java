@@ -49,7 +49,7 @@ public class NotesTable extends JFrame implements ActionListener {
 		JMenuBar menuBar = new JMenuBar();
 		
 		JMenuItem mi1 = mi("dodaj nową notatkę");
-		JMenuItem mi2 = mi("zapisz bierzącą notatkę");
+		JMenuItem mi2 = mi("zakończ");
 		menu.add(mi1);
 		menu.add(mi2);
 		
@@ -105,6 +105,9 @@ public class NotesTable extends JFrame implements ActionListener {
 			((NotesModel) nt.getModel()).newNote();
 			b = ((NotesModel) nt.getModel()).getNotesMatrix().length;
 			NoteEditForm.getInstance("", b-1, (NotesModel) nt.getModel());
+		}
+		if (e.getActionCommand().equals("zakończ")) {
+			dispose();
 		}
 	}
 }

@@ -213,7 +213,7 @@ public class EkranGlowny implements ActionListener {
 			new NewForm(data.getRowCount()+1, data);
 		}
 		if (u.equals(start[2])){
-			new RaportForm(data);
+			new RaportForm();
 		}
 		
 		if (u.equals(sort[1]))	{

@@ -102,13 +102,13 @@ public class TimeSheetTable extends JFrame implements ActionListener {
 		String u = e.getActionCommand();
 		
 		if (u.equals("powrót do formularza"))	{
-			MainTableModel mod = new MainTableModel();
+//			MainTableModel mod = new MainTableModel();
 			
 			
 			SwingUtilities.invokeLater(new Runnable() {
 			      @Override
 			      public void run() {
-			    	  new RaportForm(mod);
+			    	  new RaportForm();
 			      }
 			    });
 			dispose();
@@ -164,15 +164,14 @@ public class TimeSheetTable extends JFrame implements ActionListener {
 			}
 		}
 				
-		public static void main(String[] args) {
-			
-			
-			SwingUtilities.invokeLater(new Runnable() {
-			      @Override
-			      public void run() {
-			    	  new TimeSheetTable(9, 2019, "PLK", "", "CPO");
-			      }
-			    });
-		}
+//		public static void main(String[] args) {
+//
+//			SwingUtilities.invokeLater(new Runnable() {
+//			      @Override
+//			      public void run() {
+//			    	  new TimeSheetTable(9, 2019, "PLK", "", "CPO");
+//			      }
+//			    });
+//		}
 
 }
