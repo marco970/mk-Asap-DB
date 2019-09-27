@@ -178,12 +178,6 @@ public class MainTableModel extends AbstractTableModel {
 		fireTableDataChanged();
 		Object[] cids = new ReadTrans(lista).getIDs();
 		int a = (int) cids[cids.length-1];
-//		System.out.println("idPostepowanie----> "+a);
-//		int j=0;
-//		for (Object el: savedRow)	{
-//			System.out.println("--> "+el.toString()+" -- "+j);
-//			j++;
-//		}
 		new TimeSheetEntryNew(a, (String) savedRow[0], (String) savedRow[10], 1);
 	}
 	public void recordUpdate(Object[] savedRow, int rowNr) { //--zapis do DB

@@ -42,6 +42,14 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 		//source of data
 		this.leftSide = tsr.getEntryMatrix(); 
 		
+//		tu do leftSide dodać wszystkie postępowania aktywne, których jeszcze nie ma na liście 
+//		to mgą byc jedynie postępowania PZ
+		
+		MainTableModel mtm = new MainTableModel();
+		Object[][] matrix = mtm.getMatrix();
+		
+		
+		
 		for(String el: fixedNames)	{		//dodanie lewej strony do headera
 			ColumnNames.add(el);		
 		}

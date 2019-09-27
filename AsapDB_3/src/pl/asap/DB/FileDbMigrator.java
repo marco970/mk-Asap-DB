@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pl.asap.entity.Lista;
+import pl.asap.models.MainTableModel;
+import pl.asap.transactions.lista.ReadTrans;
 import pl.asap.transactions.lista.SaveTrans;
+import pl.asap.transactions.timesheet.TimeSheetEntryNew;
 
 public class FileDbMigrator {
 	
@@ -32,6 +35,16 @@ public class FileDbMigrator {
 		DBConnect dbConnect = new DBConnect();
 		lista = new Lista();
 //		SaveTrans st = new SaveTrans(lista);
+		ReadTrans readDB = new ReadTrans(lista);
+		
+		Object[] cids = readDB.getIDs();
+		Object[][] dane=readDB.getMatrix();
+		MainTableModel mtm = new MainTableModel();
+		
+		
+		
+		int a = (int) cids[cids.length-1];
+		System.out.println("a "+a);
 		
 //		i - wiersze
 		int row = adane.length;
@@ -39,12 +52,27 @@ public class FileDbMigrator {
 		int col = nazwyKolumn.length;
 		
 		for(int i = 0; i < row; i++)	{
-			SaveTrans st = new SaveTrans(lista);
-			st.saveRow(adane[i]);
+//			SaveTrans st = new SaveTrans(lista);
+//			st.saveRow(adane[i]);
 			
-			for(int j = 0; j < col; j++)	{
-				System.out.print(adane[i][j]+" | ");
+
+//			new TimeSheetEntryNew(a, (String) adane[i][0], (String) adane[i][10], 1);
+			
+			System.out.println(adane[i][0]+" - "+adane[i][0]+" - "+adane[i][10]);
+			if (!adane[i][1].equals(""))	{
+				System.out.println(adane[i][0]+" - "+adane[i][1]+" - "+adane[i][11]);	
+				if (!adane[i][2].equals("")) {
+					System.out.println(adane[i][0]+" - "+adane[i][2]+" - "+adane[i][12]);
+					if ((!adane[i][3].equals("")))	
+						System.out.println(adane[i][0]+" - "+adane[i][3]+" - "+adane[i][13]);
+				}
 			}
+			
+//			for(int j = 0; j < col; j++)	{
+//				System.out.print(adane[i][j]+" | ");
+//				
+//				
+//			}
 			System.out.println();
 		}
 		
