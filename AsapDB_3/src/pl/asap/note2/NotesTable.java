@@ -27,10 +27,13 @@ public class NotesTable extends JFrame implements ActionListener {
 	private static Set<Integer> checkIfOpen = new HashSet<Integer>();
 	
 	private JTable nt;
+	private int idPostepowanie;
 	
 	private NotesTable(int idPostepowanie)	{
 		super("tu dodać nazwę postępowania");
-		System.out.println("NotesTable-idPostepowanie-"+idPostepowanie);
+//		System.out.println("NotesTable-idPostepowanie-"+idPostepowanie);
+		
+		this.idPostepowanie=idPostepowanie;
 		NotesModel nm = new NotesModel(idPostepowanie);
 		
 		nt = new JTable(nm);
@@ -107,6 +110,7 @@ public class NotesTable extends JFrame implements ActionListener {
 			NoteEditForm.getInstance("", b-1, (NotesModel) nt.getModel());
 		}
 		if (e.getActionCommand().equals("zakończ")) {
+			if (checkIfOpen.contains(idPostepowanie)) checkIfOpen.remove(idPostepowanie);
 			dispose();
 		}
 	}

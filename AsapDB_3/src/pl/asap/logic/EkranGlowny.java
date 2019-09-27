@@ -34,7 +34,9 @@ public class EkranGlowny implements ActionListener {
 	private MainTableModel data;
 	private JTable lista;
 	private JMenu raport=null;
-	private ImageIcon img = new ImageIcon("gui-elements/face1.png");
+//	private ImageIcon img;
+	
+	private ImageIcon img = new ImageIcon("/gui-elements/sleepy-worker-at-work.png");
 
 	private String[] start = {"Start", "Nowe postępowanie", "Raport miesięczny", "Exit"};
 	private String[] sort = {"Sort","Nieaktywne", "Aktywne","Zawieszone", "Zakończone", "Wszystkie"};
@@ -65,7 +67,8 @@ public class EkranGlowny implements ActionListener {
 	public EkranGlowny(AbstractTableModel dataModel)	{ //do wywalenia
 		
 		this.dataModel = dataModel;
-		//img = new ImageIcon("/gui-elements/sleepy-worker-at-work.png");
+//		img = new ImageIcon("gui-elements/face1.png");
+//		img = new ImageIcon("/gui-elements/sleepy-worker-at-work.png");
 
 		SwingUtilities.invokeLater(new Runnable() {
 		      @Override
@@ -79,7 +82,7 @@ public class EkranGlowny implements ActionListener {
 		this.dbConnect = dbConnect;
 		MainTableModel dane = new MainTableModel();
 		data = dane;
-		//img = new ImageIcon("gui-elements/sleepy-worker-at-work.png");
+		img = new ImageIcon("gui-elements/sleepy-worker-at-work.png");
 
 		SwingUtilities.invokeLater(new Runnable() {
 		      @Override

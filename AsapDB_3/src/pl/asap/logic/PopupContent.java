@@ -136,7 +136,7 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 //			TableGui.getInstance(tb, te, idPostepowanie);
 			int realSelectedRow = lista.convertRowIndexToModel(lista.getSelectedRow());
 			final int idPostepowanie = ((MainTableModel) data).getId(realSelectedRow);
-			System.out.println("PopupContent-idPostepowanie-"+idPostepowanie);
+//			System.out.println("PopupContent-idPostepowanie-"+idPostepowanie);
 			NotesModel nm = new NotesModel(idPostepowanie);
 			
 //			TableBean tb = new TableBean(nm, 1);
@@ -144,14 +144,14 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 //			tb.addPropertyChangeListener(te);
 			String post = data.getValueAt(realSelectedRow , 0)+", "+data.getValueAt(realSelectedRow , 1);
 			setZZPZ(post);
-			System.out.println(ZZPZ+" --------112233-------> "+this.getClass());
+//			System.out.println(ZZPZ+" --------112233-------> "+this.getClass());
 			NotesTable.getNotesTableInstance(idPostepowanie);
 
 		}
 		if (u.equals("delete"))	{			
 			NotesModel model = (NotesModel) lista.getModel();			
 			int row = lista.convertRowIndexToModel(lista.getSelectedRow());
-			System.out.println("----------del------->"+row);
+//			System.out.println("----------del------->"+row);
 			model.deleteNote(row);
 			
 		}
@@ -161,7 +161,7 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 			
 			NotesModel model = (NotesModel) lista.getModel();
 			
-			System.out.println("odpalam edycję notatki"+model.getNoteIdFromRow(realSelectedRow));
+//			System.out.println("odpalam edycję notatki"+model.getNoteIdFromRow(realSelectedRow));
 
 			NoteEditForm.getInstance(getZZPZ(), realSelectedRow, model);
 			
