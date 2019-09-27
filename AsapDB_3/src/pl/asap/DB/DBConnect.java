@@ -24,6 +24,7 @@ public DBConnect()        {
 	if (processCheck("mysqld_usbwv8.exe")==false) {
 		try {
 			proc = Runtime.getRuntime().exec(defaultPath + "\\000_rough\\mysql\\bin\\mysqld_usbwv8.exe");
+//			proc = Runtime.getRuntime().exec(defaultPath + "\\000_rough-testowa\\mysql\\bin\\mysqld_usbwv8.exe");
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		} 

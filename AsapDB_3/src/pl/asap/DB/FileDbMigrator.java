@@ -6,12 +6,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.asap.entity.Lista;
+import pl.asap.transactions.lista.SaveTrans;
+
 public class FileDbMigrator {
 	
 	
 	
 	private String current = "Current4.txt";
 	private static Object[][] adane = null;
+	private Lista lista;
 	
 	private static String[] nazwyKolumn = {"ZZ", "PZ", "WP", "DK", "Status", 
 			"Przemiot Zakupu", "Dostawca", "Nazwa", "Tryb postępowania", "Spółka", 
@@ -25,12 +29,24 @@ public class FileDbMigrator {
 			e.printStackTrace();
 		}
 		
-//		DBConnect dbConnect = new DBConnect();
+		DBConnect dbConnect = new DBConnect();
+		lista = new Lista();
+//		SaveTrans st = new SaveTrans(lista);
 		
 //		i - wiersze
-		int i = adane.length;
+		int row = adane.length;
 //		j - kolumny
-		int j = nazwyKolumn.length;
+		int col = nazwyKolumn.length;
+		
+		for(int i = 0; i < row; i++)	{
+			SaveTrans st = new SaveTrans(lista);
+			st.saveRow(adane[i]);
+			
+			for(int j = 0; j < col; j++)	{
+				System.out.print(adane[i][j]+" | ");
+			}
+			System.out.println();
+		}
 		
 	}
 	
@@ -48,10 +64,10 @@ public class FileDbMigrator {
 
 		  bufferedReader.close();
 		  
-		  for(String el:linia)	{
-			  System.out.print(el+" | ");
-		  }
-		  System.out.println();
+//		  for(String el:linia)	{
+//			  System.out.println(el);
+//		  }
+//		  System.out.println();
 		  
 		  int i =0;
 		  Object[][] sdane = new String[linia.size()][nazwyKolumn.length];

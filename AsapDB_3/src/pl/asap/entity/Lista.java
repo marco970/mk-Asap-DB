@@ -176,16 +176,14 @@ public class Lista extends EntityBase {
 	}
 	public void setEntries(List<TimeSheetEntity> entries) {
 		this.entries = entries;
-	}
-	
+	}	
 	public void addEntry(TimeSheetEntity entry)	{
 		if (entries==null)	{
 			 entries=new ArrayList<>();
 		}
 		entries.add(entry);
 		entry.setLista(this);
-	}
-	
+	}	
 	public Object[] getArray()	{
 		//zwraca nazwy pól klasy entity
 		Class c = getClass();
@@ -207,7 +205,7 @@ public class Lista extends EntityBase {
 		return array;
 	}
 	
-public Object[] getRow()	{
+	public Object[] getRow()	{
 		//zwraca wartości wiersza
 		Class c = getClass();
 		Field[] fields = c.getDeclaredFields();

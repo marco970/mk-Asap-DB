@@ -41,7 +41,11 @@ public class SaveTrans extends TransBlank {
 //			i++;
 //		}
 		for(int i=0; i<=values.length-2; i++)	{
-			fieldLogic((String) array[i], values[i].toString());
+			String val; 
+			if (values[i]==null) val="";
+			else val = values[i].toString();
+				
+			fieldLogic((String) array[i], val);
 		}
 		
 		session.beginTransaction();
