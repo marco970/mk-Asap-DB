@@ -32,14 +32,14 @@ public class MainTableModel extends AbstractTableModel {
 	public MainTableModel() 	{
 		
 		//do wywalenia ale najpierw przepisać jednorazowo plik do BD - moze oddzielna klasa?
-		try {
-			this.adane=readFile(current);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			this.adane=readFile(current);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 
 		lista = new Lista();
-		DBConnect dbConnect = new DBConnect();
+//		DBConnect dbConnect = new DBConnect();
 		ReadTrans readDB = new ReadTrans(lista);
 		this.dane=readDB.getMatrix();
 		this.ids = readDB.getIDs();

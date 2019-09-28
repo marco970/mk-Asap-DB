@@ -15,8 +15,10 @@ import pl.asap.transactions.timesheet.TimeSheetEntryDelete;
 import pl.asap.transactions.timesheet.TimeSheetEntryNew;
 import pl.asap.transactions.timesheet.TimeSheetEntryUpdate;
 import pl.asap.transactions.timesheet.TimeSheetRead;
+import pl.asap.transactions.timesheet.TimeSheetReadActive;
 
 
+@SuppressWarnings("serial")
 public class TimeSheetModel3 extends AbstractTableModel  {
 	
 	private static String[] fixedNames = {"ZZ", "Nazwa", "Status", "Numer Wpisu"};
@@ -26,7 +28,6 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 	private String monthYear;
 	private List<String[]> leftSide;
 	private CalendarInside ci;
-	private List<Integer> leftDayHours;
 	private List<Integer> totalDayTime;
 	
 	public TimeSheetModel3(int month, int year, String u, String w, String v)	{
@@ -41,9 +42,13 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 		
 		//source of data
 		this.leftSide = tsr.getEntryMatrix(); 
+		List<String[]> leftSideActive = new TimeSheetReadActive().getEntryMatrix();
+		leftSide.addAll(leftSideActive);
 		
 //		tu do leftSide dodać wszystkie postępowania aktywne, których jeszcze nie ma na liście 
 //		to mgą byc jedynie postępowania PZ
+		
+		
 		
 		MainTableModel mtm = new MainTableModel();
 		Object[][] matrix = mtm.getMatrix();
@@ -62,9 +67,16 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 		List<List<String>> checkList = new ArrayList<>();
 		
 		for(String[] el: leftSide)	{
+			for (int i=0; i<el.length; i++)	{
+//				System.out.println(i+" leftSide: "+el[i]);
+			}
+		}
+		
+		for(String[] el: leftSide)	{
 			List<String> leftModelRow = new ArrayList<>();
 			List<String> checkRow = new ArrayList<>();
 			for (int i=0; i<6; i++)	{
+//				System.out.println(i+" leftSide: "+el[i]);
 				if (i<=2 || i==5) {
 					leftModelRow.add(el[i]);
 				}
@@ -231,9 +243,9 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 	public void setTotalDayTime(int rowNr, int i, int val)	{
 		int colNr = i+4;
 		int delta = val - Integer.valueOf(daneEntries.get(rowNr).get(colNr).toString()); 
-		System.out.println("delta = "+delta);
+//		System.out.println("delta = "+delta);
 		addDayTime(i, delta);
-		System.out.println("TSM3 - > ["+i+"] "+totalDayTime.get(i));
+//		System.out.println("TSM3 - > ["+i+"] "+totalDayTime.get(i));
 	}
 	public String numString(int num)	{
 			String numStr;
@@ -242,6 +254,6 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 			return numStr;
 		}
 	public static void main(String[] args) {
-		new TimeSheetModel3(8, 2019, "", "", "");
+		new TimeSheetModel3(9, 2019, "", "", "");
 	}
 }
