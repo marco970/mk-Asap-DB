@@ -53,7 +53,7 @@ public class RaportExcell {
 		int dniMies = ct.getDayNo(month-1);
 //		System.out.println("dniMies-"+dniMies);
 		
-		TimeSheetModel3 tsm3 = new TimeSheetModel3(month, year, u, w, v);
+		TimeSheetModel3 tsm3 = new TimeSheetModel3(month, year, u, w, v, null);
 		
 		de = new DataExtractor2(tsm3, u, w, v);
 

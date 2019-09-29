@@ -3,6 +3,8 @@ package pl.asap.transactions.lista;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import org.hibernate.SessionFactory;
+
 import pl.asap.entity.Lista;
 import pl.asap.transactions.TransBlank;
 
@@ -10,8 +12,8 @@ public class SaveTrans extends TransBlank {
 	
 	private Method method = null;
 
-	public SaveTrans (Object bean)	{
-		super(bean);
+	public SaveTrans (Object bean, SessionFactory factory)	{
+		super(bean, factory);
 		
 	}
 	public void fieldLogic(String fieldName, String value)	{
@@ -31,7 +33,7 @@ public class SaveTrans extends TransBlank {
 		session.beginTransaction();
 		session.save(bean);
 		session.getTransaction().commit();
-		factory.close();
+//		factory.close();
 	}
 	public void saveRow(Object[] values)	{
 		
@@ -51,6 +53,6 @@ public class SaveTrans extends TransBlank {
 		session.beginTransaction();
 		session.save(bean);
 		session.getTransaction().commit();
-		factory.close();
+//		factory.close();
 	}
 }

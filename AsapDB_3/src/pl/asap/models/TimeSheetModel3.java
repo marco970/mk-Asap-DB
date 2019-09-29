@@ -8,6 +8,8 @@ import java.util.Set;
 import javax.swing.JComboBox;
 import javax.swing.table.AbstractTableModel;
 
+import org.hibernate.SessionFactory;
+
 import pl.asap.entity.Lista;
 import pl.asap.raport.CalendarInside;
 import pl.asap.transactions.lista.ReadTrans;
@@ -30,7 +32,9 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 	private CalendarInside ci;
 	private List<Integer> totalDayTime;
 	
-	public TimeSheetModel3(int month, int year, String u, String w, String v)	{
+	SessionFactory factory;
+	
+	public TimeSheetModel3(int month, int year, String u, String w, String v, SessionFactory factory)	{
 		super();
 		this.ci = new CalendarInside(year, month);
 		this.ColumnNames = new ArrayList<>();
@@ -38,11 +42,13 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 		this.monthYear = "."+numString(month)+"."+year;	//data nie zawiera dnia
 //		System.out.println("tsm3, monthYear-"+monthYear);
 		
-		this.tsr = new TimeSheetRead(month, year);
+		this.tsr = new TimeSheetRead(month, year, factory);
+		
+		this.factory = factory;
 		
 		//source of data
 		this.leftSide = tsr.getEntryMatrix(); 
-		List<String[]> leftSideActive = new TimeSheetReadActive().getEntryMatrix();
+		List<String[]> leftSideActive = new TimeSheetReadActive(factory).getEntryMatrix();
 		leftSide.addAll(leftSideActive);
 		
 //		tu do leftSide dodać wszystkie postępowania aktywne, których jeszcze nie ma na liście 
@@ -50,7 +56,7 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 		
 		
 		
-		MainTableModel mtm = new MainTableModel();
+		MainTableModel mtm = new MainTableModel(factory);
 		Object[][] matrix = mtm.getMatrix();
 		
 		
@@ -197,7 +203,7 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 //			tsr.getIdPostepowanie(getValueAt(row, 3).toString(), numString(col-3)+monthYear) - to mozna inaczej.... -->  leftSide.get(row)[6]
 			
 			Lista lista = new Lista();
-			ReadTrans readDB = new ReadTrans(lista);
+			ReadTrans readDB = new ReadTrans(lista, factory);
 			List<Lista> result = readDB.getResult();
 			String nrSap = this.getValueAt(row, 3).toString();
 			
@@ -211,20 +217,20 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 				}	
 			}
 //			System.out.println("res-check end; idPostepowanie = "+idPostepowanie);
-			new TimeSheetEntryNew(idPostepowanie, getValueAt(row,3).toString(), numString(col-3)+monthYear, Integer.parseInt(o.toString()));
+			new TimeSheetEntryNew(idPostepowanie, getValueAt(row,3).toString(), numString(col-3)+monthYear, Integer.parseInt(o.toString()), factory);
 //			System.out.println("sprawdzamy: "+tsr.getIdPostepowanie(getValueAt(row, 3).toString(), numString(col-3)+monthYear)+" vs "+leftSide.get(row)[6]);
 			
 		}
 		if (next == 0 && previous > 0)	{
 			int entryId = tsr.getIdEntry(getValueAt(row,3).toString(),numString(col-3)+monthYear);
-			new TimeSheetEntryDelete(entryId);
+			new TimeSheetEntryDelete(entryId, factory);
 //			System.out.println("to delete: "+idPostepowanie);
 //			System.out.println("to delete: "+tsr.getIdEntry(getValueAt(row,3).toString(),numString(col-3)+monthYear));
 		}
 		if (next > 0 && previous > 0)		{
 			int entryId = tsr.getIdEntry(getValueAt(row,3).toString(),numString(col-3)+monthYear);
 //			System.out.println("to update :"+entryId);
-			new TimeSheetEntryUpdate(entryId, next);
+			new TimeSheetEntryUpdate(entryId, next, factory);
 		}	
 	}
 	public int getTotalDayTime(int i) {
@@ -253,7 +259,4 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 			else numStr = ""+num;
 			return numStr;
 		}
-	public static void main(String[] args) {
-		new TimeSheetModel3(9, 2019, "", "", "");
-	}
 }

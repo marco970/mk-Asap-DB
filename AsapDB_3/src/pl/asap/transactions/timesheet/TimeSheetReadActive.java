@@ -14,16 +14,16 @@ public class TimeSheetReadActive {
 	private int month;
 
 	
-	public TimeSheetReadActive() {
+	public TimeSheetReadActive(SessionFactory factory) {
 			
 		this.entries = new ArrayList<>();
 		
-		Configuration conf = new Configuration();
-		Config config = new Config();
-		conf.configure(config.getHibernateXML());
-		config.setAnnotatedClass(conf);
-		
-		SessionFactory factory = conf.buildSessionFactory();
+//		Configuration conf = new Configuration();
+//		Config config = new Config();
+//		conf.configure(config.getHibernateXML());
+//		config.setAnnotatedClass(conf);
+//		
+//		SessionFactory factory = conf.buildSessionFactory();
 		Session session = factory.getCurrentSession();
 		
 		String hql2 = "select l.ZZ, l.Nazwa, l.PZ, l.dsPZ, l.Status, l.idPostepowanie "
@@ -103,8 +103,8 @@ public class TimeSheetReadActive {
 			return numStr;
 		}
 
-	public static void main(String[] args) {
-		new TimeSheetReadActive();
-	}
+//	public static void main(String[] args) {
+//		new TimeSheetReadActive();
+//	}
 
 }

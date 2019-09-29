@@ -20,6 +20,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableRowSorter;
 
+import org.hibernate.SessionFactory;
+
 import pl.asap.DB.DBConnect;
 import pl.asap.models.MainTableModel;
 import pl.asap.raport.RaportForm;
@@ -59,40 +61,40 @@ public class EkranGlowny implements ActionListener {
 	private class CloseListener implements ActionListener{	//czy to jest potrzebne?
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
-	        
-	        System.exit(0);
+	    	System.out.println("CloseListener --->EG");
+//	        System.exit(0);
 	    }
 	}
 	
-	public EkranGlowny(AbstractTableModel dataModel)	{ //do wywalenia
-		
-		this.dataModel = dataModel;
-//		img = new ImageIcon("gui-elements/face1.png");
-//		img = new ImageIcon("/gui-elements/sleepy-worker-at-work.png");
-
-		SwingUtilities.invokeLater(new Runnable() {
-		      @Override
-		      public void run() {
-		        createGui(tytul);
-		      }
-		    });
-	}
+//	public EkranGlowny(AbstractTableModel dataModel)	{ //do wywalenia
+//		
+//		this.dataModel = dataModel;
+////		img = new ImageIcon("gui-elements/face1.png");
+////		img = new ImageIcon("/gui-elements/sleepy-worker-at-work.png");
+//
+//		SwingUtilities.invokeLater(new Runnable() {
+//		      @Override
+//		      public void run() {
+//		        createGui(tytul);
+//		      }
+//		    });
+//	}
 	
-	public EkranGlowny(DBConnect dbConnect) {
+	public EkranGlowny(DBConnect dbConnect, SessionFactory factory) {
 		this.dbConnect = dbConnect;
-		MainTableModel dane = new MainTableModel();
+		MainTableModel dane = new MainTableModel(factory);
 		data = dane;
 		img = new ImageIcon("gui-elements/sleepy-worker-at-work.png");
 
 		SwingUtilities.invokeLater(new Runnable() {
 		      @Override
 		      public void run() {
-		        createGui(tytul);
+		        createGui(tytul, factory);
 		      }
 		    });
 	}
 	
-	public void createGui(String tytul)	{
+	public void createGui(String tytul, SessionFactory factory)	{
 
 		eg = new JFrame("ASap - Lista Postępowań");
 		
@@ -100,6 +102,14 @@ public class EkranGlowny implements ActionListener {
 		height=	data.getRowCount()*15+200;	
 		eg.setSize(width, height);
 		eg.setIconImage(img.getImage());
+		
+		eg.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+//                factory.close();
+            	System.out.println("WindowClosingDemo.windowClosing--->EG");
+            }
+        });
 		
 		lista = new JTable(data);
 
@@ -216,7 +226,7 @@ public class EkranGlowny implements ActionListener {
 			new NewForm(data.getRowCount()+1, data);
 		}
 		if (u.equals(start[2])){
-			new RaportForm();
+			new RaportForm(data);
 		}
 		
 		if (u.equals(sort[1]))	{

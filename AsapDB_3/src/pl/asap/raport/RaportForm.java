@@ -49,10 +49,10 @@ public class RaportForm extends RawForm implements ActionListener {
 	private ArrayList<String> yearList = new ArrayList<String>();
 	private MainTableModel model;
 
-	public RaportForm() {
+	public RaportForm(MainTableModel model) {
 		super("Tworzenie raportu miesięcznego", "powitanie");
 		
-//		this.model = model;
+		this.model = model;
 		//data - miesiąc
 		Calendar cal = Calendar.getInstance();
 		
@@ -146,12 +146,12 @@ public class RaportForm extends RawForm implements ActionListener {
 			
 			String a = comboBoxYear.getSelectedItem().toString();
 			int y = Integer.parseInt(a);
-			System.out.println("u "+u);
-			System.out.println("w "+w);
-			System.out.println("v "+v);
+//			System.out.println("u "+u);
+//			System.out.println("w "+w);
+//			System.out.println("v "+v);
 //			System.out.println("miesiąc: "+(monthsList.indexOf(comboBoxMonth.getSelectedItem())+1));
 
-			new TimeSheetTable(monthsList.indexOf(comboBoxMonth.getSelectedItem())+1, y, u, w, v);
+			new TimeSheetTable(monthsList.indexOf(comboBoxMonth.getSelectedItem())+1, y, u, w, v, model);
 			
 //			try {
 //				new RaportExcell(model , "Marcin Kuciak", (monthsList.indexOf(comboBoxMonth.getSelectedItem())+1), y, u, w, v);

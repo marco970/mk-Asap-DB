@@ -23,6 +23,7 @@ import javax.swing.table.TableColumnModel;
 
 import pl.asap.models.MainTableModel;
 import pl.asap.models.TimeSheetModel3;
+import pl.asap.start.Main;
 
 public class TimeSheetTable extends JFrame implements ActionListener {
 	
@@ -41,8 +42,10 @@ public class TimeSheetTable extends JFrame implements ActionListener {
 	private String v;
 	private int month;
 	
+	private MainTableModel model;
+	
 
-	public TimeSheetTable(int month, int year, String u, String w, String v)	{
+	public TimeSheetTable(int month, int year, String u, String w, String v, MainTableModel model)	{
 		super("Edycja Czasu Pracy");
 		
 		this.year = year;
@@ -50,8 +53,10 @@ public class TimeSheetTable extends JFrame implements ActionListener {
 		this.w = w;
 		this.v = v;
 		this.month = month;
+		this.model = model;
 		
-		this.tsm =new TimeSheetModel3(month, year, u, w, v);
+		
+		this.tsm =new TimeSheetModel3(month, year, u, w, v, model.getFactory());
 		this.table = new JTable(tsm);
 		JMenuBar menuBar = new JMenuBar();
 		String[] itemy = {"raport" ,"generuj raport", "powrót do formularza"};
@@ -108,7 +113,7 @@ public class TimeSheetTable extends JFrame implements ActionListener {
 			SwingUtilities.invokeLater(new Runnable() {
 			      @Override
 			      public void run() {
-			    	  new RaportForm();
+			    	  new RaportForm(model);
 			      }
 			    });
 			dispose();

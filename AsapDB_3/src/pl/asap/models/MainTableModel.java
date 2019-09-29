@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
+import org.hibernate.SessionFactory;
+
 import pl.asap.DB.DBConnect;
 import pl.asap.entity.Lista;
 import pl.asap.transactions.lista.ReadTrans;
@@ -29,7 +31,11 @@ public class MainTableModel extends AbstractTableModel {
 	private Object[] ids;
 	private Lista lista;
 	
-	public MainTableModel() 	{
+	private SessionFactory factory;
+	
+
+
+	public MainTableModel(SessionFactory factory) 	{
 		
 		//do wywalenia ale najpierw przepisać jednorazowo plik do BD - moze oddzielna klasa?
 //		try {
@@ -39,8 +45,9 @@ public class MainTableModel extends AbstractTableModel {
 //		}
 
 		lista = new Lista();
+		this.factory = factory;
 //		DBConnect dbConnect = new DBConnect();
-		ReadTrans readDB = new ReadTrans(lista);
+		ReadTrans readDB = new ReadTrans(lista, factory);
 		this.dane=readDB.getMatrix();
 		this.ids = readDB.getIDs();
 		
@@ -56,10 +63,14 @@ public class MainTableModel extends AbstractTableModel {
 			}
 		}	
 	}
+	
+	public SessionFactory getFactory() {
+		return factory;
+	}
 
 	public Integer getId(int rowNr)	{
 		int id;
-		Object[] cids = new ReadTrans(lista).getIDs();
+		Object[] cids = new ReadTrans(lista, factory).getIDs();
 //		System.out.println("n -> "+rowNr+ " il.pozycji w DB -> "+cids.length+" max index w DB -> "+cids[cids.length-1]);
 		if (rowNr<=getRowCount()) {
 			id = (Integer) cids[rowNr];
@@ -172,13 +183,13 @@ public class MainTableModel extends AbstractTableModel {
 			else 		daneUpd[i]=savedRow;
 		}
 		dane=daneUpd;
-		SaveTrans st = new SaveTrans(lista);
+		SaveTrans st = new SaveTrans(lista, factory);
 		st.saveRow(savedRow);
 		fireTableRowsInserted(n-1, n-1);
 		fireTableDataChanged();
-		Object[] cids = new ReadTrans(lista).getIDs();
+		Object[] cids = new ReadTrans(lista, factory).getIDs();
 		int a = (int) cids[cids.length-1];
-		new TimeSheetEntryNew(a, (String) savedRow[0], (String) savedRow[10], 1);
+		new TimeSheetEntryNew(a, (String) savedRow[0], (String) savedRow[10], 1, factory);
 	}
 	public void recordUpdate(Object[] savedRow, int rowNr) { //--zapis do DB
 		ArrayList<Object[]> rowList = new ArrayList<Object[]>();
@@ -201,14 +212,14 @@ public class MainTableModel extends AbstractTableModel {
 //					System.out.println("idPost -> "+this.getId(rowNr));
 //					System.out.println("PZ -> "+this.getValueAt(rowNr, 1).toString());
 					
-					TSEQueryGet tse = new TSEQueryGet(this.getValueAt(rowNr, 1).toString());
+					TSEQueryGet tse = new TSEQueryGet(this.getValueAt(rowNr, 1).toString(), factory);
 					int entryId = tse.getEntryId();
 					if (entryId==0)	nrSap = (String) savedRow[i-1];	
 					else	{
 						int timePassed = tse.getTimePassed();
 //						System.out.println("entryId-> "+entryId+" timePassed-> "+timePassed);
 						//aktualizacja entry
-						new TimeSheetEntryUpdate(entryId, timePassed+1);
+						new TimeSheetEntryUpdate(entryId, timePassed+1, factory);
 					}
 				}
 				else nrSap = (String) savedRow[i];
@@ -228,17 +239,17 @@ public class MainTableModel extends AbstractTableModel {
 		dane=daneUpd;
 		fireTableRowsUpdated(rowNr, rowNr);
 		fireTableDataChanged();	
-		UpdateTrans ut = new UpdateTrans(lista);
+		UpdateTrans ut = new UpdateTrans(lista, factory);
 		ut.updateRow(savedRow, getId(rowNr));
 		
-		if (!"".equals(nrSap)) new TimeSheetEntryNew(getId(rowNr), nrSap, dateEntry, 1);
+		if (!"".equals(nrSap)) new TimeSheetEntryNew(getId(rowNr), nrSap, dateEntry, 1, factory);
 
 	}
 	public void cellUpdate(Object value, int rowNr, int kolNr)	{ //--zapis do DB
 
 		dane[rowNr][kolNr] = value;
 		fireTableCellUpdated(rowNr, kolNr); 
-		UpdateTrans ut = new UpdateTrans(lista);
+		UpdateTrans ut = new UpdateTrans(lista, factory);
 		String field = getColumnName(kolNr);
 		int id = getId(rowNr);
 //		System.out.println("cellUpdate id= "+id);
