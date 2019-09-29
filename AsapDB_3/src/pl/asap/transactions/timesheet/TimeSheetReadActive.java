@@ -54,7 +54,7 @@ public class TimeSheetReadActive {
 					//atomS[j] = atom[j].toString();
 					
 				}
-				System.out.println();
+//				System.out.println();
 				atomList.add(4,"0");
 				String[] atomS = new String[atomList.size()];
 				for (int k = 0; k < atomList.size(); k++)	{

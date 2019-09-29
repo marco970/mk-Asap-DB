@@ -41,10 +41,25 @@ public class EntryEditForm extends JFrame implements ActionListener {
 		this.colNr = colNr;
 		
 		this.eml = eml;
+		int totalDayTime = model.getTotalDayTime(colNr-4);
+		
+		
+		int startValue = 8;
+		
 
 		int currentValue = Integer.valueOf(model.getValueAt(rowNr, colNr).toString());
+//		System.out.println("totalDayTime = "+totalDayTime+" currentValue ="+currentValue );
+		
+		if(totalDayTime > 7)	{
+			startValue = currentValue;
+			
+		}
+		else	{
+			startValue = 8-totalDayTime+currentValue;
+		}
+//		System.out.println("totalDayTime = "+totalDayTime+" currentValue = "+currentValue+" startValue = "+startValue );
 		Vector<Integer> vector = new Vector<>();
-		for (int i = 0; i<= 8; i++)	{	//wartość początkowa i może być zmieniona
+		for (int i = 0; i<= startValue; i++)	{	//wartość początkowa i może być zmieniona
 			vector.add(i);
 		}
 
@@ -109,8 +124,10 @@ public class EntryEditForm extends JFrame implements ActionListener {
 //		System.out.println("action: "+u);
 		if(u=="Zapisz")	{
 //			System.out.println(jcb.getSelectedItem().toString());
-			
+			model.setTotalDayTime(rowNr, colNr-4, Integer.valueOf(jcb.getSelectedItem().toString()));
+//			System.out.println("EEF actioPerf - colNr = "+(colNr-4));
 			model.setValueAt(jcb.getSelectedItem(), rowNr, colNr);
+			
 		}
 		
 		this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING)); //to zamiast dispose, bo na to reaguje WindowsCloseListener

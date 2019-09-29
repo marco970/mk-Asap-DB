@@ -238,14 +238,14 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 //		}
 //		else dayTime = 8;
 		totalDayTime.set(i, dayTime);		
-//		System.out.println("TSM3 - > ["+i+"] "+totalDayTime.get(i));
+//		System.out.println("TSM3 add- > ["+i+"] "+totalDayTime.get(i));
 	}
 	public void setTotalDayTime(int rowNr, int i, int val)	{
 		int colNr = i+4;
 		int delta = val - Integer.valueOf(daneEntries.get(rowNr).get(colNr).toString()); 
 //		System.out.println("delta = "+delta);
 		addDayTime(i, delta);
-//		System.out.println("TSM3 - > ["+i+"] "+totalDayTime.get(i));
+//		System.out.println("TSM3 set- > ["+i+"] "+totalDayTime.get(i));
 	}
 	public String numString(int num)	{
 			String numStr;
