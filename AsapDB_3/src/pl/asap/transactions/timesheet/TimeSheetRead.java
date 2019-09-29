@@ -25,17 +25,10 @@ public class TimeSheetRead {
 		config.setAnnotatedClass(conf);
 		
 		SessionFactory factory = conf.buildSessionFactory();
+		
+
 		Session session = factory.getCurrentSession();
 
-//		String hql2 = "select t.lista.ZZ, t.lista.Nazwa, t.sapNr, t.dateEntry, t.timePassed, t.lista.Status "
-//				+ "from TimeSheetEntity as t "
-//				+ "where t.lista.Status = 'aktywne'";
-	
-//		String hql2 = "select t.lista.ZZ, t.lista.Nazwa, t.sapNr, t.dateEntry, t.timePassed "
-//				+ "from TimeSheetEntity as t ";
-	
-//		String hql2 = "select t.lista.ZZ, t.lista.Nazwa, t.sapNr, t.dateEntry, t.timePassed "
-//				+ "from TimeSheetEntity as t ";
 
 		String hql2 = "select t.lista.ZZ, t.lista.Nazwa, t.sapNr, t.dateEntry, t.timePassed, t.lista.Status, t.lista.idPostepowanie, t.entryId "
 				+ "from TimeSheetEntity as t ";
@@ -47,6 +40,7 @@ public class TimeSheetRead {
 		
 		for (int i = 0; i<entryRow.size(); i++)	{
 			Object[] atom = (Object[]) entryRow.get(i);
+//			System.out.println();
 //			for (Object el: atom)	{
 //				System.out.println("---> "+el.toString());
 //			}
@@ -54,7 +48,7 @@ public class TimeSheetRead {
 //			System.out.println(atom.length+" -asd- "+atomS.length);
 			if(checkDate(atom[3].toString(), month, year))	{
 				for (int j = 0; j < atom.length; j++)	{
-//					System.out.println(atom[j].toString());
+//					System.out.print(atom[j].toString()+" | ");
 					atomS[j] = atom[j].toString();
 				}
 				entries.add(atomS);
@@ -68,7 +62,7 @@ public class TimeSheetRead {
 //			System.out.println(" --------- ");
 //		}
 		session.close();
-		factory.close();
+//		factory.close();
 	}
 	public ArrayList<String[]> getEntryMatrix()	{
 		return entries; 
@@ -105,8 +99,8 @@ public class TimeSheetRead {
 			return numStr;
 		}
 
-	public static void main(String[] args) {
-		new TimeSheetRead(2, 2019);
-	}
+//	public static void main(String[] args) {
+//		new TimeSheetRead(9, 2019);
+//	}
 
 }

@@ -5,6 +5,7 @@
  */
 package pl.asap.transactions.lista;
 
+import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
 import pl.asap.entity.EntityBase;
@@ -43,7 +44,7 @@ public class UpdateTrans extends TransBlank {
     	updateLogic(" where id_postepowanie=:id", field, newValue, id); 	
     	
         session.getTransaction().commit();
-        factory.close();
+      factory.close();
     }
     
     public void updateRow(Object[] savedRow, int id)	{
@@ -58,7 +59,7 @@ public class UpdateTrans extends TransBlank {
     		updateLogic(" where id_postepowanie=:id", a[i], savedRow[i], id);   		
     	}
         session.getTransaction().commit();
-        factory.close();
+      factory.close();
     }
     public void updateNote(Notes notka, int notkaId)	{ // a moze to id Notki???
     	session.beginTransaction();
@@ -74,12 +75,5 @@ public class UpdateTrans extends TransBlank {
 				updateLogic(" where note_id=:id", a[i], b[i], notkaId);
 			}
     	}
-
-
-    	
-    	
-    	
-    	
-    	
     }
 }

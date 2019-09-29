@@ -2,6 +2,7 @@ package pl.asap.transactions.lista;
 
 import java.util.List;
 
+import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
 import pl.asap.entity.Lista;

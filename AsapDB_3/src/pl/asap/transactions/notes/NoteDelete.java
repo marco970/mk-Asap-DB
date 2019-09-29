@@ -3,6 +3,8 @@ package pl.asap.transactions.notes;
 import javax.persistence.Query;
 import javax.swing.JOptionPane;
 
+import org.hibernate.SessionFactory;
+
 import pl.asap.entity.EntityBase;
 import pl.asap.models.NotesModel;
 import pl.asap.transactions.TransBlank;

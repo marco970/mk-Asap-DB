@@ -25,6 +25,7 @@ public abstract class TransBlank {
 		Configuration conf = new Configuration();
 		conf.configure(hibernateConf);
 		this.bean = bean;
+//		this.factory = factory;
 		array = ((EntityBase) bean).getArray();
 		
 		Class<? extends Object> beanClass = bean.getClass();

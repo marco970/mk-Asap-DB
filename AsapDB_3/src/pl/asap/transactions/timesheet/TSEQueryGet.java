@@ -34,15 +34,15 @@ public class TSEQueryGet {
 		.createQuery("from TimeSheetEntity t where t.sapNr='"+sapNr+"'")
 		.getResultList();
 		
-		System.out.println(sapNr +" --> "+this.getEntryId());
+//		System.out.println(sapNr +" --> "+this.getEntryId());
 
 		
 		session.getTransaction().commit();
 		factory.close();
 //		System.out.println("updated");
-		for (TimeSheetEntity el: tse)	{
-			System.out.println(el.toString());
-		}
+//		for (TimeSheetEntity el: tse)	{
+//			System.out.println(el.toString());
+//		}
 
 	}
 	public int getEntryId()	{
@@ -58,10 +58,10 @@ public class TSEQueryGet {
 		System.out.println("timePassed= "+tse.get(0).getTimePassed());
 		return tse.get(0).getTimePassed();
 	}
-	public static void main(String[] args) {
-		new TSEQueryGet("PZ/0000007931") ;
-		
-	}
+//	public static void main(String[] args) {
+//		new TSEQueryGet("PZ/0000007931") ;
+//		
+//	}
 	
 
 }
