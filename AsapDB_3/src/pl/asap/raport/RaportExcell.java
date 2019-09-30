@@ -290,7 +290,7 @@ public class RaportExcell {
 
 			String defaultPath = new JFileChooser().getFileSystemView().getDefaultDirectory().toString()+"\\02_TimeSheets\\";
 			new File(defaultPath).getAbsoluteFile().mkdirs();
-			File file = new File(defaultPath+kupiec+"_TimeSheet_"+(month+1)+"_"+year+"_"+"_Raport.xls");
+			File file = new File(defaultPath+kupiec+"_TimeSheet_"+(month)+"_"+year+"_"+"_Raport.xls");
 			FileOutputStream fos = new FileOutputStream(file);
 				workbook.write(fos);
 				

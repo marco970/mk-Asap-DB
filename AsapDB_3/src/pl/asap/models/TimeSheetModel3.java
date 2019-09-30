@@ -66,11 +66,11 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 		Set<List<String>> leftSet = new HashSet<>();
 		List<List<String>> checkList = new ArrayList<>();
 		
-		for(String[] el: leftSide)	{
-			for (int i=0; i<el.length; i++)	{
+//		for(String[] el: leftSide)	{
+//			for (int i=0; i<el.length; i++)	{
 //				System.out.println(i+" leftSide: "+el[i]);
-			}
-		}
+//			}
+//		}
 		
 		for(String[] el: leftSide)	{
 			List<String> leftModelRow = new ArrayList<>();
@@ -90,12 +90,15 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 
 		String dayEntry;
 		//iteracja po "lewej stronie"
+//		System.out.println("leftSet-size "+leftSet.size());
 		for(List<String> el: leftSet)	{
 			 List<Object> rowEntries = new ArrayList<Object>();	 
 			 rowEntries.add(el.get(0));
 			 rowEntries.add(el.get(1));
 			 rowEntries.add(el.get(3));
 			 rowEntries.add(el.get(2));
+//			 System.out.println("leftSet "+el.get(0).toString()+" "+el.get(3));
+			 
 			 for (Object elem: ci.getAllDays())	{		//tworzenie rightModel
 				 rowEntries.add(0);
 			 }
@@ -111,6 +114,9 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 //			 System.out.println("tsm3-> testy-"+el.get(0).toString());
 			 String company = el.get(0).toString().substring(3, 6);
 			 boolean companyCondition = !company.equals(u) && !company.equals(w) && !company.equals(v);
+			 
+//			 System.out.println("rowEntries-size "+rowEntries.size());
+			 
 //			 System.out.println();
 //			 System.out.println("company-"+company+" u-"+u+" w-"+w+" v-"+v+" condit-"+companyCondition);
 			 if (companyCondition) {
