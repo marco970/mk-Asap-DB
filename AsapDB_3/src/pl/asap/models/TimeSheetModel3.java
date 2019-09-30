@@ -121,7 +121,7 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 //			 System.out.println("company-"+company+" u-"+u+" w-"+w+" v-"+v+" condit-"+companyCondition);
 			 if (companyCondition) {
 				daneEntries.add(rowEntries);
-				//			 System.out.println("------x"+daneEntries.size()+" -- "+daneEntries.get(daneEntries.size()-1).size()+"x------");
+//				System.out.println("------x"+daneEntries.size()+" -- "+daneEntries.get(daneEntries.size()-1).size()+"x------");
 			}
 		}
 //		List<Object>

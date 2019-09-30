@@ -55,6 +55,10 @@ public class RaportExcell {
 		
 		TimeSheetModel3 tsm3 = new TimeSheetModel3(month, year, u, w, v);
 		
+		System.out.println("--> "+u);
+		System.out.println("--> "+w);
+		System.out.println("--> "+v);
+		
 		de = new DataExtractor2(tsm3, u, w, v);
 
 		HSSFWorkbook workbook = new HSSFWorkbook();

@@ -99,9 +99,9 @@ public class TimeSheetTable extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String u = e.getActionCommand();
+		String kom = e.getActionCommand();
 		
-		if (u.equals("powrót do formularza"))	{
+		if (kom.equals("powrót do formularza"))	{
 //			MainTableModel mod = new MainTableModel();
 			
 			
@@ -113,7 +113,7 @@ public class TimeSheetTable extends JFrame implements ActionListener {
 			    });
 			dispose();
 		}
-		if (u.equals("generuj raport"))	{
+		if (kom.equals("generuj raport"))	{
 			try {
 				new RaportExcell("Marcin Kuciak", month, year, u, w, v);
 			} catch (IOException e1) {
