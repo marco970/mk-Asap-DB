@@ -73,7 +73,7 @@ public class OpForm2 implements ActionListener, FocusListener {
             @Override
             public void windowClosing(WindowEvent e) {
                 if (checkIfOpen.contains(rowNo)) checkIfOpen.remove(rowNo);
-            	System.out.println("WindowClosingDemo.windowClosing--->OpForm2");
+//            	System.out.println("WindowClosingDemo.windowClosing--->OpForm2");
             }
         });
 		
@@ -274,11 +274,11 @@ public class OpForm2 implements ActionListener, FocusListener {
 	public Object[] DsIterator(String dateString, Object[] savedRow, int liczbaWierszy, int liczbaDs, int currRow)	{
 		for (int i = 0; i <= liczbaDs-1; i++)	{
 			if ( (!"".equals(savedRow[i]) && !" ".equals(savedRow[i]) ) && !model.doesElExists(currRow, i)  )	{
-				System.out.print("+a "+!"".equals(savedRow[i]) +" b "+ !" ".equals(savedRow[i]) + " c "+!model.doesElExists(currRow, i) +" res: "+ ((!"".equals(savedRow[i]) && !" ".equals(savedRow[i]) ) && !model.doesElExists(currRow, i)) +"\n");
+//				System.out.print("+a "+!"".equals(savedRow[i]) +" b "+ !" ".equals(savedRow[i]) + " c "+!model.doesElExists(currRow, i) +" res: "+ ((!"".equals(savedRow[i]) && !" ".equals(savedRow[i]) ) && !model.doesElExists(currRow, i)) +"\n");
 				savedRow[colCount-liczbaDs+i]=dateString;
 			}
 			else	{
-				System.out.print("-a "+!"".equals(savedRow[i]) +" b "+ !" ".equals(savedRow[i]) + " c "+!model.doesElExists(currRow, i) +"\n");
+//				System.out.print("-a "+!"".equals(savedRow[i]) +" b "+ !" ".equals(savedRow[i]) + " c "+!model.doesElExists(currRow, i) +"\n");
 				savedRow[colCount-liczbaDs+i]=model.getValueAt(currRow, colCount-liczbaDs+i);
 			}
 		}

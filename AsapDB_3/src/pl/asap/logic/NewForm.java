@@ -232,7 +232,7 @@ public class NewForm implements  ActionListener, FocusListener {
 			String c = datePart.format(currentDate)+"_";
 			String d = "_"+savedRow[9];
 
-			//new FolderCreator().createFolder(a+b+c+d); ---odblokować jak gotowe
+//			new FolderCreator().createFolder(a+b+c+d); //---odblokować jak gotowe
 			
 			newFrame.dispose();
 		}
