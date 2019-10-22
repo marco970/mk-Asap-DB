@@ -39,6 +39,8 @@ public class DateChangeForm2  implements ActionListener, FocusListener  {
 	private boolean isErr;
 	
 	
+	
+	//aaaa
 
 
 	public DateChangeForm2(MainTableModel model, int rowNr) {
