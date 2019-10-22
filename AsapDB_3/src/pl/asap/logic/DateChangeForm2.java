@@ -37,10 +37,10 @@ public class DateChangeForm2  implements ActionListener, FocusListener  {
 	private int rowNr;
 	
 	private boolean isErr;
+	
+	
 
-	/**
-	 * Create the frame.
-	 */
+
 	public DateChangeForm2(MainTableModel model, int rowNr) {
 		
 		
