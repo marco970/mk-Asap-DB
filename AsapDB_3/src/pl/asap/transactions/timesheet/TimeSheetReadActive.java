@@ -36,20 +36,22 @@ public class TimeSheetReadActive {
 		@SuppressWarnings("unchecked")
 		ArrayList<String[]> entryRow = (ArrayList<String[]>) query.getResultList();
 		
+		
+		
 		for (int i = 0; i<entryRow.size(); i++)	{
 			Object[] atom = (Object[]) entryRow.get(i);
-//			System.out.println();
-//			for (Object el: atom)	{
-//				System.out.println("---> "+el.toString());
-//			}
-			Object[] atomO = new Object[atom.length];
+			System.out.println();
+			for (Object el: atom)	{
+				System.out.println("---> "+el.toString());
+			}
+//			Object[] atomO = new Object[atom.length];
 			
 			
 			ArrayList<Object> atomList = new ArrayList<>();
 //			System.out.println(atom.length+" -asd- "+atomS.length);
 			if(true)	{
 				for (int j = 0; j < atom.length; j++)	{
-//					System.out.print(atom[j].toString()+" | ");
+					System.out.print(atom[j].toString()+" | ");
 					atomList.add(atom[j]);
 					//atomS[j] = atom[j].toString();
 					
