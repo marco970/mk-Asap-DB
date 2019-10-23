@@ -142,13 +142,13 @@ public class SingleFieldValidator {
 					else valOrg(false,"nieprawidłowy format numeru_1");
 				//if PZ
 				if (fieldName.equals("PZ"))	{
-					String pzPart = field.substring(3, 13);
-					if(pzPart.matches("[0-9]{10}")) valOrg(true,"");
-					else valOrg(false,"nieprawidłowy format numeru_2,5");
+//					String pzPart = field.substring(3, 13);
+//					if(pzPart.matches("[0-9]{10}")) valOrg(true,"");
+//					else valOrg(false,"nieprawidłowy format numeru_2,5");
 				}
 				// else to ->
 				else	{
-					if (sndPart.equals("PLK") || sndPart.equals("PLI") || sndPart.equals("CPO") ) {
+					if (sndPart.equals("PLK") || sndPart.equals("PLI") || sndPart.equals("CPO") || sndPart.equals("NET") || sndPart.equals("TKO") ) {
 						valOrg(true,"");
 					}
 					else valOrg(false,"nieprawidłowy format numeru_2");
