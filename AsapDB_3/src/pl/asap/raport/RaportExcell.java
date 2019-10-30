@@ -304,8 +304,8 @@ public class RaportExcell {
 				Desktop.getDesktop().open(file);
 		
 		}
-	public static void main(String[] args) throws IOException	{ //metoda do wywalenia
-		new RaportExcell("Marcin Kuciak", 9, 2019, "PLK", "", "");
-		//do testów, potem wywalić metodę
-	}
+//	public static void main(String[] args) throws IOException	{ //metoda do wywalenia
+//		new RaportExcell("Marcin Kuciak", 9, 2019, "PLK", "", "");
+//		//do testów, potem wywalić metodę
+//	}
 }
