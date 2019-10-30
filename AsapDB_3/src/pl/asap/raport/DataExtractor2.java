@@ -45,7 +45,7 @@ public class DataExtractor2 {
 						System.out.println("****--> "+dcl.toString());
 					}
 
-				} 
+				}   
 //			}
 		}	
 	}
