@@ -18,6 +18,7 @@ public class SingleFieldValidator {
 	public SingleFieldValidator(){}
 	
 	public SingleFieldValidator(String fieldName, String fieldValue, MainTableModel model, int rowNo)	{//ten konstruktor do newForm
+		System.out.println("-------- SingleFieldValidator0");
 		this.fieldName = fieldName;
 		this.model = model;
 		this.rowNr = rowNo;
@@ -35,10 +36,26 @@ public class SingleFieldValidator {
 		for(String el: b)	{
 			runMethod(el, fieldValue);
 		}
+		spolka="";
+		if (fieldName.equals("ZZ"))	{
+			if (fieldValue.length()>6)	{		
+				if (fieldValue.substring(0,2).equals("Z/")) {
+					System.out.println("#SingleFieldValidator"+fieldValue.substring(0,2));
+					spolka = "NET";
+				}
+				
+				else if (fieldValue.substring(0,2).equals("ZZ")) spolka=fieldValue.substring(3, 6);
+				else spolka="inna";
+			}
+				
+		}
+		else spolka=model.getValueAt(rowNr,9).toString();
 
 		
 	}//koniec konstruktora 1
 	public SingleFieldValidator(String fieldName, String fieldValue, MainTableModel model, int rowNo, OpForm2 opF) {
+		
+		System.out.println("-------- SingleFieldValidator1");
 		this.fieldName = fieldName;
 		this.model = model;
 		this.rowNr = rowNo;
@@ -57,7 +74,14 @@ public class SingleFieldValidator {
 		}
 		spolka="";
 		if (fieldName.equals("ZZ"))	{
-			if (fieldValue.length()>6)	spolka=fieldValue.substring(3, 6);
+			if (fieldValue.length()>6)	{		
+				if (fieldValue.substring(0,2).equals("Z/")) {
+					System.out.println("#SingleFieldValidator"+fieldValue.substring(0,2));
+					spolka = "NET";
+				}
+				else spolka=fieldValue.substring(3, 6);
+			}
+				
 		}
 		else spolka=model.getValueAt(rowNr,9).toString();
 	}
@@ -131,11 +155,11 @@ public class SingleFieldValidator {
 				String fstPart = field.trim().substring(0, 3);
 				String sndPart = field.trim().substring(3, 6);
 				String trdPart = field.trim().substring(6,13);
-				spolka="";
-				if (fieldName.equals("ZZ"))	{
-					if (field.length()>6)	spolka=field.substring(3, 6);
-				}
-				else spolka=model.getValueAt(rowNr,9).toString();
+//				spolka="";
+//				if (fieldName.equals("ZZ"))	{
+//					if (field.length()>6)	spolka=field.substring(3, 6);
+//				}
+//				else spolka=model.getValueAt(rowNr,9).toString();
 
 				//tu dorobić dla PZ
 				if (fstPart.equals(fieldName+"/"))	valOrg(true,"");

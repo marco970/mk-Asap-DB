@@ -6,8 +6,13 @@ import java.lang.reflect.Field;
 public class ValidatioModel {
 	 String[] ZZ = {"notNull"};
 	 String[] PZ = {"doesExist"};
-	 String[] WP = {"doesExist","checkFormat","toShort", "isPredecessor"};
-	 String[] DK = {"doesExist","checkFormat","toShort", "isPredecessor"};
+	 String[] WP = {"doesExist"};
+	 String[] DK = {"doesExist"};
+	 
+	 
+//	 String[] PZ = {"doesExist"};
+//	 String[] WP = {"doesExist","checkFormat","toShort", "isPredecessor"};
+//	 String[] DK = {"doesExist","checkFormat","toShort", "isPredecessor"};
 	
 	public ValidatioModel()	{}
 	

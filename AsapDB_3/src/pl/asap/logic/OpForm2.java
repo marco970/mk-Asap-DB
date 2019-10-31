@@ -73,7 +73,7 @@ public class OpForm2 implements ActionListener, FocusListener {
             @Override
             public void windowClosing(WindowEvent e) {
                 if (checkIfOpen.contains(rowNo)) checkIfOpen.remove(rowNo);
-//            	System.out.println("WindowClosingDemo.windowClosing--->OpForm2");
+            	System.out.println("WindowClosingDemo.windowClosing--->OpForm2");
             }
         });
 		
@@ -127,7 +127,6 @@ public class OpForm2 implements ActionListener, FocusListener {
 		for (int i = 0; i<=colCount-1-model.getNumberDs(); i++) {
 			nazwaPola[i] = new JLabel(model.getColumnName(i));
 			panel.add(nazwaPola[i], targetNazwaPola[i]);
-			//System.out.println("ellou "+i);
 			if (i==4)	{
 				String[] strA5 = {"aktywne","zakonczone","zawieszone"}; //do modelu
 				String defaultStatus = (String) model.getValueAt(rowNr, i);
@@ -138,7 +137,7 @@ public class OpForm2 implements ActionListener, FocusListener {
 				listaComp.add(statusPole);
 			}
 			else if (i==8)	{
-				String[] strA5 = {"przetarg","z wolnej ręki","inne"};//ściągać z modelu
+				String[] strA5 = {"przetarg","z wolnej ręki","inne","bezkosztowy"};
 				String defaultTryb = (String) model.getValueAt(rowNr, i);
 				trybPole = new JComboBox<String>(strA5);
 				trybPole.setSelectedItem(defaultTryb);
@@ -245,7 +244,7 @@ public class OpForm2 implements ActionListener, FocusListener {
 			
 		}//koniec dużego for-----------------------
 		tfAll = a;
-		//przycisk---------------------------------------
+
 		btnSave = new JButton("Zapisz");
 		btnClose = new JButton("Anuluj");
 		btnNext = new JButton("Dalej");
@@ -257,9 +256,7 @@ public class OpForm2 implements ActionListener, FocusListener {
 		contentPane.add(btnClose, "cell 0 2");
 		contentPane.add(btnNext, "cell 0 2");
 		contentPane.add(btnSave, "cell 0 2");
-	
-		//dalej
-		//nowe etykiety błędów-----------
+
 	
 	}//koniec konstruktora
 	
@@ -290,6 +287,8 @@ public class OpForm2 implements ActionListener, FocusListener {
 	public void actionPerformed(ActionEvent e) {
 		//System.out.println(e.getActionCommand());
 		if (e.getActionCommand().equals("Anuluj"))	{
+			
+			if (checkIfOpen.contains(rowNr)) checkIfOpen.remove(rowNr);
 			opForm.dispose(); 
 		}
 

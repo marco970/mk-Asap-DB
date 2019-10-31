@@ -31,27 +31,18 @@ public class DataExtractor2 {
 		}
 		
 		for (int i = 0; i < tsm3.getRowCount(); i++)	{
-//			String company = tsm3.getValueAt(i, 0).toString().substring(3, 6);
-//			boolean companyCondition = !company.equals(u) && !company.equals(w) && !company.equals(v);
-//			if (true) {
-//			System.out.println();
-		
-				for (int j = 0; j < tsm3.getColumnCount(); j++) {
-					if (!(j == 1 || j == 2)) {
-					}
-					if (j > 3) {
-						dcl.get(j - 4).addContent(tsm3.getValueAt(i, 3).toString(),
-						Integer.valueOf(tsm3.getValueAt(i, j).toString()));
-//						System.out.println("****--> "+dcl.toString());
-					}
-
-				}   
-//			}  
+			for (int j = 0; j < tsm3.getColumnCount(); j++) {
+				if (!(j == 1 || j == 2)) {
+				}
+				if (j > 3) {
+					dcl.get(j - 4).addContent(tsm3.getValueAt(i, 3).toString(),
+					Integer.valueOf(tsm3.getValueAt(i, j).toString()));
+				}
+			}   
 		}	
 	}
 
 	public String[] getExRow(String string) {
-
 		List<String> extRow = new ArrayList<>();
 		for (int i = 0; i<dcl.size();i++)	{
 			extRow.add(dcl.get(i).getContent(string));
@@ -63,13 +54,12 @@ public class DataExtractor2 {
 		}
 		return extRowArr;
 	}
+	
 	public Integer[] getExHours(String string)	{
 		Integer[] extHoursArr = new Integer[dcl.size()];
-		
 		for (int i = 0; i<dcl.size(); i++)	{
 			extHoursArr[i] = dcl.get(i).getHours(string);
 		}
-		
 		return extHoursArr;		
 	}
 }

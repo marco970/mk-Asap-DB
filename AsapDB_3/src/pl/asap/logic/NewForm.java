@@ -54,6 +54,8 @@ public class NewForm implements  ActionListener, FocusListener {
 		
 		this.model = mod;
 		this.rowNr = rowNr;
+		
+		System.out.println("-------- NewForm");
 		//ramka///aaaaa
 		newFrame = new JFrame("Nowy ZZ");
 		newFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -178,7 +180,7 @@ public class NewForm implements  ActionListener, FocusListener {
 		SingleFieldValidator zzVal = new SingleFieldValidator("ZZ", gotZZ, model, rowNr);
 		errZZLab.setText(zzVal.getErrMessage());
 		String spolka = zzVal.getSpolka();
-		///System.out.println("*** "+spolka);
+		System.out.println("*** "+spolka);
 		if (!zzVal.getValidationResult())	{//jeśli walidacja negatywna
 			btnNext.setEnabled(false);
 			poleZZ.requestFocus();
@@ -226,13 +228,14 @@ public class NewForm implements  ActionListener, FocusListener {
 			}
 			model.recordAdd(savedRow);
 
-			String a = savedRow[0].substring(6)+"_";
+			String a = savedRow[0]+"_";
 			String b = savedRow[7].replaceAll("\\s","_")+"_";
 			SimpleDateFormat datePart = new SimpleDateFormat("yyyyMM");
 			String c = datePart.format(currentDate)+"_";
 			String d = "_"+savedRow[9];
+//			System.out.println("folder "+a+b+c+d);
 
-//			new FolderCreator().createFolder(a+b+c+d); //---odblokować jak gotowe
+			new FolderCreator().createFolder(a+b+c+d); //---odblokować jak gotowe
 			
 			newFrame.dispose();
 		}

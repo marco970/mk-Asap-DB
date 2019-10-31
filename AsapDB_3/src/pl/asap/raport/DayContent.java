@@ -11,7 +11,6 @@ public class DayContent {
 	private Set<String>	zzSet;
 	private int zzTime;
 	
-	
 	private Set<String>	pzSet;
 	private int pzTime;
 	
@@ -39,11 +38,7 @@ public class DayContent {
 	
 	public void addContent(String sapNr, int time)	{
 		String str = sapNr.substring(0, 2);
-//		String comp = zzNumer.substring(3, 6);
-//		System.out.println("company-> "+comp);
 		if (str.equals("ZZ") || str.equals("Z/")) {
-//			System.out.println("addContent-"+str);
-			
 			if (time>0) {
 				zzSet.add(sapNr);
 				zzTime = zzTime + time;
@@ -51,7 +46,6 @@ public class DayContent {
 			else zzSet.add("");
 		}
 		if (str.equals("PZ")) {
-//			System.out.println("addContent-"+str);
 			if (time>0) {
 				pzSet.add(sapNr);
 				pzTime = pzTime + time;
@@ -59,7 +53,6 @@ public class DayContent {
 			else pzSet.add("");
 		}
 		if (str.equals("WP")) {
-//			System.out.println("addContent-"+str);
 			if (time>0) {
 				wpSet.add(sapNr);
 				wpTime = wpTime + time;
@@ -67,7 +60,6 @@ public class DayContent {
 			else wpSet.add("");
 		}
 		if (str.equals("DK")) {
-//			System.out.println("addContent-"+str);
 			if (time>0) {
 				dkSet.add(sapNr);
 				dkTime = dkTime + time;
@@ -174,28 +166,4 @@ public class DayContent {
 		}
 		else return null;
 	}
-	
-//	public static void main(String[] args) {
-//		
-////		System.out.println("DayContent");
-//		DayContent dc = new DayContent(1);
-////		dc.addContent("ZZ/PLI0002234", 2);
-////		dc.addContent("WP/PLI0002234", 1);
-////		dc.addContent("DK/PLI0002234",1);
-////		dc.addContent("PZ/0000002234",0);
-////		dc.addContent("ZZ/PLI0002235", 2);
-////		dc.addContent("WP/PLI0002261", 3);
-////		dc.addContent("DK/PLI0002237",5);
-////		dc.addContent("PZ/0000002558",1);
-//		dc.DayContentShow();
-//		
-//		
-//	}
-
-	
-	
-	
-	
-
-
 }

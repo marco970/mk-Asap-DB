@@ -9,9 +9,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-//		String log4jConfPath = "D:\\GitRepo\\mk-Asap-DB\\AsapDB_3\\log4j.properties";
-//		PropertyConfigurator.configure(log4jConfPath);
-		
+		String log4jConfPath = "D:\\git\\mk-Asap-DB\\AsapDB_3\\log4j.properties";
+		PropertyConfigurator.configure(log4jConfPath);
 		DBConnect dbConnect = new DBConnect();
 		new EkranGlowny(dbConnect);
 
