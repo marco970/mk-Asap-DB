@@ -41,7 +41,7 @@ public class DayContent {
 		String str = sapNr.substring(0, 2);
 //		String comp = zzNumer.substring(3, 6);
 //		System.out.println("company-> "+comp);
-		if (str.equals("ZZ")) {
+		if (str.equals("ZZ") || str.equals("Z/")) {
 //			System.out.println("addContent-"+str);
 			
 			if (time>0) {

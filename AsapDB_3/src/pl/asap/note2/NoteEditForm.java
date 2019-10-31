@@ -18,7 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
-import javafx.scene.control.CheckBox;
+
 import net.miginfocom.swing.MigLayout;
 import pl.asap.models.NotesModel;
 
