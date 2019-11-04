@@ -63,6 +63,8 @@ public class TimeSheetTable extends JFrame implements ActionListener {
 
 		table.setCellSelectionEnabled(true);
 		
+		table.setAutoCreateRowSorter(true);
+		
 		TableColumnModel tcm = table.getColumnModel();	
 		tcm.getColumn(0).setPreferredWidth(230);
 		tcm.getColumn(1).setPreferredWidth(200);
