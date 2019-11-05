@@ -226,14 +226,14 @@ public class NewForm implements  ActionListener, FocusListener {
 				else if(i==10) savedRow[i] = dateString;
 				else savedRow[i] = "";  
 			}
-			model.recordAdd(savedRow);
+			model.recordAdd(savedRow); 
 
 			String a = savedRow[0].replace("/", "-")+"_";
 			String b = savedRow[7].replaceAll("\\s","_")+"_";
 			SimpleDateFormat datePart = new SimpleDateFormat("yyyyMM");
 			String c = datePart.format(currentDate)+"_";
 			String d = "_"+savedRow[9];
-			System.out.println("folder "+a+b+c+d);
+//			System.out.println("folder "+a+b+c+d);
 
 			new FolderCreator().createFolder(a+b+c+d); //---odblokować jak gotowe
 			

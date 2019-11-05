@@ -13,7 +13,7 @@ public class FolderCreator {
 	private String defaultPath;
 	
 	public FolderCreator()	{
-		defaultPath = new JFileChooser().getFileSystemView().getDefaultDirectory().toString();
+		defaultPath = new JFileChooser().getFileSystemView().getDefaultDirectory().toString(); 
 	}
 	
 	public String getAktywne() {
