@@ -108,7 +108,12 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 				 if (checkEl.get(0).equals(rowEntries.get(3)))	{
 					 dayEntry = checkEl.get(1).substring(0,2);
 					 int colPosition = Integer.valueOf(dayEntry)+3;
-					 rowEntries.set(colPosition, checkEl.get(2));
+					 
+					 if (colPosition<=rowEntries.size()-1) {
+						rowEntries.set(colPosition, checkEl.get(2));
+					}
+					 else rowEntries.set(rowEntries.size()-1, checkEl.get(2));
+						 
 				 }
 			 }
 //			 System.out.println("tsm3-> testy-"+el.get(0).toString());
@@ -117,7 +122,7 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 			 
 //			 System.out.println("rowEntries-size "+rowEntries.size());
 //			 System.out.println();
-			 System.out.println("----> "+el.get(0)+" company-"+company+" u-"+u+" w-"+w+" v-"+v+" condit-"+companyCondition);
+//			 System.out.println("----> "+el.get(0)+" company-"+company+" u-"+u+" w-"+w+" v-"+v+" condit-"+companyCondition);
 			 if (companyCondition) {
 				daneEntries.add(rowEntries);
 //				System.out.println("------x"+daneEntries.size()+" -- "+daneEntries.get(daneEntries.size()-1).size()+"x------");

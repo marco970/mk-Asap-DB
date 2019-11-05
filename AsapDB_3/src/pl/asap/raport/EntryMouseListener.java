@@ -58,12 +58,16 @@ public class EntryMouseListener extends MouseAdapter implements ActionListener {
 		 int row = table.rowAtPoint(e.getPoint());
 		 int col = table.columnAtPoint(e.getPoint());
 		 
-//		 System.out.println("EML, col-"+col);
-		 
+
 
 		 table.clearSelection();
 		 table.addColumnSelectionInterval(col, col);
 		 table.addRowSelectionInterval(row,row);
+		 
+		 
+
+		 
+		 
 		 if (col>3) {
 			popup.show(e.getComponent(), e.getX(), e.getY());
 		}
@@ -88,8 +92,14 @@ public class EntryMouseListener extends MouseAdapter implements ActionListener {
 		if (u.equals("edytuj czas pracy"))	{
 			int currentRow = table.getSelectedRow();
 			int currentCol = table.getSelectedColumn();
+			
+			
+//		    int selectedRow = table.getSelectedRow();
+		    int realSelectedRow = table.convertRowIndexToModel(currentRow);
+			
+			
 			if (true) {		//tu dać warunek dnia roboczego i obecności
-				EntryEditForm a = EntryEditForm.getInstance(this, model.getValueAt(currentRow, 0).toString(), model, currentRow,
+				EntryEditForm a = EntryEditForm.getInstance(this, model.getValueAt(realSelectedRow, 0).toString(), model, realSelectedRow,
 						currentCol);
 //				timeSheetTable.toBack();
 				
