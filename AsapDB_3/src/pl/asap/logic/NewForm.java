@@ -228,7 +228,7 @@ public class NewForm implements  ActionListener, FocusListener {
 			}
 			model.recordAdd(savedRow); 
 
-			String a = savedRow[0].replace("/", "-")+"_";
+			String a = savedRow[0].replace("/", "-")+"_"; 
 			String b = savedRow[7].replaceAll("\\s","_")+"_";
 			SimpleDateFormat datePart = new SimpleDateFormat("yyyyMM");
 			String c = datePart.format(currentDate)+"_";
