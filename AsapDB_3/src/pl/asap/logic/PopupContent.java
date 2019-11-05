@@ -56,14 +56,40 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 	}
 	public String getFolder(int rowNr)	{
 		String path = "";
-		String numerZZ = data.getValueAt(rowNr, 0).toString().substring(6);
+		String preNumerZZ = data.getValueAt(rowNr, 0).toString();
+		String numerZZ = preNumerZZ.replace("\"", "-");
 		FolderCreator folder = new FolderCreator();
-		String myPath = folder.getDefaultPath() + folder.getAktywne();		
+		String myPath = folder.getDefaultPath() + folder.getAktywne();	
+		System.out.println();
+		System.out.println("PopopContnent-getFolde-myPath "+myPath);
+		
+		
 		File[] directories = new File(myPath).listFiles(File::isDirectory);		
+		
+		for(File el: directories)		{
+			System.out.println(" %% "+el.toString());
+		}
+		
+		int ZZLength = numerZZ.length();
+		System.out.println();
+		System.out.println("numerZZ "+numerZZ);
+		System.out.println("numerZZ.length() "+numerZZ.length());
+		
+		
+		
+		
+		
 		if (myPath.length() > 0) {		//
 			for (int i = 0; i <= directories.length - 1; i++) {
-				if (directories[i].toString().substring(myPath.length(), +myPath.length() + 7).equals(numerZZ))	{
-					path = directories[i].toString().substring(myPath.length());
+				
+				
+				if (directories[i].toString().length() >= (myPath.length() + ZZLength)) {
+					System.out.println("substring "
+							+ directories[i].toString().substring(myPath.length(), +myPath.length() + ZZLength));
+					if (directories[i].toString().substring(myPath.length(), myPath.length() + ZZLength)
+							.equals(numerZZ)) {//ten susbstring powpoduje błąd....
+						path = directories[i].toString().substring(myPath.length());
+					} 
 				}
 			}
 		}		
@@ -87,14 +113,19 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 		if (u.equals("zakończ postępowanie"))	{
 			int selectedRow = lista.getSelectedRow();
 			int realSelectedRow = lista.convertRowIndexToModel(selectedRow);
-			if (data.getValueAt(realSelectedRow, 2)==null || "".equals(data.getValueAt(realSelectedRow, 2)))	{
-				JOptionPane.showMessageDialog(frame, "Nie można zakończyć tego postępowania"); //tu zrobić ostrzeżenie i tak/nie
-			}
-			else {
-				((MainTableModel) data).cellUpdate("zakonczone", realSelectedRow, 4);
-				new Zapis((MainTableModel) data);
-				new FolderCreator().moveFolder(getFolder(realSelectedRow), true);
-			}		
+			
+			((MainTableModel) data).cellUpdate("zakonczone", realSelectedRow, 4);
+			new Zapis((MainTableModel) data);
+			new FolderCreator().moveFolder(getFolder(realSelectedRow), true);
+			
+//			if (data.getValueAt(realSelectedRow, 2)==null || "".equals(data.getValueAt(realSelectedRow, 2)))	{
+//				JOptionPane.showMessageDialog(frame, "Nie można zakończyć tego postępowania"); //tu zrobić ostrzeżenie i tak/nie
+//			}
+//			else {
+//				((MainTableModel) data).cellUpdate("zakonczone", realSelectedRow, 4);
+//				new Zapis((MainTableModel) data);
+//				new FolderCreator().moveFolder(getFolder(realSelectedRow), true);
+//			}		
 		}
 		if (u.equals("zmień daty"))	{
 			new DateChangeForm2((MainTableModel) data, lista.convertRowIndexToModel(lista.getSelectedRow()));
