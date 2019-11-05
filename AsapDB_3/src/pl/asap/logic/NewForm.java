@@ -224,7 +224,7 @@ public class NewForm implements  ActionListener, FocusListener {
 				else if(i==8) savedRow[i] = (String) trybPole.getSelectedItem();
 				else if(i==9) savedRow[i] = spolkaPole.getText();
 				else if(i==10) savedRow[i] = dateString;
-				else savedRow[i] = "";
+				else savedRow[i] = "";  
 			}
 			model.recordAdd(savedRow);
 
