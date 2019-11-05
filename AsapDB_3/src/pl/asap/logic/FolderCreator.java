@@ -20,7 +20,7 @@ public class FolderCreator {
 		return aktywne;
 	}
 
-	public String getZamkniete() {  
+	public String getZamkniete() {   
 		return zamknięte;
 	}
 	public String getDefaultPath() {
