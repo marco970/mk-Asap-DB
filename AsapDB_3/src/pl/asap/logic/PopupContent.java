@@ -116,7 +116,7 @@ public class PopupContent extends JPopupMenu implements PropertyChangeListener, 
 			
 			((MainTableModel) data).cellUpdate("zakonczone", realSelectedRow, 4);
 			new Zapis((MainTableModel) data);
-			new FolderCreator().moveFolder(getFolder(realSelectedRow), true);
+//			new FolderCreator().moveFolder(getFolder(realSelectedRow), true);
 			
 //			if (data.getValueAt(realSelectedRow, 2)==null || "".equals(data.getValueAt(realSelectedRow, 2)))	{
 //				JOptionPane.showMessageDialog(frame, "Nie można zakończyć tego postępowania"); //tu zrobić ostrzeżenie i tak/nie

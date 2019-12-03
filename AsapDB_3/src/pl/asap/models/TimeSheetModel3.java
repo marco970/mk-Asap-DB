@@ -36,7 +36,6 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 		this.ColumnNames = new ArrayList<>();
 		this.daneEntries = new ArrayList<>();
 		this.monthYear = "."+numString(month)+"."+year;	//data nie zawiera dnia
-//		System.out.println("tsm3, monthYear-"+monthYear);
 		
 		this.tsr = new TimeSheetRead(month, year);
 		
@@ -44,11 +43,6 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 		this.leftSide = tsr.getEntryMatrix(); 
 		List<String[]> leftSideActive = new TimeSheetReadActive().getEntryMatrix();
 		leftSide.addAll(leftSideActive);
-		
-//		tu do leftSide dodać wszystkie postępowania aktywne, których jeszcze nie ma na liście 
-//		to mgą byc jedynie postępowania PZ
-		
-		
 		
 		MainTableModel mtm = new MainTableModel();
 		Object[][] matrix = mtm.getMatrix();
@@ -65,12 +59,6 @@ public class TimeSheetModel3 extends AbstractTableModel  {
 //		utworzyć leftModel
 		Set<List<String>> leftSet = new HashSet<>();
 		List<List<String>> checkList = new ArrayList<>();
-		
-//		for(String[] el: leftSide)	{
-//			for (int i=0; i<el.length; i++)	{
-//				System.out.println(i+" leftSide: "+el[i]);
-//			}
-//		}
 		
 		for(String[] el: leftSide)	{
 			List<String> leftModelRow = new ArrayList<>();

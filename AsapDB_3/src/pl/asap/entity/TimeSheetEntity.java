@@ -41,6 +41,9 @@ public class TimeSheetEntity extends EntityBase {
 	@Column(name = "time_passed")
 	private Integer timePassed;
 	
+	@Column(name = "opis")
+	private String opis;
+	
 	public TimeSheetEntity()	{
 		
 	}
