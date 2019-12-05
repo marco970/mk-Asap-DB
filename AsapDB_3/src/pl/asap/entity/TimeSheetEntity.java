@@ -48,11 +48,12 @@ public class TimeSheetEntity extends EntityBase {
 		
 	}
 
-	public TimeSheetEntity(String sapNr, String dateEntry, Integer timePassed) {
+	public TimeSheetEntity(String sapNr, String dateEntry, Integer timePassed, String opis) {
 		
 		this.sapNr = sapNr;
 		this.dateEntry = dateEntry;
 		this.timePassed = timePassed;
+		this.opis = opis;
 	}
 
 	public Integer getEntryId() {
@@ -87,10 +88,18 @@ public class TimeSheetEntity extends EntityBase {
 		this.timePassed = timePassed;
 	}
 
+	public String getOpis() {
+		return opis;
+	}
+
+	public void setOpis(String opis) {
+		this.opis = opis;
+	}
+
 	@Override
 	public String toString() {
 		return "TimeSheetEntity [entryId=" + entryId + ", sapNr=" + sapNr + ", dateEntry=" + dateEntry + ", timePassed="
-				+ timePassed + "]";
+				+ timePassed + ", opis=" + opis + "]";
 	}
 	
 	

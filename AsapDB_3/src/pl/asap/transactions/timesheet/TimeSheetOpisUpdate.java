@@ -7,9 +7,9 @@ import org.hibernate.cfg.Configuration;
 import pl.asap.entity.Config;
 import pl.asap.entity.TimeSheetEntity;
 
-public class TimeSheetEntryUpdate {
+public class TimeSheetOpisUpdate {
 	
-	public TimeSheetEntryUpdate(int entryId, int timePassed)	{	
+	public TimeSheetOpisUpdate(int entryId, String opis)	{	
 		
 		Configuration conf = new Configuration();
 		Config config = new Config();
@@ -22,12 +22,12 @@ public class TimeSheetEntryUpdate {
 		
 		TimeSheetEntity tse = session.get(TimeSheetEntity.class, entryId);
 		
-		tse.setTimePassed(timePassed);
-
+		tse.setOpis(opis);
 		
 		session.getTransaction().commit();
 		factory.close();
 
 	}
+	
 
 }

@@ -76,6 +76,7 @@ public class TimeSheetRead {
 		return Integer.parseInt(entries.get(rowNr)[6]);
 	}
 	public int getIdEntry(String sapNr, String date)	{
+		
 		int entryId = 0;
 		int rowNr = 0;
 		for (String[] el: entries)	{
@@ -92,15 +93,12 @@ public class TimeSheetRead {
 		else return false;
 		
 	}
-	  public String numString(int num)	{
+	public String numString(int num)	{
 			String numStr;
 			if (num<10) numStr = "0"+ num;
 			else numStr = ""+num;
 			return numStr;
-		}
+	}
 
-//	public static void main(String[] args) {
-//		new TimeSheetRead(9, 2019);
-//	}
 
 }

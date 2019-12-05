@@ -13,10 +13,14 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
 import pl.asap.models.TimeSheetModel3;
+import pl.asap.transactions.timesheet.TSEOpisRead;
+import pl.asap.transactions.timesheet.TimeSheetOpisUpdate;
+import pl.asap.transactions.timesheet.TimeSheetRead;
 
 public class EntryEditForm extends JFrame implements ActionListener {
 	
@@ -26,12 +30,15 @@ public class EntryEditForm extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private static Set<String> checkIfOpenPara = new HashSet<String>();
 	private EntryMouseListener eml;
+	
+	private JTextField opisTF;
 	private JButton btnSave;
 	private JButton btnCancel;
 	private TimeSheetModel3 model;
 	private int rowNr;
 	private int colNr;
 	private JComboBox<Integer> jcb;
+//	private int entryId;
 	
 	
 	private EntryEditForm(EntryMouseListener eml, String nazwa, TimeSheetModel3 model, int rowNr, int colNr)	{
@@ -40,6 +47,23 @@ public class EntryEditForm extends JFrame implements ActionListener {
 		this.rowNr = rowNr;
 		this.colNr = colNr;
 		
+		this.opisTF = new JTextField(15);
+		//tu określam, entryId
+			//muszę odczytać z modelu SAPnr i datę
+//		System.out.println("|||||||||---- "+model.getValueAt(rowNr, 3));
+//		System.out.println("|||||||||---- "+model.getColumnName(colNr).substring(13,16)+model.getMonthYear());
+			//potem skorzystać z metody klasy TimeSheetEntryRead
+//		TimeSheetRead tsr = new TimeSheetRead(model.getMonth(), model.getYear());
+	
+//		this.entryId = new TSEOpisRead(model.getValueAt(rowNr, 3).toString(),model.getColumnName(colNr).substring(14,16)+model.getMonthYear()).getEntryId();
+//		System.out.println("--------- entryId "+entryId);
+//		System.out.println("--------- xx "+model.getValueAt(rowNr, 3).toString());
+//		System.out.println("--------- yy "+model.getColumnName(colNr).substring(14,16)+model.getMonthYear());
+//		System.out.println("--------- opis "+new TSEOpisRead(model.getValueAt(rowNr, 3).toString(),model.getColumnName(colNr).substring(14,16)+model.getMonthYear()).getOpis());
+		
+		String opis = new TSEOpisRead(model.getValueAt(rowNr, 3).toString(),model.getColumnName(colNr).substring(14,16)+model.getMonthYear()).getOpis();
+		
+		opisTF.setText(opis);
 		this.eml = eml;
 		int totalDayTime = model.getTotalDayTime(colNr-4);
 		
@@ -84,10 +108,11 @@ public class EntryEditForm extends JFrame implements ActionListener {
 		jcb = new JComboBox<>(vector);
 		jcb.setSelectedItem(currentValue);
 		String colName = model.getColumnName(colNr);
-//		System.out.println(colName.substring(14, 19)+" "+colName.substring(23, 26));
 		
 		panel.add(new JLabel(model.getColumnName(colNr)), "cell 0 5");
 		panel.add(jcb, "cell 1 5");
+		panel.add(new JLabel("opis: "), "cell 0 6");
+		panel.add(opisTF, "cell 1 6");
 
 		btnSave = new JButton("Zapisz");
 		btnCancel = new JButton("Anuluj");
@@ -104,9 +129,7 @@ public class EntryEditForm extends JFrame implements ActionListener {
 	}
 	
 	public static synchronized EntryEditForm getInstance(EntryMouseListener eml, String nazwa, TimeSheetModel3 mod, int rowNo, int colNo)	{
-//		for(String el: checkIfOpenPara)	{
-//			System.out.println("set: "+el);
-//		}
+
 		if (!checkIfOpenPara.contains("r"+rowNo+"c"+colNo))	{
 			checkIfOpenPara.add("r"+rowNo+"c"+colNo);
 			return new EntryEditForm (eml, nazwa, mod, rowNo, colNo);
@@ -120,17 +143,31 @@ public class EntryEditForm extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String u = e.getActionCommand();
-		
-//		System.out.println("action: "+u);
+//		System.out.println(u+" -----------");
+
 		if(u=="Zapisz")	{
+			
 //			System.out.println(jcb.getSelectedItem().toString());
 			model.setTotalDayTime(rowNr, colNr-4, Integer.valueOf(jcb.getSelectedItem().toString()));
-//			System.out.println("EEF actioPerf - colNr = "+(colNr-4));
+			
 			model.setValueAt(jcb.getSelectedItem(), rowNr, colNr);
 			
+			int entryId;
+			entryId = new TSEOpisRead(model.getValueAt(rowNr, 3).toString(),model.getColumnName(colNr).substring(14,16)+model.getMonthYear()).getEntryId();
+
+			if ((Integer.valueOf(jcb.getSelectedItem().toString()) >0 && entryId>0)) {
+//				System.out.println("uwaga, zapis z pola tekst " + opisTF.getText());
+				new TimeSheetOpisUpdate(entryId, opisTF.getText());
+			}
 		}
 		
 		this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING)); //to zamiast dispose, bo na to reaguje WindowsCloseListener
 	}
+	public String numString(int num)	{
+		String numStr;
+		if (num<10) numStr = "0"+ num;
+		else numStr = ""+num;
+		return numStr;
+}
 
 }

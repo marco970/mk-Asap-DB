@@ -27,7 +27,7 @@ public class ListaSaveFromFile {
 		Query query = session.createQuery(getPostepowanie);		
 		Lista lista = (Lista) query.getSingleResult();		
 		
-		TimeSheetEntity entry = new TimeSheetEntity(nrSap, dateEntry, timePassed);
+		TimeSheetEntity entry = new TimeSheetEntity(nrSap, dateEntry, timePassed, "");
 		
 		
 		lista.addEntry(entry);

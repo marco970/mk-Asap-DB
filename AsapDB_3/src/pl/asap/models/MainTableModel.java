@@ -206,6 +206,7 @@ public class MainTableModel extends AbstractTableModel {
 					if (entryId==0)	nrSap = (String) savedRow[i-1];	
 					else	{
 						int timePassed = tse.getTimePassed();
+						String opis = tse.getOpis();
 //						System.out.println("entryId-> "+entryId+" timePassed-> "+timePassed);
 						//aktualizacja entry
 						new TimeSheetEntryUpdate(entryId, timePassed+1);

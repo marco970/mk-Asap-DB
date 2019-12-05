@@ -55,8 +55,11 @@ public class TSEQueryGet {
 		else return 0;
 	}
 	public int getTimePassed()	{
-		System.out.println("timePassed= "+tse.get(0).getTimePassed());
+//		System.out.println("timePassed= "+tse.get(0).getTimePassed());
 		return tse.get(0).getTimePassed();
+	}
+	public String getOpis()	{
+		return tse.get(0).getOpis();
 	}
 //	public static void main(String[] args) {
 //		new TSEQueryGet("PZ/0000007931") ;
