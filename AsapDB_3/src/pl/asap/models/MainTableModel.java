@@ -149,6 +149,7 @@ public class MainTableModel extends AbstractTableModel {
 			  i++;
 		  }
 		  int n=1;
+		  
 		  List<Object[]> wiersz = new ArrayList<Object[]>();
 		  wiersz.add(sdane[n]);
 		  return sdane;
